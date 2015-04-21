@@ -1,0 +1,13 @@
+{
+    "name": "jonathantorres/construct",
+    "description": "PHP project template.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonathan Torres",
+            "email": "jonathantorres41@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
