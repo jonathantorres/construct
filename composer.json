@@ -8,6 +8,8 @@
             "email": "jonathantorres41@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "symfony/console": "2.6.*"
+    },
     "minimum-stability": "stable"
 }
