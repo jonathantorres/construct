@@ -19,5 +19,10 @@
             "JonathanTorres\\Construct\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "JonathanTorres\\Construct\\Tests\\": "tests/"
+        }
+    },
     "minimum-stability": "stable"
 }
