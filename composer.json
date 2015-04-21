@@ -8,6 +8,6 @@
             "email": "jonathantorres41@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {}
+    "minimum-stability": "stable"
 }
