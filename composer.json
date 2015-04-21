@@ -11,5 +11,10 @@
     "require": {
         "symfony/console": "2.6.*"
     },
+    "autoload": {
+        "psr-4": {
+            "JonathanTorres\\Construct\\": "src/"
+        }
+    },
     "minimum-stability": "stable"
 }
