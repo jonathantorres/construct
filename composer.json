@@ -1,6 +1,7 @@
 {
     "name": "jonathantorres/construct",
-    "description": "PHP project template.",
+    "description": "Cli command to generate a basic PHP project structure.",
+    "keywords": ["php", "project", "structure", "cli"],
     "license": "MIT",
     "authors": [
         {
