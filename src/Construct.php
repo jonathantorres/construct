@@ -119,6 +119,7 @@ class Construct extends Command
         $this->readme();
         $this->gitignore();
         $this->phpunit();
+        $this->travis();
         $this->composer();
         $this->projectClass();
         $this->projectTest();
@@ -195,6 +196,16 @@ class Construct extends Command
         $content = str_replace('{project_upper}', $this->projectUpper, $file);
 
         $this->file->put($this->projectLower . '/' . '/phpunit.xml', $content);
+    }
+
+    /**
+     * Generate .travis.yml file.
+     *
+     * @return void
+     **/
+    protected function travis()
+    {
+        $this->file->copy(__DIR__ . '/stubs/travis.txt', $this->projectLower . '/' . '/.travis.yml');
     }
 
     /**

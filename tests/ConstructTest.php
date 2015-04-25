@@ -25,7 +25,7 @@ class ConstructTest extends PHPUnit
     public function testProjectGeneration()
     {
         $this->filesystem->shouldReceive('makeDirectory')->times(3)->andReturnNull()->getMock();
-        $this->filesystem->shouldReceive('copy')->once()->andReturnNull()->getMock();
+        $this->filesystem->shouldReceive('copy')->times(2)->andReturnNull()->getMock();
         $this->filesystem->shouldReceive('get')->times(5)->andReturnNull()->getMock();
         $this->filesystem->shouldReceive('put')->times(5)->andReturnNull()->getMock();
 
