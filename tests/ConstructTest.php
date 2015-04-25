@@ -24,13 +24,13 @@ class ConstructTest extends PHPUnit
 
     public function testProjectGeneration()
     {
-        $app = new Application();
-        $app->add(new Construct($this->filesystem, new Str()));
-
         $this->filesystem->shouldReceive('makeDirectory')->times(3)->andReturnNull()->getMock();
         $this->filesystem->shouldReceive('copy')->once()->andReturnNull()->getMock();
         $this->filesystem->shouldReceive('get')->times(5)->andReturnNull()->getMock();
         $this->filesystem->shouldReceive('put')->times(5)->andReturnNull()->getMock();
+
+        $app = new Application();
+        $app->add(new Construct($this->filesystem, new Str()));
 
         $command = $app->find('generate');
         $commandTester = new CommandTester($command);
