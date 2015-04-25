@@ -28,5 +28,6 @@
             "JonathanTorres\\Construct\\Tests\\": "tests/"
         }
     },
+    "bin": ["construct"],
     "minimum-stability": "stable"
 }
