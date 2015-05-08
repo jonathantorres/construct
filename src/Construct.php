@@ -40,6 +40,27 @@ class Construct extends Command
     protected $projectName;
 
     /**
+     * The selected testing framework.
+     *
+     * @var string
+     **/
+    protected $testing;
+
+    /**
+     * The selected testing framework version.
+     *
+     * @var string
+     **/
+    protected $testingVersion;
+
+    /**
+     * Warn if the specified testing framework is not known.
+     *
+     * @var boolean
+     **/
+    protected $testingWarning = false;
+
+    /**
      * Camel case version of vendor name.
      * ex: JonathanTorres
      *
@@ -97,6 +118,7 @@ class Construct extends Command
         $this->setName('generate');
         $this->setDescription('Generate a basic PHP project.');
         $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name.');
+        $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'Testing framework', 'phpunit');
     }
 
     /**
@@ -110,6 +132,7 @@ class Construct extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->projectName = $input->getArgument('name');
+        $this->testing = $input->getOption('test');
 
         if (!$this->str->isValid($this->projectName)) {
             $output->writeln('"' . $this->projectName . '" is not a valid project name, please use "vendor/project"');
@@ -121,13 +144,48 @@ class Construct extends Command
         $this->src();
         $this->readme();
         $this->gitignore();
-        $this->phpunit();
+        $this->testing();
         $this->travis();
         $this->composer();
         $this->projectClass();
         $this->projectTest();
 
+        if ($this->testingWarning) {
+            $output->writeln('Warning: Testing framework "' . $this->testing . '" does not exists. Using phpunit instead.');
+        }
+
         $output->writeln('Project "' . $this->projectName . '" created.');
+    }
+
+    /**
+     * Generate files for the selected testing framework.
+     *
+     * @return void
+     **/
+    protected function testing()
+    {
+        switch ($this->testing) {
+            case 'phpunit':
+                $this->phpunit();
+                break;
+
+            case 'behat':
+                $this->behat();
+                break;
+
+            case 'phpspec':
+                $this->phpspec();
+                break;
+
+            case 'codeception':
+                $this->codeception();
+                break;
+
+            default:
+                $this->testingWarning = true;
+                $this->phpunit();
+                break;
+        }
     }
 
     /**
@@ -189,16 +247,48 @@ class Construct extends Command
     }
 
     /**
-     * Generate phpunit file.
+     * Generate phpunit file/settings.
      *
      * @return void
      **/
     protected function phpunit()
     {
+        $this->testingVersion = '4.6.*';
+
         $file = $this->file->get(__DIR__ . '/stubs/phpunit.txt');
         $content = str_replace('{project_upper}', $this->projectUpper, $file);
 
         $this->file->put($this->projectLower . '/' . '/phpunit.xml', $content);
+    }
+
+    /**
+     * Generate phpspec file/settings.
+     *
+     * @return void
+     **/
+    protected function phpspec()
+    {
+        $this->testingVersion = '~2.0';
+    }
+
+    /**
+     * Generate behat file/settings.
+     *
+     * @return void
+     **/
+    protected function behat()
+    {
+        $this->testingVersion = '~3.0';
+    }
+
+    /**
+     * Generate codeception file/settings.
+     *
+     * @return void
+     **/
+    protected function codeception()
+    {
+        $this->testingVersion = '2.0.*';
     }
 
     /**
@@ -208,7 +298,10 @@ class Construct extends Command
      **/
     protected function travis()
     {
-        $this->file->copy(__DIR__ . '/stubs/travis.txt', $this->projectLower . '/' . '/.travis.yml');
+        $file = $this->file->get(__DIR__ . '/stubs/travis.txt');
+        $content = str_replace('{testing}', $this->testing, $file);
+
+        $this->file->put($this->projectLower . '/' . '/.travis.yml', $content);
     }
 
     /**
@@ -219,8 +312,8 @@ class Construct extends Command
     protected function composer()
     {
         $file = $this->file->get(__DIR__ . '/stubs/composer.txt');
-        $stubs = ['{project_upper}', '{project_lower}', '{vendor_lower}', '{vendor_upper}'];
-        $values = [$this->projectUpper, $this->projectLower, $this->vendorLower, $this->vendorUpper];
+        $stubs = ['{project_upper}', '{project_lower}', '{vendor_lower}', '{vendor_upper}', '{testing}', '{testing_version}'];
+        $values = [$this->projectUpper, $this->projectLower, $this->vendorLower, $this->vendorUpper, $this->testing, $this->testingVersion];
 
         $content = str_replace($stubs, $values, $file);
 
