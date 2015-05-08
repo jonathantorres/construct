@@ -74,6 +74,9 @@ class Construct extends Command
     /**
      * Initialize.
      *
+     * @param \Illuminate\Filesystem\Filesystem $file
+     * @param \JonathanTorres\Construct\Str $str
+     *
      * @return void
      **/
     public function __construct(Filesystem $file, Str $str)
