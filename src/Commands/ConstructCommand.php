@@ -83,16 +83,16 @@ class ConstructCommand extends Command
         $this->testing = $input->getOption('test');
 
         if (!$this->str->isValid($this->projectName)) {
-            $output->writeln('"' . $this->projectName . '" is not a valid project name, please use "vendor/project"');
+            $output->writeln('<error>"' . $this->projectName . '" is not a valid project name, please use "vendor/project"</error>');
             return false;
         }
 
         $warning = $this->construct->generate($this->projectName, $this->testing);
 
         if ($warning) {
-            $output->writeln('Warning: Testing framework "' . $this->testing . '" does not exists. Using phpunit instead.');
+            $output->writeln('<error>Warning: Testing framework "' . $this->testing . '" does not exists. Using phpunit instead.</error>');
         }
 
-        $output->writeln('Project "' . $this->projectName . '" created.');
+        $output->writeln('<info>Project "' . $this->projectName . '" created.</info>');
     }
 }
