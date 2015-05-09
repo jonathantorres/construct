@@ -1,6 +1,7 @@
 <?php namespace JonathanTorres\Construct\Tests;
 
 use Illuminate\Filesystem\Filesystem;
+use JonathanTorres\Construct\Commands\ConstructCommand;
 use JonathanTorres\Construct\Construct;
 use JonathanTorres\Construct\Str;
 use Mockery;
@@ -56,7 +57,8 @@ class ConstructTest extends PHPUnit
     protected function setApplication()
     {
         $app = new Application();
-        $app->add(new Construct($this->filesystem, new Str()));
+        $construct = new Construct($this->filesystem, new Str());
+        $app->add(new ConstructCommand($construct, new Str()));
 
         return $app;
     }

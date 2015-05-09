@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Construct extends Command
+class Construct
 {
 
     /**
@@ -102,42 +102,22 @@ class Construct extends Command
      **/
     public function __construct(Filesystem $file, Str $str)
     {
-        parent::__construct();
-
         $this->file = $file;
         $this->str = $str;
     }
 
     /**
-     * Command configuration.
+     * Generate project.
      *
-     * @return void
+     * @param string $projectName The entered project name.
+     * @param string $testing The entered testing framework.
+     *
+     * @return boolean
      **/
-    protected function configure()
+    public function generate($projectName, $testing)
     {
-        $this->setName('generate');
-        $this->setDescription('Generate a basic PHP project.');
-        $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name.');
-        $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'Testing framework', 'phpunit');
-    }
-
-    /**
-     * Execute command.
-     *
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @return void
-     **/
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $this->projectName = $input->getArgument('name');
-        $this->testing = $input->getOption('test');
-
-        if (!$this->str->isValid($this->projectName)) {
-            $output->writeln('"' . $this->projectName . '" is not a valid project name, please use "vendor/project"');
-            return false;
-        }
+        $this->projectName = $projectName;
+        $this->testing = $testing;
 
         $this->saveNames();
         $this->root();
@@ -150,11 +130,22 @@ class Construct extends Command
         $this->projectClass();
         $this->projectTest();
 
-        if ($this->testingWarning) {
-            $output->writeln('Warning: Testing framework "' . $this->testing . '" does not exists. Using phpunit instead.');
-        }
+        return $this->testingWarning;
+    }
 
-        $output->writeln('Project "' . $this->projectName . '" created.');
+    /**
+     * Save versions of project names.
+     *
+     * @return void
+     **/
+    protected function saveNames()
+    {
+        $names = $this->str->split($this->projectName);
+
+        $this->vendorLower = $this->str->toLower($names['vendor']);
+        $this->vendorUpper = $this->str->toStudly($names['vendor']);
+        $this->projectLower = $this->str->toLower($names['project']);
+        $this->projectUpper = $this->str->toStudly($names['project']);
     }
 
     /**
@@ -186,21 +177,6 @@ class Construct extends Command
                 $this->phpunit();
                 break;
         }
-    }
-
-    /**
-     * Save versions of project names.
-     *
-     * @return void
-     **/
-    protected function saveNames()
-    {
-        $names = $this->str->split($this->projectName);
-
-        $this->vendorLower = $this->str->toLower($names['vendor']);
-        $this->vendorUpper = $this->str->toStudly($names['vendor']);
-        $this->projectLower = $this->str->toLower($names['project']);
-        $this->projectUpper = $this->str->toStudly($names['project']);
     }
 
     /**

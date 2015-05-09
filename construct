@@ -9,10 +9,12 @@ if (file_exists(__DIR__ . '/../../autoload.php')) {
 }
 
 use Illuminate\Filesystem\Filesystem;
+use JonathanTorres\Construct\Commands\ConstructCommand;
 use JonathanTorres\Construct\Construct;
 use JonathanTorres\Construct\Str;
 use Symfony\Component\Console\Application;
 
 $app = new Application();
-$app->add(new Construct(new Filesystem(), new Str()));
+$construct = new Construct(new Filesystem(), new Str());
+$app->add(new ConstructCommand($construct, new Str()));
 $app->run();
