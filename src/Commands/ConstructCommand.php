@@ -43,7 +43,7 @@ class ConstructCommand extends Command
     /**
      * Initialize.
      *
-     * @param \Illuminate\Filesystem\Filesystem $file
+     * @param \JonathanTorres\Construct\Construct $construct
      * @param \JonathanTorres\Construct\Str $str
      *
      * @return void
