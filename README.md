@@ -1,7 +1,7 @@
-[![Stories in Ready](https://badge.waffle.io/jonathantorres/construct.png?label=ready&title=Ready)](https://waffle.io/jonathantorres/construct)
 Construct
 ================
 [![Build Status](https://travis-ci.org/jonathantorres/construct.svg?branch=master)](https://travis-ci.org/jonathantorres/construct)
+[![Done Issues](https://badge.waffle.io/jonathantorres/construct.png?label=done&title=Done)](https://waffle.io/jonathantorres/construct)
 
 Cli command to generate a basic PHP project structure.
 
