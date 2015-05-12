@@ -229,7 +229,7 @@ class Construct
         $file = $this->file->get(__DIR__ . '/stubs/phpunit.txt');
         $content = str_replace('{project_upper}', $this->projectUpper, $file);
 
-        $this->file->put($this->projectLower . '/' . '/phpunit.xml', $content);
+        $this->file->put($this->projectLower . '/' . '/phpunit.xml.dist', $content);
     }
 
     /**
