@@ -1,4 +1,6 @@
-<?php namespace {vendor_upper}\{project_upper}\Tests;
+<?php
+
+namespace {vendor_upper}\{project_upper}\Tests;
 
 use {vendor_upper}\{project_upper}\{project_upper};
 use PHPUnit_Framework_TestCase as PHPUnit;
