@@ -37,5 +37,18 @@ The current project structure will be the following:
 
 This is a good starting point. You can continue your work from there.
 
+#### Select testing framework
+The `--test` option will allow you to select a testing framework. One of the following is available at the moment: `phpunit`, `phpspec`, `codeception` or `behat`. `phpunit` is currently the default.
+
+```bash
+construct generate jonathantorres/logger --test=codeception
+```
+
+You can also use the short code `-t`
+
+```bash
+construct generate jonathantorres/logger -t codeception
+```
+
 #### Run tests
 Just run `vendor/bin/phpunit` from your project root directory.
