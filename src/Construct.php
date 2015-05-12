@@ -35,6 +35,13 @@ class Construct
     protected $projectName;
 
     /**
+     * The files to ignore on exporting.
+     *
+     * @var array
+     **/
+    protected $exportIgnores = [];
+
+    /**
      * The selected testing framework.
      *
      * @var string
@@ -118,12 +125,13 @@ class Construct
         $this->root();
         $this->src();
         $this->readme();
-        $this->gitignore();
         $this->testing();
+        $this->gitignore();
         $this->travis();
         $this->composer();
         $this->projectClass();
         $this->projectTest();
+        $this->gitattributes();
 
         return $this->testingWarning;
     }
@@ -201,7 +209,23 @@ class Construct
      **/
     protected function gitignore()
     {
-        $this->file->copy(__DIR__ . '/stubs/gitignore.txt', $this->projectLower . '/' . '/.gitignore');
+        $this->file->copy(__DIR__ . '/stubs/gitignore.txt', $this->projectLower . '/' . '.gitignore');
+    }
+
+    /**
+     * Generate gitattributes file.
+     *
+     * @return void
+     **/
+    protected function gitattributes()
+    {
+        $content = $this->file->get(__DIR__ . '/stubs/gitattributes.txt');
+
+        foreach ($this->exportIgnores as $ignore) {
+            $content .= PHP_EOL.'/'.$ignore.' export-ignore';
+        }
+
+        $this->file->put($this->projectLower . '/' . '.gitattributes', $content);
     }
 
     /**
@@ -214,7 +238,7 @@ class Construct
         $file = $this->file->get(__DIR__ . '/stubs/README.txt');
         $content = str_replace('{project_upper}', $this->projectUpper, $file);
 
-        $this->file->put($this->projectLower . '/' . '/README.md', $content);
+        $this->file->put($this->projectLower . '/' . 'README.md', $content);
     }
 
     /**
@@ -230,6 +254,7 @@ class Construct
         $content = str_replace('{project_upper}', $this->projectUpper, $file);
 
         $this->file->put($this->projectLower . '/' . '/phpunit.xml.dist', $content);
+        $this->exportIgnores[] = 'phpunit.xml.dist';
     }
 
     /**
