@@ -49,6 +49,13 @@ class Construct
     protected $testing;
 
     /**
+     * The selected license.
+     *
+     * @var string
+     **/
+    protected $license;
+
+    /**
      * The selected testing framework version.
      *
      * @var string
@@ -116,10 +123,11 @@ class Construct
      *
      * @return boolean
      **/
-    public function generate($projectName, $testing)
+    public function generate($projectName, $testing, $license)
     {
         $this->projectName = $projectName;
         $this->testing = $testing;
+        $this->license = $license;
 
         $this->saveNames();
         $this->root();
@@ -128,6 +136,7 @@ class Construct
         $this->testing();
         $this->gitignore();
         $this->travis();
+        $this->license();
         $this->composer();
         $this->projectClass();
         $this->projectTest();
@@ -301,6 +310,19 @@ class Construct
     }
 
     /**
+     * Generate LICENSE.md file.
+     *
+     * @return void
+     */
+    protected function license()
+    {
+        $file = $this->file->get(__DIR__ . '/stubs/licenses/'.strtolower($this->license).'.txt');
+        $content = str_replace(['{year}', '{name}'], [(new \DateTime())->format('Y'), $this->vendorUpper], $file);
+
+        $this->file->put($this->projectLower . '/' . 'LICENSE.md', $content);
+    }
+
+    /**
      * Generate composer file.
      *
      * @return void
@@ -308,8 +330,8 @@ class Construct
     protected function composer()
     {
         $file = $this->file->get(__DIR__ . '/stubs/composer.txt');
-        $stubs = ['{project_upper}', '{project_lower}', '{vendor_lower}', '{vendor_upper}', '{testing}', '{testing_version}'];
-        $values = [$this->projectUpper, $this->projectLower, $this->vendorLower, $this->vendorUpper, $this->testing, $this->testingVersion];
+        $stubs = ['{project_upper}', '{project_lower}', '{vendor_lower}', '{vendor_upper}', '{testing}', '{testing_version}', '{license}'];
+        $values = [$this->projectUpper, $this->projectLower, $this->vendorLower, $this->vendorUpper, $this->testing, $this->testingVersion, $this->license];
 
         $content = str_replace($stubs, $values, $file);
 

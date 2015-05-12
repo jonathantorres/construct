@@ -41,6 +41,20 @@ class ConstructCommand extends Command
     protected $testing;
 
     /**
+     * The open source license.
+     *
+     * @var string
+     **/
+    protected $license;
+
+    /**
+     * The available open source license. (more: http://choosealicense.com/licenses)
+     *
+     * @var array
+     **/
+    protected $licenses = ['MIT', 'Apache-2.0', 'GPL-2.0', 'GPL-3.0'];
+
+    /**
      * Initialize.
      *
      * @param \JonathanTorres\Construct\Construct $construct
@@ -63,10 +77,13 @@ class ConstructCommand extends Command
      **/
     protected function configure()
     {
+        $licenseDescription = 'License (one of: '.join(', ', $this->licenses).')';
+
         $this->setName('generate');
         $this->setDescription('Generate a basic PHP project.');
         $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name.');
         $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'Testing framework', 'phpunit');
+        $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
     }
 
     /**
@@ -81,13 +98,19 @@ class ConstructCommand extends Command
     {
         $this->projectName = $input->getArgument('name');
         $this->testing = $input->getOption('test');
+        $this->license = $input->getOption('license');
 
         if (!$this->str->isValid($this->projectName)) {
             $output->writeln('<error>"' . $this->projectName . '" is not a valid project name, please use "vendor/project"</error>');
             return false;
         }
 
-        $warning = $this->construct->generate($this->projectName, $this->testing);
+        if (!in_array($this->license, $this->licenses)) {
+            $output->writeln('<error>"' . $this->license . '" is not a known license, yet.</error>');
+            return false;
+        }
+
+        $warning = $this->construct->generate($this->projectName, $this->testing, $this->license);
 
         if ($warning) {
             $output->writeln('<error>Warning: Testing framework "' . $this->testing . '" does not exists. Using phpunit instead.</error>');
