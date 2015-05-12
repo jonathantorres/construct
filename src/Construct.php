@@ -201,7 +201,7 @@ class Construct
      **/
     protected function gitignore()
     {
-        $this->file->copy(__DIR__ . '/stubs/gitignore.txt', $this->projectLower . '/' . '/.gitignore');
+        $this->file->copy(__DIR__ . '/stubs/gitignore.txt', $this->projectLower . '/' . '.gitignore');
     }
 
     /**
@@ -214,7 +214,7 @@ class Construct
         $file = $this->file->get(__DIR__ . '/stubs/README.txt');
         $content = str_replace('{project_upper}', $this->projectUpper, $file);
 
-        $this->file->put($this->projectLower . '/' . '/README.md', $content);
+        $this->file->put($this->projectLower . '/' . 'README.md', $content);
     }
 
     /**
@@ -229,7 +229,7 @@ class Construct
         $file = $this->file->get(__DIR__ . '/stubs/phpunit.txt');
         $content = str_replace('{project_upper}', $this->projectUpper, $file);
 
-        $this->file->put($this->projectLower . '/' . '/phpunit.xml.dist', $content);
+        $this->file->put($this->projectLower . '/' . 'phpunit.xml.dist', $content);
     }
 
     /**
@@ -272,7 +272,7 @@ class Construct
         $file = $this->file->get(__DIR__ . '/stubs/travis.txt');
         $content = str_replace('{testing}', $this->testing, $file);
 
-        $this->file->put($this->projectLower . '/' . '/.travis.yml', $content);
+        $this->file->put($this->projectLower . '/' . '.travis.yml', $content);
     }
 
     /**
@@ -288,7 +288,7 @@ class Construct
 
         $content = str_replace($stubs, $values, $file);
 
-        $this->file->put($this->projectLower . '/' . '/composer.json', $content);
+        $this->file->put($this->projectLower . '/' . 'composer.json', $content);
     }
 
     /**
