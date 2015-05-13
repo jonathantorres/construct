@@ -24,6 +24,7 @@
             "{vendor_upper}\\{project_upper}\\Tests\\": "tests/"
         }
     },
+    "license": "{license}",
     "minimum-stability": "stable",
     "scripts": {
         "tests": "{testing}"
