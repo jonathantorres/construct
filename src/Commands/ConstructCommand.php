@@ -64,8 +64,8 @@ class ConstructCommand extends Command
     protected function configure()
     {
         $this->setName('generate');
-        $this->setDescription('Generate a basic PHP project.');
-        $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name.');
+        $this->setDescription('Generate a basic PHP project');
+        $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name');
         $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'Testing framework', 'phpunit');
     }
 
