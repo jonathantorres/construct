@@ -24,5 +24,8 @@
             "{vendor_upper}\\{project_upper}\\Tests\\": "tests/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "scripts": {
+        "tests": "{testing}"
+    }
 }
