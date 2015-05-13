@@ -9,7 +9,7 @@ Cli command to generate a basic PHP project structure.
 Construct should be installed globally through composer.
 
 ```bash
-composer global require "jonathantorres/construct=~1.0"
+composer global require jonathantorres/construct
 ```
 
 Make sure that `~/.composer/vendor/bin` is on your `$PATH`. This way the `construct` executable can be located.
