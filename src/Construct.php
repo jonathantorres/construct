@@ -35,6 +35,13 @@ class Construct
     protected $projectName;
 
     /**
+     * The files to ignore on exporting.
+     *
+     * @var array
+     **/
+    protected $exportIgnores = [];
+
+    /**
      * The selected testing framework.
      *
      * @var string
@@ -118,12 +125,13 @@ class Construct
         $this->root();
         $this->src();
         $this->readme();
-        $this->gitignore();
         $this->testing();
+        $this->gitignore();
         $this->travis();
         $this->composer();
         $this->projectClass();
         $this->projectTest();
+        $this->gitattributes();
 
         return $this->testingWarning;
     }
@@ -205,6 +213,22 @@ class Construct
     }
 
     /**
+     * Generate gitattributes file.
+     *
+     * @return void
+     **/
+    protected function gitattributes()
+    {
+        $content = $this->file->get(__DIR__ . '/stubs/gitattributes.txt');
+
+        foreach ($this->exportIgnores as $ignore) {
+            $content .= PHP_EOL . '/' . $ignore . ' export-ignore';
+        }
+
+        $this->file->put($this->projectLower . '/' . '.gitattributes', $content);
+    }
+
+    /**
      * Generate README file.
      *
      * @return void
@@ -230,6 +254,7 @@ class Construct
         $content = str_replace('{project_upper}', $this->projectUpper, $file);
 
         $this->file->put($this->projectLower . '/' . 'phpunit.xml.dist', $content);
+        $this->exportIgnores[] = 'phpunit.xml.dist';
     }
 
     /**
