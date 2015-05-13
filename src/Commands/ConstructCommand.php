@@ -80,8 +80,8 @@ class ConstructCommand extends Command
         $licenseDescription = 'License (one of: '.join(', ', $this->licenses).')';
 
         $this->setName('generate');
-        $this->setDescription('Generate a basic PHP project.');
-        $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name.');
+        $this->setDescription('Generate a basic PHP project');
+        $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name');
         $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'Testing framework', 'phpunit');
         $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
     }
