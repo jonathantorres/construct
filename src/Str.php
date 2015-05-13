@@ -56,6 +56,29 @@ class Str
     }
 
     /**
+     * Convert string to camel case.
+     *
+     * @param  string  $string
+     * @param  boolean $capitalizeFirstCharacter Defaults to false.
+     *
+     * @return string
+     */
+    public function toCamelCase($string, $capitalizeFirstCharacter = false)
+    {
+       $string = str_replace(
+           ' ',
+           '',
+           ucwords(str_replace(array('-', '_'), ' ', $string))
+       );
+
+       if (!$capitalizeFirstCharacter) {
+           $string = lcfirst($string);
+       }
+
+       return $string;
+    }
+
+    /**
      * Split project name in a pretty array.
      *
      * @param string $string
