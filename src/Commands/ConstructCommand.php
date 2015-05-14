@@ -106,7 +106,7 @@ class ConstructCommand extends Command
         }
 
         if (!in_array($this->license, $this->licenses)) {
-            $output->writeln('<error>"' . $this->license . '" is not a known license, yet. Using MIT by default.</error>');
+            $output->writeln('<error>Warning: "' . $this->license . '" is not a known license, yet. Using MIT by default.</error>');
             $this->license = 'MIT';
         }
 
