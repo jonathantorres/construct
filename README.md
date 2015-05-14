@@ -44,10 +44,24 @@ The `--test` option will allow you to select a testing framework. One of the fol
 construct generate jonathantorres/logger --test=codeception
 ```
 
-You can also use the short code `-t`
+You can also use the short option `-t`.
 
 ```bash
 construct generate jonathantorres/logger -t codeception
+```
+
+#### Select license
+The `--license` option will allow you to select a license for the project to construct. One of the following is
+available at the moment: `MIT`, `Apache-2.0`, `GPL-2.0` or `GPL-3.0`. `MIT` is currently the default.
+
+```bash
+construct generate jonathantorres/logger --license=Apache-2.0
+```
+
+You can also use the short option `-l`.
+
+```bash
+construct generate jonathantorres/logger -l Apache-2.0
 ```
 
 #### Run tests
