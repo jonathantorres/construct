@@ -267,6 +267,31 @@ class Construct
     }
 
     /**
+     * Tries to determine the configured git user, returns a default when failing to do so.
+     *
+     * @return array
+     */
+    protected function determineConfiguredGitUser()
+    {
+        $user = [
+            'name' => 'Some name',
+            'email' => 'some@email.com'
+        ];
+        $command = 'git config --get-regexp "^user.*" 2>&1';
+        exec($command, $keyValueLines, $returnValue);
+
+        if ($returnValue === 0) {
+            foreach ($keyValueLines as $keyValueLine) {
+                list($key, $value) = explode(' ', $keyValueLine, 2);
+                $key = str_replace('user.', '', $key);
+                $user[$key] = $value;
+            }
+        }
+
+        return $user;
+    }
+
+    /**
      * Generate phpspec file/settings.
      *
      * @return void
@@ -330,8 +355,31 @@ class Construct
     protected function composer()
     {
         $file = $this->file->get(__DIR__ . '/stubs/composer.txt');
-        $stubs = ['{project_upper}', '{project_lower}', '{vendor_lower}', '{vendor_upper}', '{testing}', '{testing_version}', '{license}'];
-        $values = [$this->projectUpper, $this->projectLower, $this->vendorLower, $this->vendorUpper, $this->testing, $this->testingVersion, $this->license];
+        $user = $this->determineConfiguredGitUser();
+
+        $stubs = [
+            '{project_upper}',
+            '{project_lower}',
+            '{vendor_lower}',
+            '{vendor_upper}',
+            '{testing}',
+            '{testing_version}',
+            '{license}',
+            '{author_name}',
+            '{author_email}',
+        ];
+
+        $values = [
+            $this->projectUpper,
+            $this->projectLower,
+            $this->vendorLower,
+            $this->vendorUpper,
+            $this->testing,
+            $this->testingVersion,
+            $this->license,
+            $user['name'],
+            $user['email'],
+        ];
 
         $content = str_replace($stubs, $values, $file);
 

@@ -4,8 +4,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Some author name",
-            "email": "someone@email.com"
+            "name": "{author_name}",
+            "email": "{author_email}"
         }
     ],
     "require": {
