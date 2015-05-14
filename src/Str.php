@@ -11,7 +11,7 @@ class Str
      *
      * @var string
      **/
-    protected $regEx = "/\w[a-z]\/\w[a-z]/";
+    protected $regEx = '{^[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$}u';
 
     /**
      * Check if the entered project name is valid.

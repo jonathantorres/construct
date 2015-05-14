@@ -15,9 +15,12 @@ class StrTest extends PHPUnit
     public function testProjectName()
     {
         $this->assertTrue($this->str->isValid('vendor/project'));
+        $this->assertTrue($this->str->isValid('vendor/project-name'));
+        $this->assertTrue($this->str->isValid('vendor/project.name'));
         $this->assertTrue($this->str->isValid('Vendor/Project'));
         $this->assertFalse($this->str->isValid('someproject'));
         $this->assertFalse($this->str->isValid('some//project'));
+        $this->assertFalse($this->str->isValid('some/_project'));
     }
 
     public function testToLower()
