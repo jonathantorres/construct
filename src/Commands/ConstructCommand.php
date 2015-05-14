@@ -48,7 +48,7 @@ class ConstructCommand extends Command
     protected $license;
 
     /**
-     * The available open source license. (more: http://choosealicense.com/licenses)
+     * The available open source licenses. (more: http://choosealicense.com/licenses)
      *
      * @var array
      **/
@@ -77,7 +77,7 @@ class ConstructCommand extends Command
      **/
     protected function configure()
     {
-        $licenseDescription = 'License (one of: '.join(', ', $this->licenses).')';
+        $licenseDescription = 'License (one of: ' . join(', ', $this->licenses) . ')';
 
         $this->setName('generate');
         $this->setDescription('Generate a basic PHP project');

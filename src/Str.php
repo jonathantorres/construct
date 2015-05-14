@@ -68,7 +68,7 @@ class Str
        $string = str_replace(
            ' ',
            '',
-           ucwords(str_replace(array('-', '_'), ' ', $string))
+           ucwords(str_replace(['-', '_'], ' ', $string))
        );
 
        if (!$capitalizeFirstCharacter) {

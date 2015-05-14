@@ -277,6 +277,7 @@ class Construct
             'name' => 'Some name',
             'email' => 'some@email.com'
         ];
+
         $command = 'git config --get-regexp "^user.*" 2>&1';
         exec($command, $keyValueLines, $returnValue);
 
@@ -341,7 +342,7 @@ class Construct
      */
     protected function license()
     {
-        $file = $this->file->get(__DIR__ . '/stubs/licenses/'.strtolower($this->license).'.txt');
+        $file = $this->file->get(__DIR__ . '/stubs/licenses/' . strtolower($this->license) . '.txt');
         $content = str_replace(['{year}', '{name}'], [(new \DateTime())->format('Y'), $this->vendorUpper], $file);
 
         $this->file->put($this->projectLower . '/' . 'LICENSE.md', $content);
@@ -412,6 +413,7 @@ class Construct
             '{project_camel_case}',
             '{vendor_upper}'
         ];
+
         $values = [
             $this->projectUpper,
             $this->str->toCamelCase($this->projectLower),
