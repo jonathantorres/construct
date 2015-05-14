@@ -54,6 +54,25 @@ class ConstructTest extends PHPUnit
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
+    public function testProjectGenerationWithUnknownLicense()
+    {
+        $this->setMocks();
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--license' => 'noidealicense',
+        ]);
+
+        $output = 'Warning: "noidealicense" is not a known license, yet. Using MIT by default.' . PHP_EOL .
+                  'Project "vendor/project" created.' . PHP_EOL;
+
+        $this->assertSame($output, $commandTester->getDisplay());
+    }
+
     protected function setApplication()
     {
         $app = new Application();
