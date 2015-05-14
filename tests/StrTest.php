@@ -31,6 +31,15 @@ class StrTest extends PHPUnit
         $this->assertSame('Jonathan', $this->str->toStudly('jonathan'));
     }
 
+    public function testToCamelCase()
+    {
+        $this->assertSame('fooBar', $this->str->toCamelCase('foo_bar'));
+        $this->assertSame('foozBall', $this->str->toCamelCase('fooz-ball'));
+        $this->assertSame('volleyBall', $this->str->toCamelCase('volley ball'));
+
+        $this->assertSame('FooBar', $this->str->toCamelCase('foo_bar', true));
+    }
+
     public function testSplit()
     {
         $result = [

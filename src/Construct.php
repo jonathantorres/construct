@@ -359,8 +359,16 @@ class Construct
     protected function projectTest()
     {
         $file = $this->file->get(__DIR__ . '/stubs/ProjectTest.txt');
-        $stubs = ['{project_upper}', '{project_lower}', '{vendor_upper}'];
-        $values = [$this->projectUpper, $this->projectLower, $this->vendorUpper];
+        $stubs = [
+            '{project_upper}',
+            '{project_camel_case}',
+            '{vendor_upper}'
+        ];
+        $values = [
+            $this->projectUpper,
+            $this->str->toCamelCase($this->projectLower),
+            $this->vendorUpper
+        ];
 
         $content = str_replace($stubs, $values, $file);
 

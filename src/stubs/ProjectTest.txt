@@ -9,7 +9,7 @@ class {project_upper}Test extends PHPUnit
 {
     public function testExample()
     {
-        ${project_lower} = new {project_upper}();
+        ${project_camel_case} = new {project_upper}();
 
         $this->assertTrue(true);
     }
