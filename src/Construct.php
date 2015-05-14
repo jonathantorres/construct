@@ -141,6 +141,7 @@ class Construct
         $this->projectClass();
         $this->projectTest();
         $this->gitattributes();
+        $this->composerInstall();
 
         return $this->testingWarning;
     }
@@ -385,6 +386,17 @@ class Construct
         $content = str_replace($stubs, $values, $file);
 
         $this->file->put($this->projectLower . '/' . 'composer.json', $content);
+    }
+
+    /**
+     * Do an initial composer install in constructed project.
+     *
+     * @return void
+     */
+    protected function composerInstall()
+    {
+        $command = 'cd ' . $this->projectLower . ' && composer install';
+        exec($command);
     }
 
     /**
