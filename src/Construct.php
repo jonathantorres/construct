@@ -280,7 +280,7 @@ class Construct
             'email' => 'some@email.com'
         ];
 
-        $command = 'git config --get-regexp "^user.*" 2>&1';
+        $command = 'git config --get-regexp "^user.*"';
         exec($command, $keyValueLines, $returnValue);
 
         if ($returnValue === 0) {
