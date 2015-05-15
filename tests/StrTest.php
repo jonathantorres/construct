@@ -21,6 +21,7 @@ class StrTest extends PHPUnit
         $this->assertFalse($this->str->isValid('someproject'));
         $this->assertFalse($this->str->isValid('some//project'));
         $this->assertFalse($this->str->isValid('some/_project'));
+        $this->assertFalse($this->str->isValid('some\project'));
     }
 
     public function testToLower()
