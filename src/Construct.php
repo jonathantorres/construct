@@ -395,8 +395,10 @@ class Construct
      */
     protected function composerInstall()
     {
-        $command = 'cd ' . $this->projectLower . ' && composer install';
-        exec($command);
+        if (is_dir($this->projectLower)) {
+            $command = 'cd ' . $this->projectLower . ' && composer install';
+            exec($command);
+        }
     }
 
     /**
