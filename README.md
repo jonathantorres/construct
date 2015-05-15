@@ -35,7 +35,7 @@ The current project structure will be the following:
 │   ├── .travis.yml
 │   ├── composer.lock
 │   ├── composer.json
-│   ├── phpunit.xml
+│   ├── phpunit.xml.dist
 │   ├── README.md
 │   ├── LICENSE.md
 ```
