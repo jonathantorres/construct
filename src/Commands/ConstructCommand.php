@@ -55,6 +55,13 @@ class ConstructCommand extends Command
     protected $licenses = ['MIT', 'Apache-2.0', 'GPL-2.0', 'GPL-3.0'];
 
     /**
+     * The available testing frameworks.
+     *
+     * @var array
+     **/
+    protected $testingFrameworks = ['phpunit', 'behat', 'phpspec', 'codeception'];
+
+    /**
      * Initialize.
      *
      * @param \JonathanTorres\Construct\Construct $construct
@@ -78,11 +85,12 @@ class ConstructCommand extends Command
     protected function configure()
     {
         $licenseDescription = 'License (one of: ' . join(', ', $this->licenses) . ')';
+        $testDescription = 'Testing framework (one of: ' . join(', ', $this->testingFrameworks) . ')';
 
         $this->setName('generate');
         $this->setDescription('Generate a basic PHP project');
         $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name');
-        $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'Testing framework', 'phpunit');
+        $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testDescription, 'phpunit');
         $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
     }
 
