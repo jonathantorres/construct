@@ -116,6 +116,6 @@ class ConstructCommand extends Command
             $output->writeln('<error>Warning: Testing framework "' . $this->testing . '" does not exists. Using phpunit instead.</error>');
         }
 
-        $output->writeln('<info>Project "' . $this->projectName . '" created.</info>');
+        $output->writeln('<info>Project "' . $this->projectName . '" constructed.</info>');
     }
 }
