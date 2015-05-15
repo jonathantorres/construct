@@ -32,7 +32,7 @@ class ConstructTest extends PHPUnit
         $commandTester = new CommandTester($command);
         $commandTester->execute(['command' => $command->getName(), 'name' => 'vendor/project']);
 
-        $this->assertSame('Project "vendor/project" created.' . PHP_EOL, $commandTester->getDisplay());
+        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
     public function testProjectGenerationWithUnknownTestingFramework()
@@ -48,8 +48,8 @@ class ConstructTest extends PHPUnit
             '--test' => 'idontexist',
         ]);
 
-        $output = 'Warning: Testing framework "idontexist" does not exists. Using phpunit instead.' . PHP_EOL .
-                  'Project "vendor/project" created.' . PHP_EOL;
+        $output = 'Warning: Testing framework "idontexist" does not exists. Using phpunit instead.' . PHP_EOL
+            . 'Project "vendor/project" constructed.' . PHP_EOL;
 
         $this->assertSame($output, $commandTester->getDisplay());
     }
@@ -67,8 +67,8 @@ class ConstructTest extends PHPUnit
             '--license' => 'noidealicense',
         ]);
 
-        $output = 'Warning: "noidealicense" is not a known license, yet. Using MIT by default.' . PHP_EOL .
-                  'Project "vendor/project" created.' . PHP_EOL;
+        $output = 'Warning: "noidealicense" is not a known license, yet. Using MIT by default.' . PHP_EOL
+            . 'Project "vendor/project" constructed.' . PHP_EOL;
 
         $this->assertSame($output, $commandTester->getDisplay());
     }
