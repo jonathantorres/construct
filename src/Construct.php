@@ -120,6 +120,7 @@ class Construct
      *
      * @param string $projectName The entered project name.
      * @param string $testing The entered testing framework.
+     * @param string $license The entered project license.
      *
      * @return boolean
      **/
