@@ -118,11 +118,12 @@ class ConstructCommand extends Command
             $this->license = 'MIT';
         }
 
-        $warning = $this->construct->generate($this->projectName, $this->testing, $this->license);
-
-        if ($warning) {
-            $output->writeln('<error>Warning: Testing framework "' . $this->testing . '" does not exists. Using phpunit instead.</error>');
+        if (!in_array($this->testing, $this->testingFrameworks)) {
+            $output->writeln('<error>Warning: "' . $this->testing . '" is not a known testing framework, yet. Using phpunit by default.</error>');
+            $this->testing = 'phpunit';
         }
+
+        $this->construct->generate($this->projectName, $this->testing, $this->license);
 
         $output->writeln('<info>Project "' . $this->projectName . '" created.</info>');
     }
