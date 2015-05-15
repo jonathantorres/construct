@@ -28,11 +28,16 @@ The current project structure will be the following:
 │   │   ├── Logger.php
 │   ├── tests/
 │   │   ├── LoggerTest.php
+│   ├── vendor/
+│   │   ├── ...
+│   ├── .gitattributes
 │   ├── .gitignore
 │   ├── .travis.yml
+│   ├── composer.lock
 │   ├── composer.json
-│   ├── phpunit.xml
+│   ├── phpunit.xml.dist
 │   ├── README.md
+│   ├── LICENSE.md
 ```
 
 This is a good starting point. You can continue your work from there.
