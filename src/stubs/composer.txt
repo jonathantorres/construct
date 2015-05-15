@@ -1,7 +1,7 @@
 {
     "name": "{vendor_lower}/{project_lower}",
     "description": "PHP project.",
-    "license": "MIT",
+    "license": "{license}",
     "authors": [
         {
             "name": "{author_name}",
@@ -24,7 +24,6 @@
             "{vendor_upper}\\{project_upper}\\Tests\\": "tests/"
         }
     },
-    "license": "{license}",
     "minimum-stability": "stable",
     "scripts": {
         "tests": "{testing}"
