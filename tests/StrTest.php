@@ -54,4 +54,35 @@ class StrTest extends PHPUnit
         $this->assertInternalType('array', $this->str->split('vendor/project'));
         $this->assertSame($result, $this->str->split('vendor/project'));
     }
+
+    public function testNamespaceWithProjectNameAndSingleSlashes()
+    {
+        $this->assertSame('Vendor\\Project', $this->str->createNamespace('vendor/project', true));
+        $this->assertSame('Vendor\\ProjectName', $this->str->createNamespace('vendor/project-name', true));
+        $this->assertSame('Vendor\\ProjectName', $this->str->createNamespace('vendor/project.name', true));
+        $this->assertSame('Vendor\\Project', $this->str->createNamespace('Vendor/Project', true));
+    }
+
+    public function testNamespaceWithProjectNameAndDoubleSlashes()
+    {
+        $this->assertSame('Vendor\\\\Project', $this->str->createNamespace('vendor/project', true, true));
+        $this->assertSame('Vendor\\\\Project', $this->str->createNamespace('Vendor/Project', true, true));
+    }
+
+    public function testNamespaceWithProvidedInputAndSingleSlashes()
+    {
+        $this->assertSame('Project\\Namespace', $this->str->createNamespace('project\namespace', false));
+        $this->assertSame('Project\\Namespace', $this->str->createNamespace('Project\Namespace', false));
+    }
+
+    public function testNamespaceWithProvidedInputAndDoubleSlashes()
+    {
+        $this->assertSame('Project\\\\Namespace', $this->str->createNamespace('project\namespace', false, true));
+        $this->assertSame('Project\\\\Namespace', $this->str->createNamespace('Project\Namespace', false, true));
+    }
+
+    public function testNamespaceWithProvidedInputWithSingleName()
+    {
+        $this->assertSame('Namespace', $this->str->createNamespace('namespace'));
+    }
 }
