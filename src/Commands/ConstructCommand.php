@@ -27,7 +27,7 @@ class ConstructCommand extends Command
     protected $str;
 
     /**
-     * Entered project name.
+     * The entered project name.
      *
      * @var string
      **/
@@ -41,7 +41,7 @@ class ConstructCommand extends Command
     protected $testing;
 
     /**
-     * The open source license.
+     * The entered open source license.
      *
      * @var string
      **/
