@@ -30,6 +30,36 @@ class Str
     }
 
     /**
+     * Construct a correct project namespace name.
+     *
+     * @param string $namespace The entered namespace.
+     * @param boolean $usesProjectName Whether or not it's using the project name.
+     * @param boolean $useDoubleSlashes Whether or not use double slashes \\.
+     *
+     * @return string
+     **/
+    public function createNamespace($namespace, $usesProjectName = false, $useDoubleSlashes = false)
+    {
+        $delimiter = ($usesProjectName) ? '/' : '\\';
+        $slash = ($useDoubleSlashes) ? '\\\\' : '\\';
+
+        // using a single namespace name? Ex: Namespace
+        if (strpos($namespace, '\\') === false && strpos($namespace, '/') === false) {
+            return $this->toStudly($namespace);
+        }
+
+        // strip dots and dashes from project name
+        if ($usesProjectName) {
+            $namespace = str_replace(['-', '.'], '_', $namespace);
+            $namespace = $this->toStudly($namespace);
+        }
+
+        return implode($slash, array_map(function ($v) {
+            return $this->toStudly($v);
+        }, explode($delimiter, $namespace)));
+    }
+
+    /**
      * Convert string to studly case.
      * Ex: jonathan -> Jonathan
      *
