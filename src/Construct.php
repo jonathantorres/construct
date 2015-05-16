@@ -63,13 +63,6 @@ class Construct
     protected $testingVersion;
 
     /**
-     * Warn if the specified testing framework is not known.
-     *
-     * @var boolean
-     **/
-    protected $testingWarning = false;
-
-    /**
      * Camel case version of vendor name.
      * ex: JonathanTorres
      *
@@ -122,7 +115,7 @@ class Construct
      * @param string $testing The entered testing framework.
      * @param string $license The entered project license.
      *
-     * @return boolean
+     * @return void
      **/
     public function generate($projectName, $testing, $license)
     {
@@ -143,8 +136,6 @@ class Construct
         $this->projectTest();
         $this->gitattributes();
         $this->composerInstall();
-
-        return $this->testingWarning;
     }
 
     /**
@@ -187,7 +178,6 @@ class Construct
                 break;
 
             default:
-                $this->testingWarning = true;
                 $this->phpunit();
                 break;
         }

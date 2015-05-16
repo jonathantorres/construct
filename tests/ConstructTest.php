@@ -48,8 +48,8 @@ class ConstructTest extends PHPUnit
             '--test' => 'idontexist',
         ]);
 
-        $output = 'Warning: Testing framework "idontexist" does not exists. Using phpunit instead.' . PHP_EOL
-            . 'Project "vendor/project" constructed.' . PHP_EOL;
+        $output = 'Warning: "idontexist" is not a known testing framework, yet. Using phpunit by default.' . PHP_EOL .
+                  'Project "vendor/project" created.' . PHP_EOL;
 
         $this->assertSame($output, $commandTester->getDisplay());
     }
