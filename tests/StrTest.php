@@ -66,6 +66,8 @@ class StrTest extends PHPUnit
     public function testNamespaceWithProjectNameAndDoubleSlashes()
     {
         $this->assertSame('Vendor\\\\Project', $this->str->createNamespace('vendor/project', true, true));
+        $this->assertSame('Vendor\\\\ProjectName', $this->str->createNamespace('vendor/project-name', true, true));
+        $this->assertSame('Vendor\\\\ProjectName', $this->str->createNamespace('vendor/project.name', true, true));
         $this->assertSame('Vendor\\\\Project', $this->str->createNamespace('Vendor/Project', true, true));
     }
 
