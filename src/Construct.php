@@ -56,6 +56,13 @@ class Construct
     protected $license;
 
     /**
+     * The selected namespace.
+     *
+     * @var string
+     **/
+    protected $namespace;
+
+    /**
      * The selected testing framework version.
      *
      * @var string
@@ -114,14 +121,16 @@ class Construct
      * @param string $projectName The entered project name.
      * @param string $testing The entered testing framework.
      * @param string $license The entered project license.
+     * @param string $namespace The entered namespace.
      *
      * @return void
      **/
-    public function generate($projectName, $testing, $license)
+    public function generate($projectName, $testing, $license, $namespace)
     {
         $this->projectName = $projectName;
         $this->testing = $testing;
         $this->license = $license;
+        $this->namespace = $namespace;
 
         $this->saveNames();
         $this->root();
@@ -285,6 +294,24 @@ class Construct
     }
 
     /**
+     * Construct a correct project namespace name.
+     *
+     * @param boolean $useDoubleSlashes Whether or not to create the namespace with double slashes \\
+     *
+     * @return string
+     **/
+    protected function createNamespace($useDoubleSlashes = false)
+    {
+        if ($this->namespace === 'Vendor\Project') {
+            $this->namespace = $this->projectName;
+
+            return $this->str->createNamespace($this->namespace, true, $useDoubleSlashes);
+        }
+
+        return $this->str->createNamespace($this->namespace, false, $useDoubleSlashes);
+    }
+
+    /**
      * Generate phpspec file/settings.
      *
      * @return void
@@ -357,6 +384,7 @@ class Construct
             '{vendor_upper}',
             '{testing}',
             '{testing_version}',
+            '{namespace}',
             '{license}',
             '{author_name}',
             '{author_email}',
@@ -369,6 +397,7 @@ class Construct
             $this->vendorUpper,
             $this->testing,
             $this->testingVersion,
+            $this->createNamespace(true),
             $this->license,
             $user['name'],
             $user['email'],

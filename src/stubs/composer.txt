@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "{vendor_upper}\\{project_upper}\\": "src/"
+            "{namespace}\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "{vendor_upper}\\{project_upper}\\Tests\\": "tests/"
+            "{namespace}\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable",
