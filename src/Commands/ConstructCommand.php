@@ -55,6 +55,13 @@ class ConstructCommand extends Command
     protected $licenses = ['MIT', 'Apache-2.0', 'GPL-2.0', 'GPL-3.0'];
 
     /**
+     * The available testing frameworks.
+     *
+     * @var array
+     **/
+    protected $testingFrameworks = ['phpunit', 'behat', 'phpspec', 'codeception'];
+
+    /**
      * Initialize.
      *
      * @param \JonathanTorres\Construct\Construct $construct
@@ -78,11 +85,12 @@ class ConstructCommand extends Command
     protected function configure()
     {
         $licenseDescription = 'License (one of: ' . join(', ', $this->licenses) . ')';
+        $testDescription = 'Testing framework (one of: ' . join(', ', $this->testingFrameworks) . ')';
 
         $this->setName('generate');
         $this->setDescription('Generate a basic PHP project');
         $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name');
-        $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'Testing framework', 'phpunit');
+        $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testDescription, 'phpunit');
         $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
     }
 
@@ -110,11 +118,12 @@ class ConstructCommand extends Command
             $this->license = 'MIT';
         }
 
-        $warning = $this->construct->generate($this->projectName, $this->testing, $this->license);
-
-        if ($warning) {
-            $output->writeln('<error>Warning: Testing framework "' . $this->testing . '" does not exists. Using phpunit instead.</error>');
+        if (!in_array($this->testing, $this->testingFrameworks)) {
+            $output->writeln('<error>Warning: "' . $this->testing . '" is not a known testing framework, yet. Using phpunit by default.</error>');
+            $this->testing = 'phpunit';
         }
+
+        $this->construct->generate($this->projectName, $this->testing, $this->license);
 
         $output->writeln('<info>Project "' . $this->projectName . '" constructed.</info>');
     }
