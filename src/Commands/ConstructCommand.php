@@ -48,6 +48,13 @@ class ConstructCommand extends Command
     protected $license;
 
     /**
+     * The entered project namespace.
+     *
+     * @var string
+     **/
+    protected $namespace;
+
+    /**
      * The available open source licenses. (more: http://choosealicense.com/licenses)
      *
      * @var array
@@ -92,6 +99,7 @@ class ConstructCommand extends Command
         $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name');
         $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testDescription, 'phpunit');
         $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
+        $this->addOption('namespace', 'ns', InputOption::VALUE_OPTIONAL, 'Project namespace', 'Vendor\Project');
     }
 
     /**
@@ -107,6 +115,7 @@ class ConstructCommand extends Command
         $this->projectName = $input->getArgument('name');
         $this->testing = $input->getOption('test');
         $this->license = $input->getOption('license');
+        $this->namespace = $input->getOption('namespace');
 
         if (!$this->str->isValid($this->projectName)) {
             $output->writeln('<error>"' . $this->projectName . '" is not a valid project name, please use "vendor/project"</error>');
@@ -123,7 +132,7 @@ class ConstructCommand extends Command
             $this->testing = 'phpunit';
         }
 
-        $this->construct->generate($this->projectName, $this->testing, $this->license);
+        $this->construct->generate($this->projectName, $this->testing, $this->license, $this->namespace);
 
         $output->writeln('<info>Project "' . $this->projectName . '" constructed.</info>');
     }
