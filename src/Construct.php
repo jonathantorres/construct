@@ -429,7 +429,20 @@ class Construct
     protected function projectClass()
     {
         $file = $this->file->get(__DIR__ . '/stubs/Project.txt');
-        $content = str_replace(['{project_upper}', '{vendor_upper}'], [$this->projectUpper, $this->vendorUpper], $file);
+
+        $stubs = [
+            '{project_upper}',
+            '{vendor_upper}',
+            '{namespace}',
+        ];
+
+        $values = [
+            $this->projectUpper,
+            $this->vendorUpper,
+            $this->createNamespace()
+        ];
+
+        $content = str_replace($stubs, $values, $file);
 
         $this->file->put($this->projectLower . '/' . $this->srcPath . '/' . $this->projectUpper . '.php', $content);
     }
@@ -445,13 +458,15 @@ class Construct
         $stubs = [
             '{project_upper}',
             '{project_camel_case}',
-            '{vendor_upper}'
+            '{vendor_upper}',
+            '{namespace}',
         ];
 
         $values = [
             $this->projectUpper,
             $this->str->toCamelCase($this->projectLower),
-            $this->vendorUpper
+            $this->vendorUpper,
+            $this->createNamespace(),
         ];
 
         $content = str_replace($stubs, $values, $file);
