@@ -43,11 +43,6 @@ class Str
         $delimiter = ($usesProjectName) ? '/' : '\\';
         $slash = ($useDoubleSlashes) ? '\\\\' : '\\';
 
-        // using a single namespace name? Ex: Namespace
-        if (strpos($namespace, '\\') === false && strpos($namespace, '/') === false && $usesProjectName === false) {
-            return $this->toStudly($namespace);
-        }
-
         // strip dots and dashes from project name
         if ($usesProjectName) {
             $namespace = str_replace(['-', '.'], '_', $namespace);
