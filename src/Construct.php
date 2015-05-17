@@ -455,6 +455,7 @@ class Construct
     protected function projectTest()
     {
         $file = $this->file->get(__DIR__ . '/stubs/ProjectTest.txt');
+
         $stubs = [
             '{project_upper}',
             '{project_camel_case}',
