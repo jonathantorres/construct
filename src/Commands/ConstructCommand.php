@@ -99,7 +99,7 @@ class ConstructCommand extends Command
         $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name');
         $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testDescription, 'phpunit');
         $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
-        $this->addOption('namespace', 'ns', InputOption::VALUE_OPTIONAL, 'Project namespace', 'Vendor\Project');
+        $this->addOption('namespace', 's', InputOption::VALUE_OPTIONAL, 'Project namespace', 'Vendor\Project');
     }
 
     /**
