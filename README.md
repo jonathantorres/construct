@@ -69,5 +69,18 @@ You can also use the short option `-l`.
 construct generate jonathantorres/logger -l Apache-2.0
 ```
 
+#### Specify a namespace
+The `--namespace` option will allow you to specify a namespace for the project to construct. This is totally optional. By default construct will use the package name as the namespace.
+
+```bash
+construct generate jonathantorres/logger --namespace=JonathanTorres\\Projects\\Logger
+```
+
+You can also use the short option `-s`.
+
+```bash
+construct generate jonathantorres/logger -s JonathanTorres\\Projects\\Logger
+```
+
 #### Run tests
 Just run `vendor/bin/phpunit` from your project root directory.
