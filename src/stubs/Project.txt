@@ -1,6 +1,6 @@
 <?php
 
-namespace {vendor_upper}\{project_upper};
+namespace {namespace};
 
 class {project_upper}
 {
