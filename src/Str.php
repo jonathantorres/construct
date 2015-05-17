@@ -44,7 +44,7 @@ class Str
         $slash = ($useDoubleSlashes) ? '\\\\' : '\\';
 
         // using a single namespace name? Ex: Namespace
-        if (strpos($namespace, '\\') === false && strpos($namespace, '/') === false) {
+        if (strpos($namespace, '\\') === false && strpos($namespace, '/') === false && $usesProjectName === false) {
             return $this->toStudly($namespace);
         }
 

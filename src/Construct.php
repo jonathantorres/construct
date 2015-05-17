@@ -302,7 +302,7 @@ class Construct
      **/
     protected function createNamespace($useDoubleSlashes = false)
     {
-        if ($this->namespace === 'Vendor\Project') {
+        if ($this->namespace === 'Vendor\Project' || $this->namespace === $this->projectName) {
             $this->namespace = $this->projectName;
 
             return $this->str->createNamespace($this->namespace, true, $useDoubleSlashes);
