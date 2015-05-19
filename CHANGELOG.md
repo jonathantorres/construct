@@ -1,5 +1,10 @@
 # Changelog
 
+#### v1.1.0 `2015-05-18`
+- `Added`
+    - User can optionally initialize an empty git repository.
+    - User can now specify a namespace for the constructed project. See [#12](https://github.com/jonathantorres/construct/issues/12).
+
 #### v1.0.3 `2015-05-14`
 - `Added`
     - User can now select a license. Default is `MIT`. Done by [@hannesvdvreken](https://github.com/hannesvdvreken). See [#13](https://github.com/jonathantorres/construct/issues/13).
