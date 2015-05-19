@@ -55,6 +55,13 @@ class ConstructCommand extends Command
     protected $namespace;
 
     /**
+     * Initialize a git repo?
+     *
+     * @var boolean
+     **/
+    protected $git;
+
+    /**
      * The available open source licenses. (more: http://choosealicense.com/licenses)
      *
      * @var array
@@ -100,6 +107,7 @@ class ConstructCommand extends Command
         $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testDescription, 'phpunit');
         $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
         $this->addOption('namespace', 's', InputOption::VALUE_OPTIONAL, 'Project namespace', 'Vendor\Project');
+        $this->addOption('git', 'g', InputOption::VALUE_NONE, 'Initialize an empty git repo');
     }
 
     /**
@@ -116,6 +124,7 @@ class ConstructCommand extends Command
         $this->testing = $input->getOption('test');
         $this->license = $input->getOption('license');
         $this->namespace = $input->getOption('namespace');
+        $this->git = $input->getOption('git');
 
         if (!$this->str->isValid($this->projectName)) {
             $output->writeln('<error>"' . $this->projectName . '" is not a valid project name, please use "vendor/project"</error>');
@@ -132,7 +141,7 @@ class ConstructCommand extends Command
             $this->testing = 'phpunit';
         }
 
-        $this->construct->generate($this->projectName, $this->testing, $this->license, $this->namespace);
+        $this->construct->generate($this->projectName, $this->testing, $this->license, $this->namespace, $this->git);
 
         $output->writeln('<info>Project "' . $this->projectName . '" constructed.</info>');
     }

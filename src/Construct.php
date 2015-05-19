@@ -63,6 +63,13 @@ class Construct
     protected $namespace;
 
     /**
+     * Whether or not to initialize an empty git repo.
+     *
+     * @var boolean
+     **/
+    protected $git;
+
+    /**
      * The selected testing framework version.
      *
      * @var string
@@ -122,15 +129,17 @@ class Construct
      * @param string $testing The entered testing framework.
      * @param string $license The entered project license.
      * @param string $namespace The entered namespace.
+     * @param boolean $git Initialize a git repo?
      *
      * @return void
      **/
-    public function generate($projectName, $testing, $license, $namespace)
+    public function generate($projectName, $testing, $license, $namespace, $git)
     {
         $this->projectName = $projectName;
         $this->testing = $testing;
         $this->license = $license;
         $this->namespace = $namespace;
+        $this->git = $git;
 
         $this->saveNames();
         $this->root();
@@ -145,6 +154,7 @@ class Construct
         $this->projectTest();
         $this->gitattributes();
         $this->composerInstall();
+        $this->gitInit();
     }
 
     /**
@@ -236,6 +246,19 @@ class Construct
         }
 
         $this->file->put($this->projectLower . '/' . '.gitattributes', $content);
+    }
+
+    /**
+     * Initialize an empty git repo.
+     *
+     * @return void
+     **/
+    protected function gitInit()
+    {
+        if ($this->git && is_dir($this->projectLower)) {
+            $command = 'cd ' . $this->projectLower . ' && git init';
+            exec($command);
+        }
     }
 
     /**
