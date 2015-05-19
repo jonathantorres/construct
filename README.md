@@ -82,5 +82,18 @@ You can also use the short option `-s`.
 construct generate jonathantorres/logger -s JonathanTorres\\Projects\\Logger
 ```
 
+#### Initialize an empty git repo?
+The `--git` option will allow you to initialize an empty git repository inside the constructed project.
+
+```bash
+construct generate jonathantorres/logger --git
+```
+
+You can also use the short option `-g`.
+
+```bash
+construct generate jonathantorres/logger -g
+```
+
 #### Run tests
 Just run `vendor/bin/phpunit` from your project root directory.
