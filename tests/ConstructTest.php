@@ -86,7 +86,7 @@ class ConstructTest extends PHPUnit
     {
         $this->filesystem->shouldReceive('makeDirectory')->times(3)->andReturnNull()->getMock();
         $this->filesystem->shouldReceive('copy')->once()->andReturnNull()->getMock();
-        $this->filesystem->shouldReceive('get')->times(8)->andReturnNull()->getMock();
-        $this->filesystem->shouldReceive('put')->times(8)->andReturnNull()->getMock();
+        $this->filesystem->shouldReceive('get')->times(10)->andReturnNull()->getMock();
+        $this->filesystem->shouldReceive('put')->times(10)->andReturnNull()->getMock();
     }
 }
