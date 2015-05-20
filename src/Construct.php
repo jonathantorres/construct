@@ -385,7 +385,14 @@ class Construct
     protected function license()
     {
         $file = $this->file->get(__DIR__ . '/stubs/licenses/' . strtolower($this->license) . '.txt');
-        $content = str_replace(['{year}', '{name}'], [(new \DateTime())->format('Y'), $this->vendorUpper], $file);
+
+        $user = $this->determineConfiguredGitUser();
+
+        $content = str_replace(
+            ['{year}', '{author_name}'],
+            [(new \DateTime())->format('Y'), $user['name']],
+            $file
+        );
 
         $this->file->put($this->projectLower . '/' . 'LICENSE.md', $content);
     }
