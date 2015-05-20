@@ -144,7 +144,7 @@ class Construct
         $this->saveNames();
         $this->root();
         $this->src();
-        $this->readme();
+        $this->docs();
         $this->testing();
         $this->gitignore();
         $this->travis();
@@ -262,16 +262,30 @@ class Construct
     }
 
     /**
-     * Generate README file.
+     * Generate documentation (README, CONTRIBUTING, CHANGELOG) files.
      *
      * @return void
-     **/
-    protected function readme()
+     */
+    protected function docs()
     {
-        $file = $this->file->get(__DIR__ . '/stubs/README.txt');
-        $content = str_replace('{project_upper}', $this->projectUpper, $file);
+        $readmeFile = $this->file->get(__DIR__ . '/stubs/README.txt');
+        $readmeContent = str_replace(
+            '{project_upper}',
+            $this->projectUpper,
+            $readmeFile
+        );
+        $this->file->put($this->projectLower . '/' . 'README.md', $readmeContent);
 
-        $this->file->put($this->projectLower . '/' . 'README.md', $content);
+        $contributingContent = $this->file->get(__DIR__ . '/stubs/CONTRIBUTING.txt');
+        $this->file->put($this->projectLower . '/' . 'CONTRIBUTING.md', $contributingContent);
+
+        $changelogFile = $this->file->get(__DIR__ . '/stubs/CHANGELOG.txt');
+        $changelogContent = str_replace(
+            '{creation_date}',
+            (new \DateTime())->format('Y-m-d'),
+            $changelogFile
+        );
+        $this->file->put($this->projectLower . '/' . 'CHANGELOG.md', $changelogContent);
     }
 
     /**
