@@ -37,6 +37,8 @@ The current project structure will be the following:
 │   ├── phpunit.xml.dist
 │   ├── README.md
 │   ├── LICENSE.md
+│   ├── CHANGELOG.md
+│   ├── CONTRIBUTING.md
 ```
 
 This is a good starting point. You can continue your work from there.

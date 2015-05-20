@@ -145,6 +145,8 @@ class Construct
         $this->root();
         $this->src();
         $this->readme();
+        $this->contributing();
+        $this->changelog();
         $this->testing();
         $this->gitignore();
         $this->travis();
@@ -272,6 +274,32 @@ class Construct
         $content = str_replace('{project_upper}', $this->projectUpper, $file);
 
         $this->file->put($this->projectLower . '/' . 'README.md', $content);
+    }
+
+    /**
+     * Generate CONTRIBUTING file.
+     *
+     * @return void
+     **/
+    protected function contributing()
+    {
+        $content = $this->file->get(__DIR__ . '/stubs/CONTRIBUTING.txt');
+
+        $this->file->put($this->projectLower . '/' . 'CONTRIBUTING.md', $content);
+    }
+
+    /**
+     * Generate CHANGELOG file.
+     *
+     * @return void
+     **/
+    protected function changelog()
+    {
+        $file = $this->file->get(__DIR__ . '/stubs/CHANGELOG.txt');
+
+        $content = str_replace('{creation_date}', (new \DateTime())->format('Y-m-d'), $file);
+
+        $this->file->put($this->projectLower . '/' . 'CHANGELOG.md', $content);
     }
 
     /**
