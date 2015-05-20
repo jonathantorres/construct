@@ -85,7 +85,7 @@ class ConstructTest extends PHPUnit
     protected function setMocks()
     {
         $this->filesystem->shouldReceive('makeDirectory')->times(3)->andReturnNull()->getMock();
-        $this->filesystem->shouldReceive('copy')->once()->andReturnNull()->getMock();
+        $this->filesystem->shouldReceive('copy')->times(2)->andReturnNull()->getMock();
         $this->filesystem->shouldReceive('get')->times(10)->andReturnNull()->getMock();
         $this->filesystem->shouldReceive('put')->times(10)->andReturnNull()->getMock();
     }

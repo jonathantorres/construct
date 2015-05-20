@@ -31,6 +31,7 @@ The current project structure will be the following:
 │   │   ├── ...
 │   ├── .gitattributes
 │   ├── .gitignore
+│   ├── .php_cs
 │   ├── .travis.yml
 │   ├── composer.lock
 │   ├── composer.json
