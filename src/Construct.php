@@ -147,6 +147,7 @@ class Construct
         $this->docs();
         $this->testing();
         $this->gitignore();
+        $this->phpcs();
         $this->travis();
         $this->license();
         $this->composer();
@@ -259,6 +260,16 @@ class Construct
             $command = 'cd ' . $this->projectLower . ' && git init';
             exec($command);
         }
+    }
+
+    /**
+     * Generate PHP CS Fixer configuration file.
+     *
+     * @return void
+     **/
+    protected function phpcs()
+    {
+        $this->file->copy(__DIR__ . '/stubs/phpcs.txt', $this->projectLower . '/' . '.php_cs');
     }
 
     /**
