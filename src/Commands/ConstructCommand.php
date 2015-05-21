@@ -1,6 +1,5 @@
 <?php namespace JonathanTorres\Construct\Commands;
 
-use Illuminate\Filesystem\Filesystem;
 use JonathanTorres\Construct\Construct;
 use JonathanTorres\Construct\Str;
 use Symfony\Component\Console\Command\Command;
@@ -79,7 +78,7 @@ class ConstructCommand extends Command
      * Initialize.
      *
      * @param \JonathanTorres\Construct\Construct $construct
-     * @param \JonathanTorres\Construct\Str $str
+     * @param \JonathanTorres\Construct\Str       $str
      *
      * @return void
      **/
@@ -113,7 +112,7 @@ class ConstructCommand extends Command
     /**
      * Execute command.
      *
-     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return void
@@ -128,6 +127,7 @@ class ConstructCommand extends Command
 
         if (!$this->str->isValid($this->projectName)) {
             $output->writeln('<error>"' . $this->projectName . '" is not a valid project name, please use "vendor/project"</error>');
+
             return false;
         }
 

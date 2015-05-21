@@ -1,7 +1,6 @@
 <?php namespace JonathanTorres\Construct;
 
 use Illuminate\Filesystem\Filesystem;
-use JonathanTorres\Construct\Str;
 
 class Construct
 {
@@ -112,7 +111,7 @@ class Construct
      * Initialize.
      *
      * @param \Illuminate\Filesystem\Filesystem $file
-     * @param \JonathanTorres\Construct\Str $str
+     * @param \JonathanTorres\Construct\Str     $str
      *
      * @return void
      **/
@@ -125,11 +124,11 @@ class Construct
     /**
      * Generate project.
      *
-     * @param string $projectName The entered project name.
-     * @param string $testing The entered testing framework.
-     * @param string $license The entered project license.
-     * @param string $namespace The entered namespace.
-     * @param boolean $git Initialize a git repo?
+     * @param string  $projectName The entered project name.
+     * @param string  $testing     The entered testing framework.
+     * @param string  $license     The entered project license.
+     * @param string  $namespace   The entered namespace.
+     * @param boolean $git         Initialize a git repo?
      *
      * @return void
      **/

@@ -32,8 +32,8 @@ class Str
     /**
      * Construct a correct project namespace name.
      *
-     * @param string $namespace The entered namespace.
-     * @param boolean $usesProjectName Whether or not it's using the project name.
+     * @param string  $namespace        The entered namespace.
+     * @param boolean $usesProjectName  Whether or not it's using the project name.
      * @param boolean $useDoubleSlashes Whether or not use double slashes \\.
      *
      * @return string
@@ -83,24 +83,24 @@ class Str
     /**
      * Convert string to camel case.
      *
-     * @param  string  $string
-     * @param  boolean $capitalizeFirstCharacter Defaults to false.
+     * @param string  $string
+     * @param boolean $capitalizeFirstCharacter Defaults to false.
      *
      * @return string
      */
     public function toCamelCase($string, $capitalizeFirstCharacter = false)
     {
-       $string = str_replace(
+        $string = str_replace(
            ' ',
            '',
            ucwords(str_replace(['-', '_'], ' ', $string))
        );
 
-       if (!$capitalizeFirstCharacter) {
-           $string = lcfirst($string);
-       }
+        if (!$capitalizeFirstCharacter) {
+            $string = lcfirst($string);
+        }
 
-       return $string;
+        return $string;
     }
 
     /**
