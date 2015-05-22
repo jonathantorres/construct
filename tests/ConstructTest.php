@@ -73,6 +73,22 @@ class ConstructTest extends PHPUnit
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
+    public function testProjectGenerationWithPhpCs()
+    {
+        $this->setMocks(2);
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--phpcs' => true
+        ]);
+
+        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+    }
+
     protected function setApplication()
     {
         $app = new Application();
@@ -82,10 +98,13 @@ class ConstructTest extends PHPUnit
         return $app;
     }
 
-    protected function setMocks()
+    /**
+     * @param integer $copyTimes Defaults to 1.
+     */
+    protected function setMocks($copyTimes = 1)
     {
         $this->filesystem->shouldReceive('makeDirectory')->times(3)->andReturnNull()->getMock();
-        $this->filesystem->shouldReceive('copy')->once()->andReturnNull()->getMock();
+        $this->filesystem->shouldReceive('copy')->times($copyTimes)->andReturnNull()->getMock();
         $this->filesystem->shouldReceive('get')->times(10)->andReturnNull()->getMock();
         $this->filesystem->shouldReceive('put')->times(10)->andReturnNull()->getMock();
     }

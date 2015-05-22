@@ -69,6 +69,13 @@ class Construct
     protected $git;
 
     /**
+     * Whether or not to generate a PHP Coding Standards Fixer configuration.
+     *
+     * @var boolean
+     **/
+    protected $phpcs;
+
+    /**
      * The selected testing framework version.
      *
      * @var string
@@ -129,16 +136,18 @@ class Construct
      * @param string  $license     The entered project license.
      * @param string  $namespace   The entered namespace.
      * @param boolean $git         Initialize a git repo?
+     * @param boolean $phpcs       Generate a PHP Coding Standards Fixer configuration?
      *
      * @return void
      **/
-    public function generate($projectName, $testing, $license, $namespace, $git)
+    public function generate($projectName, $testing, $license, $namespace, $git, $phpcs)
     {
         $this->projectName = $projectName;
         $this->testing = $testing;
         $this->license = $license;
         $this->namespace = $namespace;
         $this->git = $git;
+        $this->phpcs = $phpcs;
 
         $this->saveNames();
         $this->root();
@@ -146,6 +155,7 @@ class Construct
         $this->docs();
         $this->testing();
         $this->gitignore();
+        $this->phpcs();
         $this->travis();
         $this->license();
         $this->composer();
@@ -257,6 +267,22 @@ class Construct
         if ($this->git && is_dir($this->projectLower)) {
             $command = 'cd ' . $this->projectLower . ' && git init';
             exec($command);
+        }
+    }
+
+    /**
+     * Generate PHP CS Fixer configuration file.
+     *
+     * @return void
+     **/
+    protected function phpcs()
+    {
+        if ($this->phpcs) {
+            $this->file->copy(
+                __DIR__ . '/stubs/phpcs.txt',
+                $this->projectLower . '/' . '.php_cs'
+            );
+            $this->exportIgnores[] = '.php_cs';
         }
     }
 
