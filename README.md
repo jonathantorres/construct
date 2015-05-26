@@ -110,4 +110,4 @@ construct generate jonathantorres/logger -p
 ```
 
 #### Run tests
-Just run `vendor/bin/phpunit` from your project root directory.
+Just run `composer test` from the project's root directory.

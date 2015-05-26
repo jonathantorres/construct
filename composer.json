@@ -30,5 +30,8 @@
         }
     },
     "bin": ["construct"],
+    "scripts": {
+        "test": "phpunit"
+    },
     "minimum-stability": "stable"
 }
