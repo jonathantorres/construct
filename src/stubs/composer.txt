@@ -26,6 +26,6 @@
     },
     "minimum-stability": "stable",
     "scripts": {
-        "tests": "{testing}"
+        "test": "{testing}"
     }
 }
