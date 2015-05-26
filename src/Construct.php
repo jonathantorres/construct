@@ -111,7 +111,11 @@ class Construct
         $this->docs();
         $this->testing();
         $this->gitignore();
-        $this->phpcs();
+
+        if ($this->commandSettings->withPhpcsConfiguration()) {
+            $this->phpcs();
+        }
+
         $this->travis();
         $this->license();
         $this->composer();
@@ -241,13 +245,11 @@ class Construct
      **/
     protected function phpcs()
     {
-        if ($this->commandSettings->withPhpcsConfiguration()) {
-            $this->file->copy(
-                __DIR__ . '/stubs/phpcs.txt',
-                $this->projectLower . '/' . '.php_cs'
-            );
-            $this->exportIgnores[] = '.php_cs';
-        }
+        $this->file->copy(
+            __DIR__ . '/stubs/phpcs.txt',
+            $this->projectLower . '/' . '.php_cs'
+        );
+        $this->exportIgnores[] = '.php_cs';
     }
 
     /**
