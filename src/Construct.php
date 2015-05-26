@@ -239,6 +239,7 @@ class Construct
     protected function gitignore()
     {
         $this->file->copy(__DIR__ . '/stubs/gitignore.txt', $this->projectLower . '/' . '.gitignore');
+        $this->exportIgnores[] = '.gitignore';
     }
 
     /**
@@ -248,6 +249,9 @@ class Construct
      **/
     protected function gitattributes()
     {
+        $this->exportIgnores[] = '.gitattributes';
+        sort($this->exportIgnores);
+
         $content = $this->file->get(__DIR__ . '/stubs/gitattributes.txt');
 
         foreach ($this->exportIgnores as $ignore) {
@@ -311,6 +315,10 @@ class Construct
             $changelogFile
         );
         $this->file->put($this->projectLower . '/' . 'CHANGELOG.md', $changelogContent);
+
+        $this->exportIgnores[] = 'README.md';
+        $this->exportIgnores[] = 'CONTRIBUTING.md';
+        $this->exportIgnores[] = 'CHANGELOG.md';
     }
 
     /**
@@ -414,6 +422,7 @@ class Construct
         $content = str_replace('{testing}', $this->testing, $file);
 
         $this->file->put($this->projectLower . '/' . '.travis.yml', $content);
+        $this->exportIgnores[] = '.travis.yml';
     }
 
     /**
@@ -434,6 +443,7 @@ class Construct
         );
 
         $this->file->put($this->projectLower . '/' . 'LICENSE.md', $content);
+        $this->exportIgnores[] = 'LICENSE.md';
     }
 
     /**
@@ -543,5 +553,6 @@ class Construct
 
         $this->file->makeDirectory($this->projectLower . '/tests');
         $this->file->put($this->projectLower . '/tests/' . $this->projectUpper . 'Test.php', $content);
+        $this->exportIgnores[] = 'tests';
     }
 }
