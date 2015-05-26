@@ -61,6 +61,13 @@ class ConstructCommand extends Command
     protected $git;
 
     /**
+     * Generate a PHP Coding Standards Fixer configuration?
+     *
+     * @var boolean
+     **/
+    protected $phpcs;
+
+    /**
      * The available open source licenses. (more: http://choosealicense.com/licenses)
      *
      * @var array
@@ -107,6 +114,7 @@ class ConstructCommand extends Command
         $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
         $this->addOption('namespace', 's', InputOption::VALUE_OPTIONAL, 'Project namespace', 'Vendor\Project');
         $this->addOption('git', 'g', InputOption::VALUE_NONE, 'Initialize an empty git repo');
+        $this->addOption('phpcs', 'p', InputOption::VALUE_NONE, 'Generate a PHP Coding Standards Fixer configuration');
     }
 
     /**
@@ -124,6 +132,7 @@ class ConstructCommand extends Command
         $this->license = $input->getOption('license');
         $this->namespace = $input->getOption('namespace');
         $this->git = $input->getOption('git');
+        $this->phpcs = $input->getOption('phpcs');
 
         if (!$this->str->isValid($this->projectName)) {
             $output->writeln('<error>"' . $this->projectName . '" is not a valid project name, please use "vendor/project"</error>');
@@ -141,7 +150,14 @@ class ConstructCommand extends Command
             $this->testing = 'phpunit';
         }
 
-        $this->construct->generate($this->projectName, $this->testing, $this->license, $this->namespace, $this->git);
+        $this->construct->generate(
+            $this->projectName,
+            $this->testing,
+            $this->license,
+            $this->namespace,
+            $this->git,
+            $this->phpcs
+        );
 
         $output->writeln('<info>Project "' . $this->projectName . '" constructed.</info>');
     }

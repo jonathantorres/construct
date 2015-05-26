@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.x.x `2015-MM-DD`
+- `Added`
+    - User can optionally generate a PHP Coding Standards Fixer configuration.
+
 #### v1.1.0 `2015-05-18`
 - `Added`
     - User can optionally initialize an empty git repository.
