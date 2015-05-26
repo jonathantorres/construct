@@ -299,8 +299,18 @@ class Construct
     {
         $readmeFile = $this->file->get(__DIR__ . '/stubs/README.txt');
         $readmeContent = str_replace(
-            '{project_upper}',
-            $this->projectUpper,
+            [
+                '{project_upper}',
+                '{license}',
+                '{vendor_lower}',
+                '{project_lower}'
+            ],
+            [
+                $this->projectUpper,
+                $this->license,
+                $this->vendorLower,
+                $this->projectLower
+            ],
             $readmeFile
         );
         $this->file->put($this->projectLower . '/' . 'README.md', $readmeContent);
