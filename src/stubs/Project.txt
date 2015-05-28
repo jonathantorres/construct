@@ -9,7 +9,7 @@ class {project_upper}
      * Initialize.
      *
      * @return void
-     **/
+     */
     public function __construct()
     {
 
