@@ -95,6 +95,7 @@ You can also use the short option `-g`.
 ```bash
 construct generate jonathantorres/logger -g
 ```
+
 #### Generate a PHP Coding Standards Fixer configuration?
 The `--phpcs` option will generate a [PHP Coding Standards Fixer](http://cs.sensiolabs.org/) configuration
 within the constructed project. The generated `.php_cs` configuration defaults to the `psr-2` coding style guide.
