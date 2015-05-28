@@ -1,8 +1,13 @@
 # Changelog
 
-#### v1.x.x `2015-MM-DD`
+#### v1.2.0 `2015-05-27`
 - `Added`
-    - User can optionally generate a PHP Coding Standards Fixer configuration.
+    - User can optionally generate a PHP Coding Standards Fixer configuration. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+    - `CHANGELOG.md` and `CONTRIBUTING.md` are now also generated. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+    - `README.md` has more additional content. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+- `Fixed`
+    - Generated `LICENSE.md` now contains author name. Fix by [@raphaelstolt](https://github.com/raphaelstolt). See [#42](https://github.com/jonathantorres/construct/issues/42).
+    - Code coverage included on generated `phpunit.xml.dist` file. Fix by [@raphaelstolt](https://github.com/raphaelstolt). See [#7](https://github.com/jonathantorres/construct/issues/7).
 
 #### v1.1.0 `2015-05-18`
 - `Added`
