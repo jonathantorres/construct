@@ -2,26 +2,21 @@
 ================
 This is where your library description should go. Try to limit it to a paragraph or two.
 
-## Installation via Composer
-
+#### Installation via Composer
 ``` bash
 $ composer require {vendor_lower}/{project_lower}
 ```
 
-## Change log
-
+#### Changelog
 Please see [CHANGELOG](CHANGELOG.md) for more information.
 
-## Testing
-
+#### Running Tests
 ``` bash
 $ composer test
 ```
 
-## Contributing
-
+#### Contributing
 Please see [CONTRIBUTING](CONTRIBUTING.md) for more details.
 
-## License
-
-This library is licensed under the {license} License. Please see [License file](LICENSE.md) for more information.
+#### License
+This library is licensed under the {license} license. Please see [License file](LICENSE.md) for more information.
