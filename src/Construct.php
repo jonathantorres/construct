@@ -21,7 +21,7 @@ class Construct
     protected $str;
 
     /**
-     * The construct command selctions instance.
+     * The construct command selections instance.
      *
      * @var \JonathanTorres\Construct\Commands\Settings\Construct
      **/
