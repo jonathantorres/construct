@@ -104,12 +104,12 @@ class ConstructCommand extends Command
         }
 
         if (!in_array($license, $this->licenses)) {
-            $output->writeln('<error>Warning: "' . $license . '" is not a known license, yet. Using MIT by default.</error>');
+            $output->writeln('<error>Warning: "' . $license . '" is not a supported license. Using MIT.</error>');
             $license = 'MIT';
         }
 
         if (!in_array($testFramework, $this->testingFrameworks)) {
-            $output->writeln('<error>Warning: "' . $testFramework . '" is not a known testing framework, yet. Using phpunit by default.</error>');
+            $output->writeln('<error>Warning: "' . $testFramework . '" is not a supported testing framework. Using phpunit.</error>');
             $testFramework = 'phpunit';
         }
 

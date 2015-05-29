@@ -48,7 +48,7 @@ class ConstructTest extends PHPUnit
             '--test' => 'idontexist',
         ]);
 
-        $output = 'Warning: "idontexist" is not a known testing framework, yet. Using phpunit by default.' . PHP_EOL .
+        $output = 'Warning: "idontexist" is not a supported testing framework. Using phpunit.' . PHP_EOL .
                   'Project "vendor/project" constructed.' . PHP_EOL;
 
         $this->assertSame($output, $commandTester->getDisplay());
@@ -67,7 +67,7 @@ class ConstructTest extends PHPUnit
             '--license' => 'noidealicense',
         ]);
 
-        $output = 'Warning: "noidealicense" is not a known license, yet. Using MIT by default.' . PHP_EOL
+        $output = 'Warning: "noidealicense" is not a supported license. Using MIT.' . PHP_EOL
             . 'Project "vendor/project" constructed.' . PHP_EOL;
 
         $this->assertSame($output, $commandTester->getDisplay());
