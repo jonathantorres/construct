@@ -105,17 +105,21 @@ class ConstructCommand extends Command
      **/
     protected function configure()
     {
-        $licenseDescription = 'License (one of: ' . join(', ', $this->licenses) . ')';
+        $nameDescription = 'The vendor/project name';
         $testDescription = 'Testing framework (one of: ' . join(', ', $this->testingFrameworks) . ')';
+        $licenseDescription = 'License (one of: ' . join(', ', $this->licenses) . ')';
+        $namespaceDescription = 'Namespace for project';
+        $gitDescription = 'Initialize an empty git repo';
+        $phpcsDescription = 'Generate a PHP Coding Standards Fixer configuration';
 
         $this->setName('generate');
         $this->setDescription('Generate a basic PHP project');
-        $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name');
+        $this->addArgument('name', InputArgument::REQUIRED, $nameDescription);
         $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testDescription, 'phpunit');
         $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
-        $this->addOption('namespace', 's', InputOption::VALUE_OPTIONAL, 'Project namespace', 'Vendor\Project');
-        $this->addOption('git', 'g', InputOption::VALUE_NONE, 'Initialize an empty git repo');
-        $this->addOption('phpcs', 'p', InputOption::VALUE_NONE, 'Generate a PHP Coding Standards Fixer configuration');
+        $this->addOption('namespace', 's', InputOption::VALUE_OPTIONAL, $namespaceDescription, 'Vendor\Project');
+        $this->addOption('git', 'g', InputOption::VALUE_NONE, $gitDescription);
+        $this->addOption('phpcs', 'p', InputOption::VALUE_NONE, $phpcsDescription);
     }
 
     /**
