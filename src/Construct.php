@@ -24,7 +24,7 @@ class Construct
      *
      * @var \JonathanTorres\Construct\Settings
      **/
-    protected $commandSettings;
+    protected $settings;
 
     /**
      * Folder to store source files.
@@ -100,9 +100,9 @@ class Construct
      *
      * @return void
      **/
-    public function generate(Settings $commandSettings)
+    public function generate(Settings $settings)
     {
-        $this->commandSettings = $commandSettings;
+        $this->settings = $settings;
 
         $this->saveNames();
         $this->root();
@@ -111,7 +111,7 @@ class Construct
         $this->testing();
         $this->gitignore();
 
-        if ($this->commandSettings->withPhpcsConfiguration()) {
+        if ($this->settings->withPhpcsConfiguration()) {
             $this->phpcs();
         }
 
@@ -124,7 +124,7 @@ class Construct
         $this->gitattributes();
         $this->composerInstall();
 
-        if ($this->commandSettings->withGitInit()) {
+        if ($this->settings->withGitInit()) {
             $this->gitInit();
         }
     }
@@ -136,7 +136,7 @@ class Construct
      **/
     protected function saveNames()
     {
-        $names = $this->str->split($this->commandSettings->getProjectName());
+        $names = $this->str->split($this->settings->getProjectName());
 
         $this->vendorLower = $this->str->toLower($names['vendor']);
         $this->vendorUpper = $this->str->toStudly($names['vendor']);
@@ -151,7 +151,7 @@ class Construct
      **/
     protected function testing()
     {
-        switch ($this->commandSettings->getTestingFramework()) {
+        switch ($this->settings->getTestingFramework()) {
             case 'phpunit':
                 $this->phpunit();
                 break;
@@ -268,7 +268,7 @@ class Construct
             ],
             [
                 $this->projectUpper,
-                $this->commandSettings->getLicense(),
+                $this->settings->getLicense(),
                 $this->vendorLower,
                 $this->projectLower
             ],
@@ -343,8 +343,8 @@ class Construct
      **/
     protected function createNamespace($useDoubleSlashes = false)
     {
-        $namespace = $this->commandSettings->getNamespace();
-        $projectName = $this->commandSettings->getProjectName();
+        $namespace = $this->settings->getNamespace();
+        $projectName = $this->settings->getProjectName();
 
         if ($namespace === 'Vendor\Project' || $namespace === $projectName) {
             return $this->str->createNamespace($namespace, true, $useDoubleSlashes);
@@ -393,7 +393,7 @@ class Construct
         $file = $this->file->get(__DIR__ . '/stubs/travis.txt');
         $content = str_replace(
             '{testing}',
-            $this->commandSettings->getTestingFramework(),
+            $this->settings->getTestingFramework(),
             $file
         );
 
@@ -409,7 +409,7 @@ class Construct
     protected function license()
     {
         $file = $this->file->get(
-            __DIR__ . '/stubs/licenses/' . strtolower($this->commandSettings->getLicense()) . '.txt'
+            __DIR__ . '/stubs/licenses/' . strtolower($this->settings->getLicense()) . '.txt'
         );
 
         $user = $this->determineConfiguredGitUser();
@@ -452,10 +452,10 @@ class Construct
             $this->projectLower,
             $this->vendorLower,
             $this->vendorUpper,
-            $this->commandSettings->getTestingFramework(),
+            $this->settings->getTestingFramework(),
             $this->testingVersion,
             $this->createNamespace(true),
-            $this->commandSettings->getLicense(),
+            $this->settings->getLicense(),
             $user['name'],
             $user['email'],
         ];
