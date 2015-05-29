@@ -1,6 +1,6 @@
-<?php namespace JonathanTorres\Construct\Commands\Settings;
+<?php namespace JonathanTorres\Construct;
 
-class Construct
+class Settings
 {
 
     /**
@@ -46,12 +46,16 @@ class Construct
     private $phpcsConfiguration;
 
     /**
+     * Initialize.
+     *
      * @param string  $projectName        The entered project name.
      * @param string  $testingFramework   The entered testing framework.
      * @param string  $license            The entered project license.
      * @param string  $namespace          The entered namespace.
      * @param boolean $gitInit            Initialize a git repo?
      * @param boolean $phpcsConfiguration Generate a PHP Coding Standards Fixer configuration?
+     *
+     * @return void
      */
     public function __construct(
         $projectName,

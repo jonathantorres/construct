@@ -1,7 +1,6 @@
 <?php namespace JonathanTorres\Construct;
 
 use Illuminate\Filesystem\Filesystem;
-use JonathanTorres\Construct\Commands\Settings\Construct as CommandSettings;
 
 class Construct
 {
@@ -23,7 +22,7 @@ class Construct
     /**
      * The construct command selections instance.
      *
-     * @var \JonathanTorres\Construct\Commands\Settings\Construct
+     * @var \JonathanTorres\Construct\Settings
      **/
     protected $commandSettings;
 
@@ -97,11 +96,11 @@ class Construct
     /**
      * Generate project.
      *
-     * @param CommandSettings $settings The command settings made by the user.
+     * @param Settings $settings The command settings made by the user.
      *
      * @return void
      **/
-    public function generate(CommandSettings $commandSettings)
+    public function generate(Settings $commandSettings)
     {
         $this->commandSettings = $commandSettings;
 

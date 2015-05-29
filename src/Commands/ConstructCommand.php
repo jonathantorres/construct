@@ -2,7 +2,7 @@
 
 use JonathanTorres\Construct\Construct;
 use JonathanTorres\Construct\Str;
-use JonathanTorres\Construct\Commands\Settings\Construct as ConstructSettings;
+use JonathanTorres\Construct\Settings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -114,7 +114,7 @@ class ConstructCommand extends Command
         }
 
         $this->construct->generate(
-            new ConstructSettings(
+            new Settings(
                 $projectName,
                 $testFramework,
                 $license,
