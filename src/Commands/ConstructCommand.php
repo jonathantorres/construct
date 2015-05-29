@@ -27,48 +27,6 @@ class ConstructCommand extends Command
     protected $str;
 
     /**
-     * The entered project name.
-     *
-     * @var string
-     **/
-    protected $projectName;
-
-    /**
-     * The entered testing framework.
-     *
-     * @var string
-     **/
-    protected $testing;
-
-    /**
-     * The entered open source license.
-     *
-     * @var string
-     **/
-    protected $license;
-
-    /**
-     * The entered project namespace.
-     *
-     * @var string
-     **/
-    protected $namespace;
-
-    /**
-     * Initialize a git repo?
-     *
-     * @var boolean
-     **/
-    protected $git;
-
-    /**
-     * Generate a PHP Coding Standards Fixer configuration?
-     *
-     * @var boolean
-     **/
-    protected $phpcs;
-
-    /**
      * The available open source licenses. (more: http://choosealicense.com/licenses)
      *
      * @var array
@@ -132,40 +90,40 @@ class ConstructCommand extends Command
      **/
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->projectName = $input->getArgument('name');
-        $this->testing = $input->getOption('test');
-        $this->license = $input->getOption('license');
-        $this->namespace = $input->getOption('namespace');
-        $this->git = $input->getOption('git');
-        $this->phpcs = $input->getOption('phpcs');
+        $projectName = $input->getArgument('name');
+        $testFramework = $input->getOption('test');
+        $license = $input->getOption('license');
+        $namespace = $input->getOption('namespace');
+        $git = $input->getOption('git');
+        $phpcs = $input->getOption('phpcs');
 
-        if (!$this->str->isValid($this->projectName)) {
-            $output->writeln('<error>"' . $this->projectName . '" is not a valid project name, please use "vendor/project"</error>');
+        if (!$this->str->isValid($projectName)) {
+            $output->writeln('<error>"' . $projectName . '" is not a valid project name, please use "vendor/project"</error>');
 
             return false;
         }
 
-        if (!in_array($this->license, $this->licenses)) {
-            $output->writeln('<error>Warning: "' . $this->license . '" is not a known license, yet. Using MIT by default.</error>');
-            $this->license = 'MIT';
+        if (!in_array($license, $this->licenses)) {
+            $output->writeln('<error>Warning: "' . $license . '" is not a known license, yet. Using MIT by default.</error>');
+            $license = 'MIT';
         }
 
-        if (!in_array($this->testing, $this->testingFrameworks)) {
-            $output->writeln('<error>Warning: "' . $this->testing . '" is not a known testing framework, yet. Using phpunit by default.</error>');
-            $this->testing = 'phpunit';
+        if (!in_array($testFramework, $this->testingFrameworks)) {
+            $output->writeln('<error>Warning: "' . $testFramework . '" is not a known testing framework, yet. Using phpunit by default.</error>');
+            $testFramework = 'phpunit';
         }
 
         $this->construct->generate(
             new ConstructSettings(
-                $this->projectName,
-                $this->testing,
-                $this->license,
-                $this->namespace,
-                $this->git,
-                $this->phpcs
+                $projectName,
+                $testFramework,
+                $license,
+                $namespace,
+                $git,
+                $phpcs
             )
         );
 
-        $output->writeln('<info>Project "' . $this->projectName . '" constructed.</info>');
+        $output->writeln('<info>Project "' . $projectName . '" constructed.</info>');
     }
 }
