@@ -1,6 +1,7 @@
 <?php namespace JonathanTorres\Construct;
 
 use Illuminate\Filesystem\Filesystem;
+use JonathanTorres\Construct\Commands\Settings\Construct as CommandSettings;
 
 class Construct
 {
@@ -20,6 +21,13 @@ class Construct
     protected $str;
 
     /**
+     * The construct command selctions instance.
+     *
+     * @var \JonathanTorres\Construct\Commands\Settings\Construct
+     **/
+    protected $commandSettings;
+
+    /**
      * Folder to store source files.
      *
      * @var string
@@ -27,53 +35,11 @@ class Construct
     protected $srcPath = 'src';
 
     /**
-     * Entered project name.
-     *
-     * @var string
-     **/
-    protected $projectName;
-
-    /**
      * The files to ignore on exporting.
      *
      * @var array
      **/
     protected $exportIgnores = [];
-
-    /**
-     * The selected testing framework.
-     *
-     * @var string
-     **/
-    protected $testing;
-
-    /**
-     * The selected license.
-     *
-     * @var string
-     **/
-    protected $license;
-
-    /**
-     * The selected namespace.
-     *
-     * @var string
-     **/
-    protected $namespace;
-
-    /**
-     * Whether or not to initialize an empty git repo.
-     *
-     * @var boolean
-     **/
-    protected $git;
-
-    /**
-     * Whether or not to generate a PHP Coding Standards Fixer configuration.
-     *
-     * @var boolean
-     **/
-    protected $phpcs;
 
     /**
      * The selected testing framework version.
@@ -131,23 +97,13 @@ class Construct
     /**
      * Generate project.
      *
-     * @param string  $projectName The entered project name.
-     * @param string  $testing     The entered testing framework.
-     * @param string  $license     The entered project license.
-     * @param string  $namespace   The entered namespace.
-     * @param boolean $git         Initialize a git repo?
-     * @param boolean $phpcs       Generate a PHP Coding Standards Fixer configuration?
+     * @param CommandSettings $settings The command settings made by the user.
      *
      * @return void
      **/
-    public function generate($projectName, $testing, $license, $namespace, $git, $phpcs)
+    public function generate(CommandSettings $commandSettings)
     {
-        $this->projectName = $projectName;
-        $this->testing = $testing;
-        $this->license = $license;
-        $this->namespace = $namespace;
-        $this->git = $git;
-        $this->phpcs = $phpcs;
+        $this->commandSettings = $commandSettings;
 
         $this->saveNames();
         $this->root();
@@ -155,15 +111,23 @@ class Construct
         $this->docs();
         $this->testing();
         $this->gitignore();
-        $this->phpcs();
+
+        if ($this->commandSettings->withPhpcsConfiguration()) {
+            $this->phpcs();
+        }
+
         $this->travis();
         $this->license();
         $this->composer();
         $this->projectClass();
         $this->projectTest();
+
         $this->gitattributes();
         $this->composerInstall();
-        $this->gitInit();
+
+        if ($this->commandSettings->withGitInit()) {
+            $this->gitInit();
+        }
     }
 
     /**
@@ -173,7 +137,7 @@ class Construct
      **/
     protected function saveNames()
     {
-        $names = $this->str->split($this->projectName);
+        $names = $this->str->split($this->commandSettings->getProjectName());
 
         $this->vendorLower = $this->str->toLower($names['vendor']);
         $this->vendorUpper = $this->str->toStudly($names['vendor']);
@@ -188,7 +152,7 @@ class Construct
      **/
     protected function testing()
     {
-        switch ($this->testing) {
+        switch ($this->commandSettings->getTestingFramework()) {
             case 'phpunit':
                 $this->phpunit();
                 break;
@@ -268,7 +232,7 @@ class Construct
      **/
     protected function gitInit()
     {
-        if ($this->git && is_dir($this->projectLower)) {
+        if (is_dir($this->projectLower)) {
             $command = 'cd ' . $this->projectLower . ' && git init';
             exec($command);
         }
@@ -281,13 +245,11 @@ class Construct
      **/
     protected function phpcs()
     {
-        if ($this->phpcs) {
-            $this->file->copy(
-                __DIR__ . '/stubs/phpcs.txt',
-                $this->projectLower . '/' . '.php_cs'
-            );
-            $this->exportIgnores[] = '.php_cs';
-        }
+        $this->file->copy(
+            __DIR__ . '/stubs/phpcs.txt',
+            $this->projectLower . '/' . '.php_cs'
+        );
+        $this->exportIgnores[] = '.php_cs';
     }
 
     /**
@@ -307,7 +269,7 @@ class Construct
             ],
             [
                 $this->projectUpper,
-                $this->license,
+                $this->commandSettings->getLicense(),
                 $this->vendorLower,
                 $this->projectLower
             ],
@@ -382,13 +344,14 @@ class Construct
      **/
     protected function createNamespace($useDoubleSlashes = false)
     {
-        if ($this->namespace === 'Vendor\Project' || $this->namespace === $this->projectName) {
-            $this->namespace = $this->projectName;
+        $namespace = $this->commandSettings->getNamespace();
+        $projectName = $this->commandSettings->getProjectName();
 
-            return $this->str->createNamespace($this->namespace, true, $useDoubleSlashes);
+        if ($namespace === 'Vendor\Project' || $namespace === $projectName) {
+            return $this->str->createNamespace($namespace, true, $useDoubleSlashes);
         }
 
-        return $this->str->createNamespace($this->namespace, false, $useDoubleSlashes);
+        return $this->str->createNamespace($namespace, false, $useDoubleSlashes);
     }
 
     /**
@@ -429,7 +392,11 @@ class Construct
     protected function travis()
     {
         $file = $this->file->get(__DIR__ . '/stubs/travis.txt');
-        $content = str_replace('{testing}', $this->testing, $file);
+        $content = str_replace(
+            '{testing}',
+            $this->commandSettings->getTestingFramework(),
+            $file
+        );
 
         $this->file->put($this->projectLower . '/' . '.travis.yml', $content);
         $this->exportIgnores[] = '.travis.yml';
@@ -442,7 +409,9 @@ class Construct
      */
     protected function license()
     {
-        $file = $this->file->get(__DIR__ . '/stubs/licenses/' . strtolower($this->license) . '.txt');
+        $file = $this->file->get(
+            __DIR__ . '/stubs/licenses/' . strtolower($this->commandSettings->getLicense()) . '.txt'
+        );
 
         $user = $this->determineConfiguredGitUser();
 
@@ -484,10 +453,10 @@ class Construct
             $this->projectLower,
             $this->vendorLower,
             $this->vendorUpper,
-            $this->testing,
+            $this->commandSettings->getTestingFramework(),
             $this->testingVersion,
             $this->createNamespace(true),
-            $this->license,
+            $this->commandSettings->getLicense(),
             $user['name'],
             $user['email'],
         ];

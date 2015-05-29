@@ -2,6 +2,7 @@
 
 use JonathanTorres\Construct\Construct;
 use JonathanTorres\Construct\Str;
+use JonathanTorres\Construct\Commands\Settings\Construct as ConstructSettings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -151,12 +152,14 @@ class ConstructCommand extends Command
         }
 
         $this->construct->generate(
-            $this->projectName,
-            $this->testing,
-            $this->license,
-            $this->namespace,
-            $this->git,
-            $this->phpcs
+            new ConstructSettings(
+                $this->projectName,
+                $this->testing,
+                $this->license,
+                $this->namespace,
+                $this->git,
+                $this->phpcs
+            )
         );
 
         $output->writeln('<info>Project "' . $this->projectName . '" constructed.</info>');
