@@ -4,31 +4,43 @@ class Construct
 {
 
     /**
+     * The entered project name.
+     *
      * @var string
      */
     private $projectName;
 
     /**
+     * The entered testing framework.
+     *
      * @var string
      */
     private $testingFramework;
 
     /**
+     * The entered project license.
+     *
      * @var string
      */
     private $license;
 
     /**
+     * The entered namespace.
+     *
      * @var string
      */
     private $namespace;
 
     /**
+     * Initialize a git repo?
+     *
      * @var boolean
      */
     private $gitInit;
 
     /**
+     * Generate a PHP Coding Standards Fixer configuration?
+     *
      * @var boolean
      */
     private $phpcsConfiguration;
@@ -58,6 +70,8 @@ class Construct
     }
 
     /**
+     * Get the entered project name.
+     *
      * @return string
      */
     public function getProjectName()
@@ -66,6 +80,8 @@ class Construct
     }
 
     /**
+     * Get the entered testing framework.
+     *
      * @return string
      */
     public function getTestingFramework()
@@ -74,6 +90,8 @@ class Construct
     }
 
     /**
+     * Get the entered license.
+     *
      * @return string
      */
     public function getLicense()
@@ -82,6 +100,8 @@ class Construct
     }
 
     /**
+     * Get the entered namespace.
+     *
      * @return string
      */
     public function getNamespace()
@@ -90,6 +110,8 @@ class Construct
     }
 
     /**
+     * Whether or not to initialize a git repo on the project.
+     *
      * @return boolean
      */
     public function withGitInit()
@@ -98,6 +120,8 @@ class Construct
     }
 
     /**
+     * Whether or not to use phpcs on the project.
+     *
      * @return boolean
      */
     public function withPhpcsConfiguration()
