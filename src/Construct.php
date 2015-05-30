@@ -507,7 +507,7 @@ class Construct
         $projectName = $this->settings->getProjectName();
 
         if ($namespace === 'Vendor\Project' || $namespace === $projectName) {
-            return $this->str->createNamespace($namespace, true, $useDoubleSlashes);
+            return $this->str->createNamespace($projectName, true, $useDoubleSlashes);
         }
 
         return $this->str->createNamespace($namespace, false, $useDoubleSlashes);
