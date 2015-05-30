@@ -423,7 +423,7 @@ class Construct
      */
     protected function composerInstall()
     {
-        if (is_dir($this->projectLower)) {
+        if ($this->file->isDirectory($this->projectLower)) {
             $command = 'cd ' . $this->projectLower . ' && composer install';
             exec($command);
         }
@@ -436,7 +436,7 @@ class Construct
      **/
     protected function gitInit()
     {
-        if (is_dir($this->projectLower)) {
+        if ($this->file->isDirectory($this->projectLower)) {
             $command = 'cd ' . $this->projectLower . ' && git init';
             exec($command);
         }
