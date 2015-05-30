@@ -1,8 +1,9 @@
 <?php namespace JonathanTorres\Construct\Commands;
 
 use JonathanTorres\Construct\Construct;
-use JonathanTorres\Construct\Str;
+use JonathanTorres\Construct\Helpers\Git;
 use JonathanTorres\Construct\Settings;
+use JonathanTorres\Construct\Str;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -113,16 +114,10 @@ class ConstructCommand extends Command
             $testFramework = 'phpunit';
         }
 
-        $this->construct->generate(
-            new Settings(
-                $projectName,
-                $testFramework,
-                $license,
-                $namespace,
-                $git,
-                $phpcs
-            )
-        );
+        $settings = new Settings($projectName, $testFramework, $license, $namespace, $git, $phpcs);
+        $gitHelper = new Git();
+
+        $this->construct->generate($settings, $gitHelper);
 
         $output->writeln('<info>Project "' . $projectName . '" constructed.</info>');
     }

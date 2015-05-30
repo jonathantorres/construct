@@ -1,6 +1,7 @@
 <?php namespace JonathanTorres\Construct;
 
 use Illuminate\Filesystem\Filesystem;
+use JonathanTorres\Construct\Helpers\Git;
 
 class Construct
 {
@@ -96,11 +97,12 @@ class Construct
     /**
      * Generate project.
      *
-     * @param Settings $settings The command settings made by the user.
+     * @param \JonathanTorres\Construct\Settings $settings The command settings made by the user.
+     * @param \JonathanTorres\Construct\Helpers\Git $git The git helper.
      *
      * @return void
      **/
-    public function generate(Settings $settings)
+    public function generate(Settings $settings, Git $git)
     {
         $this->settings = $settings;
 
@@ -116,8 +118,8 @@ class Construct
         }
 
         $this->travis();
-        $this->license();
-        $this->composer();
+        $this->license($git);
+        $this->composer($git);
         $this->projectClass();
         $this->projectTest();
         $this->gitattributes();
@@ -280,15 +282,17 @@ class Construct
     /**
      * Generate LICENSE.md file.
      *
+     * @param \JonathanTorres\Construct\Helpers\Git $git The git helper.
+     *
      * @return void
      */
-    protected function license()
+    protected function license(Git $git)
     {
         $file = $this->file->get(
             __DIR__ . '/stubs/licenses/' . strtolower($this->settings->getLicense()) . '.txt'
         );
 
-        $user = $this->determineConfiguredGitUser();
+        $user = $git->getUser();
 
         $content = str_replace(
             ['{year}', '{author_name}'],
@@ -303,12 +307,14 @@ class Construct
     /**
      * Generate composer file.
      *
+     * @param \JonathanTorres\Construct\Helpers\Git $git The git helper.
+     *
      * @return void
      **/
-    protected function composer()
+    protected function composer(Git $git)
     {
         $file = $this->file->get(__DIR__ . '/stubs/composer.txt');
-        $user = $this->determineConfiguredGitUser();
+        $user = $git->getUser();
 
         $stubs = [
             '{project_upper}',
@@ -486,32 +492,6 @@ class Construct
     protected function codeception()
     {
         $this->testingVersion = '2.0.*';
-    }
-
-    /**
-     * Tries to determine the configured git user, returns a default when failing to do so.
-     *
-     * @return array
-     */
-    protected function determineConfiguredGitUser()
-    {
-        $user = [
-            'name' => 'Some name',
-            'email' => 'some@email.com'
-        ];
-
-        $command = 'git config --get-regexp "^user.*"';
-        exec($command, $keyValueLines, $returnValue);
-
-        if ($returnValue === 0) {
-            foreach ($keyValueLines as $keyValueLine) {
-                list($key, $value) = explode(' ', $keyValueLine, 2);
-                $key = str_replace('user.', '', $key);
-                $user[$key] = $value;
-            }
-        }
-
-        return $user;
     }
 
     /**
