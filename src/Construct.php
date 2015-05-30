@@ -108,8 +108,8 @@ class Construct
         $this->root();
         $this->src();
         $this->docs();
-        $this->testing();
         $this->gitignore();
+        $this->testing();
 
         if ($this->settings->withPhpcsConfiguration()) {
             $this->phpcs();
@@ -120,7 +120,6 @@ class Construct
         $this->composer();
         $this->projectClass();
         $this->projectTest();
-
         $this->gitattributes();
         $this->composerInstall();
 
@@ -145,36 +144,6 @@ class Construct
     }
 
     /**
-     * Generate files for the selected testing framework.
-     *
-     * @return void
-     **/
-    protected function testing()
-    {
-        switch ($this->settings->getTestingFramework()) {
-            case 'phpunit':
-                $this->phpunit();
-                break;
-
-            case 'behat':
-                $this->behat();
-                break;
-
-            case 'phpspec':
-                $this->phpspec();
-                break;
-
-            case 'codeception':
-                $this->codeception();
-                break;
-
-            default:
-                $this->phpunit();
-                break;
-        }
-    }
-
-    /**
      * Create project root folder.
      *
      * @return void
@@ -192,63 +161,6 @@ class Construct
     protected function src()
     {
         $this->file->makeDirectory($this->projectLower . '/' . $this->srcPath);
-    }
-
-    /**
-     * Generate gitignore file.
-     *
-     * @return void
-     **/
-    protected function gitignore()
-    {
-        $this->file->copy(__DIR__ . '/stubs/gitignore.txt', $this->projectLower . '/' . '.gitignore');
-        $this->exportIgnores[] = '.gitignore';
-    }
-
-    /**
-     * Generate gitattributes file.
-     *
-     * @return void
-     **/
-    protected function gitattributes()
-    {
-        $this->exportIgnores[] = '.gitattributes';
-        sort($this->exportIgnores);
-
-        $content = $this->file->get(__DIR__ . '/stubs/gitattributes.txt');
-
-        foreach ($this->exportIgnores as $ignore) {
-            $content .= PHP_EOL . '/' . $ignore . ' export-ignore';
-        }
-
-        $this->file->put($this->projectLower . '/' . '.gitattributes', $content);
-    }
-
-    /**
-     * Initialize an empty git repo.
-     *
-     * @return void
-     **/
-    protected function gitInit()
-    {
-        if (is_dir($this->projectLower)) {
-            $command = 'cd ' . $this->projectLower . ' && git init';
-            exec($command);
-        }
-    }
-
-    /**
-     * Generate PHP CS Fixer configuration file.
-     *
-     * @return void
-     **/
-    protected function phpcs()
-    {
-        $this->file->copy(
-            __DIR__ . '/stubs/phpcs.txt',
-            $this->projectLower . '/' . '.php_cs'
-        );
-        $this->exportIgnores[] = '.php_cs';
     }
 
     /**
@@ -293,94 +205,58 @@ class Construct
     }
 
     /**
-     * Generate phpunit file/settings.
+     * Generate gitignore file.
      *
      * @return void
      **/
-    protected function phpunit()
+    protected function gitignore()
     {
-        $this->testingVersion = '4.6.*';
-
-        $file = $this->file->get(__DIR__ . '/stubs/phpunit.txt');
-        $content = str_replace('{project_upper}', $this->projectUpper, $file);
-
-        $this->file->put($this->projectLower . '/' . 'phpunit.xml.dist', $content);
-        $this->exportIgnores[] = 'phpunit.xml.dist';
+        $this->file->copy(__DIR__ . '/stubs/gitignore.txt', $this->projectLower . '/' . '.gitignore');
+        $this->exportIgnores[] = '.gitignore';
     }
 
     /**
-     * Tries to determine the configured git user, returns a default when failing to do so.
+     * Generate files for the selected testing framework.
      *
-     * @return array
-     */
-    protected function determineConfiguredGitUser()
+     * @return void
+     **/
+    protected function testing()
     {
-        $user = [
-            'name' => 'Some name',
-            'email' => 'some@email.com'
-        ];
+        switch ($this->settings->getTestingFramework()) {
+            case 'phpunit':
+                $this->phpunit();
+                break;
 
-        $command = 'git config --get-regexp "^user.*"';
-        exec($command, $keyValueLines, $returnValue);
+            case 'behat':
+                $this->behat();
+                break;
 
-        if ($returnValue === 0) {
-            foreach ($keyValueLines as $keyValueLine) {
-                list($key, $value) = explode(' ', $keyValueLine, 2);
-                $key = str_replace('user.', '', $key);
-                $user[$key] = $value;
-            }
+            case 'phpspec':
+                $this->phpspec();
+                break;
+
+            case 'codeception':
+                $this->codeception();
+                break;
+
+            default:
+                $this->phpunit();
+                break;
         }
-
-        return $user;
     }
 
     /**
-     * Construct a correct project namespace name.
-     *
-     * @param boolean $useDoubleSlashes Whether or not to create the namespace with double slashes \\
-     *
-     * @return string
-     **/
-    protected function createNamespace($useDoubleSlashes = false)
-    {
-        $namespace = $this->settings->getNamespace();
-        $projectName = $this->settings->getProjectName();
-
-        if ($namespace === 'Vendor\Project' || $namespace === $projectName) {
-            return $this->str->createNamespace($namespace, true, $useDoubleSlashes);
-        }
-
-        return $this->str->createNamespace($namespace, false, $useDoubleSlashes);
-    }
-
-    /**
-     * Generate phpspec file/settings.
+     * Generate PHP CS Fixer configuration file.
      *
      * @return void
      **/
-    protected function phpspec()
+    protected function phpcs()
     {
-        $this->testingVersion = '~2.0';
-    }
-
-    /**
-     * Generate behat file/settings.
-     *
-     * @return void
-     **/
-    protected function behat()
-    {
-        $this->testingVersion = '~3.0';
-    }
-
-    /**
-     * Generate codeception file/settings.
-     *
-     * @return void
-     **/
-    protected function codeception()
-    {
-        $this->testingVersion = '2.0.*';
+        $this->file->copy(
+            __DIR__ . '/stubs/phpcs.txt',
+            $this->projectLower . '/' . '.php_cs'
+        );
+        $this->exportIgnores[] = '.php_cs';
     }
 
     /**
@@ -466,19 +342,6 @@ class Construct
     }
 
     /**
-     * Do an initial composer install in constructed project.
-     *
-     * @return void
-     */
-    protected function composerInstall()
-    {
-        if (is_dir($this->projectLower)) {
-            $command = 'cd ' . $this->projectLower . ' && composer install';
-            exec($command);
-        }
-    }
-
-    /**
      * Generate project class file.
      *
      * @return void
@@ -532,5 +395,141 @@ class Construct
         $this->file->makeDirectory($this->projectLower . '/tests');
         $this->file->put($this->projectLower . '/tests/' . $this->projectUpper . 'Test.php', $content);
         $this->exportIgnores[] = 'tests';
+    }
+
+    /**
+     * Generate gitattributes file.
+     *
+     * @return void
+     **/
+    protected function gitattributes()
+    {
+        $this->exportIgnores[] = '.gitattributes';
+        sort($this->exportIgnores);
+
+        $content = $this->file->get(__DIR__ . '/stubs/gitattributes.txt');
+
+        foreach ($this->exportIgnores as $ignore) {
+            $content .= PHP_EOL . '/' . $ignore . ' export-ignore';
+        }
+
+        $this->file->put($this->projectLower . '/' . '.gitattributes', $content);
+    }
+
+    /**
+     * Do an initial composer install in constructed project.
+     *
+     * @return void
+     */
+    protected function composerInstall()
+    {
+        if (is_dir($this->projectLower)) {
+            $command = 'cd ' . $this->projectLower . ' && composer install';
+            exec($command);
+        }
+    }
+
+    /**
+     * Initialize an empty git repo.
+     *
+     * @return void
+     **/
+    protected function gitInit()
+    {
+        if (is_dir($this->projectLower)) {
+            $command = 'cd ' . $this->projectLower . ' && git init';
+            exec($command);
+        }
+    }
+
+    /**
+     * Generate phpunit file/settings.
+     *
+     * @return void
+     **/
+    protected function phpunit()
+    {
+        $this->testingVersion = '4.6.*';
+
+        $file = $this->file->get(__DIR__ . '/stubs/phpunit.txt');
+        $content = str_replace('{project_upper}', $this->projectUpper, $file);
+
+        $this->file->put($this->projectLower . '/' . 'phpunit.xml.dist', $content);
+        $this->exportIgnores[] = 'phpunit.xml.dist';
+    }
+
+    /**
+     * Generate phpspec file/settings.
+     *
+     * @return void
+     **/
+    protected function phpspec()
+    {
+        $this->testingVersion = '~2.0';
+    }
+
+    /**
+     * Generate behat file/settings.
+     *
+     * @return void
+     **/
+    protected function behat()
+    {
+        $this->testingVersion = '~3.0';
+    }
+
+    /**
+     * Generate codeception file/settings.
+     *
+     * @return void
+     **/
+    protected function codeception()
+    {
+        $this->testingVersion = '2.0.*';
+    }
+
+    /**
+     * Tries to determine the configured git user, returns a default when failing to do so.
+     *
+     * @return array
+     */
+    protected function determineConfiguredGitUser()
+    {
+        $user = [
+            'name' => 'Some name',
+            'email' => 'some@email.com'
+        ];
+
+        $command = 'git config --get-regexp "^user.*"';
+        exec($command, $keyValueLines, $returnValue);
+
+        if ($returnValue === 0) {
+            foreach ($keyValueLines as $keyValueLine) {
+                list($key, $value) = explode(' ', $keyValueLine, 2);
+                $key = str_replace('user.', '', $key);
+                $user[$key] = $value;
+            }
+        }
+
+        return $user;
+    }
+
+    /**
+     * Construct a correct project namespace name.
+     *
+     * @param boolean $useDoubleSlashes Whether or not to create the namespace with double slashes \\
+     *
+     * @return string
+     **/
+    protected function createNamespace($useDoubleSlashes = false)
+    {
+        $namespace = $this->settings->getNamespace();
+        $projectName = $this->settings->getProjectName();
+
+        if ($namespace === 'Vendor\Project' || $namespace === $projectName) {
+            return $this->str->createNamespace($namespace, true, $useDoubleSlashes);
+        }
+
+        return $this->str->createNamespace($namespace, false, $useDoubleSlashes);
     }
 }
