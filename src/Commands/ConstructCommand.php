@@ -135,7 +135,7 @@ class ConstructCommand extends Command
         $this->phpcs = $input->getOption('phpcs');
 
         if (!$this->str->isValid($this->projectName)) {
-            $output->writeln('<error>"' . $this->projectName . '" is not a valid project name, please use "vendor/project"</error>');
+            $output->writeln('<error>Warning: "' . $this->projectName . '" is not a valid project name, please use "vendor/project"</error>');
 
             return false;
         }
