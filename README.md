@@ -14,7 +14,7 @@ composer global require jonathantorres/construct
 Make sure that `~/.composer/vendor/bin` is on your `$PATH`. This way the `construct` executable can be located.
 
 #### Usage
-Just run `construct generate` with your `vendor/package` declaration and it will construct a basic php project on the `package` directory. For example, if you run `construct generate jonathantorres/logger` it will generate a basic project structure inside the `logger` folder.
+Just run `construct generate` with your `vendor/package` declaration and it will construct a basic PHP project into the `package` directory. For example, if you run `construct generate jonathantorres/logger` it will generate a basic project structure inside the `logger` folder.
 
 ```bash
 construct generate jonathantorres/logger
