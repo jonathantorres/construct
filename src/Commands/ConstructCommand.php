@@ -113,7 +113,7 @@ class ConstructCommand extends Command
         $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testDescription, 'phpunit');
         $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
         $this->addOption('namespace', 's', InputOption::VALUE_OPTIONAL, 'Project namespace', 'Vendor\Project');
-        $this->addOption('git', 'g', InputOption::VALUE_NONE, 'Initialize an empty git repo');
+        $this->addOption('git', 'g', InputOption::VALUE_NONE, 'Initialize an empty Git repo');
         $this->addOption('phpcs', 'p', InputOption::VALUE_NONE, 'Generate a PHP Coding Standards Fixer configuration');
     }
 
