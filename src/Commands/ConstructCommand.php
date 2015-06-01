@@ -108,7 +108,7 @@ class ConstructCommand extends Command
         $testDescription = 'Testing framework (one of: ' . join(', ', $this->testingFrameworks) . ')';
 
         $this->setName('generate');
-        $this->setDescription('Generate a basic PHP project');
+        $this->setDescription('Generates a basic PHP project');
         $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name');
         $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testDescription, 'phpunit');
         $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
