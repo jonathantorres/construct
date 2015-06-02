@@ -129,6 +129,10 @@ class Construct
         if ($this->settings->withGitInit()) {
             $this->gitInit();
         }
+
+        if ($this->settings->withVagrantFile()) {
+            $this->vagrant();
+        }
     }
 
     /**
@@ -260,6 +264,20 @@ class Construct
             $this->projectLower . '/' . '.php_cs'
         );
         $this->exportIgnores[] = '.php_cs';
+    }
+
+    /**
+     * Generate Vagrant file.
+     *
+     * @return void
+     */
+    protected function vagrant()
+    {
+        $this->file->copy(
+            __DIR__ . '/stubs/Vagrantfile.txt',
+            $this->projectLower . '/' . 'Vagrantfile'
+        );
+        $this->exportIgnores[] = 'Vagrantfile';
     }
 
     /**

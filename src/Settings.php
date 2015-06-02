@@ -46,6 +46,13 @@ class Settings
     private $phpcsConfiguration;
 
     /**
+     * Generate a Vagrantfile?
+     *
+     * @var boolean
+     */
+    private $vagrantfile;
+
+    /**
      * Initialize.
      *
      * @param string  $projectName        The entered project name.
@@ -54,6 +61,7 @@ class Settings
      * @param string  $namespace          The entered namespace.
      * @param boolean $gitInit            Initialize a git repo?
      * @param boolean $phpcsConfiguration Generate a PHP Coding Standards Fixer configuration?
+     * @param boolean $vagrantfile        Generate a Vagrantfile?
      *
      * @return void
      */
@@ -63,7 +71,8 @@ class Settings
         $license,
         $namespace,
         $gitInit,
-        $phpcsConfiguration
+        $phpcsConfiguration,
+        $vagrantfile
     ) {
         $this->projectName = $projectName;
         $this->testingFramework = $testingFramework;
@@ -71,6 +80,7 @@ class Settings
         $this->namespace = $namespace;
         $this->gitInit = $gitInit;
         $this->phpcsConfiguration = $phpcsConfiguration;
+        $this->vagrantfile = $vagrantfile;
     }
 
     /**
@@ -131,5 +141,15 @@ class Settings
     public function withPhpcsConfiguration()
     {
         return $this->phpcsConfiguration;
+    }
+
+    /**
+     * Whether or not to create a Vagrantfile.
+     *
+     * @return boolean
+     */
+    public function withVagrantfile()
+    {
+        return $this->vagrantfile;
     }
 }
