@@ -14,7 +14,7 @@ composer global require jonathantorres/construct
 Make sure that `~/.composer/vendor/bin` is on your `$PATH`. This way the `construct` executable can be located.
 
 #### Usage
-Just run `construct generate` with your `vendor/package` declaration and it will construct a basic php project on the `package` directory. For example, if you run `construct generate jonathantorres/logger` it will generate a basic project structure inside the `logger` folder.
+Just run `construct generate` with your `vendor/package` declaration and it will construct a basic PHP project into the `package` directory. For example, if you run `construct generate jonathantorres/logger` it will generate a basic project structure inside the `logger` folder.
 
 ```bash
 construct generate jonathantorres/logger
@@ -83,8 +83,8 @@ You can also use the short option `-s`.
 construct generate jonathantorres/logger -s JonathanTorres\\Projects\\Logger
 ```
 
-#### Initialize an empty git repo?
-The `--git` option will allow you to initialize an empty git repository inside the constructed project.
+#### Initialize an empty Git repo?
+The `--git` option will allow you to initialize an empty Git repository inside the constructed project.
 
 ```bash
 construct generate jonathantorres/logger --git

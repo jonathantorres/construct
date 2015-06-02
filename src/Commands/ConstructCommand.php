@@ -108,12 +108,12 @@ class ConstructCommand extends Command
         $testDescription = 'Testing framework (one of: ' . join(', ', $this->testingFrameworks) . ')';
 
         $this->setName('generate');
-        $this->setDescription('Generate a basic PHP project');
+        $this->setDescription('Generates a basic PHP project');
         $this->addArgument('name', InputArgument::REQUIRED, 'The vendor/project name');
         $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testDescription, 'phpunit');
         $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
         $this->addOption('namespace', 's', InputOption::VALUE_OPTIONAL, 'Project namespace', 'Vendor\Project');
-        $this->addOption('git', 'g', InputOption::VALUE_NONE, 'Initialize an empty git repo');
+        $this->addOption('git', 'g', InputOption::VALUE_NONE, 'Initialize an empty Git repo');
         $this->addOption('phpcs', 'p', InputOption::VALUE_NONE, 'Generate a PHP Coding Standards Fixer configuration');
     }
 
@@ -135,7 +135,7 @@ class ConstructCommand extends Command
         $this->phpcs = $input->getOption('phpcs');
 
         if (!$this->str->isValid($this->projectName)) {
-            $output->writeln('<error>"' . $this->projectName . '" is not a valid project name, please use "vendor/project"</error>');
+            $output->writeln('<error>Warning: "' . $this->projectName . '" is not a valid project name, please use "vendor/project"</error>');
 
             return false;
         }
