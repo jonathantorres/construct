@@ -84,8 +84,8 @@ class Construct
     /**
      * Initialize.
      *
-     * @param \Illuminate\Filesystem\Filesystem $file
-     * @param \JonathanTorres\Construct\Helpers\Str     $str
+     * @param \Illuminate\Filesystem\Filesystem     $file
+     * @param \JonathanTorres\Construct\Helpers\Str $str
      *
      * @return void
      */
@@ -98,8 +98,8 @@ class Construct
     /**
      * Generate project.
      *
-     * @param \JonathanTorres\Construct\Settings $settings The command settings made by the user.
-     * @param \JonathanTorres\Construct\Helpers\Git $git The git helper.
+     * @param \JonathanTorres\Construct\Settings    $settings The command settings made by the user.
+     * @param \JonathanTorres\Construct\Helpers\Git $git      The git helper.
      *
      * @return void
      */
