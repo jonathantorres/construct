@@ -89,6 +89,22 @@ class ConstructTest extends PHPUnit
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
+    /**
+     * @group integration
+     */
+    public function testExecutable()
+    {
+      $constructCommand = 'php construct';
+      exec($constructCommand, $output, $returnValue);
+
+      $this->assertStringStartsWith(
+        'Construct',
+        $output[1],
+        'Expected application name not present.'
+      );
+      $this->assertEquals(0, $returnValue);
+    }
+
     protected function setApplication()
     {
         $app = new Application();
