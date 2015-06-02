@@ -1,4 +1,4 @@
-<?php namespace JonathanTorres\Construct;
+<?php namespace JonathanTorres\Construct\Helpers;
 
 use Illuminate\Support\Str as StringHelper;
 

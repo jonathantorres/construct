@@ -2,6 +2,7 @@
 
 use Illuminate\Filesystem\Filesystem;
 use JonathanTorres\Construct\Helpers\Git;
+use JonathanTorres\Construct\Helpers\Str;
 
 class Construct
 {
@@ -16,7 +17,7 @@ class Construct
     /**
      * String helper.
      *
-     * @var \JonathanTorres\Construct\Str
+     * @var \JonathanTorres\Construct\Helpers\Str
      */
     protected $str;
 
@@ -84,7 +85,7 @@ class Construct
      * Initialize.
      *
      * @param \Illuminate\Filesystem\Filesystem $file
-     * @param \JonathanTorres\Construct\Str     $str
+     * @param \JonathanTorres\Construct\Helpers\Str     $str
      *
      * @return void
      */

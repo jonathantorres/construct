@@ -2,8 +2,8 @@
 
 use JonathanTorres\Construct\Construct;
 use JonathanTorres\Construct\Helpers\Git;
+use JonathanTorres\Construct\Helpers\Str;
 use JonathanTorres\Construct\Settings;
-use JonathanTorres\Construct\Str;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

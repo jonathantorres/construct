@@ -3,7 +3,7 @@
 use Illuminate\Filesystem\Filesystem;
 use JonathanTorres\Construct\Commands\ConstructCommand;
 use JonathanTorres\Construct\Construct;
-use JonathanTorres\Construct\Str;
+use JonathanTorres\Construct\Helpers\Str;
 use Mockery;
 use PHPUnit_Framework_TestCase as PHPUnit;
 use Symfony\Component\Console\Application;
