@@ -1,6 +1,6 @@
 <?php namespace JonathanTorres\Construct\Tests;
 
-use JonathanTorres\Construct\Str;
+use JonathanTorres\Construct\Helpers\Str;
 use PHPUnit_Framework_TestCase as PHPUnit;
 
 class StrTest extends PHPUnit

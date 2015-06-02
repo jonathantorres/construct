@@ -1,4 +1,4 @@
-<?php namespace JonathanTorres\Construct;
+<?php namespace JonathanTorres\Construct\Helpers;
 
 use Illuminate\Support\Str as StringHelper;
 
@@ -10,7 +10,7 @@ class Str
      * Must be: vendor/package
      *
      * @var string
-     **/
+     */
     protected $regEx = '{^[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$}u';
 
     /**
@@ -19,7 +19,7 @@ class Str
      * @param string $name
      *
      * @return boolean
-     **/
+     */
     public function isValid($name)
     {
         if (preg_match($this->regEx, $name) === 0) {
@@ -37,7 +37,7 @@ class Str
      * @param boolean $useDoubleSlashes Whether or not use double slashes \\.
      *
      * @return string
-     **/
+     */
     public function createNamespace($namespace, $usesProjectName = false, $useDoubleSlashes = false)
     {
         $delimiter = ($usesProjectName) ? '/' : '\\';
@@ -61,7 +61,7 @@ class Str
      * @param string $string
      *
      * @return string
-     **/
+     */
     public function toStudly($string)
     {
         return StringHelper::studly($string);
@@ -74,7 +74,7 @@ class Str
      * @param string $string
      *
      * @return string
-     **/
+     */
     public function toLower($string)
     {
         return strtolower($string);
@@ -109,7 +109,7 @@ class Str
      * @param string $string
      *
      * @return array
-     **/
+     */
     public function split($string)
     {
         $project = explode('/', $string);
