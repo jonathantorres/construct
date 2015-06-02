@@ -17,28 +17,28 @@ class ConstructCommand extends Command
      * The construct implementation.
      *
      * @var string
-     **/
+     */
     protected $construct;
 
     /**
      * String helper.
      *
      * @var \JonathanTorres\Construct\Str
-     **/
+     */
     protected $str;
 
     /**
      * The available open source licenses. (more: http://choosealicense.com/licenses)
      *
      * @var array
-     **/
+     */
     protected $licenses = ['MIT', 'Apache-2.0', 'GPL-2.0', 'GPL-3.0'];
 
     /**
      * The available testing frameworks.
      *
      * @var array
-     **/
+     */
     protected $testingFrameworks = ['phpunit', 'behat', 'phpspec', 'codeception'];
 
     /**
@@ -48,7 +48,7 @@ class ConstructCommand extends Command
      * @param \JonathanTorres\Construct\Str       $str
      *
      * @return void
-     **/
+     */
     public function __construct(Construct $construct, Str $str)
     {
         parent::__construct();
@@ -61,7 +61,7 @@ class ConstructCommand extends Command
      * Command configuration.
      *
      * @return void
-     **/
+     */
     protected function configure()
     {
         $nameDescription = 'The vendor/project name';
@@ -88,7 +88,7 @@ class ConstructCommand extends Command
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return void
-     **/
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $projectName = $input->getArgument('name');

@@ -10,42 +10,42 @@ class Construct
      * The filesystem instance.
      *
      * @var \Illuminate\Filesystem\Filesystem
-     **/
+     */
     protected $file;
 
     /**
      * String helper.
      *
      * @var \JonathanTorres\Construct\Str
-     **/
+     */
     protected $str;
 
     /**
      * The construct command selections instance.
      *
      * @var \JonathanTorres\Construct\Settings
-     **/
+     */
     protected $settings;
 
     /**
      * Folder to store source files.
      *
      * @var string
-     **/
+     */
     protected $srcPath = 'src';
 
     /**
      * The files to ignore on exporting.
      *
      * @var array
-     **/
+     */
     protected $exportIgnores = [];
 
     /**
      * The selected testing framework version.
      *
      * @var string
-     **/
+     */
     protected $testingVersion;
 
     /**
@@ -53,7 +53,7 @@ class Construct
      * ex: JonathanTorres
      *
      * @var string
-     **/
+     */
     protected $vendorUpper;
 
     /**
@@ -61,7 +61,7 @@ class Construct
      * ex: jonathantorres
      *
      * @var string
-     **/
+     */
     protected $vendorLower;
 
     /**
@@ -69,7 +69,7 @@ class Construct
      * ex: Construct
      *
      * @var string
-     **/
+     */
     protected $projectUpper;
 
     /**
@@ -77,7 +77,7 @@ class Construct
      * ex: construct
      *
      * @var string
-     **/
+     */
     protected $projectLower;
 
     /**
@@ -87,7 +87,7 @@ class Construct
      * @param \JonathanTorres\Construct\Str     $str
      *
      * @return void
-     **/
+     */
     public function __construct(Filesystem $file, Str $str)
     {
         $this->file = $file;
@@ -101,7 +101,7 @@ class Construct
      * @param \JonathanTorres\Construct\Helpers\Git $git The git helper.
      *
      * @return void
-     **/
+     */
     public function generate(Settings $settings, Git $git)
     {
         $this->settings = $settings;
@@ -134,7 +134,7 @@ class Construct
      * Save versions of project names.
      *
      * @return void
-     **/
+     */
     protected function saveNames()
     {
         $names = $this->str->split($this->settings->getProjectName());
@@ -149,7 +149,7 @@ class Construct
      * Create project root folder.
      *
      * @return void
-     **/
+     */
     protected function root()
     {
         $this->file->makeDirectory($this->projectLower);
@@ -159,7 +159,7 @@ class Construct
      * Create 'src' folder.
      *
      * @return void
-     **/
+     */
     protected function src()
     {
         $this->file->makeDirectory($this->projectLower . '/' . $this->srcPath);
@@ -210,7 +210,7 @@ class Construct
      * Generate gitignore file.
      *
      * @return void
-     **/
+     */
     protected function gitignore()
     {
         $this->file->copy(__DIR__ . '/stubs/gitignore.txt', $this->projectLower . '/' . '.gitignore');
@@ -221,7 +221,7 @@ class Construct
      * Generate files for the selected testing framework.
      *
      * @return void
-     **/
+     */
     protected function testing()
     {
         switch ($this->settings->getTestingFramework()) {
@@ -251,7 +251,7 @@ class Construct
      * Generate PHP CS Fixer configuration file.
      *
      * @return void
-     **/
+     */
     protected function phpcs()
     {
         $this->file->copy(
@@ -265,7 +265,7 @@ class Construct
      * Generate .travis.yml file.
      *
      * @return void
-     **/
+     */
     protected function travis()
     {
         $file = $this->file->get(__DIR__ . '/stubs/travis.txt');
@@ -310,7 +310,7 @@ class Construct
      * @param \JonathanTorres\Construct\Helpers\Git $git The git helper.
      *
      * @return void
-     **/
+     */
     protected function composer(Git $git)
     {
         $file = $this->file->get(__DIR__ . '/stubs/composer.txt');
@@ -351,7 +351,7 @@ class Construct
      * Generate project class file.
      *
      * @return void
-     **/
+     */
     protected function projectClass()
     {
         $file = $this->file->get(__DIR__ . '/stubs/Project.txt');
@@ -377,7 +377,7 @@ class Construct
      * Generate project test file.
      *
      * @return void
-     **/
+     */
     protected function projectTest()
     {
         $file = $this->file->get(__DIR__ . '/stubs/ProjectTest.txt');
@@ -407,7 +407,7 @@ class Construct
      * Generate gitattributes file.
      *
      * @return void
-     **/
+     */
     protected function gitattributes()
     {
         $this->exportIgnores[] = '.gitattributes';
@@ -439,7 +439,7 @@ class Construct
      * Initialize an empty git repo.
      *
      * @return void
-     **/
+     */
     protected function gitInit()
     {
         if ($this->file->isDirectory($this->projectLower)) {
@@ -452,7 +452,7 @@ class Construct
      * Generate phpunit file/settings.
      *
      * @return void
-     **/
+     */
     protected function phpunit()
     {
         $this->testingVersion = '4.6.*';
@@ -468,7 +468,7 @@ class Construct
      * Generate phpspec file/settings.
      *
      * @return void
-     **/
+     */
     protected function phpspec()
     {
         $this->testingVersion = '~2.0';
@@ -478,7 +478,7 @@ class Construct
      * Generate behat file/settings.
      *
      * @return void
-     **/
+     */
     protected function behat()
     {
         $this->testingVersion = '~3.0';
@@ -488,7 +488,7 @@ class Construct
      * Generate codeception file/settings.
      *
      * @return void
-     **/
+     */
     protected function codeception()
     {
         $this->testingVersion = '2.0.*';
@@ -500,7 +500,7 @@ class Construct
      * @param boolean $useDoubleSlashes Whether or not to create the namespace with double slashes \\
      *
      * @return string
-     **/
+     */
     protected function createNamespace($useDoubleSlashes = false)
     {
         $namespace = $this->settings->getNamespace();
