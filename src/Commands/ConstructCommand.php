@@ -100,6 +100,7 @@ class ConstructCommand extends Command
 
         if (!$this->str->isValid($projectName)) {
             $output->writeln('<error>Warning: "' . $projectName . '" is not a valid project name, please use "vendor/project"</error>');
+
             return false;
         }
 

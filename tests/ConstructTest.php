@@ -94,15 +94,15 @@ class ConstructTest extends PHPUnit
      */
     public function testExecutable()
     {
-      $constructCommand = 'php construct';
-      exec($constructCommand, $output, $returnValue);
+        $constructCommand = 'php construct';
+        exec($constructCommand, $output, $returnValue);
 
-      $this->assertStringStartsWith(
-        'Construct',
-        $output[1],
-        'Expected application name not present.'
-      );
-      $this->assertEquals(0, $returnValue);
+        $this->assertStringStartsWith(
+            'Construct',
+            $output[1],
+            'Expected application name not present.'
+        );
+        $this->assertEquals(0, $returnValue);
     }
 
     protected function setApplication()
