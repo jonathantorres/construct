@@ -83,7 +83,7 @@ construct generate jonathantorres/logger -s JonathanTorres\\Projects\\Logger
 ```
 
 #### Specify Composer keywords
-The optional `--keywords` option will allow you to specify comma separated list of [Composer keywords](https://getcomposer.org/doc/04-schema.md#keywords).
+The optional `--keywords` option will allow you to specify a comma separated list of [Composer keywords](https://getcomposer.org/doc/04-schema.md#keywords).
 
 ```bash
 construct generate jonathantorres/logger --keywords=log,logging
