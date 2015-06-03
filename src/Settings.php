@@ -61,7 +61,7 @@ class Settings
      * @param string  $namespace          The entered namespace.
      * @param boolean $gitInit            Initialize a git repo?
      * @param boolean $phpcsConfiguration Generate a PHP Coding Standards Fixer configuration?
-     * @param string  $composerKeywords   Comma separated list of Composer keywords.
+     * @param string  $composerKeywords   The entered list of Composer keywords.
      *
      * @return void
      */
