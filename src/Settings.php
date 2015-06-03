@@ -46,6 +46,13 @@ class Settings
     private $phpcsConfiguration;
 
     /**
+     * The entered list of Composer keywords.
+     *
+     * @var string
+     */
+    private $composerKeywords;
+
+    /**
      * Initialize.
      *
      * @param string  $projectName        The entered project name.
@@ -54,6 +61,7 @@ class Settings
      * @param string  $namespace          The entered namespace.
      * @param boolean $gitInit            Initialize a git repo?
      * @param boolean $phpcsConfiguration Generate a PHP Coding Standards Fixer configuration?
+     * @param string  $composerKeywords   Comma separated list of Composer keywords.
      *
      * @return void
      */
@@ -63,7 +71,8 @@ class Settings
         $license,
         $namespace,
         $gitInit,
-        $phpcsConfiguration
+        $phpcsConfiguration,
+        $composerKeywords
     ) {
         $this->projectName = $projectName;
         $this->testingFramework = $testingFramework;
@@ -71,6 +80,7 @@ class Settings
         $this->namespace = $namespace;
         $this->gitInit = $gitInit;
         $this->phpcsConfiguration = $phpcsConfiguration;
+        $this->composerKeywords = $composerKeywords;
     }
 
     /**
@@ -131,5 +141,15 @@ class Settings
     public function withPhpcsConfiguration()
     {
         return $this->phpcsConfiguration;
+    }
+
+    /**
+     * Get the entered Composer keywords.
+     *
+     * @return string
+     */
+    public function getComposerKeywords()
+    {
+        return $this->composerKeywords;
     }
 }

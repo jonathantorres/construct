@@ -87,4 +87,28 @@ class StrTest extends PHPUnit
     {
         $this->assertSame('Namespace', $this->str->createNamespace('namespace'));
     }
+
+    /**
+     * @dataProvider keywordsProvider
+     */
+    public function testToQuotedKeywords($keywordsList, $expectedQuotedKeywords)
+    {
+        $this->assertEquals(
+            $expectedQuotedKeywords,
+            $this->str->toQuotedKeywords($keywordsList)
+        );
+    }
+
+    /**
+     * @return array
+     */
+    public function keywordsProvider()
+    {
+        return [
+            'keywords_with_whitespace' => ['test, php,vagrant,    provision', '"test", "php", "vagrant", "provision"'],
+            'keyword_single' => ['fooo', '"fooo"'],
+            'keyword_empty_string' => ['  ', ""],
+            'keyword_null' => [null, ""],
+        ];
+    }
 }

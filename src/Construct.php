@@ -328,6 +328,7 @@ class Construct
             '{license}',
             '{author_name}',
             '{author_email}',
+            '{keywords}',
         ];
 
         $values = [
@@ -341,6 +342,7 @@ class Construct
             $this->settings->getLicense(),
             $user['name'],
             $user['email'],
+            $this->str->toQuotedKeywords($this->settings->getComposerKeywords()),
         ];
 
         $content = str_replace($stubs, $values, $file);

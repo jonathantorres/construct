@@ -78,9 +78,21 @@ construct generate jonathantorres/logger --namespace=JonathanTorres\\Projects\\L
 ```
 
 You can also use the short option `-s`.
-
 ```bash
 construct generate jonathantorres/logger -s JonathanTorres\\Projects\\Logger
+```
+
+#### Specify Composer keywords
+The optional `--keywords` option will allow you to specify comma separated list of [Composer keywords](https://getcomposer.org/doc/04-schema.md#keywords).
+
+```bash
+construct generate jonathantorres/logger --keywords=log,logging
+```
+
+You can also use the short option `-k`.
+
+```bash
+construct generate jonathantorres/logger -k=log, logging
 ```
 
 #### Initialize an empty Git repo?
