@@ -92,7 +92,7 @@ construct generate jonathantorres/logger --keywords=log,logging
 You can also use the short option `-k`.
 
 ```bash
-construct generate jonathantorres/logger -k=log, logging
+construct generate jonathantorres/logger -k=log,logging
 ```
 
 #### Initialize an empty Git repo?
