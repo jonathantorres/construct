@@ -106,6 +106,22 @@ class ConstructTest extends PHPUnit
         $this->assertEquals(0, $returnValue);
     }
 
+    public function testProjectGenerationWithVagrant()
+    {
+        $this->setMocks(2);
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--vagrant' => true
+        ]);
+
+        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+    }
+
     protected function setApplication()
     {
         $app = new Application();

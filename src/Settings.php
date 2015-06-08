@@ -53,6 +53,13 @@ class Settings
     private $composerKeywords;
 
     /**
+     * Generate a Vagrantfile?
+     *
+     * @var boolean
+     */
+    private $vagrantfile;
+
+    /**
      * Initialize.
      *
      * @param string  $projectName        The entered project name.
@@ -62,6 +69,7 @@ class Settings
      * @param boolean $gitInit            Initialize a git repo?
      * @param boolean $phpcsConfiguration Generate a PHP Coding Standards Fixer configuration?
      * @param string  $composerKeywords   The entered list of Composer keywords.
+     * @param boolean $vagrantfile        Generate a Vagrantfile?
      *
      * @return void
      */
@@ -73,6 +81,7 @@ class Settings
         $gitInit,
         $phpcsConfiguration,
         $composerKeywords
+        $vagrantfile
     ) {
         $this->projectName = $projectName;
         $this->testingFramework = $testingFramework;
@@ -81,6 +90,7 @@ class Settings
         $this->gitInit = $gitInit;
         $this->phpcsConfiguration = $phpcsConfiguration;
         $this->composerKeywords = $composerKeywords;
+        $this->vagrantfile = $vagrantfile;
     }
 
     /**
@@ -151,5 +161,15 @@ class Settings
     public function getComposerKeywords()
     {
         return $this->composerKeywords;
+    }
+
+    /**
+     * Whether or not to create a Vagrantfile.
+     *
+     * @return boolean
+     */
+    public function withVagrantfile()
+    {
+        return $this->vagrantfile;
     }
 }
