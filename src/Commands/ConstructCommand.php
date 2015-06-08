@@ -71,6 +71,7 @@ class ConstructCommand extends Command
         $gitDescription = 'Initialize an empty Git repo';
         $phpcsDescription = 'Generate a PHP Coding Standards Fixer configuration';
         $keywordsDescription = 'Comma separated list of Composer keywords';
+        $vagrantDescription = 'Generate a Vagrantfile';
 
         $this->setName('generate');
         $this->setDescription('Generates a basic PHP project');
@@ -81,6 +82,7 @@ class ConstructCommand extends Command
         $this->addOption('git', 'g', InputOption::VALUE_NONE, $gitDescription);
         $this->addOption('phpcs', 'p', InputOption::VALUE_NONE, $phpcsDescription);
         $this->addOption('keywords', 'k', InputOption::VALUE_OPTIONAL, $keywordsDescription);
+        $this->addOption('vagrant', null, InputOption::VALUE_NONE, $vagrantDescription);
     }
 
     /**
@@ -100,6 +102,7 @@ class ConstructCommand extends Command
         $git = $input->getOption('git');
         $phpcs = $input->getOption('phpcs');
         $keywords = $input->getOption('keywords');
+        $vagrant = $input->getOption('vagrant');
 
         if (!$this->str->isValid($projectName)) {
             $output->writeln('<error>Warning: "' . $projectName . '" is not a valid project name, please use "vendor/project"</error>');
@@ -125,6 +128,7 @@ class ConstructCommand extends Command
           $git,
           $phpcs,
           $keywords
+          $vagrant
         );
 
         $gitHelper = new Git();
