@@ -123,9 +123,7 @@ construct generate jonathantorres/logger -p
 ```
 
 #### Generate a Vagrantfile?
-The `--vagrant` option will generate a basic [Vagrantfile](https://docs.vagrantup.com/v2/vagrantfile/index.html) within the constructed project, defaulting
-to the output of a `vagrant init` call plus a minimal [vagrant-cachier](http://fgrehm.viewdocs.io/vagrant-cachier) plugin configuration. There's no short
-option available.
+The `--vagrant` option will generate a basic [Vagrantfile](https://docs.vagrantup.com/v2/vagrantfile/index.html) within the constructed project, defaulting to the output of a `vagrant init` call plus a minimal [vagrant-cachier](http://fgrehm.viewdocs.io/vagrant-cachier) plugin configuration. There's no short option available.
 
 ```bash
 construct generate jonathantorres/logger --vagrant
