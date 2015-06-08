@@ -80,7 +80,7 @@ class Settings
         $namespace,
         $gitInit,
         $phpcsConfiguration,
-        $composerKeywords
+        $composerKeywords,
         $vagrantfile
     ) {
         $this->projectName = $projectName;

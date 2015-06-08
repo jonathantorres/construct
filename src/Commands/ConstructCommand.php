@@ -127,7 +127,7 @@ class ConstructCommand extends Command
           $namespace,
           $git,
           $phpcs,
-          $keywords
+          $keywords,
           $vagrant
         );
 
