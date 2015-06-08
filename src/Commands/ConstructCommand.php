@@ -70,6 +70,7 @@ class ConstructCommand extends Command
         $namespaceDescription = 'Namespace for project';
         $gitDescription = 'Initialize an empty Git repo';
         $phpcsDescription = 'Generate a PHP Coding Standards Fixer configuration';
+        $keywordsDescription = 'Comma separated list of Composer keywords';
 
         $this->setName('generate');
         $this->setDescription('Generates a basic PHP project');
@@ -79,6 +80,7 @@ class ConstructCommand extends Command
         $this->addOption('namespace', 's', InputOption::VALUE_OPTIONAL, $namespaceDescription, 'Vendor\Project');
         $this->addOption('git', 'g', InputOption::VALUE_NONE, $gitDescription);
         $this->addOption('phpcs', 'p', InputOption::VALUE_NONE, $phpcsDescription);
+        $this->addOption('keywords', 'k', InputOption::VALUE_OPTIONAL, $keywordsDescription);
     }
 
     /**
@@ -97,6 +99,7 @@ class ConstructCommand extends Command
         $namespace = $input->getOption('namespace');
         $git = $input->getOption('git');
         $phpcs = $input->getOption('phpcs');
+        $keywords = $input->getOption('keywords');
 
         if (!$this->str->isValid($projectName)) {
             $output->writeln('<error>Warning: "' . $projectName . '" is not a valid project name, please use "vendor/project"</error>');
@@ -114,7 +117,16 @@ class ConstructCommand extends Command
             $testFramework = 'phpunit';
         }
 
-        $settings = new Settings($projectName, $testFramework, $license, $namespace, $git, $phpcs);
+        $settings = new Settings(
+          $projectName,
+          $testFramework,
+          $license,
+          $namespace,
+          $git,
+          $phpcs,
+          $keywords
+        );
+
         $gitHelper = new Git();
 
         $this->construct->generate($settings, $gitHelper);
