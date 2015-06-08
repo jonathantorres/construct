@@ -119,4 +119,25 @@ class Str
             'project' => $project[1],
         ];
     }
+
+    /**
+     * Convert keywords to quoted keywords.
+     * Ex: "test,php,vagrant,provision" -> '"test","php","vagrant","provision"'
+     *
+     * @param string $keywords
+     *
+     * @return string
+     */
+    public function toQuotedKeywords($keywords)
+    {
+        if (trim($keywords) === '' || $keywords === null) {
+            return '';
+        }
+
+        $keywordsQuoted = array_map(function ($keyword) {
+            return '"' . trim($keyword) . '"';
+        }, explode(',', $keywords));
+
+        return implode(', ', $keywordsQuoted);
+    }
 }

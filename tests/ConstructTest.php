@@ -102,6 +102,7 @@ class ConstructTest extends PHPUnit
             $output[1],
             'Expected application name not present.'
         );
+
         $this->assertEquals(0, $returnValue);
     }
 

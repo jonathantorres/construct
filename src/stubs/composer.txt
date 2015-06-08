@@ -1,6 +1,7 @@
 {
     "name": "{vendor_lower}/{project_lower}",
     "description": "PHP project.",
+    "keywords": [{keywords}],
     "license": "{license}",
     "authors": [
         {
