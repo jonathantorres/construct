@@ -177,39 +177,67 @@ class Construct
      */
     protected function docs()
     {
-        $readmeFile = $this->file->get(__DIR__ . '/stubs/README.txt');
-        $readmeContent = str_replace(
-            [
-                '{project_upper}',
-                '{license}',
-                '{vendor_lower}',
-                '{project_lower}'
-            ],
-            [
-                $this->projectUpper,
-                $this->settings->getLicense(),
-                $this->vendorLower,
-                $this->projectLower
-            ],
-            $readmeFile
-        );
+        $this->readme();
+        $this->contributing();
+        $this->changelog();
+    }
 
-        $this->file->put($this->projectLower . '/' . 'README.md', $readmeContent);
+    /**
+     * Generate README.md file.
+     *
+     * @return void
+     */
+    protected function readme()
+    {
+        $readme = $this->file->get(__DIR__ . '/stubs/README.txt');
+        $stubs = [
+            '{project_upper}',
+            '{license}',
+            '{vendor_lower}',
+            '{project_lower}'
+        ];
 
-        $contributingContent = $this->file->get(__DIR__ . '/stubs/CONTRIBUTING.txt');
-        $this->file->put($this->projectLower . '/' . 'CONTRIBUTING.md', $contributingContent);
+        $values = [
+            $this->projectUpper,
+            $this->settings->getLicense(),
+            $this->vendorLower,
+            $this->projectLower
+        ];
 
-        $changelogFile = $this->file->get(__DIR__ . '/stubs/CHANGELOG.txt');
-        $changelogContent = str_replace(
+        $content = str_replace($stubs, $values, $readme);
+
+        $this->file->put($this->projectLower . '/' . 'README.md', $content);
+        $this->exportIgnores[] = 'README.md';
+    }
+
+    /**
+     * Generate CONTRIBUTING.md file.
+     *
+     * @return void
+     */
+    protected function contributing()
+    {
+        $content = $this->file->get(__DIR__ . '/stubs/CONTRIBUTING.txt');
+
+        $this->file->put($this->projectLower . '/' . 'CONTRIBUTING.md', $content);
+        $this->exportIgnores[] = 'CONTRIBUTING.md';
+    }
+
+    /**
+     * Generate CHANGELOG.md file.
+     *
+     * @return void
+     */
+    protected function changelog()
+    {
+        $changelog = $this->file->get(__DIR__ . '/stubs/CHANGELOG.txt');
+        $content = str_replace(
             '{creation_date}',
             (new \DateTime())->format('Y-m-d'),
-            $changelogFile
+            $changelog
         );
 
-        $this->file->put($this->projectLower . '/' . 'CHANGELOG.md', $changelogContent);
-
-        $this->exportIgnores[] = 'README.md';
-        $this->exportIgnores[] = 'CONTRIBUTING.md';
+        $this->file->put($this->projectLower . '/' . 'CHANGELOG.md', $content);
         $this->exportIgnores[] = 'CHANGELOG.md';
     }
 
