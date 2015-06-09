@@ -267,20 +267,6 @@ class Construct
     }
 
     /**
-     * Generate Vagrant file.
-     *
-     * @return void
-     */
-    protected function vagrant()
-    {
-        $this->file->copy(
-            __DIR__ . '/stubs/Vagrantfile.txt',
-            $this->projectLower . '/' . 'Vagrantfile'
-        );
-        $this->exportIgnores[] = 'Vagrantfile';
-    }
-
-    /**
      * Generate .travis.yml file.
      *
      * @return void
@@ -467,6 +453,20 @@ class Construct
             $command = 'cd ' . $this->projectLower . ' && git init';
             exec($command);
         }
+    }
+
+    /**
+     * Generate Vagrant file.
+     *
+     * @return void
+     */
+    protected function vagrant()
+    {
+        $this->file->copy(
+            __DIR__ . '/stubs/Vagrantfile.txt',
+            $this->projectLower . '/' . 'Vagrantfile'
+        );
+        $this->exportIgnores[] = 'Vagrantfile';
     }
 
     /**
