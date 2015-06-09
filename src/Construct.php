@@ -193,6 +193,7 @@ class Construct
             ],
             $readmeFile
         );
+
         $this->file->put($this->projectLower . '/' . 'README.md', $readmeContent);
 
         $contributingContent = $this->file->get(__DIR__ . '/stubs/CONTRIBUTING.txt');
@@ -204,6 +205,7 @@ class Construct
             (new \DateTime())->format('Y-m-d'),
             $changelogFile
         );
+
         $this->file->put($this->projectLower . '/' . 'CHANGELOG.md', $changelogContent);
 
         $this->exportIgnores[] = 'README.md';
@@ -263,6 +265,7 @@ class Construct
             __DIR__ . '/stubs/phpcs.txt',
             $this->projectLower . '/' . '.php_cs'
         );
+
         $this->exportIgnores[] = '.php_cs';
     }
 
@@ -466,6 +469,7 @@ class Construct
             __DIR__ . '/stubs/Vagrantfile.txt',
             $this->projectLower . '/' . 'Vagrantfile'
         );
+
         $this->exportIgnores[] = 'Vagrantfile';
     }
 
