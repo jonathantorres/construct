@@ -1,5 +1,10 @@
 # Changelog
 
+#### v1.3.0 `2015-06-09`
+- `Added`
+    - User can optionally generate a Vagrant file. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+    - User can optionally specify composer keywords. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+
 #### v1.2.0 `2015-05-27`
 - `Added`
     - User can optionally generate a PHP Coding Standards Fixer configuration. Done by [@raphaelstolt](https://github.com/raphaelstolt).
