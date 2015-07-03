@@ -508,7 +508,7 @@ class Construct
      */
     protected function phpunit()
     {
-        $this->testingVersion = '4.6.*';
+        $this->testingVersion = '4.7.*';
 
         $file = $this->file->get(__DIR__ . '/stubs/phpunit.txt');
         $content = str_replace('{project_upper}', $this->projectUpper, $file);
@@ -544,7 +544,7 @@ class Construct
      */
     protected function codeception()
     {
-        $this->testingVersion = '2.0.*';
+        $this->testingVersion = '2.1.*';
     }
 
     /**
