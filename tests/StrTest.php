@@ -24,6 +24,15 @@ class StrTest extends PHPUnit
         $this->assertFalse($this->str->isValid('some\project'));
     }
 
+    public function testContain()
+    {
+        $this->assertTrue($this->str->contains('vendor/php-project', 'php'));
+        $this->assertTrue($this->str->contains('vendor/project-php', 'php'));
+        $this->assertFalse($this->str->contains('vendor/project', 'php'));
+        $this->assertTrue($this->str->contains('vendor/test-project-test', 'test'));
+        $this->assertTrue($this->str->contains('vendor/project-test', 'test'));
+    }
+
     public function testToLower()
     {
         $this->assertSame('jonathantorres', $this->str->toLower('JonathanTorres'));

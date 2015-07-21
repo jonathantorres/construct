@@ -35,6 +35,22 @@ class ConstructTest extends PHPUnit
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
+    public function testProjectGenerationWithPhpInProjectName()
+    {
+        $this->setMocks();
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(['command' => $command->getName(), 'name' => 'vendor/php-project']);
+
+        $output = 'Warning: If you are about to create a micro-package "vendor/php-project" ' .
+                  'should optimally not contain a "php" notation in the project name.' . PHP_EOL .
+                  'Project "vendor/php-project" constructed.' . PHP_EOL;
+
+        $this->assertSame($output, $commandTester->getDisplay());
+    }
+
     public function testProjectGenerationWithUnknownTestingFramework()
     {
         $this->setMocks();
