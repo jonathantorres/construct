@@ -30,6 +30,19 @@ class Str
     }
 
     /**
+     * Check if the entered project name contains a given string.
+     *
+     * @param string $name
+     * @param string $needle
+     *
+     * @return boolean
+     */
+    public function contains($name, $needle)
+    {
+        return strstr($name, $needle) != false;
+    }
+
+    /**
      * Construct a correct project namespace name.
      *
      * @param string  $namespace        The entered namespace.

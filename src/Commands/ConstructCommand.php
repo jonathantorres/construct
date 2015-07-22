@@ -110,6 +110,12 @@ class ConstructCommand extends Command
             return false;
         }
 
+        if ($this->str->contains($projectName, 'php')) {
+            $containsPhpWarning = 'Warning: If you are about to create a micro-package "'
+                . $projectName . '" should optimally not contain a "php" notation in the project name.';
+            $output->writeln('<error>' . $containsPhpWarning . '</error>');
+        }
+
         if (!in_array($license, $this->licenses)) {
             $output->writeln('<error>Warning: "' . $license . '" is not a supported license. Using MIT.</error>');
             $license = 'MIT';
