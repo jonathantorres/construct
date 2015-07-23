@@ -129,5 +129,19 @@ The `--vagrant` option will generate a basic [Vagrantfile](https://docs.vagrantu
 construct generate jonathantorres/logger --vagrant
 ```
 
+#### Generate an EditorConfig configuration?
+The `--editor-config` option will generate an [EditorConfig](http://editorconfig.org) configuration
+within the constructed project.
+
+```bash
+construct generate jonathantorres/logger --editor-config
+```
+
+You can also use the short option `-e`.
+
+```bash
+construct generate jonathantorres/logger -e
+```
+
 #### Run tests
 Just run `composer test` from the project's root directory.
