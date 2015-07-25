@@ -60,6 +60,13 @@ class Settings
     private $vagrantfile;
 
     /**
+     * Generate an EditorConfig file?
+     *
+     * @var boolean
+     */
+    private $editorConfig;
+
+    /**
      * Initialize.
      *
      * @param string  $projectName        The entered project name.
@@ -70,6 +77,7 @@ class Settings
      * @param boolean $phpcsConfiguration Generate a PHP Coding Standards Fixer configuration?
      * @param string  $composerKeywords   The entered list of Composer keywords.
      * @param boolean $vagrantfile        Generate a Vagrantfile?
+     * @param boolean $editorConfig       Generate an EditorConfig file?
      *
      * @return void
      */
@@ -81,7 +89,8 @@ class Settings
         $gitInit,
         $phpcsConfiguration,
         $composerKeywords,
-        $vagrantfile
+        $vagrantfile,
+        $editorConfig
     ) {
         $this->projectName = $projectName;
         $this->testingFramework = $testingFramework;
@@ -91,6 +100,7 @@ class Settings
         $this->phpcsConfiguration = $phpcsConfiguration;
         $this->composerKeywords = $composerKeywords;
         $this->vagrantfile = $vagrantfile;
+        $this->editorConfig = $editorConfig;
     }
 
     /**
@@ -171,5 +181,15 @@ class Settings
     public function withVagrantfile()
     {
         return $this->vagrantfile;
+    }
+
+    /**
+     * Whether or not to create an EditorConfig file.
+     *
+     * @return boolean
+     */
+    public function withEditorConfig()
+    {
+        return $this->editorConfig;
     }
 }

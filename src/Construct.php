@@ -133,6 +133,10 @@ class Construct
         if ($this->settings->withVagrantFile()) {
             $this->vagrant();
         }
+
+        if ($this->settings->withEditorConfig()) {
+            $this->editorConfig();
+        }
     }
 
     /**
@@ -499,6 +503,21 @@ class Construct
         );
 
         $this->exportIgnores[] = 'Vagrantfile';
+    }
+
+    /**
+     * Generate EditorConfig configuration file.
+     *
+     * @return void
+     **/
+    protected function editorConfig()
+    {
+        $this->file->copy(
+            __DIR__ . '/stubs/editorconfig.txt',
+            $this->projectLower . '/' . '.editorconfig'
+        );
+
+        $this->exportIgnores[] = '.editorconfig';
     }
 
     /**
