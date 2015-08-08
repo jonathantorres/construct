@@ -1,4 +1,6 @@
-<?php namespace JonathanTorres\Construct;
+<?php
+
+namespace JonathanTorres\Construct;
 
 use Illuminate\Filesystem\Filesystem;
 use JonathanTorres\Construct\Helpers\Git;
@@ -6,7 +8,6 @@ use JonathanTorres\Construct\Helpers\Str;
 
 class Construct
 {
-
     /**
      * The filesystem instance.
      *

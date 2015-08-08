@@ -1,8 +1,9 @@
-<?php namespace JonathanTorres\Construct\Helpers;
+<?php
+
+namespace JonathanTorres\Construct\Helpers;
 
 class Git
 {
-
     /**
      * Tries to determine the configured git user, returns a default when failing to do so.
      *

@@ -1,8 +1,9 @@
-<?php namespace JonathanTorres\Construct;
+<?php
+
+namespace JonathanTorres\Construct;
 
 class Settings
 {
-
     /**
      * The entered project name.
      *

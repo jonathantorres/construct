@@ -1,10 +1,11 @@
-<?php namespace JonathanTorres\Construct\Helpers;
+<?php
+
+namespace JonathanTorres\Construct\Helpers;
 
 use Illuminate\Support\Str as StringHelper;
 
 class Str
 {
-
     /**
      * Regex to match project name against.
      * Must be: vendor/package

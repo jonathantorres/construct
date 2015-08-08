@@ -1,4 +1,6 @@
-<?php namespace JonathanTorres\Construct\Tests;
+<?php
+
+namespace JonathanTorres\Construct\Tests;
 
 use Illuminate\Filesystem\Filesystem;
 use JonathanTorres\Construct\Commands\ConstructCommand;

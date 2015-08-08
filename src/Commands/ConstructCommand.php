@@ -1,4 +1,6 @@
-<?php namespace JonathanTorres\Construct\Commands;
+<?php
+
+namespace JonathanTorres\Construct\Commands;
 
 use JonathanTorres\Construct\Construct;
 use JonathanTorres\Construct\Helpers\Git;
@@ -12,7 +14,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ConstructCommand extends Command
 {
-
     /**
      * The construct implementation.
      *
