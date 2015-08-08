@@ -1,5 +1,12 @@
 # Changelog
 
+#### v1.4.0 `2015-08-08`
+- `Added`
+    - User can optionally generate an EditorConfig configuration. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+    - Display warning against using `php` as part of project name in micro-packages. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+- `Fixes`
+    - Update `phpunit` to `4.7.*` and `codeception` to `2.1.*`
+
 #### v1.3.0 `2015-06-09`
 - `Added`
     - User can optionally generate a Vagrant file. Done by [@raphaelstolt](https://github.com/raphaelstolt).
