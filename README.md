@@ -2,7 +2,7 @@ Construct
 ================
 [![Build Status](https://travis-ci.org/jonathantorres/construct.svg?branch=master)](https://travis-ci.org/jonathantorres/construct)
 
-Cli command to generate a basic PHP project structure.
+PHP project/micro-package generator.
 
 #### Installation
 Construct should be installed globally through composer.
