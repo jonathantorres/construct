@@ -37,6 +37,21 @@ class ConstructCommandTest extends PHPUnit
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
+    public function testProjectGenerationWithInvalidProjectName()
+    {
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'someinvalidname',
+        ]);
+
+        $output = 'Warning: "someinvalidname" is not a valid project name, please use "vendor/project"' . PHP_EOL;
+
+        $this->assertSame($output, $commandTester->getDisplay());
+    }
+
     public function testProjectGenerationWithPhpInProjectName()
     {
         $this->setMocks();
@@ -49,25 +64,6 @@ class ConstructCommandTest extends PHPUnit
         $output = 'Warning: If you are about to create a micro-package "vendor/php-project" ' .
                   'should optimally not contain a "php" notation in the project name.' . PHP_EOL .
                   'Project "vendor/php-project" constructed.' . PHP_EOL;
-
-        $this->assertSame($output, $commandTester->getDisplay());
-    }
-
-    public function testProjectGenerationWithUnknownTestingFramework()
-    {
-        $this->setMocks();
-
-        $app = $this->setApplication();
-        $command = $app->find('generate');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute([
-            'command' => $command->getName(),
-            'name' => 'vendor/project',
-            '--test' => 'idontexist',
-        ]);
-
-        $output = 'Warning: "idontexist" is not a supported testing framework. Using phpunit.' . PHP_EOL .
-                  'Project "vendor/project" constructed.' . PHP_EOL;
 
         $this->assertSame($output, $commandTester->getDisplay());
     }
@@ -91,9 +87,92 @@ class ConstructCommandTest extends PHPUnit
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
+    public function testProjectGenerationWithUnknownTestingFramework()
+    {
+        $this->setMocks();
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--test' => 'idontexist',
+        ]);
+
+        $output = 'Warning: "idontexist" is not a supported testing framework. Using phpunit.' . PHP_EOL .
+                  'Project "vendor/project" constructed.' . PHP_EOL;
+
+        $this->assertSame($output, $commandTester->getDisplay());
+    }
+
+    public function testProjectGenerationWithASpecifiedTestingFramework()
+    {
+        $this->setMocks(3, 1, 1, 9, 9);
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--test' => 'behat'
+        ]);
+
+        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+    }
+
+    public function testProjectGenerationWithASpecifiedLicense()
+    {
+        $this->setMocks();
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--license' => 'Apache-2.0'
+        ]);
+
+        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+    }
+
+    public function testProjectGenerationWithASpecifiedNamespace()
+    {
+        $this->setMocks();
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--namespace' => 'JonathanTorres\\MyAwesomeProject'
+        ]);
+
+        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+    }
+
+    public function testProjectGenerationWithAnInitializedGithubRepo()
+    {
+        $this->setMocks(3, 2);
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--git' => true
+        ]);
+
+        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+    }
+
     public function testProjectGenerationWithPhpCs()
     {
-        $this->setMocks(2);
+        $this->setMocks(3, 1, 2);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -102,6 +181,54 @@ class ConstructCommandTest extends PHPUnit
             'command' => $command->getName(),
             'name' => 'vendor/project',
             '--phpcs' => true
+        ]);
+
+        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+    }
+
+    public function testProjectGenerationWithSpecifiedComposerKeywords()
+    {
+        $this->setMocks();
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--keywords' => 'some,project,keywords'
+        ]);
+
+        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+    }
+
+    public function testProjectGenerationWithVagrant()
+    {
+        $this->setMocks(3, 1, 2);
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--vagrant' => true
+        ]);
+
+        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+    }
+
+    public function testProjectGenerationWithEditorConfig()
+    {
+        $this->setMocks(3, 1, 2);
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--editor-config' => true
         ]);
 
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
@@ -124,38 +251,6 @@ class ConstructCommandTest extends PHPUnit
         $this->assertEquals(0, $returnValue);
     }
 
-    public function testProjectGenerationWithVagrant()
-    {
-        $this->setMocks(2);
-
-        $app = $this->setApplication();
-        $command = $app->find('generate');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute([
-            'command' => $command->getName(),
-            'name' => 'vendor/project',
-            '--vagrant' => true
-        ]);
-
-        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
-    }
-
-    public function testProjectGenerationWithEditorConfig()
-    {
-        $this->setMocks(2);
-
-        $app = $this->setApplication();
-        $command = $app->find('generate');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute([
-            'command' => $command->getName(),
-            'name' => 'vendor/project',
-            '--editor-config' => true
-        ]);
-
-        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
-    }
-
     protected function setApplication()
     {
         $app = new Application();
@@ -166,14 +261,18 @@ class ConstructCommandTest extends PHPUnit
     }
 
     /**
-     * @param integer $copyTimes Defaults to 1.
+     * @param int $makeDirectoryTimes
+     * @param int $isDirectoryTimes
+     * @param int $copyTimes
+     * @param int $getTimes
+     * @param int $putTimes
      */
-    protected function setMocks($copyTimes = 1)
+    protected function setMocks($makeDirectoryTimes = 3, $isDirectoryTimes = 1, $copyTimes = 1, $getTimes = 10, $putTimes = 10)
     {
-        $this->filesystem->shouldReceive('makeDirectory')->times(3)->andReturnNull()->getMock();
-        $this->filesystem->shouldReceive('isDirectory')->once()->andReturnNull()->getMock();
-        $this->filesystem->shouldReceive('copy')->times($copyTimes)->andReturnNull()->getMock();
-        $this->filesystem->shouldReceive('get')->times(10)->andReturnNull()->getMock();
-        $this->filesystem->shouldReceive('put')->times(10)->andReturnNull()->getMock();
+        $this->filesystem->shouldReceive('makeDirectory')->times($makeDirectoryTimes)->andReturnNull();
+        $this->filesystem->shouldReceive('isDirectory')->times($isDirectoryTimes)->andReturnNull();
+        $this->filesystem->shouldReceive('copy')->times($copyTimes)->andReturnNull();
+        $this->filesystem->shouldReceive('get')->times($getTimes)->andReturnNull();
+        $this->filesystem->shouldReceive('put')->times($putTimes)->andReturnNull();
     }
 }
