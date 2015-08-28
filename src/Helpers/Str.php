@@ -40,7 +40,7 @@ class Str
      */
     public function contains($name, $needle)
     {
-        return strstr($name, $needle) != false;
+        return strstr($name, $needle) !== false;
     }
 
     /**
