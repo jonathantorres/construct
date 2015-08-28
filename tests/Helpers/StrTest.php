@@ -1,6 +1,6 @@
 <?php
 
-namespace JonathanTorres\Construct\Tests;
+namespace JonathanTorres\Construct\Tests\Helpers;
 
 use JonathanTorres\Construct\Helpers\Str;
 use PHPUnit_Framework_TestCase as PHPUnit;

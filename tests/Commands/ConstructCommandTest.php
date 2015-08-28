@@ -1,6 +1,6 @@
 <?php
 
-namespace JonathanTorres\Construct\Tests;
+namespace JonathanTorres\Construct\Tests\Commands;
 
 use Illuminate\Filesystem\Filesystem;
 use JonathanTorres\Construct\Commands\ConstructCommand;
@@ -11,7 +11,7 @@ use PHPUnit_Framework_TestCase as PHPUnit;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class ConstructTest extends PHPUnit
+class ConstructCommandTest extends PHPUnit
 {
     protected $filesystem;
 
