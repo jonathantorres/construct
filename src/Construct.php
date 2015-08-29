@@ -128,7 +128,7 @@ class Construct
         $this->composerInstall();
 
         if ($this->settings->withGitInit()) {
-            $this->gitInit();
+            $this->gitInit($git);
         }
 
         if ($this->settings->withVagrantFile()) {
@@ -481,13 +481,14 @@ class Construct
     /**
      * Initialize an empty git repo.
      *
+     * @param JonathanTorres\Construct\Helpers\Git $git
+     *
      * @return void
      */
-    protected function gitInit()
+    protected function gitInit(Git $git)
     {
         if ($this->file->isDirectory($this->projectLower)) {
-            $command = 'cd ' . $this->projectLower . ' && git init';
-            exec($command);
+            $git->init($this->projectLower);
         }
     }
 
