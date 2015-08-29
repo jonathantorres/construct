@@ -1,5 +1,10 @@
 # Changelog
 
+#### v1.4.1 `2015-08-29`
+- `Fixes`
+    - Fix console dependency. Always use latest stable version.
+    - Minor docs updates.
+
 #### v1.4.0 `2015-08-08`
 - `Added`
     - User can optionally generate an EditorConfig configuration. Done by [@raphaelstolt](https://github.com/raphaelstolt).
