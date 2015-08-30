@@ -191,6 +191,24 @@ class ConstructTest extends PHPUnit
         $this->assertSame($this->getStub('with-namespace/LoggerTest'), $this->getFile('tests/LoggerTest.php'));
     }
 
+    public function testProjectGenerationWithGitRepository()
+    {
+        $settings = new Settings(
+            'jonathantorres/logger',
+            'phpunit',
+            'MIT',
+            'Vendor\Project',
+            true,
+            null,
+            null,
+            null,
+            null
+        );
+
+        $this->gitHelper->shouldReceive('init')->once()->with('logger')->andReturnNull();
+        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper);
+    }
+
     public function testProjectGenerationWithCodingStandardsFixer()
     {
         $settings = new Settings(
