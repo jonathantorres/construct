@@ -100,9 +100,9 @@ class Construct
     /**
      * Generate project.
      *
-     * @param \JonathanTorres\Construct\Settings    $settings The command settings made by the user.
-     * @param \JonathanTorres\Construct\Helpers\Git $git      The git helper.
-     * @param \JonathanTorres\Construct\Helpers\Composer $composer      The composer helper.
+     * @param \JonathanTorres\Construct\Settings         $settings The command settings made by the user.
+     * @param \JonathanTorres\Construct\Helpers\Git      $git      The git helper.
+     * @param \JonathanTorres\Construct\Helpers\Composer $composer The composer helper.
      *
      * @return void
      */
