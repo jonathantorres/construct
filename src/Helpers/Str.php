@@ -40,50 +40,11 @@ class Str
      */
     public function contains($name, $needle)
     {
-        return strstr($name, $needle) != false;
-    }
-
-    /**
-     * Construct a correct project namespace name.
-     *
-     * @param string  $namespace        The entered namespace.
-     * @param boolean $usesProjectName  Whether or not it's using the project name.
-     * @param boolean $useDoubleSlashes Whether or not use double slashes \\.
-     *
-     * @return string
-     */
-    public function createNamespace($namespace, $usesProjectName = false, $useDoubleSlashes = false)
-    {
-        $delimiter = ($usesProjectName) ? '/' : '\\';
-        $slash = ($useDoubleSlashes) ? '\\\\' : '\\';
-
-        // strip dots and dashes from project name
-        if ($usesProjectName) {
-            $namespace = str_replace(['-', '.'], '_', $namespace);
-            $namespace = $this->toStudly($namespace);
-        }
-
-        return implode($slash, array_map(function ($v) {
-            return $this->toStudly($v);
-        }, explode($delimiter, $namespace)));
-    }
-
-    /**
-     * Convert string to studly case.
-     * Ex: jonathan -> Jonathan
-     *
-     * @param string $string
-     *
-     * @return string
-     */
-    public function toStudly($string)
-    {
-        return StringHelper::studly($string);
+        return strstr($name, $needle) !== false;
     }
 
     /**
      * Convert string to lower case.
-     * Ex: Jonathan -> jonathan
      *
      * @param string $string
      *
@@ -95,10 +56,22 @@ class Str
     }
 
     /**
+     * Convert string to studly case.
+     *
+     * @param string $string
+     *
+     * @return string
+     */
+    public function toStudly($string)
+    {
+        return StringHelper::studly($string);
+    }
+
+    /**
      * Convert string to camel case.
      *
      * @param string  $string
-     * @param boolean $capitalizeFirstCharacter Defaults to false.
+     * @param boolean $capitalizeFirstCharacter
      *
      * @return string
      */
@@ -132,6 +105,31 @@ class Str
             'vendor' => $project[0],
             'project' => $project[1],
         ];
+    }
+
+    /**
+     * Construct a correct project namespace name.
+     *
+     * @param string  $namespace        The entered namespace.
+     * @param boolean $usesProjectName  Whether or not it's using the project name.
+     * @param boolean $useDoubleSlashes Whether or not use double slashes \\.
+     *
+     * @return string
+     */
+    public function createNamespace($namespace, $usesProjectName = false, $useDoubleSlashes = false)
+    {
+        $delimiter = $usesProjectName ? '/' : '\\';
+        $slash = $useDoubleSlashes ? '\\\\' : '\\';
+
+        // strip dots and dashes from project name
+        if ($usesProjectName) {
+            $namespace = str_replace(['-', '.'], '_', $namespace);
+            $namespace = $this->toStudly($namespace);
+        }
+
+        return implode($slash, array_map(function ($v) {
+            return $this->toStudly($v);
+        }, explode($delimiter, $namespace)));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace JonathanTorres\Construct\Commands;
 
 use JonathanTorres\Construct\Construct;
+use JonathanTorres\Construct\Helpers\Composer;
 use JonathanTorres\Construct\Helpers\Git;
 use JonathanTorres\Construct\Helpers\Str;
 use JonathanTorres\Construct\Settings;
@@ -143,8 +144,9 @@ class ConstructCommand extends Command
         );
 
         $gitHelper = new Git();
+        $composerHelper = new Composer();
 
-        $this->construct->generate($settings, $gitHelper);
+        $this->construct->generate($settings, $gitHelper, $composerHelper);
 
         $output->writeln('<info>Project "' . $projectName . '" constructed.</info>');
     }

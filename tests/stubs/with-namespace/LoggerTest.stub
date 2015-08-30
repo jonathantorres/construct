@@ -1,0 +1,16 @@
+<?php
+
+namespace Terminus\Maximus\Logger\Tests;
+
+use Terminus\Maximus\Logger\Logger;
+use PHPUnit_Framework_TestCase as PHPUnit;
+
+class LoggerTest extends PHPUnit
+{
+    public function testExample()
+    {
+        $logger = new Logger();
+
+        $this->assertTrue(true);
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "name": "jonathantorres/logger",
+    "description": "PHP project.",
+    "keywords": [],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonathan Torres",
+            "email": "jonathantorres41@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+        "behat/behat": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jonathantorres\\Logger\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jonathantorres\\Logger\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "scripts": {
+        "test": "behat"
+    }
+}

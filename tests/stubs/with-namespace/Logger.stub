@@ -1,0 +1,17 @@
+<?php
+
+namespace Terminus\Maximus\Logger;
+
+class Logger
+{
+
+    /**
+     * Initialize.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+
+    }
+}

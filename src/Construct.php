@@ -3,6 +3,7 @@
 namespace JonathanTorres\Construct;
 
 use Illuminate\Filesystem\Filesystem;
+use JonathanTorres\Construct\Helpers\Composer;
 use JonathanTorres\Construct\Helpers\Git;
 use JonathanTorres\Construct\Helpers\Str;
 
@@ -101,10 +102,11 @@ class Construct
      *
      * @param \JonathanTorres\Construct\Settings    $settings The command settings made by the user.
      * @param \JonathanTorres\Construct\Helpers\Git $git      The git helper.
+     * @param \JonathanTorres\Construct\Helpers\Composer $composer      The composer helper.
      *
      * @return void
      */
-    public function generate(Settings $settings, Git $git)
+    public function generate(Settings $settings, Git $git, Composer $composer)
     {
         $this->settings = $settings;
 
@@ -119,18 +121,6 @@ class Construct
             $this->phpcs();
         }
 
-        $this->travis();
-        $this->license($git);
-        $this->composer($git);
-        $this->projectClass();
-        $this->projectTest();
-        $this->gitattributes();
-        $this->composerInstall();
-
-        if ($this->settings->withGitInit()) {
-            $this->gitInit();
-        }
-
         if ($this->settings->withVagrantFile()) {
             $this->vagrant();
         }
@@ -138,6 +128,19 @@ class Construct
         if ($this->settings->withEditorConfig()) {
             $this->editorConfig();
         }
+
+        $this->travis();
+        $this->license($git);
+        $this->composer($git);
+        $this->projectClass();
+        $this->projectTest();
+        $this->gitattributes();
+
+        if ($this->settings->withGitInit()) {
+            $this->gitInit($git);
+        }
+
+        $this->composerInstall($composer);
     }
 
     /**
@@ -462,32 +465,36 @@ class Construct
             $content .= PHP_EOL . '/' . $ignore . ' export-ignore';
         }
 
+        $content .= PHP_EOL;
+
         $this->file->put($this->projectLower . '/' . '.gitattributes', $content);
     }
 
     /**
      * Do an initial composer install in constructed project.
      *
+     * @param JonathanTorres\Construct\Helpers\Composer $composer
+     *
      * @return void
      */
-    protected function composerInstall()
+    protected function composerInstall(Composer $composer)
     {
         if ($this->file->isDirectory($this->projectLower)) {
-            $command = 'cd ' . $this->projectLower . ' && composer install';
-            exec($command);
+            $composer->install($this->projectLower);
         }
     }
 
     /**
      * Initialize an empty git repo.
      *
+     * @param JonathanTorres\Construct\Helpers\Git $git
+     *
      * @return void
      */
-    protected function gitInit()
+    protected function gitInit(Git $git)
     {
         if ($this->file->isDirectory($this->projectLower)) {
-            $command = 'cd ' . $this->projectLower . ' && git init';
-            exec($command);
+            $git->init($this->projectLower);
         }
     }
 

@@ -1,0 +1,32 @@
+{
+    "name": "jonathantorres/logger",
+    "description": "PHP project.",
+    "keywords": [],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonathan Torres",
+            "email": "jonathantorres41@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Terminus\\Maximus\\Logger\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Terminus\\Maximus\\Logger\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "scripts": {
+        "test": "phpunit"
+    }
+}

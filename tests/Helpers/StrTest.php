@@ -1,6 +1,6 @@
 <?php
 
-namespace JonathanTorres\Construct\Tests;
+namespace JonathanTorres\Construct\Tests\Helpers;
 
 use JonathanTorres\Construct\Helpers\Str;
 use PHPUnit_Framework_TestCase as PHPUnit;
@@ -14,7 +14,7 @@ class StrTest extends PHPUnit
         $this->str = new Str();
     }
 
-    public function testProjectName()
+    public function testValidProjectName()
     {
         $this->assertTrue($this->str->isValid('vendor/project'));
         $this->assertTrue($this->str->isValid('vendor/project-name'));
@@ -26,7 +26,7 @@ class StrTest extends PHPUnit
         $this->assertFalse($this->str->isValid('some\project'));
     }
 
-    public function testContain()
+    public function testContains()
     {
         $this->assertTrue($this->str->contains('vendor/php-project', 'php'));
         $this->assertTrue($this->str->contains('vendor/project-php', 'php'));
@@ -51,8 +51,9 @@ class StrTest extends PHPUnit
         $this->assertSame('fooBar', $this->str->toCamelCase('foo_bar'));
         $this->assertSame('foozBall', $this->str->toCamelCase('fooz-ball'));
         $this->assertSame('volleyBall', $this->str->toCamelCase('volley ball'));
-
         $this->assertSame('FooBar', $this->str->toCamelCase('foo_bar', true));
+        $this->assertSame('FoozBall', $this->str->toCamelCase('fooz-ball', true));
+        $this->assertSame('VolleyBall', $this->str->toCamelCase('volley ball', true));
     }
 
     public function testSplit()
