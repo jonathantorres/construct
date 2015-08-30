@@ -464,6 +464,8 @@ class Construct
             $content .= PHP_EOL . '/' . $ignore . ' export-ignore';
         }
 
+        $content .= PHP_EOL;
+
         $this->file->put($this->projectLower . '/' . '.gitattributes', $content);
     }
 
