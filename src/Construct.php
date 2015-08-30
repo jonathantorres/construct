@@ -121,18 +121,6 @@ class Construct
             $this->phpcs();
         }
 
-        $this->travis();
-        $this->license($git);
-        $this->composer($git);
-        $this->projectClass();
-        $this->projectTest();
-        $this->gitattributes();
-        $this->composerInstall($composer);
-
-        if ($this->settings->withGitInit()) {
-            $this->gitInit($git);
-        }
-
         if ($this->settings->withVagrantFile()) {
             $this->vagrant();
         }
@@ -140,6 +128,19 @@ class Construct
         if ($this->settings->withEditorConfig()) {
             $this->editorConfig();
         }
+
+        $this->travis();
+        $this->license($git);
+        $this->composer($git);
+        $this->projectClass();
+        $this->projectTest();
+        $this->gitattributes();
+
+        if ($this->settings->withGitInit()) {
+            $this->gitInit($git);
+        }
+
+        $this->composerInstall($composer);
     }
 
     /**
