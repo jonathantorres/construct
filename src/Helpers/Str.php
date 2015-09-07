@@ -64,7 +64,9 @@ class Str
      */
     public function toStudly($string)
     {
-        return StringHelper::studly($string);
+        $value = ucwords(str_replace(['-', '_'], ' ', $string));
+
+        return str_replace(' ', '', $value);
     }
 
     /**
