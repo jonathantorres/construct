@@ -2,12 +2,14 @@
 
 namespace JonathanTorres\Construct\Tests;
 
-use Illuminate\Filesystem\Filesystem;
 use JonathanTorres\Construct\Construct;
+use JonathanTorres\Construct\Helpers\Filesystem;
 use JonathanTorres\Construct\Helpers\Str;
 use JonathanTorres\Construct\Settings;
 use Mockery;
 use PHPUnit_Framework_TestCase as PHPUnit;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 class ConstructTest extends PHPUnit
 {
@@ -30,9 +32,26 @@ class ConstructTest extends PHPUnit
         $this->gitHelper->shouldReceive('getUser')->twice()->withNoArgs()->andReturn($this->gitUser);
     }
 
+    /**
+     * Clean up created project directory.
+     *
+     * @return void
+     */
     protected function tearDown()
     {
-        $this->filesystem->deleteDirectory(__DIR__ . '/../logger');
+        $path = __DIR__ . '/../logger';
+        $iterator = new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator($iterator, RecursiveIteratorIterator::CHILD_FIRST);
+
+        foreach($files as $file) {
+            if ($file->isDir()) {
+                rmdir($file->getRealPath());
+            } else {
+                unlink($file->getRealPath());
+            }
+        }
+
+        rmdir($path);
     }
 
     public function testBasicProjectIsGenerated()
