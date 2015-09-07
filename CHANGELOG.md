@@ -1,5 +1,11 @@
 # Changelog
 
+#### v1.4.2 `2015-09-07`
+- `Fixes`
+    - Include author name on GPL license files.
+    - No longer using illuminate components.
+    - Improved tests. Added integration test.
+
 #### v1.4.1 `2015-08-29`
 - `Fixes`
     - Fix console dependency. Always use latest stable version.
