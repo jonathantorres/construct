@@ -2,17 +2,17 @@
 
 namespace JonathanTorres\Construct;
 
-use Illuminate\Filesystem\Filesystem;
 use JonathanTorres\Construct\Helpers\Composer;
+use JonathanTorres\Construct\Helpers\Filesystem;
 use JonathanTorres\Construct\Helpers\Git;
 use JonathanTorres\Construct\Helpers\Str;
 
 class Construct
 {
     /**
-     * The filesystem instance.
+     * The filesystem helper.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var \JonathanTorres\Construct\Helpers\Filesystem
      */
     protected $file;
 
@@ -86,7 +86,7 @@ class Construct
     /**
      * Initialize.
      *
-     * @param \Illuminate\Filesystem\Filesystem     $file
+     * @param \JonathanTorres\Construct\Helpers\Filesystem     $file
      * @param \JonathanTorres\Construct\Helpers\Str $str
      *
      * @return void

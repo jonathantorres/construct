@@ -8,9 +8,9 @@ if (file_exists(__DIR__ . '/../../autoload.php')) {
     require __DIR__ . '/vendor/autoload.php';
 }
 
-use Illuminate\Filesystem\Filesystem;
 use JonathanTorres\Construct\Commands\ConstructCommand;
 use JonathanTorres\Construct\Construct;
+use JonathanTorres\Construct\Helpers\Filesystem;
 use JonathanTorres\Construct\Helpers\Str;
 use Symfony\Component\Console\Application;
 
