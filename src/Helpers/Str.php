@@ -2,8 +2,6 @@
 
 namespace JonathanTorres\Construct\Helpers;
 
-use Illuminate\Support\Str as StringHelper;
-
 class Str
 {
     /**
