@@ -17,7 +17,7 @@ class ConstructCommandTest extends PHPUnit
 
     protected function setUp()
     {
-        $this->filesystem = Mockery::mock('Illuminate\Filesystem\Filesystem');
+        $this->filesystem = Mockery::mock('JonathanTorres\Construct\Helpers\Filesystem');
     }
 
     protected function tearDown()
