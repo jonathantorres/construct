@@ -356,7 +356,9 @@ class Construct
      */
     protected function composer(Git $git)
     {
-        $file = $this->file->get(__DIR__ . '/stubs/composer.stub');
+        $composerFile = 'composer.' . $this->settings->getTestingFramework();
+
+        $file = $this->file->get(__DIR__ . '/stubs/composer/' . $composerFile . '.stub');
         $user = $git->getUser();
 
         $stubs = [
