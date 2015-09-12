@@ -20,13 +20,5 @@
             "Jonathantorres\\Logger\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Jonathantorres\\Logger\\Tests\\": "tests/"
-        }
-    },
-    "minimum-stability": "stable",
-    "scripts": {
-        "test": "phpspec"
-    }
+    "minimum-stability": "stable"
 }

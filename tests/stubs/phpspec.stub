@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Jonathantorres\Logger
+        psr4_prefix: Jonathantorres\Logger
+        src_path: src

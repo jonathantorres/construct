@@ -133,6 +133,7 @@ class ConstructTest extends PHPUnit
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->composerHelper);
+        $this->assertSame($this->getStub('phpspec'), $this->getFile('phpspec.yml'));
         $this->assertSame($this->getStub('composer.phpspec'), $this->getFile('composer.json'));
     }
 

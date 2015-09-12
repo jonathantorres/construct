@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: {namespace}
+        psr4_prefix: {namespace}
+        src_path: src

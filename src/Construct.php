@@ -554,6 +554,12 @@ class Construct
     protected function phpspec()
     {
         $this->testingVersion = '~2.0';
+
+        $file = $this->file->get(__DIR__ . '/stubs/phpspec.stub');
+        $content = str_replace('{namespace}', $this->createNamespace(), $file);
+
+        $this->file->put($this->projectLower . '/' . 'phpspec.yml', $content);
+        $this->exportIgnores[] = 'phpspec.yml';
     }
 
     /**
