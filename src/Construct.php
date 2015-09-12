@@ -133,7 +133,6 @@ class Construct
         $this->license($git);
         $this->composer($git);
         $this->projectClass();
-        $this->phpunitTest();
         $this->gitattributes();
 
         if ($this->settings->withGitInit()) {
@@ -529,12 +528,13 @@ class Construct
     }
 
     /**
-     * Generate phpunit file/settings.
+     * Generate phpunit test/file/settings.
      *
      * @return void
      */
     protected function phpunit()
     {
+        $this->phpunitTest();
         $this->testingVersion = '4.7.*';
 
         $file = $this->file->get(__DIR__ . '/stubs/phpunit.txt');

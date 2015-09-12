@@ -108,7 +108,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithASpecifiedTestingFramework()
     {
-        $this->setMocks(3, 1, 1, 9, 9);
+        $this->setMocks(2, 1, 1, 8, 8);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
