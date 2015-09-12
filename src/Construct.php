@@ -271,12 +271,12 @@ class Construct
                 $this->phpunit();
                 break;
 
-            case 'behat':
-                $this->behat();
-                break;
-
             case 'phpspec':
                 $this->phpspec();
+                break;
+
+            case 'behat':
+                $this->behat();
                 break;
 
             case 'codeception':
