@@ -133,7 +133,7 @@ class Construct
         $this->license($git);
         $this->composer($git);
         $this->projectClass();
-        $this->projectTest();
+        $this->phpunitTest();
         $this->gitattributes();
 
         if ($this->settings->withGitInit()) {
@@ -424,7 +424,7 @@ class Construct
      *
      * @return void
      */
-    protected function projectTest()
+    protected function phpunitTest()
     {
         $file = $this->file->get(__DIR__ . '/stubs/ProjectTest.txt');
 
