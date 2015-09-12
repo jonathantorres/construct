@@ -196,7 +196,7 @@ class Construct
      */
     protected function readme()
     {
-        $readme = $this->file->get(__DIR__ . '/stubs/README.txt');
+        $readme = $this->file->get(__DIR__ . '/stubs/README.stub');
         $stubs = [
             '{project_upper}',
             '{license}',
@@ -224,7 +224,7 @@ class Construct
      */
     protected function contributing()
     {
-        $content = $this->file->get(__DIR__ . '/stubs/CONTRIBUTING.txt');
+        $content = $this->file->get(__DIR__ . '/stubs/CONTRIBUTING.stub');
 
         $this->file->put($this->projectLower . '/' . 'CONTRIBUTING.md', $content);
         $this->exportIgnores[] = 'CONTRIBUTING.md';
@@ -237,7 +237,7 @@ class Construct
      */
     protected function changelog()
     {
-        $changelog = $this->file->get(__DIR__ . '/stubs/CHANGELOG.txt');
+        $changelog = $this->file->get(__DIR__ . '/stubs/CHANGELOG.stub');
         $content = str_replace(
             '{creation_date}',
             (new \DateTime())->format('Y-m-d'),
@@ -255,7 +255,7 @@ class Construct
      */
     protected function gitignore()
     {
-        $this->file->copy(__DIR__ . '/stubs/gitignore.txt', $this->projectLower . '/' . '.gitignore');
+        $this->file->copy(__DIR__ . '/stubs/gitignore.stub', $this->projectLower . '/' . '.gitignore');
         $this->exportIgnores[] = '.gitignore';
     }
 
@@ -297,7 +297,7 @@ class Construct
     protected function phpcs()
     {
         $this->file->copy(
-            __DIR__ . '/stubs/phpcs.txt',
+            __DIR__ . '/stubs/phpcs.stub',
             $this->projectLower . '/' . '.php_cs'
         );
 
@@ -311,7 +311,7 @@ class Construct
      */
     protected function travis()
     {
-        $file = $this->file->get(__DIR__ . '/stubs/travis.txt');
+        $file = $this->file->get(__DIR__ . '/stubs/travis.stub');
         $content = str_replace(
             '{testing}',
             $this->settings->getTestingFramework(),
@@ -332,7 +332,7 @@ class Construct
     protected function license(Git $git)
     {
         $file = $this->file->get(
-            __DIR__ . '/stubs/licenses/' . strtolower($this->settings->getLicense()) . '.txt'
+            __DIR__ . '/stubs/licenses/' . strtolower($this->settings->getLicense()) . '.stub'
         );
 
         $user = $git->getUser();
@@ -356,7 +356,7 @@ class Construct
      */
     protected function composer(Git $git)
     {
-        $file = $this->file->get(__DIR__ . '/stubs/composer.txt');
+        $file = $this->file->get(__DIR__ . '/stubs/composer.stub');
         $user = $git->getUser();
 
         $stubs = [
@@ -399,7 +399,7 @@ class Construct
      */
     protected function projectClass()
     {
-        $file = $this->file->get(__DIR__ . '/stubs/Project.txt');
+        $file = $this->file->get(__DIR__ . '/stubs/Project.stub');
 
         $stubs = [
             '{project_upper}',
@@ -425,7 +425,7 @@ class Construct
      */
     protected function phpunitTest()
     {
-        $file = $this->file->get(__DIR__ . '/stubs/ProjectTest.txt');
+        $file = $this->file->get(__DIR__ . '/stubs/ProjectTest.stub');
 
         $stubs = [
             '{project_upper}',
@@ -458,7 +458,7 @@ class Construct
         $this->exportIgnores[] = '.gitattributes';
         sort($this->exportIgnores);
 
-        $content = $this->file->get(__DIR__ . '/stubs/gitattributes.txt');
+        $content = $this->file->get(__DIR__ . '/stubs/gitattributes.stub');
 
         foreach ($this->exportIgnores as $ignore) {
             $content .= PHP_EOL . '/' . $ignore . ' export-ignore';
@@ -505,7 +505,7 @@ class Construct
     protected function vagrant()
     {
         $this->file->copy(
-            __DIR__ . '/stubs/Vagrantfile.txt',
+            __DIR__ . '/stubs/Vagrantfile.stub',
             $this->projectLower . '/' . 'Vagrantfile'
         );
 
@@ -520,7 +520,7 @@ class Construct
     protected function editorConfig()
     {
         $this->file->copy(
-            __DIR__ . '/stubs/editorconfig.txt',
+            __DIR__ . '/stubs/editorconfig.stub',
             $this->projectLower . '/' . '.editorconfig'
         );
 
@@ -537,7 +537,7 @@ class Construct
         $this->phpunitTest();
         $this->testingVersion = '4.7.*';
 
-        $file = $this->file->get(__DIR__ . '/stubs/phpunit.txt');
+        $file = $this->file->get(__DIR__ . '/stubs/phpunit.stub');
         $content = str_replace('{project_upper}', $this->projectUpper, $file);
 
         $this->file->put($this->projectLower . '/' . 'phpunit.xml.dist', $content);
