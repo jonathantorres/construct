@@ -6,6 +6,7 @@ use JonathanTorres\Construct\Helpers\Composer;
 use JonathanTorres\Construct\Helpers\Filesystem;
 use JonathanTorres\Construct\Helpers\Git;
 use JonathanTorres\Construct\Helpers\Str;
+use JonathanTorres\Construct\Helpers\Testing;
 
 class Construct
 {
@@ -103,10 +104,11 @@ class Construct
      * @param \JonathanTorres\Construct\Settings         $settings The command settings made by the user.
      * @param \JonathanTorres\Construct\Helpers\Git      $git      The git helper.
      * @param \JonathanTorres\Construct\Helpers\Composer $composer The composer helper.
+     * @param \JonathanTorres\Construct\Helpers\Testing  $testingHelper  Testing helper.
      *
      * @return void
      */
-    public function generate(Settings $settings, Git $git, Composer $composer)
+    public function generate(Settings $settings, Git $git, Composer $composer, Testing $testingHelper)
     {
         $this->settings = $settings;
 
@@ -140,6 +142,7 @@ class Construct
         }
 
         $this->composerInstall($composer);
+        $this->scripts($testingHelper);
     }
 
     /**
@@ -482,6 +485,22 @@ class Construct
     {
         if ($this->file->isDirectory($this->projectLower)) {
             $composer->install($this->projectLower);
+        }
+    }
+
+    /**
+     * Run any extra scripts.
+     *
+     * @param JonathanTorres\Construct\Helpers\Testing $testingHelper
+     *
+     * @return void
+     */
+    protected function scripts(Testing $testingHelper)
+    {
+        if ($this->settings->getTestingFramework() === 'behat') {
+            if ($this->file->isDirectory($this->projectLower)) {
+                $testingHelper->behat($this->projectLower);
+            }
         }
     }
 

@@ -6,6 +6,7 @@ use JonathanTorres\Construct\Construct;
 use JonathanTorres\Construct\Helpers\Composer;
 use JonathanTorres\Construct\Helpers\Git;
 use JonathanTorres\Construct\Helpers\Str;
+use JonathanTorres\Construct\Helpers\Testing;
 use JonathanTorres\Construct\Settings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -145,8 +146,9 @@ class ConstructCommand extends Command
 
         $gitHelper = new Git();
         $composerHelper = new Composer();
+        $testingHelper = new Testing();
 
-        $this->construct->generate($settings, $gitHelper, $composerHelper);
+        $this->construct->generate($settings, $gitHelper, $composerHelper, $testingHelper);
 
         $output->writeln('<info>Project "' . $projectName . '" constructed.</info>');
     }
