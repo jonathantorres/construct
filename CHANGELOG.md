@@ -1,5 +1,12 @@
 # Changelog
 
+#### v1.4.3 `2015-09-17`
+- `Fixes`
+    - PHPUnit test is only generated if using `phpunit` as your testing framework.
+    - Generate `phpspec.yml` file. When using `phpspec` as your testing framework.
+    - Initialize `behat` if using it as your testing framework.
+    - Bootstrap `codeception` if using it as your testing framework.
+
 #### v1.4.2 `2015-09-07`
 - `Fixes`
     - Include author name on GPL license files.
