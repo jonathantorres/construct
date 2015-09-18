@@ -14,7 +14,7 @@ use JonathanTorres\Construct\Helpers\Filesystem;
 use JonathanTorres\Construct\Helpers\Str;
 use Symfony\Component\Console\Application;
 
-$app = new Application('Construct', '1.4.2');
+$app = new Application('Construct', '1.4.3');
 $construct = new Construct(new Filesystem(), new Str());
 $app->add(new ConstructCommand($construct, new Str()));
 $app->run();
