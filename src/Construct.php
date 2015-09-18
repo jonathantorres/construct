@@ -421,7 +421,7 @@ class Construct
     }
 
     /**
-     * Generate project test file.
+     * Generate phpunit test file.
      *
      * @return void
      */
