@@ -20,13 +20,5 @@
             "{namespace}\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "{namespace}\\Tests\\": "tests/"
-        }
-    },
-    "minimum-stability": "stable",
-    "scripts": {
-        "test": "{testing}"
-    }
+    "minimum-stability": "stable"
 }

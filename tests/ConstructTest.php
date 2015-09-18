@@ -117,6 +117,7 @@ class ConstructTest extends PHPUnit
             null
         );
 
+        $this->testingHelper->shouldReceive('codeception')->once()->with('logger')->andReturnNull();
         $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
         $this->assertSame($this->getStub('composer.codeception'), $this->getFile('composer.json'));
     }

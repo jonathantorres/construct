@@ -17,4 +17,18 @@ class Testing
 
         exec($command);
     }
+
+    /**
+     * Bootstrap codeception.
+     *
+     * @param string $folder
+     *
+     * @return void
+     */
+    public function codeception($folder)
+    {
+        $command = 'cd ' . $folder . ' && vendor/bin/codecept bootstrap';
+
+        exec($command);
+    }
 }

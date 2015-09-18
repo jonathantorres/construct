@@ -502,6 +502,12 @@ class Construct
                 $testingHelper->behat($this->projectLower);
             }
         }
+
+        if ($this->settings->getTestingFramework() === 'codeception') {
+            if ($this->file->isDirectory($this->projectLower)) {
+                $testingHelper->codeception($this->projectLower);
+            }
+        }
     }
 
     /**
