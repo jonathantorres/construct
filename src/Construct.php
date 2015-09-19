@@ -2,11 +2,10 @@
 
 namespace JonathanTorres\Construct;
 
-use JonathanTorres\Construct\Helpers\Composer;
 use JonathanTorres\Construct\Helpers\Filesystem;
 use JonathanTorres\Construct\Helpers\Git;
+use JonathanTorres\Construct\Helpers\Script;
 use JonathanTorres\Construct\Helpers\Str;
-use JonathanTorres\Construct\Helpers\Testing;
 
 class Construct
 {
@@ -103,12 +102,11 @@ class Construct
      *
      * @param \JonathanTorres\Construct\Settings         $settings The command settings made by the user.
      * @param \JonathanTorres\Construct\Helpers\Git      $git      The git helper.
-     * @param \JonathanTorres\Construct\Helpers\Composer $composer The composer helper.
-     * @param \JonathanTorres\Construct\Helpers\Testing  $testingHelper  Testing helper.
+     * @param \JonathanTorres\Construct\Helpers\Git      $script   Script helper.
      *
      * @return void
      */
-    public function generate(Settings $settings, Git $git, Composer $composer, Testing $testingHelper)
+    public function generate(Settings $settings, Git $git, Script $script)
     {
         $this->settings = $settings;
 
@@ -141,8 +139,8 @@ class Construct
             $this->gitInit($git);
         }
 
-        $this->composerInstall($composer);
-        $this->scripts($testingHelper);
+        $this->composerInstall($script);
+        $this->scripts($script);
     }
 
     /**
@@ -459,35 +457,35 @@ class Construct
     /**
      * Do an initial composer install in constructed project.
      *
-     * @param JonathanTorres\Construct\Helpers\Composer $composer
+     * @param JonathanTorres\Construct\Helpers\Script $script
      *
      * @return void
      */
-    protected function composerInstall(Composer $composer)
+    protected function composerInstall(Script $script)
     {
         if ($this->file->isDirectory($this->projectLower)) {
-            $composer->install($this->projectLower);
+            $script->runComposerInstall($this->projectLower);
         }
     }
 
     /**
      * Run any extra scripts.
      *
-     * @param JonathanTorres\Construct\Helpers\Testing $testingHelper
+     * @param JonathanTorres\Construct\Helpers\Script $script
      *
      * @return void
      */
-    protected function scripts(Testing $testingHelper)
+    protected function scripts(Script $script)
     {
-        if ($this->settings->getTestingFramework() === 'behat') {
-            if ($this->file->isDirectory($this->projectLower)) {
-                $testingHelper->behat($this->projectLower);
-            }
-        }
+        $testingFramework = $this->settings->getTestingFramework();
 
-        if ($this->settings->getTestingFramework() === 'codeception') {
-            if ($this->file->isDirectory($this->projectLower)) {
-                $testingHelper->codeception($this->projectLower);
+        if ($this->file->isDirectory($this->projectLower)) {
+            if ($testingFramework === 'behat') {
+                $script->initBehat($this->projectLower);
+            }
+
+            if ($testingFramework === 'codeception') {
+                $script->bootstrapCodeception($this->projectLower);
             }
         }
     }

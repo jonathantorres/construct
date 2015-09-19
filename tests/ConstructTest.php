@@ -16,8 +16,7 @@ class ConstructTest extends PHPUnit
     protected $construct;
     protected $filesystem;
     protected $gitHelper;
-    protected $composerHelper;
-    protected $testingHelper;
+    protected $scriptHelper;
     protected $gitUser = [
         'name' => 'Jonathan Torres',
         'email' => 'jonathantorres41@gmail.com',
@@ -27,11 +26,10 @@ class ConstructTest extends PHPUnit
     {
         $this->filesystem = new Filesystem;
         $this->construct = new Construct(new Filesystem, new Str);
-        $this->composerHelper = Mockery::mock('JonathanTorres\Construct\Helpers\Composer');
-        $this->composerHelper->shouldReceive('install')->once()->with('logger')->andReturnNull();
+        $this->scriptHelper = Mockery::mock('JonathanTorres\Construct\Helpers\Script');
+        $this->scriptHelper->shouldReceive('runComposerInstall')->once()->with('logger')->andReturnNull();
         $this->gitHelper = Mockery::mock('JonathanTorres\Construct\Helpers\Git');
         $this->gitHelper->shouldReceive('getUser')->twice()->withNoArgs()->andReturn($this->gitUser);
-        $this->testingHelper = Mockery::mock('JonathanTorres\Construct\Helpers\Testing');
     }
 
     /**
@@ -70,7 +68,7 @@ class ConstructTest extends PHPUnit
             null
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('README'), $this->getFile('README.md'));
         $this->assertSame($this->getStub('phpunit'), $this->getFile('phpunit.xml.dist'));
         $this->assertSame($this->getStub('LICENSE'), $this->getFile('LICENSE.md'));
@@ -98,8 +96,8 @@ class ConstructTest extends PHPUnit
             null
         );
 
-        $this->testingHelper->shouldReceive('behat')->once()->with('logger')->andReturnNull();
-        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
+        $this->scriptHelper->shouldReceive('initBehat')->once()->with('logger')->andReturnNull();
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('composer.behat'), $this->getFile('composer.json'));
     }
 
@@ -117,8 +115,8 @@ class ConstructTest extends PHPUnit
             null
         );
 
-        $this->testingHelper->shouldReceive('codeception')->once()->with('logger')->andReturnNull();
-        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
+        $this->scriptHelper->shouldReceive('bootstrapCodeception')->once()->with('logger')->andReturnNull();
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('composer.codeception'), $this->getFile('composer.json'));
     }
 
@@ -136,7 +134,7 @@ class ConstructTest extends PHPUnit
             null
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('phpspec'), $this->getFile('phpspec.yml'));
         $this->assertSame($this->getStub('composer.phpspec'), $this->getFile('composer.json'));
     }
@@ -155,7 +153,7 @@ class ConstructTest extends PHPUnit
             null
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('LICENSE.Apache'), $this->getFile('LICENSE.md'));
     }
 
@@ -173,7 +171,7 @@ class ConstructTest extends PHPUnit
             null
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('LICENSE.Gpl2'), $this->getFile('LICENSE.md'));
     }
 
@@ -191,7 +189,7 @@ class ConstructTest extends PHPUnit
             null
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('LICENSE.Gpl3'), $this->getFile('LICENSE.md'));
     }
 
@@ -209,7 +207,7 @@ class ConstructTest extends PHPUnit
             null
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('with-namespace/composer'), $this->getFile('composer.json'));
         $this->assertSame($this->getStub('with-namespace/Logger'), $this->getFile('src/Logger.php'));
         $this->assertSame($this->getStub('with-namespace/LoggerTest'), $this->getFile('tests/LoggerTest.php'));
@@ -230,7 +228,7 @@ class ConstructTest extends PHPUnit
         );
 
         $this->gitHelper->shouldReceive('init')->once()->with('logger')->andReturnNull();
-        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
     }
 
     public function testProjectGenerationWithCodingStandardsFixer()
@@ -247,7 +245,7 @@ class ConstructTest extends PHPUnit
             null
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('with-phpcs/phpcs'), $this->getFile('.php_cs'));
         $this->assertSame($this->getStub('with-phpcs/gitattributes'), $this->getFile('.gitattributes'));
     }
@@ -266,7 +264,7 @@ class ConstructTest extends PHPUnit
             null
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('composer.keywords'), $this->getFile('composer.json'));
     }
 
@@ -284,7 +282,7 @@ class ConstructTest extends PHPUnit
             null
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('with-vagrant/Vagrantfile'), $this->getFile('Vagrantfile'));
         $this->assertSame($this->getStub('with-vagrant/gitattributes'), $this->getFile('.gitattributes'));
     }
@@ -303,7 +301,7 @@ class ConstructTest extends PHPUnit
             true
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->composerHelper, $this->testingHelper);
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('with-editorconfig/editorconfig'), $this->getFile('.editorconfig'));
         $this->assertSame($this->getStub('with-editorconfig/gitattributes'), $this->getFile('.gitattributes'));
     }

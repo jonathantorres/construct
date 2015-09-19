@@ -3,10 +3,9 @@
 namespace JonathanTorres\Construct\Commands;
 
 use JonathanTorres\Construct\Construct;
-use JonathanTorres\Construct\Helpers\Composer;
 use JonathanTorres\Construct\Helpers\Git;
+use JonathanTorres\Construct\Helpers\Script;
 use JonathanTorres\Construct\Helpers\Str;
-use JonathanTorres\Construct\Helpers\Testing;
 use JonathanTorres\Construct\Settings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -144,11 +143,7 @@ class ConstructCommand extends Command
           $editorConfig
         );
 
-        $gitHelper = new Git();
-        $composerHelper = new Composer();
-        $testingHelper = new Testing();
-
-        $this->construct->generate($settings, $gitHelper, $composerHelper, $testingHelper);
+        $this->construct->generate($settings, new Git, new Script);
 
         $output->writeln('<info>Project "' . $projectName . '" constructed.</info>');
     }

@@ -27,7 +27,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGeneration()
     {
-        $this->setMocks();
+        $this->setMocks(3, 2);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -54,7 +54,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithPhpInProjectName()
     {
-        $this->setMocks();
+        $this->setMocks(3, 2);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -70,7 +70,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithUnknownLicense()
     {
-        $this->setMocks();
+        $this->setMocks(3, 2);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -89,7 +89,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithUnknownTestingFramework()
     {
-        $this->setMocks();
+        $this->setMocks(3, 2);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -124,7 +124,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithASpecifiedLicense()
     {
-        $this->setMocks();
+        $this->setMocks(3, 2);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -140,7 +140,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithASpecifiedNamespace()
     {
-        $this->setMocks();
+        $this->setMocks(3, 2);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -156,7 +156,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithAnInitializedGithubRepo()
     {
-        $this->setMocks(3, 2);
+        $this->setMocks(3, 3);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -172,7 +172,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithPhpCs()
     {
-        $this->setMocks(3, 1, 2);
+        $this->setMocks(3, 2, 2);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -188,7 +188,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithSpecifiedComposerKeywords()
     {
-        $this->setMocks();
+        $this->setMocks(3, 2);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -204,7 +204,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithVagrant()
     {
-        $this->setMocks(3, 1, 2);
+        $this->setMocks(3, 2, 2);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -220,7 +220,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithEditorConfig()
     {
-        $this->setMocks(3, 1, 2);
+        $this->setMocks(3, 2, 2);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
