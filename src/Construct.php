@@ -269,27 +269,9 @@ class Construct
      */
     protected function testing()
     {
-        switch ($this->settings->getTestingFramework()) {
-            case 'phpunit':
-                $this->phpunit();
-                break;
+        $testingFramework = $this->settings->getTestingFramework();
 
-            case 'phpspec':
-                $this->phpspec();
-                break;
-
-            case 'behat':
-                $this->behat();
-                break;
-
-            case 'codeception':
-                $this->codeception();
-                break;
-
-            default:
-                $this->phpunit();
-                break;
-        }
+        $this->{$testingFramework}();
     }
 
     /**
