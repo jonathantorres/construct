@@ -11,7 +11,7 @@ class Script
      *
      * @return void
      */
-    public function composerInstall($folder)
+    public function runComposerInstall($folder)
     {
         $command = 'cd ' . $folder . ' && composer install';
 
