@@ -145,6 +145,19 @@ class ConstructCommand extends Command
 
         $this->construct->generate($settings, new Git, new Script);
 
+        if ($settings->withGitInit()) {
+            $folder = $this->construct->getprojectLower();
+            $output->writeln('<info>Initialized git repo in "' . $folder . '".</info>');
+        }
+
+        if ($testFramework === 'codeception') {
+            $output->writeln('<info>Bootstrapped codeception.</info>');
+        }
+
+        if ($testFramework === 'behat') {
+            $output->writeln('<info>Initialized behat.</info>');
+        }
+
         $output->writeln('<info>Project "' . $projectName . '" constructed.</info>');
     }
 }

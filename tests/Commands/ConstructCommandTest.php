@@ -119,7 +119,8 @@ class ConstructCommandTest extends PHPUnit
             '--test' => 'behat'
         ]);
 
-        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+        $output = 'Initialized behat.' . PHP_EOL . 'Project "vendor/project" constructed.' . PHP_EOL;
+        $this->assertSame($output, $commandTester->getDisplay());
     }
 
     public function testProjectGenerationWithASpecifiedLicense()
@@ -167,7 +168,8 @@ class ConstructCommandTest extends PHPUnit
             '--git' => true
         ]);
 
-        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+        $output = 'Initialized git repo in "project".' . PHP_EOL . 'Project "vendor/project" constructed.' . PHP_EOL;
+        $this->assertSame($output, $commandTester->getDisplay());
     }
 
     public function testProjectGenerationWithPhpCs()

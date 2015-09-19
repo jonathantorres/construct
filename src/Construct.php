@@ -605,4 +605,14 @@ class Construct
 
         return $this->str->createNamespace($namespace, false, $useDoubleSlashes);
     }
+
+    /**
+     * Get project root folder.
+     *
+     * @return string
+     */
+    public function getprojectLower()
+    {
+        return $this->projectLower;
+    }
 }
