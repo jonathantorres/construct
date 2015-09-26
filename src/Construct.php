@@ -542,7 +542,7 @@ class Construct
     protected function phpunit()
     {
         $this->phpunitTest();
-        $this->testingVersion = '4.7.*';
+        $this->testingVersion = '4.8.*';
 
         $file = $this->file->get(__DIR__ . '/stubs/phpunit.stub');
         $content = str_replace('{project_upper}', $this->projectUpper, $file);
