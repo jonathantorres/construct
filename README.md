@@ -82,6 +82,13 @@ You can also use the short option `-s`.
 construct generate jonathantorres/logger -s JonathanTorres\\Projects\\Logger
 ```
 
+#### Specify php version
+The `--php` option will allow you to specify the minimum required php version that your project will support. Only one of the following versions can be specified: `5.4.0`, `5.5.0` or `5.6.0`. Php version `5.6.0` is currently the default.
+
+```bash
+construct generate jonathantorres/logger --php=5.5.0
+```
+
 #### Specify Composer keywords
 The optional `--keywords` option will allow you to specify a comma separated list of [Composer keywords](https://getcomposer.org/doc/04-schema.md#keywords).
 
