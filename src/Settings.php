@@ -68,6 +68,13 @@ class Settings
     private $editorConfig;
 
     /**
+     * Project php version.
+     *
+     * @var string
+     */
+    private $phpVersion;
+
+    /**
      * Initialize.
      *
      * @param string  $projectName        The entered project name.
@@ -79,6 +86,7 @@ class Settings
      * @param string  $composerKeywords   The entered list of Composer keywords.
      * @param boolean $vagrantfile        Generate a Vagrantfile?
      * @param boolean $editorConfig       Generate an EditorConfig file?
+     * @param boolean $phpVersion         The entered php version
      *
      * @return void
      */
@@ -91,7 +99,8 @@ class Settings
         $phpcsConfiguration,
         $composerKeywords,
         $vagrantfile,
-        $editorConfig
+        $editorConfig,
+        $phpVersion
     ) {
         $this->projectName = $projectName;
         $this->testingFramework = $testingFramework;
@@ -102,6 +111,7 @@ class Settings
         $this->composerKeywords = $composerKeywords;
         $this->vagrantfile = $vagrantfile;
         $this->editorConfig = $editorConfig;
+        $this->phpVersion = $phpVersion;
     }
 
     /**
@@ -192,5 +202,15 @@ class Settings
     public function withEditorConfig()
     {
         return $this->editorConfig;
+    }
+
+    /**
+     * Get the entered project php version.
+     *
+     * @return string
+     */
+    public function getPhpVersion()
+    {
+        return $this->phpVersion;
     }
 }

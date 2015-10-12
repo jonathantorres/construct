@@ -356,6 +356,7 @@ class Construct
             '{author_name}',
             '{author_email}',
             '{keywords}',
+            '{php_version}',
         ];
 
         $values = [
@@ -370,6 +371,7 @@ class Construct
             $user['name'],
             $user['email'],
             $this->str->toQuotedKeywords($this->settings->getComposerKeywords()),
+            $this->settings->getPhpVersion(),
         ];
 
         $content = str_replace($stubs, $values, $file);

@@ -44,6 +44,13 @@ class ConstructCommand extends Command
     protected $testingFrameworks = ['phpunit', 'behat', 'phpspec', 'codeception'];
 
     /**
+     * Available php versions.
+     *
+     * @var array
+     */
+    protected $phpVersions = ['5.4.0', '5.5.0', '5.6.0'];
+
+    /**
      * Initialize.
      *
      * @param \JonathanTorres\Construct\Construct $construct
@@ -75,6 +82,7 @@ class ConstructCommand extends Command
         $keywordsDescription = 'Comma separated list of Composer keywords';
         $vagrantDescription = 'Generate a Vagrantfile';
         $editorConfigDescription = 'Generate an EditorConfig configuration';
+        $phpVersionDescription = 'Project minimun required php version';
 
         $this->setName('generate');
         $this->setDescription('Generates a basic PHP project');
@@ -87,6 +95,7 @@ class ConstructCommand extends Command
         $this->addOption('keywords', 'k', InputOption::VALUE_OPTIONAL, $keywordsDescription);
         $this->addOption('vagrant', null, InputOption::VALUE_NONE, $vagrantDescription);
         $this->addOption('editor-config', 'e', InputOption::VALUE_NONE, $editorConfigDescription);
+        $this->addOption('php', null, InputOption::VALUE_OPTIONAL, $phpVersionDescription, '5.6.0');
     }
 
     /**
@@ -108,6 +117,7 @@ class ConstructCommand extends Command
         $keywords = $input->getOption('keywords');
         $vagrant = $input->getOption('vagrant');
         $editorConfig = $input->getOption('editor-config');
+        $phpVersion = $input->getOption('php');
 
         if (!$this->str->isValid($projectName)) {
             $output->writeln('<error>Warning: "' . $projectName . '" is not a valid project name, please use "vendor/project"</error>');
@@ -131,6 +141,11 @@ class ConstructCommand extends Command
             $testFramework = 'phpunit';
         }
 
+        if (!in_array($phpVersion, $this->phpVersions)) {
+            $output->writeln('<error>Warning: "'. $phpVersion . '" is not a supported php version. Using version 5.6.0</error>');
+            $phpVersion = '5.6.0';
+        }
+
         $settings = new Settings(
           $projectName,
           $testFramework,
@@ -140,7 +155,8 @@ class ConstructCommand extends Command
           $phpcs,
           $keywords,
           $vagrant,
-          $editorConfig
+          $editorConfig,
+          $phpVersion
         );
 
         $this->construct->generate($settings, new Git, new Script);
