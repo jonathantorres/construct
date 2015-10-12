@@ -65,7 +65,8 @@ class ConstructTest extends PHPUnit
             null,
             null,
             null,
-            null
+            null,
+            '5.6.0'
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
@@ -93,7 +94,8 @@ class ConstructTest extends PHPUnit
             null,
             null,
             null,
-            null
+            null,
+            '5.6.0'
         );
 
         $this->scriptHelper->shouldReceive('initBehat')->once()->with('logger')->andReturnNull();
@@ -112,7 +114,8 @@ class ConstructTest extends PHPUnit
             null,
             null,
             null,
-            null
+            null,
+            '5.6.0'
         );
 
         $this->scriptHelper->shouldReceive('bootstrapCodeception')->once()->with('logger')->andReturnNull();
@@ -131,7 +134,8 @@ class ConstructTest extends PHPUnit
             null,
             null,
             null,
-            null
+            null,
+            '5.6.0'
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
@@ -150,7 +154,8 @@ class ConstructTest extends PHPUnit
             null,
             null,
             null,
-            null
+            null,
+            '5.6.0'
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
@@ -168,7 +173,8 @@ class ConstructTest extends PHPUnit
             null,
             null,
             null,
-            null
+            null,
+            '5.6.0'
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
@@ -186,7 +192,8 @@ class ConstructTest extends PHPUnit
             null,
             null,
             null,
-            null
+            null,
+            '5.6.0'
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
@@ -204,7 +211,8 @@ class ConstructTest extends PHPUnit
             null,
             null,
             null,
-            null
+            null,
+            '5.6.0'
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
@@ -224,7 +232,8 @@ class ConstructTest extends PHPUnit
             null,
             null,
             null,
-            null
+            null,
+            '5.6.0'
         );
 
         $this->gitHelper->shouldReceive('init')->once()->with('logger')->andReturnNull();
@@ -242,7 +251,8 @@ class ConstructTest extends PHPUnit
             true,
             null,
             null,
-            null
+            null,
+            '5.6.0'
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
@@ -261,7 +271,8 @@ class ConstructTest extends PHPUnit
             null,
             'some,another,keyword',
             null,
-            null
+            null,
+            '5.6.0'
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
@@ -279,7 +290,8 @@ class ConstructTest extends PHPUnit
             null,
             null,
             true,
-            null
+            null,
+            '5.6.0'
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
@@ -298,12 +310,32 @@ class ConstructTest extends PHPUnit
             null,
             null,
             null,
-            true
+            true,
+            '5.6.0'
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('with-editorconfig/editorconfig'), $this->getFile('.editorconfig'));
         $this->assertSame($this->getStub('with-editorconfig/gitattributes'), $this->getFile('.gitattributes'));
+    }
+
+    public function testProjectGenerationWithSpecifiedPhpVersion()
+    {
+        $settings = new Settings(
+            'jonathantorres/logger',
+            'phpunit',
+            'MIT',
+            'Vendor\Project',
+            null,
+            null,
+            null,
+            null,
+            null,
+            '5.4.0'
+        );
+
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->assertSame($this->getStub('composer.phpversion'), $this->getFile('composer.json'));
     }
 
     /**

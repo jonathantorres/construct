@@ -10,15 +10,23 @@
         }
     ],
     "require": {
-        "php": ">=5.6.0"
+        "php": ">=5.4.0"
     },
     "require-dev": {
-        "codeception/codeception": "2.1.*"
+        "phpunit/phpunit": "4.8.*"
     },
     "autoload": {
         "psr-4": {
             "Jonathantorres\\Logger\\": "src/"
         }
     },
-    "minimum-stability": "stable"
+    "autoload-dev": {
+        "psr-4": {
+            "Jonathantorres\\Logger\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "scripts": {
+        "test": "phpunit"
+    }
 }
