@@ -1,5 +1,11 @@
 # Changelog
 
+#### v1.5.0 `2015-11-07`
+- `Added`
+    - Add `--php` option to specify a php version for your project.
+    - Generated project now uses phpunit `4.8`.
+    - Show more console output when initializing a git repo, bootstrapping codeception and initializing behat.
+
 #### v1.4.3 `2015-09-17`
 - `Fixes`
     - PHPUnit test is only generated if using `phpunit` as your testing framework.
