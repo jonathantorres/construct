@@ -16,6 +16,6 @@ use Symfony\Component\Console\Application;
 
 $str = new Str();
 $construct = new Construct(new Filesystem(), $str);
-$app = new Application('Construct', '1.4.3');
+$app = new Application('Construct', '1.5.0');
 $app->add(new ConstructCommand($construct, $str));
 $app->run();
