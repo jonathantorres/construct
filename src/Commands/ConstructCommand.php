@@ -142,7 +142,7 @@ class ConstructCommand extends Command
         }
 
         if (!in_array($phpVersion, $this->phpVersions)) {
-            $output->writeln('<error>Warning: "'. $phpVersion . '" is not a supported php version. Using version 5.6.0</error>');
+            $output->writeln('<error>Warning: "' . $phpVersion . '" is not a supported php version. Using version 5.6.0</error>');
             $phpVersion = '5.6.0';
         }
 
