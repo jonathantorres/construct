@@ -30,6 +30,13 @@ class ConstructCommand extends Command
     protected $str;
 
     /**
+     * Construct settings.
+     *
+     * @var \JonathanTorres\Construct\Settings
+     */
+    protected $settings;
+
+    /**
      * The available open source licenses. (more: http://choosealicense.com/licenses)
      *
      * @var array
@@ -125,28 +132,12 @@ class ConstructCommand extends Command
             return false;
         }
 
-        if ($this->str->contains($projectName, 'php')) {
-            $containsPhpWarning = 'Warning: If you are about to create a micro-package "'
-                . $projectName . '" should optimally not contain a "php" notation in the project name.';
-            $output->writeln('<error>' . $containsPhpWarning . '</error>');
-        }
+        $this->containsPhpWarning($projectName, $output);
+        $license = $this->supportedLicenseWarning($license, $output);
+        $testFramework = $this->testFrameworkWarning($testFramework, $output);
+        $phpVersion = $this->phpVersionWarning($phpVersion, $output);
 
-        if (!in_array($license, $this->licenses)) {
-            $output->writeln('<error>Warning: "' . $license . '" is not a supported license. Using MIT.</error>');
-            $license = 'MIT';
-        }
-
-        if (!in_array($testFramework, $this->testingFrameworks)) {
-            $output->writeln('<error>Warning: "' . $testFramework . '" is not a supported testing framework. Using phpunit.</error>');
-            $testFramework = 'phpunit';
-        }
-
-        if (!in_array($phpVersion, $this->phpVersions)) {
-            $output->writeln('<error>Warning: "' . $phpVersion . '" is not a supported php version. Using version 5.6.0</error>');
-            $phpVersion = '5.6.0';
-        }
-
-        $settings = new Settings(
+        $this->settings = new Settings(
           $projectName,
           $testFramework,
           $license,
@@ -159,21 +150,129 @@ class ConstructCommand extends Command
           $phpVersion
         );
 
-        $this->construct->generate($settings, new Git, new Script);
+        $this->construct->generate($this->settings, new Git, new Script);
 
-        if ($settings->withGitInit()) {
+        $this->initializedGitMessage($output);
+        $this->bootstrappedCodeceptionMessage($testFramework, $output);
+        $this->initializedBehatMessage($testFramework, $output);
+
+        $output->writeln('<info>Project "' . $projectName . '" constructed.</info>');
+    }
+
+    /**
+     * Show warning if the project name contains the string "php"
+     *
+     * @param string $projectName
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
+     * @return void
+     */
+    private function containsPhpWarning($projectName, $output)
+    {
+        if ($this->str->contains($projectName, 'php')) {
+            $containsPhpWarning = 'Warning: If you are about to create a micro-package "'
+                . $projectName . '" should optimally not contain a "php" notation in the project name.';
+            $output->writeln('<error>' . $containsPhpWarning . '</error>');
+        }
+    }
+
+    /**
+     * Show warning if a license that is not supported is specified.
+     *
+     * @param string $license
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
+     * @return string
+     */
+    private function supportedLicenseWarning($license, $output)
+    {
+        if (!in_array($license, $this->licenses)) {
+            $output->writeln('<error>Warning: "' . $license . '" is not a supported license. Using MIT.</error>');
+
+            $license = 'MIT';
+        }
+
+        return $license;
+    }
+
+    /**
+     * Show warning if a test framework that is not supported is specified.
+     *
+     * @param string $testFramework
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
+     * @return string
+     */
+    private function testFrameworkWarning($testFramework, $output)
+    {
+        if (!in_array($testFramework, $this->testingFrameworks)) {
+            $output->writeln('<error>Warning: "' . $testFramework . '" is not a supported testing framework. Using phpunit.</error>');
+            $testFramework = 'phpunit';
+        }
+
+        return $testFramework;
+    }
+
+    /**
+     * Show warning if a php version that is not supported is specified.
+     *
+     * @param string $phpVersion
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
+     * @return string
+     */
+    private function phpVersionWarning($phpVersion, $output)
+    {
+        if (!in_array($phpVersion, $this->phpVersions)) {
+            $output->writeln('<error>Warning: "' . $phpVersion . '" is not a supported php version. Using version 5.6.0</error>');
+            $phpVersion = '5.6.0';
+        }
+
+        return $phpVersion;
+    }
+
+    /**
+     * Show message if an empty git repo is initialized.
+     *
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
+     * @return void
+     */
+    private function initializedGitMessage($output)
+    {
+        if ($this->settings->withGitInit()) {
             $folder = $this->construct->getprojectLower();
             $output->writeln('<info>Initialized git repo in "' . $folder . '".</info>');
         }
+    }
 
+    /**
+     * Show message if codeception is bootstrapped successfully.
+     *
+     * @param string $testFramework
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
+     * @return void
+     */
+    private function bootstrappedCodeceptionMessage($testFramework, $output)
+    {
         if ($testFramework === 'codeception') {
             $output->writeln('<info>Bootstrapped codeception.</info>');
         }
+    }
 
+    /**
+     * Show message if behat is initialized successfully.
+     *
+     * @param string $testFramework
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
+     * @return void
+     */
+    private function initializedBehatMessage($testFramework, $output)
+    {
         if ($testFramework === 'behat') {
             $output->writeln('<info>Initialized behat.</info>');
         }
-
-        $output->writeln('<info>Project "' . $projectName . '" constructed.</info>');
     }
 }
