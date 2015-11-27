@@ -129,6 +129,10 @@ class Construct
             $this->editorConfig();
         }
 
+        if ($this->settings->withEnvironmentFiles()) {
+            $this->environmentFiles();
+        }
+
         $this->travis();
         $this->license($git);
         $this->composer($git);
@@ -376,6 +380,12 @@ class Construct
 
         $content = str_replace($stubs, $values, $file);
 
+        if ($this->settings->withEnvironmentFiles()) {
+            $composer = json_decode($content, true);
+            $composer['require-dev']['vlucas/phpdotenv'] = '~2.1';
+            $content = json_encode($composer, JSON_PRETTY_PRINT);
+        }
+
         $this->file->put($this->projectLower . '/' . 'composer.json', $content);
     }
 
@@ -534,6 +544,25 @@ class Construct
         );
 
         $this->exportIgnores[] = '.editorconfig';
+    }
+
+    /**
+     * Generate .env environment files.
+     *
+     * @return void
+     **/
+    protected function environmentFiles()
+    {
+        $this->file->copy(
+            __DIR__ . '/stubs/env.stub',
+            $this->projectLower . '/' . '.env'
+        );
+        $this->file->copy(
+            __DIR__ . '/stubs/env.stub',
+            $this->projectLower . '/' . '.env.example'
+        );
+
+        $this->exportIgnores[] = '.env';
     }
 
     /**

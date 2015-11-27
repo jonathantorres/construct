@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.6.0 `201?-??-??`
+- `Added`
+    - User can optionally generate .env environment files. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+
 #### v1.5.0 `2015-11-07`
 - `Added`
     - Add `--php` option to specify a php version for your project.

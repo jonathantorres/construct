@@ -21,7 +21,8 @@ class SettingsTest extends PHPUnit
             'some, another, keyword',
             false,
             false,
-            '5.6.0'
+            '5.6.0',
+            true
         );
     }
 
@@ -37,5 +38,6 @@ class SettingsTest extends PHPUnit
         $this->assertFalse($this->settings->withVagrantfile());
         $this->assertFalse($this->settings->withEditorConfig());
         $this->assertSame('5.6.0', $this->settings->getPhpVersion());
+        $this->assertTrue($this->settings->withEnvironmentFiles());
     }
 }
