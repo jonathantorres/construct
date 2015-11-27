@@ -151,7 +151,7 @@ construct generate jonathantorres/logger -e
 ```
 
 #### Generate .env enviroment files?
-The `--env` option will generate [.env](https://github.com/vlucas/phpdotenv) environment files within the constructed project for keeping `sensitive` information out of the constructed project. There's no short option available.
+The `--env` option will generate [.env](https://github.com/vlucas/phpdotenv) environment files within the constructed project for keeping `sensitive` information out of it. There's no short option available.
 
 ```bash
 construct generate jonathantorres/logger --env
