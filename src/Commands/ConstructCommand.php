@@ -90,6 +90,7 @@ class ConstructCommand extends Command
         $vagrantDescription = 'Generate a Vagrantfile';
         $editorConfigDescription = 'Generate an EditorConfig configuration';
         $phpVersionDescription = 'Project minimun required php version';
+        $environmentDescription = 'Generate .env environment files';
 
         $this->setName('generate');
         $this->setDescription('Generates a basic PHP project');
@@ -103,6 +104,7 @@ class ConstructCommand extends Command
         $this->addOption('vagrant', null, InputOption::VALUE_NONE, $vagrantDescription);
         $this->addOption('editor-config', 'e', InputOption::VALUE_NONE, $editorConfigDescription);
         $this->addOption('php', null, InputOption::VALUE_OPTIONAL, $phpVersionDescription, '5.6.0');
+        $this->addOption('env', null, InputOption::VALUE_NONE, $environmentDescription);
     }
 
     /**
@@ -125,6 +127,7 @@ class ConstructCommand extends Command
         $vagrant = $input->getOption('vagrant');
         $editorConfig = $input->getOption('editor-config');
         $phpVersion = $input->getOption('php');
+        $environment = $input->getOption('env');
 
         if (!$this->str->isValid($projectName)) {
             $output->writeln('<error>Warning: "' . $projectName . '" is not a valid project name, please use "vendor/project"</error>');
@@ -147,7 +150,8 @@ class ConstructCommand extends Command
           $keywords,
           $vagrant,
           $editorConfig,
-          $phpVersion
+          $phpVersion,
+          $environment
         );
 
         $this->construct->generate($this->settings, new Git, new Script);

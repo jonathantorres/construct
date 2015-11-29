@@ -75,6 +75,13 @@ class Settings
     private $phpVersion;
 
     /**
+     * Generate .env environment files?
+     *
+     * @var boolean
+     */
+    private $environmentFiles;
+
+    /**
      * Initialize.
      *
      * @param string  $projectName        The entered project name.
@@ -87,6 +94,7 @@ class Settings
      * @param boolean $vagrantfile        Generate a Vagrantfile?
      * @param boolean $editorConfig       Generate an EditorConfig file?
      * @param boolean $phpVersion         The entered php version
+     * @param boolean $environmentFiles   Generate .env environment files?
      *
      * @return void
      */
@@ -100,7 +108,8 @@ class Settings
         $composerKeywords,
         $vagrantfile,
         $editorConfig,
-        $phpVersion
+        $phpVersion,
+        $environmentFiles
     ) {
         $this->projectName = $projectName;
         $this->testingFramework = $testingFramework;
@@ -112,6 +121,7 @@ class Settings
         $this->vagrantfile = $vagrantfile;
         $this->editorConfig = $editorConfig;
         $this->phpVersion = $phpVersion;
+        $this->environmentFiles = $environmentFiles;
     }
 
     /**
@@ -212,5 +222,15 @@ class Settings
     public function getPhpVersion()
     {
         return $this->phpVersion;
+    }
+
+    /**
+     * Whether or not to create .env environment files.
+     *
+     * @return boolean
+     */
+    public function withEnvironmentFiles()
+    {
+        return $this->environmentFiles;
     }
 }

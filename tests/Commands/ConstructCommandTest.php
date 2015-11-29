@@ -270,6 +270,22 @@ class ConstructCommandTest extends PHPUnit
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
+    public function testProjectGenerationWithEnvironmentFiles()
+    {
+        $this->setMocks(3, 2, 3);
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--env' => true
+        ]);
+
+        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+    }
+
     /**
      * @group integration
      */

@@ -150,5 +150,12 @@ You can also use the short option `-e`.
 construct generate jonathantorres/logger -e
 ```
 
+#### Generate .env enviroment files?
+The `--env` option will generate [.env](https://github.com/vlucas/phpdotenv) environment files within the constructed project for keeping `sensitive` information out of it. There's no short option available.
+
+```bash
+construct generate jonathantorres/logger --env
+```
+
 #### Run tests
 Just run `composer test` from the project's root directory.
