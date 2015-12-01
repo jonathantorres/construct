@@ -557,6 +557,7 @@ class Construct
             __DIR__ . '/stubs/env.stub',
             $this->projectLower . '/' . '.env'
         );
+
         $this->file->copy(
             __DIR__ . '/stubs/env.stub',
             $this->projectLower . '/' . '.env.example'
