@@ -1,9 +1,7 @@
 {
     "name": "jonathantorres\/logger",
     "description": "PHP project.",
-    "keywords": [
-
-    ],
+    "keywords": [],
     "license": "MIT",
     "authors": [
         {
