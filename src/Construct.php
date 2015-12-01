@@ -384,6 +384,7 @@ class Construct
             $composer = json_decode($content, true);
             $composer['require-dev']['vlucas/phpdotenv'] = '~2.1';
             $content = json_encode($composer, JSON_PRETTY_PRINT);
+            $content .= PHP_EOL;
         }
 
         $this->file->put($this->projectLower . '/' . 'composer.json', $content);
