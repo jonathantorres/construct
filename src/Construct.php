@@ -299,13 +299,8 @@ class Construct
     protected function travis()
     {
         $file = $this->file->get(__DIR__ . '/stubs/travis.stub');
-        $content = str_replace(
-            '{testing}',
-            $this->settings->getTestingFramework(),
-            $file
-        );
 
-        $this->file->put($this->projectLower . '/' . '.travis.yml', $content);
+        $this->file->put($this->projectLower . '/' . '.travis.yml', $file);
         $this->exportIgnores[] = '.travis.yml';
     }
 
