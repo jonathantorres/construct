@@ -89,7 +89,7 @@ class ConstructCommand extends Command
         $keywordsDescription = 'Comma separated list of Composer keywords';
         $vagrantDescription = 'Generate a Vagrantfile';
         $editorConfigDescription = 'Generate an EditorConfig configuration';
-        $phpVersionDescription = 'Project minimun required php version';
+        $phpVersionDescription = 'Project minimun required php version (one of: ' . join(', ', $this->phpVersions) . ')';
         $environmentDescription = 'Generate .env environment files';
 
         $this->setName('generate');
