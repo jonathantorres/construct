@@ -332,7 +332,7 @@ class ConstructTest extends PHPUnit
         $this->assertSame($this->getStub('with-editorconfig/gitattributes'), $this->getFile('.gitattributes'));
     }
 
-    public function testProjectGenerationWithSpecifiedPhpVersion()
+    public function testProjectGenerationWithPhp54()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -349,7 +349,71 @@ class ConstructTest extends PHPUnit
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
-        $this->assertSame($this->getStub('composer.phpversion'), $this->getFile('composer.json'));
+        $this->assertSame($this->getStub('composer.php54'), $this->getFile('composer.json'));
+        $this->assertSame($this->getStub('travis.php54'), $this->getFile('.travis.yml'));
+    }
+
+    public function testProjectGenerationWithPhp55()
+    {
+        $settings = new Settings(
+            'jonathantorres/logger',
+            'phpunit',
+            'MIT',
+            'Vendor\Project',
+            null,
+            null,
+            null,
+            null,
+            null,
+            '5.5.0',
+            null
+        );
+
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->assertSame($this->getStub('composer.php55'), $this->getFile('composer.json'));
+        $this->assertSame($this->getStub('travis.php55'), $this->getFile('.travis.yml'));
+    }
+
+    public function testProjectGenerationWithPhp56()
+    {
+        $settings = new Settings(
+            'jonathantorres/logger',
+            'phpunit',
+            'MIT',
+            'Vendor\Project',
+            null,
+            null,
+            null,
+            null,
+            null,
+            '5.6.0',
+            null
+        );
+
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->assertSame($this->getStub('composer.php56'), $this->getFile('composer.json'));
+        $this->assertSame($this->getStub('travis.php56'), $this->getFile('.travis.yml'));
+    }
+
+    public function testProjectGenerationWithPhp7()
+    {
+        $settings = new Settings(
+            'jonathantorres/logger',
+            'phpunit',
+            'MIT',
+            'Vendor\Project',
+            null,
+            null,
+            null,
+            null,
+            null,
+            '7.0.0',
+            null
+        );
+
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->assertSame($this->getStub('composer.php7'), $this->getFile('composer.json'));
+        $this->assertSame($this->getStub('travis.php7'), $this->getFile('.travis.yml'));
     }
 
     public function testProjectGenerationWithEnvironmentFiles()
