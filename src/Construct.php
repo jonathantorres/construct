@@ -2,6 +2,7 @@
 
 namespace JonathanTorres\Construct;
 
+use JonathanTorres\Construct\Defaults;
 use JonathanTorres\Construct\Helpers\Filesystem;
 use JonathanTorres\Construct\Helpers\Git;
 use JonathanTorres\Construct\Helpers\Script;
@@ -299,8 +300,13 @@ class Construct
     protected function travis()
     {
         $file = $this->file->get(__DIR__ . '/stubs/travis.stub');
+        $phpVersionsToRunOnTravis = $this->phpVersionsToRunOnTravis(
+            $this->phpVersionsToTestOnTravis()
+        );
 
-        $this->file->put($this->projectLower . '/' . '.travis.yml', $file);
+        $content = str_replace('{phpVersions}', $phpVersionsToRunOnTravis, $file);
+
+        $this->file->put($this->projectLower . '/' . '.travis.yml', $content);
         $this->exportIgnores[] = '.travis.yml';
     }
 
@@ -632,6 +638,50 @@ class Construct
         }
 
         return $this->str->createNamespace($namespace, false, $useDoubleSlashes);
+    }
+
+    /**
+     * Get project php versions that will be run on travis ci.
+     *
+     * @return array
+     */
+    protected function phpVersionsToTestOnTravis()
+    {
+        $supportedPhpVersions = (new Defaults)->phpVersions;
+        $projectPhpVersion = (float) substr($this->settings->getPhpVersion(), 0, 3);
+        $versionsToTest = ['hhvm'];
+
+        foreach ($supportedPhpVersions as $phpVersion) {
+            $version = (float) substr($phpVersion, 0, 3);
+
+            if ($projectPhpVersion <= $version) {
+                $versionsToTest[] = $version;
+            }
+        }
+
+        return $versionsToTest;
+    }
+
+    /**
+     * Generate string that specifies the php versions that will be run on travis.
+     *
+     * @param array $phpVersions
+     *
+     * @return string
+     */
+    protected function phpVersionsToRunOnTravis($phpVersions)
+    {
+        $travisString = '';
+
+        for ($i = 0; $i < count($phpVersions); $i++) {
+            $travisString .= '  - ' . $phpVersions[$i];
+
+            if ($i !== (count($phpVersions) - 1)) {
+                $travisString .= PHP_EOL;
+            }
+        }
+
+        return $travisString;
     }
 
     /**
