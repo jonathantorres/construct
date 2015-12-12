@@ -3,6 +3,7 @@
 namespace JonathanTorres\Construct\Commands;
 
 use JonathanTorres\Construct\Construct;
+use JonathanTorres\Construct\Defaults;
 use JonathanTorres\Construct\Helpers\Git;
 use JonathanTorres\Construct\Helpers\Script;
 use JonathanTorres\Construct\Helpers\Str;
@@ -37,25 +38,11 @@ class ConstructCommand extends Command
     protected $settings;
 
     /**
-     * The available open source licenses. (more: http://choosealicense.com/licenses)
+     * Construct defaults.
      *
-     * @var array
+     * @var \JonathanTorres\Construct\Defaults
      */
-    protected $licenses = ['MIT', 'Apache-2.0', 'GPL-2.0', 'GPL-3.0'];
-
-    /**
-     * The available testing frameworks.
-     *
-     * @var array
-     */
-    protected $testingFrameworks = ['phpunit', 'behat', 'phpspec', 'codeception'];
-
-    /**
-     * Available php versions.
-     *
-     * @var array
-     */
-    protected $phpVersions = ['5.4.0', '5.5.0', '5.6.0', '7.0.0'];
+    protected $defaults;
 
     /**
      * Initialize.
@@ -67,10 +54,11 @@ class ConstructCommand extends Command
      */
     public function __construct(Construct $construct, Str $str)
     {
-        parent::__construct();
-
         $this->construct = $construct;
         $this->str = $str;
+        $this->defaults = new Defaults();
+
+        parent::__construct();
     }
 
     /**
@@ -81,15 +69,15 @@ class ConstructCommand extends Command
     protected function configure()
     {
         $nameDescription = 'The vendor/project name';
-        $testDescription = 'Testing framework (one of: ' . join(', ', $this->testingFrameworks) . ')';
-        $licenseDescription = 'License (one of: ' . join(', ', $this->licenses) . ')';
+        $testDescription = 'Testing framework (one of: ' . join(', ', $this->defaults->testingFrameworks) . ')';
+        $licenseDescription = 'License (one of: ' . join(', ', $this->defaults->licenses) . ')';
         $namespaceDescription = 'Namespace for project';
         $gitDescription = 'Initialize an empty Git repo';
         $phpcsDescription = 'Generate a PHP Coding Standards Fixer configuration';
         $keywordsDescription = 'Comma separated list of Composer keywords';
         $vagrantDescription = 'Generate a Vagrantfile';
         $editorConfigDescription = 'Generate an EditorConfig configuration';
-        $phpVersionDescription = 'Project minimun required php version (one of: ' . join(', ', $this->phpVersions) . ')';
+        $phpVersionDescription = 'Project minimun required php version (one of: ' . join(', ', $this->defaults->phpVersions) . ')';
         $environmentDescription = 'Generate .env environment files';
 
         $this->setName('generate');
@@ -190,7 +178,7 @@ class ConstructCommand extends Command
      */
     private function supportedLicenseWarning($license, $output)
     {
-        if (!in_array($license, $this->licenses)) {
+        if (!in_array($license, $this->defaults->licenses)) {
             $output->writeln('<error>Warning: "' . $license . '" is not a supported license. Using MIT.</error>');
 
             $license = 'MIT';
@@ -209,7 +197,7 @@ class ConstructCommand extends Command
      */
     private function testFrameworkWarning($testFramework, $output)
     {
-        if (!in_array($testFramework, $this->testingFrameworks)) {
+        if (!in_array($testFramework, $this->defaults->testingFrameworks)) {
             $output->writeln('<error>Warning: "' . $testFramework . '" is not a supported testing framework. Using phpunit.</error>');
             $testFramework = 'phpunit';
         }
@@ -227,7 +215,7 @@ class ConstructCommand extends Command
      */
     private function phpVersionWarning($phpVersion, $output)
     {
-        if (!in_array($phpVersion, $this->phpVersions)) {
+        if (!in_array($phpVersion, $this->defaults->phpVersions)) {
             $output->writeln('<error>Warning: "' . $phpVersion . '" is not a supported php version. Using version 5.6.0</error>');
             $phpVersion = '5.6.0';
         }
