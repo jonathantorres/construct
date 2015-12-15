@@ -134,6 +134,10 @@ class Construct
             $this->environmentFiles();
         }
 
+        if ($this->settings->withLgtmConfiguration()) {
+            $this->lgtmFiles();
+        }
+
         $this->travis();
         $this->license($git);
         $this->composer($git);
@@ -566,6 +570,27 @@ class Construct
         );
 
         $this->exportIgnores[] = '.env';
+    }
+
+    /**
+     * Generate LGTM configuration files.
+     *
+     * @return void
+     */
+    protected function lgtmFiles()
+    {
+        $this->file->copy(
+            __DIR__ . '/stubs/MAINTAINERS.stub',
+            $this->projectLower . '/' . 'MAINTAINERS'
+        );
+
+        $this->file->copy(
+            __DIR__ . '/stubs/lgtm.stub',
+            $this->projectLower . '/' . '.lgtm'
+        );
+
+        $this->exportIgnores[] = 'MAINTAINERS';
+        $this->exportIgnores[] = '.lgtm';
     }
 
     /**

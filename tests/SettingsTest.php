@@ -22,7 +22,8 @@ class SettingsTest extends PHPUnit
             false,
             false,
             '5.6.0',
-            true
+            true,
+            false
         );
     }
 
@@ -39,5 +40,6 @@ class SettingsTest extends PHPUnit
         $this->assertFalse($this->settings->withEditorConfig());
         $this->assertSame('5.6.0', $this->settings->getPhpVersion());
         $this->assertTrue($this->settings->withEnvironmentFiles());
+        $this->assertFalse($this->settings->withLgtmConfiguration());
     }
 }

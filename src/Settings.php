@@ -82,6 +82,13 @@ class Settings
     private $environmentFiles;
 
     /**
+     * Generate LGTM configuration files?
+     *
+     * @var boolean
+     */
+    private $lgtmConfiguration;
+
+    /**
      * Initialize.
      *
      * @param string  $projectName        The entered project name.
@@ -95,6 +102,7 @@ class Settings
      * @param boolean $editorConfig       Generate an EditorConfig file?
      * @param boolean $phpVersion         The entered php version
      * @param boolean $environmentFiles   Generate .env environment files?
+     * @param boolean $lgtmConfiguration  Generate LGTM configuration files?
      *
      * @return void
      */
@@ -109,7 +117,8 @@ class Settings
         $vagrantfile,
         $editorConfig,
         $phpVersion,
-        $environmentFiles
+        $environmentFiles,
+        $lgtmConfiguration
     ) {
         $this->projectName = $projectName;
         $this->testingFramework = $testingFramework;
@@ -122,6 +131,7 @@ class Settings
         $this->editorConfig = $editorConfig;
         $this->phpVersion = $phpVersion;
         $this->environmentFiles = $environmentFiles;
+        $this->lgtmConfiguration = $lgtmConfiguration;
     }
 
     /**
@@ -232,5 +242,15 @@ class Settings
     public function withEnvironmentFiles()
     {
         return $this->environmentFiles;
+    }
+
+    /**
+     * Whether or not to create LGTM configuration files.
+     *
+     * @return boolean
+     */
+    public function withLgtmConfiguration()
+    {
+        return $this->lgtmConfiguration;
     }
 }
