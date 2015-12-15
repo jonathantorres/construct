@@ -3,6 +3,7 @@
 #### v1.6.0 `201?-??-??`
 - `Added`
     - User can optionally generate .env environment files. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+    - User can optionally generate LGTM configuration files. Done by [@raphaelstolt](https://github.com/raphaelstolt).
 
 #### v1.5.0 `2015-11-07`
 - `Added`

@@ -67,6 +67,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.6.0',
+            null,
             null
         );
 
@@ -97,6 +98,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.6.0',
+            null,
             null
         );
 
@@ -118,6 +120,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.6.0',
+            null,
             null
         );
 
@@ -139,6 +142,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.6.0',
+            null,
             null
         );
 
@@ -160,6 +164,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.6.0',
+            null,
             null
         );
 
@@ -180,6 +185,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.6.0',
+            null,
             null
         );
 
@@ -200,6 +206,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.6.0',
+            null,
             null
         );
 
@@ -220,6 +227,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.6.0',
+            null,
             null
         );
 
@@ -242,6 +250,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.6.0',
+            null,
             null
         );
 
@@ -262,6 +271,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.6.0',
+            null,
             null
         );
 
@@ -283,6 +293,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.6.0',
+            null,
             null
         );
 
@@ -303,6 +314,7 @@ class ConstructTest extends PHPUnit
             true,
             null,
             '5.6.0',
+            null,
             null
         );
 
@@ -324,6 +336,7 @@ class ConstructTest extends PHPUnit
             null,
             true,
             '5.6.0',
+            null,
             null
         );
 
@@ -345,6 +358,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.4.0',
+            null,
             null
         );
 
@@ -366,6 +380,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.5.0',
+            null,
             null
         );
 
@@ -387,6 +402,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '5.6.0',
+            null,
             null
         );
 
@@ -408,6 +424,7 @@ class ConstructTest extends PHPUnit
             null,
             null,
             '7.0.0',
+            null,
             null
         );
 
@@ -429,7 +446,8 @@ class ConstructTest extends PHPUnit
             null,
             false,
             '5.6.0',
-            true
+            true,
+            false
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
@@ -437,6 +455,29 @@ class ConstructTest extends PHPUnit
         $this->assertSame($this->getStub('with-env/env'), $this->getFile('.env.example'));
         $this->assertSame($this->getStub('with-env/gitattributes'), $this->getFile('.gitattributes'));
         $this->assertSame($this->getStub('with-env/composer'), $this->getFile('composer.json'));
+    }
+
+    public function testProjectGenerationWithLgtmConfiguration()
+    {
+        $settings = new Settings(
+            'jonathantorres/logger',
+            'phpunit',
+            'MIT',
+            'Vendor\Project',
+            null,
+            null,
+            null,
+            null,
+            false,
+            '5.6.0',
+            null,
+            true
+        );
+
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->assertSame($this->getStub('with-lgtm/maintainers'), $this->getFile('MAINTAINERS'));
+        $this->assertSame($this->getStub('with-lgtm/lgtm'), $this->getFile('.lgtm'));
+        $this->assertSame($this->getStub('with-lgtm/gitattributes'), $this->getFile('.gitattributes'));
     }
 
     /**

@@ -156,5 +156,12 @@ The `--env` option will generate [.env](https://github.com/vlucas/phpdotenv) env
 construct generate jonathantorres/logger --env
 ```
 
+## Generate LGTM configuration files?
+The `--lgtm` option will generate [LGTM](https://lgtm.co) configuration files within the constructed project. There's no short option available.
+
+```bash
+construct generate jonathantorres/logger --lgtm
+```
+
 ## Run tests
 Just run `composer test` from the project's root directory.
