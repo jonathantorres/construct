@@ -1,9 +1,12 @@
 # Changelog
 
-#### v1.6.0 `201?-??-??`
+#### v1.6.0 `2015-12-17`
 - `Added`
     - User can optionally generate .env environment files. Done by [@raphaelstolt](https://github.com/raphaelstolt).
     - User can optionally generate LGTM configuration files. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+    - Allow user to specify php7 as the project's required php version.
+- `Fixes`
+    - Run travis on php versions greater or equal than the generated project. See [#72](https://github.com/jonathantorres/construct/issues/72)
 
 #### v1.5.0 `2015-11-07`
 - `Added`
