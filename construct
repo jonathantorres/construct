@@ -9,6 +9,7 @@ if (file_exists(__DIR__ . '/../../autoload.php')) {
 }
 
 use JonathanTorres\Construct\Commands\ConstructCommand;
+use JonathanTorres\Construct\Commands\InteractiveCommand;
 use JonathanTorres\Construct\Construct;
 use JonathanTorres\Construct\Helpers\Filesystem;
 use JonathanTorres\Construct\Helpers\Str;
@@ -18,4 +19,5 @@ $str = new Str();
 $construct = new Construct(new Filesystem(), $str);
 $app = new Application('Construct', '1.6.0');
 $app->add(new ConstructCommand($construct, $str));
+$app->add(new InteractiveCommand($construct, $str));
 $app->run();
