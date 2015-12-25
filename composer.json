@@ -27,6 +27,11 @@
             "JonathanTorres\\Construct\\Tests\\": "tests/"
         }
     },
+    "config": {
+        "platform": {
+            "php": "5.4"
+        }
+    },
     "bin": ["construct"],
     "scripts": {
         "test": "phpunit"
