@@ -163,5 +163,12 @@ The `--lgtm` option will generate [LGTM](https://lgtm.co) configuration files wi
 construct generate jonathantorres/logger --lgtm
 ```
 
+## Interactive Mode
+This mode will ask you all the required (and optional) information to generate your project.
+
+```bash
+construct generate:interactive
+```
+
 ## Run tests
 Just run `composer test` from the project's root directory.
