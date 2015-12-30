@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.7.0 `2015-12-30`
+- `Added`
+    - Interactive console mode. See [#14](https://github.com/jonathantorres/construct/issues/14)
+
 #### v1.6.0 `2015-12-17`
 - `Added`
     - User can optionally generate .env environment files. Done by [@raphaelstolt](https://github.com/raphaelstolt).
