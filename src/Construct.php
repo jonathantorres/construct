@@ -388,7 +388,10 @@ class Construct
         if ($this->settings->withEnvironmentFiles()) {
             $composer = json_decode($content, true);
             $composer['require-dev']['vlucas/phpdotenv'] = '~2.1';
-            $content = json_encode($composer, JSON_PRETTY_PRINT);
+            $content = json_encode(
+                $composer,
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+            );
             $content .= PHP_EOL;
         }
 
