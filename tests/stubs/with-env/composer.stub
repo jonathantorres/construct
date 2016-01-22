@@ -1,5 +1,5 @@
 {
-    "name": "jonathantorres\/logger",
+    "name": "jonathantorres/logger",
     "description": "PHP project.",
     "keywords": [],
     "license": "MIT",
@@ -13,17 +13,17 @@
         "php": ">=5.6.0"
     },
     "require-dev": {
-        "phpunit\/phpunit": "4.8.*",
-        "vlucas\/phpdotenv": "~2.1"
+        "phpunit/phpunit": "4.8.*",
+        "vlucas/phpdotenv": "~2.1"
     },
     "autoload": {
         "psr-4": {
-            "Jonathantorres\\Logger\\": "src\/"
+            "Jonathantorres\\Logger\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Jonathantorres\\Logger\\Tests\\": "tests\/"
+            "Jonathantorres\\Logger\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable",
