@@ -23,5 +23,5 @@ class Defaults
      *
      * @var array
      */
-    public $phpVersions = ['5.4.0', '5.5.0', '5.6.0', '7.0.0'];
+    public $phpVersions = ['5.4.0', '5.5.0', '5.5.9', '5.6.0', '7.0.0'];
 }
