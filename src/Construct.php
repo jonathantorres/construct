@@ -395,6 +395,13 @@ class Construct
             $content .= PHP_EOL;
         }
 
+        if ($this->settings->withPhpcsConfiguration() && !$this->str->isWindows()) {
+            $composer = json_decode($content, true);
+            $composer['scripts']['cs-fix'] = 'php-cs-fixer fix . -vv || true';
+            $content = json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            $content .= PHP_EOL;
+        }
+
         $this->file->put($this->projectLower . '/' . 'composer.json', $content);
     }
 

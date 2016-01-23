@@ -15,6 +15,7 @@ class ConstructTest extends PHPUnit
 {
     protected $construct;
     protected $filesystem;
+    protected $str;
     protected $gitHelper;
     protected $scriptHelper;
     protected $gitUser = [
@@ -25,7 +26,8 @@ class ConstructTest extends PHPUnit
     protected function setUp()
     {
         $this->filesystem = new Filesystem;
-        $this->construct = new Construct(new Filesystem, new Str);
+        $this->str = new Str;
+        $this->construct = new Construct(new Filesystem, $this->str);
         $this->scriptHelper = Mockery::mock('JonathanTorres\Construct\Helpers\Script');
         $this->scriptHelper->shouldReceive('runComposerInstall')->once()->with('logger')->andReturnNull();
         $this->gitHelper = Mockery::mock('JonathanTorres\Construct\Helpers\Git');
@@ -276,6 +278,14 @@ class ConstructTest extends PHPUnit
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+
+        if (!$this->str->isWindows()) {
+            $this->assertSame(
+                $this->getStub('with-phpcs/composer'),
+                $this->getFile('composer.json')
+            );
+        }
+
         $this->assertSame($this->getStub('with-phpcs/phpcs'), $this->getFile('.php_cs'));
         $this->assertSame($this->getStub('with-phpcs/gitattributes'), $this->getFile('.gitattributes'));
     }

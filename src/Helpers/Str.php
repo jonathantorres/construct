@@ -133,6 +133,22 @@ class Str
     }
 
     /**
+     * Check if the operating system is windowsish.
+     *
+     * @param string $os
+     *
+     * @return boolean
+     */
+    public function isWindows($os = PHP_OS)
+    {
+        if (strtoupper(substr($os, 0, 3)) !== 'WIN') {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Convert keywords to quoted keywords.
      * Ex: "test,php,vagrant,provision" -> '"test","php","vagrant","provision"'
      *
