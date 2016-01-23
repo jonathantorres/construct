@@ -307,7 +307,7 @@ class Construct
         $file = $this->file->get(__DIR__ . '/stubs/travis.stub');
         $travisHelper = new Travis();
         $phpVersionsToRunOnTravis = $travisHelper->phpVersionsToRun(
-            $travisHelper->phpVersionsToTest()
+            $travisHelper->phpVersionsToTest($this->settings->getPhpVersion())
         );
 
         $content = str_replace('{phpVersions}', $phpVersionsToRunOnTravis, $file);
