@@ -45,6 +45,13 @@ class ConstructCommand extends Command
     protected $defaults;
 
     /**
+     * Php version currently used on the system.
+     *
+     * @var string
+     */
+    protected $systemPhpVersion;
+
+    /**
      * Initialize.
      *
      * @param \JonathanTorres\Construct\Construct $construct
@@ -57,6 +64,7 @@ class ConstructCommand extends Command
         $this->construct = $construct;
         $this->str = $str;
         $this->defaults = new Defaults();
+        $this->systemPhpVersion = PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION;
 
         parent::__construct();
     }
@@ -92,7 +100,7 @@ class ConstructCommand extends Command
         $this->addOption('keywords', 'k', InputOption::VALUE_OPTIONAL, $keywordsDescription);
         $this->addOption('vagrant', null, InputOption::VALUE_NONE, $vagrantDescription);
         $this->addOption('editor-config', 'e', InputOption::VALUE_NONE, $editorConfigDescription);
-        $this->addOption('php', null, InputOption::VALUE_OPTIONAL, $phpVersionDescription, '5.6.0');
+        $this->addOption('php', null, InputOption::VALUE_OPTIONAL, $phpVersionDescription, $this->systemPhpVersion);
         $this->addOption('env', null, InputOption::VALUE_NONE, $environmentDescription);
         $this->addOption('lgtm', null, InputOption::VALUE_NONE, $lgtmDescription);
     }
@@ -210,7 +218,8 @@ class ConstructCommand extends Command
     }
 
     /**
-     * Show warning if a php version that is not supported is specified.
+     * Show warning if an invalid php version or
+     * a version greater than the one on the system is specified.
      *
      * @param string $phpVersion
      * @param \Symfony\Component\Console\Output\OutputInterface $output
@@ -219,9 +228,14 @@ class ConstructCommand extends Command
      */
     private function phpVersionWarning($phpVersion, $output)
     {
-        if (!in_array($phpVersion, $this->defaults->phpVersions)) {
-            $output->writeln('<error>Warning: "' . $phpVersion . '" is not a supported php version. Using version 5.6.0</error>');
-            $phpVersion = '5.6.0';
+        if (!$this->str->phpVersionIsValid($phpVersion)) {
+            $output->writeln('<error>Warning: "' . $phpVersion . '" is not a valid php version. Using version ' . $this->systemPhpVersion . '</error>');
+            $phpVersion = $this->systemPhpVersion;
+        }
+
+        if (version_compare($phpVersion, $this->systemPhpVersion, '>')) {
+            $output->writeln('<error>Warning: "' . $phpVersion . '" is greater than your installed php version. Using version ' . $this->systemPhpVersion . '</error>');
+            $phpVersion = $this->systemPhpVersion;
         }
 
         return $phpVersion;

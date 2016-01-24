@@ -14,10 +14,12 @@ use Symfony\Component\Console\Tester\CommandTester;
 class ConstructCommandTest extends PHPUnit
 {
     protected $filesystem;
+    protected $systemPhpVersion;
 
     protected function setUp()
     {
         $this->filesystem = Mockery::mock('JonathanTorres\Construct\Helpers\Filesystem');
+        $this->systemPhpVersion = PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION;
     }
 
     protected function tearDown()
@@ -136,7 +138,16 @@ class ConstructCommandTest extends PHPUnit
             '--php' => '5.6.0'
         ]);
 
-        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+        $output = '';
+
+        // show warning on php versions less than 5.6.0
+        if (version_compare($this->systemPhpVersion, '5.6.0', '<')) {
+            $output .= 'Warning: "5.6.0" is greater than your installed php version. Using version ' . $this->systemPhpVersion . PHP_EOL;
+        }
+
+        $output .= 'Project "vendor/project" constructed.' . PHP_EOL;
+
+        $this->assertSame($output, $commandTester->getDisplay());
     }
 
     public function testProjectGenerationWithAnInvalidPhpVersion()
@@ -152,7 +163,7 @@ class ConstructCommandTest extends PHPUnit
             '--php' => 'invalid'
         ]);
 
-        $output = 'Warning: "invalid" is not a supported php version. Using version 5.6.0' . PHP_EOL .
+        $output = 'Warning: "invalid" is not a valid php version. Using version ' . $this->systemPhpVersion . PHP_EOL .
                   'Project "vendor/project" constructed.' . PHP_EOL;
         $this->assertSame($output, $commandTester->getDisplay());
     }
