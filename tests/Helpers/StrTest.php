@@ -111,6 +111,17 @@ class StrTest extends PHPUnit
         );
     }
 
+    public function testPhpVersionIsValid()
+    {
+        $this->assertTrue($this->str->phpVersionIsValid('7.0.0'));
+        $this->assertTrue($this->str->phpVersionIsValid('7.1.0'));
+        $this->assertTrue($this->str->phpVersionIsValid('5.4.0'));
+        $this->assertTrue($this->str->phpVersionIsValid('5.5.0'));
+        $this->assertTrue($this->str->phpVersionIsValid('5.5.9'));
+        $this->assertTrue($this->str->phpVersionIsValid('5.6.0'));
+        $this->assertFalse($this->str->phpVersionIsValid('invalid'));
+    }
+
     /**
      * @return array
      */
