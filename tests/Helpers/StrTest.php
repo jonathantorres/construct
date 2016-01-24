@@ -100,6 +100,18 @@ class StrTest extends PHPUnit
         $this->assertSame('Namespace', $this->str->createNamespace('namespace'));
     }
 
+    public function testIsWindows()
+    {
+        if ($this->str->isWindows()) {
+            $this->assertTrue($this->str->isWindows());
+        } else {
+            $this->assertFalse($this->str->isWindows());
+        }
+
+        $this->assertTrue($this->str->isWindows('WIn'));
+        $this->assertFalse($this->str->isWindows('Darwin'));
+    }
+
     /**
      * @dataProvider keywordsProvider
      */
