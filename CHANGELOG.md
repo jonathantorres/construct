@@ -1,5 +1,10 @@
 # Changelog
 
+#### v1.7.1 `2016-01-24`
+- `Fixes`
+    - Use installed php version by default. See [#77](https://github.com/jonathantorres/construct/issues/77)
+    - Php cs fixer composer script is now generated. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+
 #### v1.7.0 `2015-12-30`
 - `Added`
     - Interactive console mode. See [#14](https://github.com/jonathantorres/construct/issues/14)
