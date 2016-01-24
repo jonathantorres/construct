@@ -82,10 +82,10 @@ construct generate jonathantorres/logger -s JonathanTorres\\Projects\\Logger
 ```
 
 ## Specify php version
-The `--php` option will allow you to specify the minimum required php version that your project will support. Only one of the following versions can be specified: `5.4.0`, `5.5.0` or `5.6.0`. Php version `5.6.0` is currently the default.
+The `--php` option will allow you to specify the minimum required php version that your project will support. Construct will use the currently installed version if not specified.
 
 ```bash
-construct generate jonathantorres/logger --php=5.5.0
+construct generate jonathantorres/logger --php=5.5.9
 ```
 
 ## Specify Composer keywords
