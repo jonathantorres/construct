@@ -36,7 +36,7 @@
     "bin": ["construct"],
     "scripts": {
         "test": "phpunit",
-        "cs-fix": "php-cs-fixer fix . -vv || /bin/true"
+        "cs-fix": "php-cs-fixer fix . -vv || true"
     },
     "minimum-stability": "stable"
 }
