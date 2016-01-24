@@ -19,7 +19,7 @@ class Defaults
     public $testingFrameworks = ['phpunit', 'behat', 'phpspec', 'codeception'];
 
     /**
-     * Available php versions.
+     * Available php versions to test on travis.
      *
      * @var array
      */
