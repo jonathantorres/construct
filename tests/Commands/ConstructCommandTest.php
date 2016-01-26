@@ -19,7 +19,7 @@ class ConstructCommandTest extends PHPUnit
     protected function setUp()
     {
         $this->filesystem = Mockery::mock('JonathanTorres\Construct\Helpers\Filesystem');
-        $this->systemPhpVersion = PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION;
+        $this->systemPhpVersion = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION;
     }
 
     protected function tearDown()

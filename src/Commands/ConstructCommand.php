@@ -64,7 +64,7 @@ class ConstructCommand extends Command
         $this->construct = $construct;
         $this->str = $str;
         $this->defaults = new Defaults();
-        $this->systemPhpVersion = PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION;
+        $this->systemPhpVersion = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION;
 
         parent::__construct();
     }
@@ -166,7 +166,7 @@ class ConstructCommand extends Command
     /**
      * Show warning if the project name contains the string "php"
      *
-     * @param string $projectName
+     * @param string                                            $projectName
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return void
@@ -183,7 +183,7 @@ class ConstructCommand extends Command
     /**
      * Show warning if a license that is not supported is specified.
      *
-     * @param string $license
+     * @param string                                            $license
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return string
@@ -202,7 +202,7 @@ class ConstructCommand extends Command
     /**
      * Show warning if a test framework that is not supported is specified.
      *
-     * @param string $testFramework
+     * @param string                                            $testFramework
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return string
@@ -221,7 +221,7 @@ class ConstructCommand extends Command
      * Show warning if an invalid php version or
      * a version greater than the one on the system is specified.
      *
-     * @param string $phpVersion
+     * @param string                                            $phpVersion
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return string
@@ -259,7 +259,7 @@ class ConstructCommand extends Command
     /**
      * Show message if codeception is bootstrapped successfully.
      *
-     * @param string $testFramework
+     * @param string                                            $testFramework
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return void
@@ -274,7 +274,7 @@ class ConstructCommand extends Command
     /**
      * Show message if behat is initialized successfully.
      *
-     * @param string $testFramework
+     * @param string                                            $testFramework
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return void
