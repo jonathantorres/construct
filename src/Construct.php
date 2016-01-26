@@ -2,7 +2,6 @@
 
 namespace JonathanTorres\Construct;
 
-use JonathanTorres\Construct\Defaults;
 use JonathanTorres\Construct\Helpers\Filesystem;
 use JonathanTorres\Construct\Helpers\Git;
 use JonathanTorres\Construct\Helpers\Script;

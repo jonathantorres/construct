@@ -56,5 +56,4 @@ class Travis
 
         return $runOn;
     }
-
 }

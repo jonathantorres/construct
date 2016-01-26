@@ -43,11 +43,11 @@ class TravisTest extends PHPUnit
             '5.6',
             '7.0',
         ]);
-        $stringExpected = '  - hhvm'.PHP_EOL.
-                          '  - 5.4'.PHP_EOL.
-                          '  - 5.5'.PHP_EOL.
-                          '  - 5.5.9'.PHP_EOL.
-                          '  - 5.6'.PHP_EOL.
+        $stringExpected = '  - hhvm' . PHP_EOL .
+                          '  - 5.4' . PHP_EOL .
+                          '  - 5.5' . PHP_EOL .
+                          '  - 5.5.9' . PHP_EOL .
+                          '  - 5.6' . PHP_EOL .
                           '  - 7.0';
 
         $this->assertEquals($versionsToRun, $stringExpected);
@@ -82,10 +82,10 @@ class TravisTest extends PHPUnit
             '5.6',
             '7.0',
         ]);
-        $stringExpected = '  - hhvm'.PHP_EOL.
-                          '  - 5.5'.PHP_EOL.
-                          '  - 5.5.9'.PHP_EOL.
-                          '  - 5.6'.PHP_EOL.
+        $stringExpected = '  - hhvm' . PHP_EOL .
+                          '  - 5.5' . PHP_EOL .
+                          '  - 5.5.9' . PHP_EOL .
+                          '  - 5.6' . PHP_EOL .
                           '  - 7.0';
 
         $this->assertEquals($versionsToRun, $stringExpected);
@@ -118,9 +118,9 @@ class TravisTest extends PHPUnit
             '5.6',
             '7.0',
         ]);
-        $stringExpected = '  - hhvm'.PHP_EOL.
-                          '  - 5.5.9'.PHP_EOL.
-                          '  - 5.6'.PHP_EOL.
+        $stringExpected = '  - hhvm' . PHP_EOL .
+                          '  - 5.5.9' . PHP_EOL .
+                          '  - 5.6' . PHP_EOL .
                           '  - 7.0';
 
         $this->assertEquals($versionsToRun, $stringExpected);
@@ -151,8 +151,8 @@ class TravisTest extends PHPUnit
             '5.6',
             '7.0',
         ]);
-        $stringExpected = '  - hhvm'.PHP_EOL.
-                          '  - 5.6'.PHP_EOL.
+        $stringExpected = '  - hhvm' . PHP_EOL .
+                          '  - 5.6' . PHP_EOL .
                           '  - 7.0';
 
         $this->assertEquals($versionsToRun, $stringExpected);
@@ -181,7 +181,7 @@ class TravisTest extends PHPUnit
             'hhvm',
             '7.0',
         ]);
-        $stringExpected = '  - hhvm'.PHP_EOL.
+        $stringExpected = '  - hhvm' . PHP_EOL .
                           '  - 7.0';
 
         $this->assertEquals($versionsToRun, $stringExpected);
