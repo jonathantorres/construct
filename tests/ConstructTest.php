@@ -490,6 +490,39 @@ class ConstructTest extends PHPUnit
         $this->assertSame($this->getStub('with-lgtm/gitattributes'), $this->getFile('.gitattributes'));
     }
 
+    public function testProjectGenerationWithGitHubTemplates()
+    {
+        $settings = new Settings(
+            'jonathantorres/logger',
+            'phpunit',
+            'MIT',
+            'Vendor\Project',
+            null,
+            null,
+            null,
+            null,
+            false,
+            '5.6.0',
+            null,
+            false,
+            true
+        );
+
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->assertSame(
+            $this->getStub('with-github-templates/issue_template'),
+            $this->getFile('.github/ISSUE_TEMPLATE.md')
+        );
+        $this->assertSame(
+            $this->getStub('with-github-templates/pull_request_template'),
+            $this->getFile('.github/PULL_REQUEST_TEMPLATE.md')
+        );
+        $this->assertSame(
+            $this->getStub('with-github-templates/gitattributes'),
+            $this->getFile('.gitattributes')
+        );
+    }
+
     /**
      * Get expected changelog file.
      *

@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.8.0 `2016-02-??`
+- `Added`
+    - User can optionally generate [GitHub templates](https://github.com/blog/2111-issue-and-pull-request-templates). Done by [@raphaelstolt](https://github.com/raphaelstolt).
+
 #### v1.7.1 `2016-01-24`
 - `Fixes`
     - Use installed php version by default. See [#77](https://github.com/jonathantorres/construct/issues/77)

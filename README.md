@@ -163,6 +163,13 @@ The `--lgtm` option will generate [LGTM](https://lgtm.co) configuration files wi
 construct generate jonathantorres/logger --lgtm
 ```
 
+## Generate GitHub template files?
+The `--github-templates` option will generate [GitHub template](https://github.com/blog/2111-issue-and-pull-request-templates) files within the constructed project into a folder conventionally named `.github`. It also will move `CONTRIBUTING.md` into it. There's no short option available.
+
+```bash
+construct generate jonathantorres/logger --github-templates
+```
+
 ## Interactive Mode
 This mode will ask you all the required (and optional) information to generate your project.
 

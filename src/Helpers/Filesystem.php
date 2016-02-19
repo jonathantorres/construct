@@ -7,13 +7,14 @@ class Filesystem
     /**
      * Create a directory
      *
-     * @param string $path
+     * @param string  $path
+     * @param boolean $recursive Defaults to false.
      *
      * @return boolean
      */
-    public function makeDirectory($path)
+    public function makeDirectory($path, $recursive = false)
     {
-        return mkdir($path);
+        return mkdir($path, 0777, $recursive);
     }
 
     /**
@@ -39,6 +40,21 @@ class Filesystem
     public function copy($path, $target)
     {
         return copy($path, $target);
+    }
+
+    /**
+     * Move the given file to a new location.
+     *
+     * @param string $path
+     * @param string $target
+     *
+     * @return boolean
+     */
+
+    public function move($path, $target)
+    {
+        $this->copy($path, $target);
+        unlink($path);
     }
 
     /**

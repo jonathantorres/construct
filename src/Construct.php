@@ -138,6 +138,10 @@ class Construct
             $this->lgtmFiles();
         }
 
+        if ($this->settings->withGithubTemplates()) {
+            $this->githubTemplates();
+        }
+
         $this->travis();
         $this->license($git);
         $this->composer($git);
@@ -602,6 +606,38 @@ class Construct
 
         $this->exportIgnores[] = 'MAINTAINERS';
         $this->exportIgnores[] = '.lgtm';
+    }
+
+    /**
+     * Generate GitHub template files.
+     *
+     * @return void
+     */
+    protected function githubTemplates()
+    {
+        $this->file->makeDirectory(
+            $this->projectLower . '/.github',
+            true
+        );
+
+        $templates = ['ISSUE_TEMPLATE', 'PULL_REQUEST_TEMPLATE'];
+
+        foreach ($templates as $template) {
+            $this->file->copy(
+                __DIR__ . '/stubs/github/' . $template . '.stub',
+                $this->projectLower . '/.github/' . $template . '.md'
+            );
+        }
+
+        $this->file->move(
+            $this->projectLower . '/CONTRIBUTING.md',
+            $this->projectLower . '/.github/CONTRIBUTING.md'
+        );
+
+        $index = array_search('CONTRIBUTING.md', $this->exportIgnores);
+        unset($this->exportIgnores[$index]);
+
+        $this->exportIgnores[] = '.github/*';
     }
 
     /**
