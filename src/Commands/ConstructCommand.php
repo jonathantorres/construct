@@ -88,6 +88,7 @@ class ConstructCommand extends Command
         $phpVersionDescription = 'Project minimun required php version (one of: ' . join(', ', $this->defaults->phpVersions) . ')';
         $environmentDescription = 'Generate .env environment files';
         $lgtmDescription = 'Generate LGTM configuration files';
+        $githubTemplatesDescription = 'Generate GitHub templates';
 
         $this->setName('generate');
         $this->setDescription('Generates a basic PHP project');
@@ -103,6 +104,7 @@ class ConstructCommand extends Command
         $this->addOption('php', null, InputOption::VALUE_OPTIONAL, $phpVersionDescription, $this->systemPhpVersion);
         $this->addOption('env', null, InputOption::VALUE_NONE, $environmentDescription);
         $this->addOption('lgtm', null, InputOption::VALUE_NONE, $lgtmDescription);
+        $this->addOption('github-templates', null, InputOption::VALUE_NONE, $githubTemplatesDescription);
     }
 
     /**
@@ -127,6 +129,7 @@ class ConstructCommand extends Command
         $phpVersion = $input->getOption('php');
         $environment = $input->getOption('env');
         $lgtm = $input->getOption('lgtm');
+        $githubTemplates = $input->getOption('github-templates');
 
         if (!$this->str->isValid($projectName)) {
             $output->writeln('<error>Warning: "' . $projectName . '" is not a valid project name, please use "vendor/project"</error>');
@@ -151,7 +154,8 @@ class ConstructCommand extends Command
           $editorConfig,
           $phpVersion,
           $environment,
-          $lgtm
+          $lgtm,
+          $githubTemplates
         );
 
         $this->construct->generate($this->settings, new Git, new Script);

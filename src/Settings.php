@@ -89,6 +89,13 @@ class Settings
     private $lgtmConfiguration;
 
     /**
+     * Generate GitHub templates?
+     *
+     * @var boolean
+     */
+    private $githubTemplates;
+
+    /**
      * Initialize.
      *
      * @param string  $projectName        The entered project name.
@@ -103,6 +110,7 @@ class Settings
      * @param boolean $phpVersion         The entered php version
      * @param boolean $environmentFiles   Generate .env environment files?
      * @param boolean $lgtmConfiguration  Generate LGTM configuration files?
+     * @param boolean $githubTemplates    Generate GitHub templates?
      *
      * @return void
      */
@@ -118,7 +126,8 @@ class Settings
         $editorConfig,
         $phpVersion,
         $environmentFiles,
-        $lgtmConfiguration
+        $lgtmConfiguration,
+        $githubTemplates = false
     ) {
         $this->projectName = $projectName;
         $this->testingFramework = $testingFramework;
@@ -132,6 +141,7 @@ class Settings
         $this->phpVersion = $phpVersion;
         $this->environmentFiles = $environmentFiles;
         $this->lgtmConfiguration = $lgtmConfiguration;
+        $this->githubTemplates = $githubTemplates;
     }
 
     /**
@@ -252,5 +262,15 @@ class Settings
     public function withLgtmConfiguration()
     {
         return $this->lgtmConfiguration;
+    }
+
+    /**
+     * Whether or not to create GitHub template files.
+     *
+     * @return boolean
+     */
+    public function withGithubTemplates()
+    {
+        return $this->githubTemplates;
     }
 }

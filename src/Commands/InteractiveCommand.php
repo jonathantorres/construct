@@ -120,6 +120,7 @@ class InteractiveCommand extends Command
         $editorConfigQuestion = new ConfirmationQuestion('Do you want to generate a generate an EditorConfig configuration?', false);
         $environmentFileQuestion = new ConfirmationQuestion('Do you want to generate an .env file?', false);
         $lgtmFileQuestion = new ConfirmationQuestion('Do you want to generate an LGTM configuration file?', false);
+        $githubTemplatesQuestion = new ConfirmationQuestion('Do you want to generate GitHub templates?', false);
 
         $projectName = $helper->ask($input, $output, $projectNameQuestion);
         $testingFramework = $helper->ask($input, $output, $testingFrameworkQuestion);
@@ -133,6 +134,7 @@ class InteractiveCommand extends Command
         $editorConfig = $helper->ask($input, $output, $editorConfigQuestion);
         $environmentFile = $helper->ask($input, $output, $environmentFileQuestion);
         $lgtmFile = $helper->ask($input, $output, $lgtmFileQuestion);
+        $githubTemplates = $helper->ask($input, $output, $githubTemplatesQuestion);
 
         $this->settings = new Settings(
           $projectName,
@@ -146,7 +148,8 @@ class InteractiveCommand extends Command
           $editorConfig,
           $phpVersion,
           $environmentFile,
-          $lgtmFile
+          $lgtmFile,
+          $githubTemplates
         );
 
         $output->writeln('Creating your project...');
