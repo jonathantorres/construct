@@ -50,7 +50,6 @@ class Filesystem
      *
      * @return boolean
      */
-
     public function move($path, $target)
     {
         $this->copy($path, $target);
