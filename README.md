@@ -19,25 +19,38 @@ Just run `construct generate` with your `vendor/package` declaration and it will
 construct generate jonathantorres/logger
 ```
 
-The current project structure will look like the following:
+The generated project structure will look like the following `tree` excerpt. Files and directories in brackets are optional.
 ```
-├── logger/
-│   ├── src/
-│   │   ├── Logger.php
-│   ├── tests/
-│   │   ├── LoggerTest.php
-│   ├── vendor/
-│   │   ├── ...
-│   ├── .gitattributes
-│   ├── .gitignore
-│   ├── .travis.yml
-│   ├── composer.lock
-│   ├── composer.json
-│   ├── phpunit.xml.dist
-│   ├── README.md
-│   ├── LICENSE.md
+├── logger
 │   ├── CHANGELOG.md
+│   ├── composer.json
+│   ├── composer.lock
 │   ├── CONTRIBUTING.md
+│   ├── (.editorconfig)
+│   ├── (.env)
+│   ├── (.env.example)
+│   ├── (.git)
+│   │   └── ...
+│   ├── .gitattributes
+│   ├── (.github)
+│   │   ├── CONTRIBUTING.md
+│   │   ├── ISSUE_TEMPLATE.md
+│   │   └── PULL_REQUEST_TEMPLATE.md
+│   ├── .gitignore
+│   ├── (.lgtm)
+│   ├── LICENSE.md
+│   ├── (MAINTAINERS)
+│   ├── (.php_cs)
+│   ├── (phpunit.xml.dist)
+│   ├── README.md
+│   ├── src
+│   │   └── Logger.php
+│   ├── tests
+│   │   └── LoggerTest.php
+│   ├── .travis.yml
+│   ├── (Vagrantfile)
+│   └── vendor
+│           └── ...
 ```
 
 This is a good starting point. You can continue your work from there.
