@@ -20,6 +20,7 @@ class TravisTest extends PHPUnit
         $versionsToTest = $this->travis->phpVersionsToTest('5.4.0');
         $versionsExpected = [
             'hhvm',
+            'nightly',
             '5.4',
             '5.5',
             '5.5.9',
@@ -37,6 +38,7 @@ class TravisTest extends PHPUnit
     {
         $versionsToRun = $this->travis->phpVersionsToRun([
             'hhvm',
+            'nightly',
             '5.4',
             '5.5',
             '5.5.9',
@@ -44,6 +46,7 @@ class TravisTest extends PHPUnit
             '7.0',
         ]);
         $stringExpected = '  - hhvm' . PHP_EOL .
+                          '  - nightly' . PHP_EOL .
                           '  - 5.4' . PHP_EOL .
                           '  - 5.5' . PHP_EOL .
                           '  - 5.5.9' . PHP_EOL .
@@ -61,6 +64,7 @@ class TravisTest extends PHPUnit
         $versionsToTest = $this->travis->phpVersionsToTest('5.5.0');
         $versionsExpected = [
             'hhvm',
+            'nightly',
             '5.5',
             '5.5.9',
             '5.6',
@@ -99,6 +103,7 @@ class TravisTest extends PHPUnit
         $versionsToTest = $this->travis->phpVersionsToTest('5.5.9');
         $versionsExpected = [
             'hhvm',
+            'nightly',
             '5.5.9',
             '5.6',
             '7.0',
@@ -134,6 +139,7 @@ class TravisTest extends PHPUnit
         $versionsToTest = $this->travis->phpVersionsToTest('5.6.0');
         $versionsExpected = [
             'hhvm',
+            'nightly',
             '5.6',
             '7.0',
         ];
@@ -166,6 +172,7 @@ class TravisTest extends PHPUnit
         $versionsToTest = $this->travis->phpVersionsToTest('7.0.0');
         $versionsExpected = [
             'hhvm',
+            'nightly',
             '7.0',
         ];
 

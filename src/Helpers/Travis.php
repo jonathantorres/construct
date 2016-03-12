@@ -16,7 +16,7 @@ class Travis
     public function phpVersionsToTest($projectPhpVersion)
     {
         $supportedPhpVersions = (new Defaults)->phpVersions;
-        $versionsToTest = ['hhvm'];
+        $versionsToTest = ['hhvm', 'nightly'];
 
         $supportedPhpVersions = array_filter($supportedPhpVersions, function ($version) use ($projectPhpVersion) {
             return version_compare($version, $projectPhpVersion) >= 0;
