@@ -1,8 +1,9 @@
 # Changelog
 
-#### v1.8.0 `2016-02-??`
+#### v1.8.0 `2016-03-12`
 - `Added`
     - User can optionally generate [GitHub templates](https://github.com/blog/2111-issue-and-pull-request-templates). Done by [@raphaelstolt](https://github.com/raphaelstolt).
+    - Test generated project on php nightly. Done by [@raphaelstolt](https://github.com/raphaelstolt).
 
 #### v1.7.1 `2016-01-24`
 - `Fixes`
