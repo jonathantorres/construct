@@ -28,4 +28,5 @@ class Defaults
     const TEST_FRAMEWORK = 'phpunit';
     const LICENSE = 'MIT';
     const PROJECT_NAMESPACE = 'Vendor\Project';
+    const CONFIGURATION_FILE = '.construct';
 }

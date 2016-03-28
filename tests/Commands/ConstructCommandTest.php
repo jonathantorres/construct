@@ -6,6 +6,7 @@ use Illuminate\Filesystem\Filesystem;
 use JonathanTorres\Construct\Commands\ConstructCommand;
 use JonathanTorres\Construct\Construct;
 use JonathanTorres\Construct\Helpers\Str;
+use JonathanTorres\Construct\Helpers\Filesystem as FilesystemHelper;
 use Mockery;
 use PHPUnit_Framework_TestCase as PHPUnit;
 use Symfony\Component\Console\Application;
@@ -331,6 +332,29 @@ class ConstructCommandTest extends PHPUnit
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
+    public function testProjectGenerationFromConfiguration()
+    {
+        $this->setMocks(3, 3, 10);
+        $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project-from-config',
+            '--config' => dirname(__DIR__) . '/stubs/config/complete.stub'
+        ]);
+
+        $expectedCommandDisplay = 'Initialized git repo in "project-from-config".' . PHP_EOL
+            . 'Project "vendor/project-from-config" constructed.' . PHP_EOL;
+
+        $this->assertSame(
+            $expectedCommandDisplay,
+            $commandTester->getDisplay()
+        );
+    }
+
     /**
      * @group integration
      */
@@ -352,7 +376,7 @@ class ConstructCommandTest extends PHPUnit
     {
         $app = new Application();
         $construct = new Construct($this->filesystem, new Str());
-        $app->add(new ConstructCommand($construct, new Str()));
+        $app->add(new ConstructCommand($construct, new Str(), new FilesystemHelper()));
 
         return $app;
     }

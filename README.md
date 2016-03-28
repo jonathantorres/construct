@@ -192,6 +192,21 @@ The `--code-of-conduct` option will generate a Code of Conduct file named `CONDU
 construct generate jonathantorres/logger --code-of-conduct
 ```
 
+## Use a configuration for recurring settings
+The `--config` option allows the usage of a configuration file in the `YAML` format. There are two ways to provide such a configuration file: One is to provide a specific file as an option argument, the other is to put a `.construct` configuration file in the home directory of your system. For the structure of a configuration file have a look at the [.construct](example/.construct) example file. When no configuration keys are provided for settings having a default value (i.e. `test-framework`, `license`, `php`) their default value is used.
+
+```bash
+construct generate jonathantorres/logger --config /path/to/config.yml
+```
+
+You can also use the short option `-c`.
+
+```bash
+construct generate jonathantorres/logger -c /path/to/config.yml
+```
+
+When there's a `.construct` configuration file in your home directory it will be used per default. If required it's possible to disable the usage via the `--ignore-default-config` option or the equivalent short option `-i`.
+
 ## Interactive Mode
 This mode will ask you all the required (and optional) information to generate your project.
 
