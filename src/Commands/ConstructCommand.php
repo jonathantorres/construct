@@ -64,7 +64,7 @@ class ConstructCommand extends Command
         $this->construct = $construct;
         $this->str = $str;
         $this->defaults = new Defaults();
-        $this->systemPhpVersion = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION;
+        $this->systemPhpVersion = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
 
         parent::__construct();
     }
