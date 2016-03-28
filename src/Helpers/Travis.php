@@ -31,7 +31,7 @@ class Travis
         $supportedPhpVersions = (new Defaults)->phpVersions;
         $versionsToTest = ['hhvm', 'nightly'];
 
-        $supportedPhpVersions = array_filter($supportedPhpVersions, function ($supportedPhpVersion) use ($projectPhpVersion) {
+        $phpVersionsToTest = array_filter($supportedPhpVersions, function ($supportedPhpVersion) use ($projectPhpVersion) {
             return version_compare(
                 $this->toMinorversion($projectPhpVersion),
                 $this->toMinorversion($supportedPhpVersion),
@@ -39,17 +39,7 @@ class Travis
             ) === true;
         });
 
-        foreach ($supportedPhpVersions as $phpVersion) {
-            $isPatch = substr($phpVersion, -1) !== '0';
-
-            if ($isPatch) {
-                $versionsToTest[] = substr($phpVersion, 0, 5);
-            } else {
-                $versionsToTest[] = substr($phpVersion, 0, 3);
-            }
-        }
-
-        return $versionsToTest;
+        return array_merge($versionsToTest, $phpVersionsToTest);
     }
 
     /**
