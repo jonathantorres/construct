@@ -147,24 +147,6 @@ class TravisTest extends PHPUnit
 
     /**
      * @test
-     * @ticket 91 (https://github.com/jonathantorres/construct/issues/91)
-     */
-    public function it_should_return_all_versions_to_test_on_a_php5616_project()
-    {
-        $versionsToTest = $this->travis->phpVersionsToTest('5.6.16');
-
-        $versionsExpected = [
-            'hhvm',
-            'nightly',
-            '5.6',
-            '7.0',
-        ];
-
-        $this->assertEquals($versionsToTest, $versionsExpected);
-    }
-
-    /**
-     * @test
      */
     public function it_should_generate_string_of_all_versions_to_run_on_a_php56_project()
     {
@@ -178,6 +160,23 @@ class TravisTest extends PHPUnit
                           '  - 7.0';
 
         $this->assertEquals($versionsToRun, $stringExpected);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_return_all_versions_to_test_on_a_php5616_project()
+    {
+        $versionsToTest = $this->travis->phpVersionsToTest('5.6.16');
+
+        $versionsExpected = [
+            'hhvm',
+            'nightly',
+            '5.6',
+            '7.0',
+        ];
+
+        $this->assertEquals($versionsToTest, $versionsExpected);
     }
 
     /**
