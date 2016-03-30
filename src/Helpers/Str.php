@@ -178,6 +178,6 @@ class Str
      */
     public function phpVersionIsValid($version)
     {
-        return preg_match('/\d\.\d\.\d/', $version) === 1;
+        return preg_match('/\d\.\d(\.\d)?/', $version) === 1;
     }
 }
