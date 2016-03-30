@@ -23,7 +23,6 @@ class TravisTest extends PHPUnit
             'nightly',
             '5.4',
             '5.5',
-            '5.5.9',
             '5.6',
             '7.0',
         ];
@@ -66,7 +65,6 @@ class TravisTest extends PHPUnit
             'hhvm',
             'nightly',
             '5.5',
-            '5.5.9',
             '5.6',
             '7.0',
         ];
@@ -104,7 +102,7 @@ class TravisTest extends PHPUnit
         $versionsExpected = [
             'hhvm',
             'nightly',
-            '5.5.9',
+            '5.5',
             '5.6',
             '7.0',
         ];
@@ -137,6 +135,24 @@ class TravisTest extends PHPUnit
     public function it_should_return_all_versions_to_test_on_a_php56_project()
     {
         $versionsToTest = $this->travis->phpVersionsToTest('5.6.0');
+        $versionsExpected = [
+            'hhvm',
+            'nightly',
+            '5.6',
+            '7.0',
+        ];
+
+        $this->assertEquals($versionsToTest, $versionsExpected);
+    }
+
+    /**
+     * @test
+     * @ticket 91 (https://github.com/jonathantorres/construct/issues/91)
+     */
+    public function it_should_return_all_versions_to_test_on_a_php5616_project()
+    {
+        $versionsToTest = $this->travis->phpVersionsToTest('5.6.16');
+
         $versionsExpected = [
             'hhvm',
             'nightly',
