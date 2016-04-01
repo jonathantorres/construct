@@ -137,19 +137,19 @@ class InteractiveCommand extends Command
         $githubTemplates = $helper->ask($input, $output, $githubTemplatesQuestion);
 
         $this->settings = new Settings(
-          $projectName,
-          $testingFramework,
-          $license,
-          $namespace,
-          $git,
-          $phpCs,
-          $composerKeywords,
-          $vagrantFile,
-          $editorConfig,
-          $phpVersion,
-          $environmentFile,
-          $lgtmFile,
-          $githubTemplates
+            $projectName,
+            $testingFramework,
+            $license,
+            $namespace,
+            $git,
+            $phpCs,
+            $composerKeywords,
+            $vagrantFile,
+            $editorConfig,
+            $phpVersion,
+            $environmentFile,
+            $lgtmFile,
+            $githubTemplates
         );
 
         $output->writeln('Creating your project...');
