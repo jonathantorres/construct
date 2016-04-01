@@ -114,7 +114,7 @@ class Construct
         $this->saveNames();
         $this->root();
         $this->src();
-        $this->docs();
+        $this->docs($this->settings->withCodeOfConduct());
         $this->gitignore();
         $this->testing();
 
@@ -140,6 +140,10 @@ class Construct
 
         if ($this->settings->withGithubTemplates()) {
             $this->githubTemplates();
+        }
+
+        if ($this->settings->withCodeOfConduct()) {
+            $this->codeOfConduct();
         }
 
         $this->travis();
@@ -194,11 +198,13 @@ class Construct
     /**
      * Generate documentation (README, CONTRIBUTING, CHANGELOG) files.
      *
+     * @param boolean $withCodeOfConduct Whether or not to set a reference to the Code of Conduct in the readme.
+     *
      * @return void
      */
-    protected function docs()
+    protected function docs($withCodeOfConduct = false)
     {
-        $this->readme();
+        $this->readme($withCodeOfConduct);
         $this->contributing();
         $this->changelog();
     }
@@ -206,11 +212,18 @@ class Construct
     /**
      * Generate README.md file.
      *
+     * @param boolean $withCodeOfConduct Whether or not to set a reference to the Code of Conduct in the readme.
+     *
      * @return void
      */
-    protected function readme()
+    protected function readme($withCodeOfConduct = false)
     {
-        $readme = $this->file->get(__DIR__ . '/stubs/README.stub');
+        if ($withCodeOfConduct === false) {
+            $readme = $this->file->get(__DIR__ . '/stubs/README.stub');
+        } else {
+            $readme = $this->file->get(__DIR__ . '/stubs/README.CONDUCT.stub');
+        }
+
         $stubs = [
             '{project_upper}',
             '{license}',
@@ -638,6 +651,21 @@ class Construct
         unset($this->exportIgnores[$index]);
 
         $this->exportIgnores[] = '.github/*';
+    }
+
+    /**
+     * Generate Code of Conduct file.
+     *
+     * @return void
+     */
+    protected function codeOfConduct()
+    {
+        $this->file->copy(
+            __DIR__ . '/stubs/CONDUCT.stub',
+            $this->projectLower . '/' . 'CONDUCT.md'
+        );
+
+        $this->exportIgnores[] = 'CONDUCT.md';
     }
 
     /**

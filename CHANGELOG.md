@@ -1,6 +1,8 @@
 # Changelog
 
 #### v1.9.0 `2016-04-dd`
+- `Added`
+    - User can optionally generate a Code of Conduct file which is adapted from the [Contributor Covenant](http://contributor-covenant.org), version 1.4. Done by [@raphaelstolt](https://github.com/raphaelstolt).
 - `Fixes`
     - User can use the more intent revealing option alias `--test-framework` to select a testing framework. The `--test` option will be removed in a future release. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#96](https://github.com/jonathantorres/construct/issues/96).
 

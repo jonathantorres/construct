@@ -96,6 +96,13 @@ class Settings
     private $githubTemplates;
 
     /**
+     * Generate Code of Conduct file?
+     *
+     * @var boolean
+     */
+    private $codeOfConduct;
+
+    /**
      * Initialize.
      *
      * @param string  $projectName        The entered project name.
@@ -111,6 +118,7 @@ class Settings
      * @param boolean $environmentFiles   Generate .env environment files?
      * @param boolean $lgtmConfiguration  Generate LGTM configuration files?
      * @param boolean $githubTemplates    Generate GitHub templates?
+     * @param boolean $codeOfConduct      Generate Code of Conduct file?
      *
      * @return void
      */
@@ -127,7 +135,8 @@ class Settings
         $phpVersion,
         $environmentFiles,
         $lgtmConfiguration,
-        $githubTemplates = false
+        $githubTemplates = false,
+        $codeOfConduct = false
     ) {
         $this->projectName = $projectName;
         $this->testingFramework = $testingFramework;
@@ -142,6 +151,7 @@ class Settings
         $this->environmentFiles = $environmentFiles;
         $this->lgtmConfiguration = $lgtmConfiguration;
         $this->githubTemplates = $githubTemplates;
+        $this->codeOfConduct = $codeOfConduct;
     }
 
     /**
@@ -272,5 +282,15 @@ class Settings
     public function withGithubTemplates()
     {
         return $this->githubTemplates;
+    }
+
+    /**
+     * Whether or not to create a Code of Conduct file.
+     *
+     * @return boolean
+     */
+    public function withCodeOfConduct()
+    {
+        return $this->codeOfConduct;
     }
 }
