@@ -78,10 +78,10 @@ class Str
     public function toCamelCase($string, $capitalizeFirstCharacter = false)
     {
         $string = str_replace(
-           ' ',
-           '',
-           ucwords(str_replace(['-', '_'], ' ', $string))
-       );
+            ' ',
+            '',
+            ucwords(str_replace(['-', '_'], ' ', $string))
+        );
 
         if (!$capitalizeFirstCharacter) {
             $string = lcfirst($string);

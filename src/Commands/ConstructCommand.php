@@ -143,19 +143,19 @@ class ConstructCommand extends Command
         $phpVersion = $this->phpVersionWarning($phpVersion, $output);
 
         $this->settings = new Settings(
-          $projectName,
-          $testFramework,
-          $license,
-          $namespace,
-          $git,
-          $phpcs,
-          $keywords,
-          $vagrant,
-          $editorConfig,
-          $phpVersion,
-          $environment,
-          $lgtm,
-          $githubTemplates
+            $projectName,
+            $testFramework,
+            $license,
+            $namespace,
+            $git,
+            $phpcs,
+            $keywords,
+            $vagrant,
+            $editorConfig,
+            $phpVersion,
+            $environment,
+            $lgtm,
+            $githubTemplates
         );
 
         $this->construct->generate($this->settings, new Git, new Script);
