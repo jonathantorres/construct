@@ -6,21 +6,21 @@
     - Test generated project on php nightly. Done by [@raphaelstolt](https://github.com/raphaelstolt).
 
 #### v1.7.1 `2016-01-24`
-- `Fixes`
-    - Use installed php version by default. See [#77](https://github.com/jonathantorres/construct/issues/77)
-    - Php cs fixer composer script is now generated. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+- `Fixed`
+    - Use installed php version by default. See [#77](https://github.com/jonathantorres/construct/issues/77).
+    - Php cs fixer composer script is now generated. Fix by [@raphaelstolt](https://github.com/raphaelstolt).
 
 #### v1.7.0 `2015-12-30`
 - `Added`
-    - Interactive console mode. See [#14](https://github.com/jonathantorres/construct/issues/14)
+    - Interactive console mode. See [#14](https://github.com/jonathantorres/construct/issues/14).
 
 #### v1.6.0 `2015-12-17`
 - `Added`
     - User can optionally generate .env environment files. Done by [@raphaelstolt](https://github.com/raphaelstolt).
     - User can optionally generate LGTM configuration files. Done by [@raphaelstolt](https://github.com/raphaelstolt).
     - Allow user to specify php7 as the project's required php version.
-- `Fixes`
-    - Run travis on php versions greater or equal than the generated project. See [#72](https://github.com/jonathantorres/construct/issues/72)
+- `Fixed`
+    - Run travis on php versions greater or equal than the generated project. See [#72](https://github.com/jonathantorres/construct/issues/72).
 
 #### v1.5.0 `2015-11-07`
 - `Added`
@@ -29,20 +29,20 @@
     - Show more console output when initializing a git repo, bootstrapping codeception and initializing behat.
 
 #### v1.4.3 `2015-09-17`
-- `Fixes`
+- `Fixed`
     - PHPUnit test is only generated if using `phpunit` as your testing framework.
     - Generate `phpspec.yml` file. When using `phpspec` as your testing framework.
     - Initialize `behat` if using it as your testing framework.
     - Bootstrap `codeception` if using it as your testing framework.
 
 #### v1.4.2 `2015-09-07`
-- `Fixes`
+- `Fixed`
     - Include author name on GPL license files.
     - No longer using illuminate components.
     - Improved tests. Added integration test.
 
 #### v1.4.1 `2015-08-29`
-- `Fixes`
+- `Fixed`
     - Fix console dependency. Always use latest stable version.
     - Minor docs updates.
 
@@ -50,8 +50,8 @@
 - `Added`
     - User can optionally generate an EditorConfig configuration. Done by [@raphaelstolt](https://github.com/raphaelstolt).
     - Display warning against using `php` as part of project name in micro-packages. Done by [@raphaelstolt](https://github.com/raphaelstolt).
-- `Fixes`
-    - Update `phpunit` to `4.7.*` and `codeception` to `2.1.*`
+- `Fixed`
+    - Update `phpunit` to `4.7.*` and `codeception` to `2.1.*`.
 
 #### v1.3.0 `2015-06-09`
 - `Added`
