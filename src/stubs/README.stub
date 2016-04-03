@@ -10,7 +10,7 @@ $ composer require {vendor_lower}/{project_lower}
 #### Changelog
 Please see [CHANGELOG](CHANGELOG.md) for more information.
 
-#### Running Tests
+#### Running tests
 ``` bash
 $ composer test
 ```
@@ -19,4 +19,4 @@ $ composer test
 Please see [CONTRIBUTING](CONTRIBUTING.md) for more details.
 
 #### License
-This library is licensed under the {license} license. Please see [License file](LICENSE.md) for more information.
+This library is licensed under the {license} license. Please see [LICENSE](LICENSE.md) for more information.
