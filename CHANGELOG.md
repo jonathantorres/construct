@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.9.0 `2016-04-dd`
+- `Fixes`
+    - User can use the more intent revealing option alias `--test-framework` to select a testing framework. The `--test` option will be removed in a future release. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#96](https://github.com/jonathantorres/construct/issues/96).
+
 #### v1.8.0 `2016-03-12`
 - `Added`
     - User can optionally generate [GitHub templates](https://github.com/blog/2111-issue-and-pull-request-templates). Done by [@raphaelstolt](https://github.com/raphaelstolt).

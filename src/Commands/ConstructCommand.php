@@ -77,7 +77,7 @@ class ConstructCommand extends Command
     protected function configure()
     {
         $nameDescription = 'The vendor/project name';
-        $testDescription = 'Testing framework (one of: ' . join(', ', $this->defaults->testingFrameworks) . ')';
+        $testFrameworkDescription = 'Testing framework (one of: ' . join(', ', $this->defaults->testingFrameworks) . ')';
         $licenseDescription = 'License (one of: ' . join(', ', $this->defaults->licenses) . ')';
         $namespaceDescription = 'Namespace for project';
         $gitDescription = 'Initialize an empty Git repo';
@@ -93,7 +93,8 @@ class ConstructCommand extends Command
         $this->setName('generate');
         $this->setDescription('Generates a basic PHP project');
         $this->addArgument('name', InputArgument::REQUIRED, $nameDescription);
-        $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testDescription, 'phpunit');
+        $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testFrameworkDescription, 'phpunit');
+        $this->addOption('test-framework', null, InputOption::VALUE_OPTIONAL, $testFrameworkDescription, 'phpunit');
         $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
         $this->addOption('namespace', 's', InputOption::VALUE_OPTIONAL, $namespaceDescription, 'Vendor\Project');
         $this->addOption('git', 'g', InputOption::VALUE_NONE, $gitDescription);
@@ -119,6 +120,12 @@ class ConstructCommand extends Command
     {
         $projectName = $input->getArgument('name');
         $testFramework = $input->getOption('test');
+
+        $testingFramework = $input->getOption('test-framework');
+        if ($testingFramework !== 'phpunit') {
+            $testFramework = $testingFramework;
+        }
+
         $license = $input->getOption('license');
         $namespace = $input->getOption('namespace');
         $git = $input->getOption('git');

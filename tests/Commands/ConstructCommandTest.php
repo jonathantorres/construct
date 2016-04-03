@@ -125,6 +125,23 @@ class ConstructCommandTest extends PHPUnit
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
+    public function testProjectGenerationWithASpecifiedTestingFrameworkViaAlias()
+    {
+        $this->setMocks(2, 2, 1, 8, 8);
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--test-framework' => 'behat'
+        ]);
+
+        $output = 'Initialized behat.' . PHP_EOL . 'Project "vendor/project" constructed.' . PHP_EOL;
+        $this->assertSame($output, $commandTester->getDisplay());
+    }
+
     public function testProjectGenerationWithSpecifiedPhpVersion()
     {
         $this->setMocks(3, 2);
