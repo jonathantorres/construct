@@ -20,5 +20,8 @@
             "Jonathantorres\\Logger\\": "src/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "scripts": {
+        "test": "phpspec run --format=pretty"
+    }
 }
