@@ -114,7 +114,7 @@ class Construct
         $this->saveNames();
         $this->root();
         $this->src();
-        $this->docs($this->settings->withCodeOfConduct());
+        $this->docs();
         $this->gitignore();
         $this->testing();
 
@@ -198,13 +198,11 @@ class Construct
     /**
      * Generate documentation (README, CONTRIBUTING, CHANGELOG) files.
      *
-     * @param boolean $withCodeOfConduct Whether or not to set a reference to the Code of Conduct in the readme.
-     *
      * @return void
      */
-    protected function docs($withCodeOfConduct = false)
+    protected function docs()
     {
-        $this->readme($withCodeOfConduct);
+        $this->readme();
         $this->contributing();
         $this->changelog();
     }
@@ -212,16 +210,20 @@ class Construct
     /**
      * Generate README.md file.
      *
-     * @param boolean $withCodeOfConduct Whether or not to set a reference to the Code of Conduct in the readme.
-     *
      * @return void
      */
-    protected function readme($withCodeOfConduct = false)
+    protected function readme()
     {
-        if ($withCodeOfConduct === false) {
+        if ($this->settings->withCodeOfConduct() === false && $this->settings->withGithubTemplates() === false) {
             $readme = $this->file->get(__DIR__ . '/stubs/README.stub');
-        } else {
+        } elseif ($this->settings->withCodeOfConduct() === false && $this->settings->
+            withGithubTemplates() === true) {
+            $readme = $this->file->get(__DIR__ . '/stubs/README.GITHUB.TEMPLATES.stub');
+        } elseif ($this->settings->withCodeOfConduct() === true && $this->settings->
+            withGithubTemplates() === false) {
             $readme = $this->file->get(__DIR__ . '/stubs/README.CONDUCT.stub');
+        } else {
+            $readme = $this->file->get(__DIR__ . '/stubs/README.CONDUCT.GITHUB.TEMPLATES.stub');
         }
 
         $stubs = [
