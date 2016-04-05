@@ -89,6 +89,7 @@ class ConstructCommand extends Command
         $environmentDescription = 'Generate .env environment files';
         $lgtmDescription = 'Generate LGTM configuration files';
         $githubTemplatesDescription = 'Generate GitHub templates';
+        $codeOfConductDescription = 'Generate Code of Conduct file';
 
         $this->setName('generate');
         $this->setDescription('Generates a basic PHP project');
@@ -106,6 +107,7 @@ class ConstructCommand extends Command
         $this->addOption('env', null, InputOption::VALUE_NONE, $environmentDescription);
         $this->addOption('lgtm', null, InputOption::VALUE_NONE, $lgtmDescription);
         $this->addOption('github-templates', null, InputOption::VALUE_NONE, $githubTemplatesDescription);
+        $this->addOption('code-of-conduct', null, InputOption::VALUE_NONE, $codeOfConductDescription);
     }
 
     /**
@@ -137,6 +139,7 @@ class ConstructCommand extends Command
         $environment = $input->getOption('env');
         $lgtm = $input->getOption('lgtm');
         $githubTemplates = $input->getOption('github-templates');
+        $codeOfConduct = $input->getOption('code-of-conduct');
 
         if (!$this->str->isValid($projectName)) {
             $output->writeln('<error>Warning: "' . $projectName . '" is not a valid project name, please use "vendor/project"</error>');
@@ -162,7 +165,8 @@ class ConstructCommand extends Command
             $phpVersion,
             $environment,
             $lgtm,
-            $githubTemplates
+            $githubTemplates,
+            $codeOfConduct
         );
 
         $this->construct->generate($this->settings, new Git, new Script);

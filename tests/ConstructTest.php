@@ -523,6 +523,40 @@ class ConstructTest extends PHPUnit
         );
     }
 
+    public function testProjectGenerationWithCodeOfConduct()
+    {
+        $settings = new Settings(
+            'jonathantorres/logger',
+            'phpunit',
+            'MIT',
+            'Vendor\Project',
+            null,
+            null,
+            null,
+            null,
+            false,
+            '5.6.0',
+            null,
+            false,
+            false,
+            true
+        );
+
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->assertSame(
+            $this->getStub('with-code-of-conduct/CONDUCT'),
+            $this->getFile('CONDUCT.md')
+        );
+        $this->assertSame(
+            $this->getStub('with-code-of-conduct/README'),
+            $this->getFile('README.md')
+        );
+        $this->assertSame(
+            $this->getStub('with-code-of-conduct/gitattributes'),
+            $this->getFile('.gitattributes')
+        );
+    }
+
     /**
      * Get expected changelog file.
      *

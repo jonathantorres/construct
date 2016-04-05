@@ -23,6 +23,7 @@ The generated project structure will look like the following `tree` excerpt. Fil
 ```
 ├── logger
 │   ├── CHANGELOG.md
+│   ├── (CONDUCT.md)
 │   ├── composer.json
 │   ├── composer.lock
 │   ├── CONTRIBUTING.md
@@ -181,6 +182,13 @@ The `--github-templates` option will generate [GitHub template](https://github.c
 
 ```bash
 construct generate jonathantorres/logger --github-templates
+```
+
+## Generate a Code of Conduct?
+The `--code-of-conduct` option will generate a Code of Conduct file named `CONDUCT.md` within the constructed project and also add a reference to it in the generated `README.md`. The used Code of Conduct is adapted from the [Contributor Covenant](http://contributor-covenant.org), version 1.4. There's no short option available.
+
+```bash
+construct generate jonathantorres/logger --code-of-conduct
 ```
 
 ## Interactive Mode
