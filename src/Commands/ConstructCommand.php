@@ -94,10 +94,10 @@ class ConstructCommand extends Command
         $this->setName('generate');
         $this->setDescription('Generates a basic PHP project');
         $this->addArgument('name', InputArgument::REQUIRED, $nameDescription);
-        $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testFrameworkDescription, 'phpunit');
-        $this->addOption('test-framework', null, InputOption::VALUE_OPTIONAL, $testFrameworkDescription, 'phpunit');
-        $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, 'MIT');
-        $this->addOption('namespace', 's', InputOption::VALUE_OPTIONAL, $namespaceDescription, 'Vendor\Project');
+        $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testFrameworkDescription, Defaults::TEST_FRAMEWORK);
+        $this->addOption('test-framework', null, InputOption::VALUE_OPTIONAL, $testFrameworkDescription, Defaults::TEST_FRAMEWORK);
+        $this->addOption('license', 'l', InputOption::VALUE_OPTIONAL, $licenseDescription, Defaults::LICENSE);
+        $this->addOption('namespace', 's', InputOption::VALUE_OPTIONAL, $namespaceDescription, Defaults::PROJECT_NAMESPACE);
         $this->addOption('git', 'g', InputOption::VALUE_NONE, $gitDescription);
         $this->addOption('phpcs', 'p', InputOption::VALUE_NONE, $phpcsDescription);
         $this->addOption('keywords', 'k', InputOption::VALUE_OPTIONAL, $keywordsDescription);
@@ -124,7 +124,7 @@ class ConstructCommand extends Command
         $testFramework = $input->getOption('test');
 
         $testingFramework = $input->getOption('test-framework');
-        if ($testingFramework !== 'phpunit') {
+        if ($testingFramework !== Defaults::TEST_FRAMEWORK) {
             $testFramework = $testingFramework;
         }
 
@@ -206,9 +206,10 @@ class ConstructCommand extends Command
     private function supportedLicenseWarning($license, $output)
     {
         if (!in_array($license, $this->defaults->licenses)) {
-            $output->writeln('<error>Warning: "' . $license . '" is not a supported license. Using MIT.</error>');
-
-            $license = 'MIT';
+            $warning = '<error>Warning: "' . $license . '" is not a supported license. '
+                . 'Using ' . Defaults::LICENSE . '.</error>';
+            $output->writeln($warning);
+            $license = Defaults::LICENSE;
         }
 
         return $license;
@@ -225,8 +226,10 @@ class ConstructCommand extends Command
     private function testFrameworkWarning($testFramework, $output)
     {
         if (!in_array($testFramework, $this->defaults->testingFrameworks)) {
-            $output->writeln('<error>Warning: "' . $testFramework . '" is not a supported testing framework. Using phpunit.</error>');
-            $testFramework = 'phpunit';
+            $warning = '<error>Warning: "' . $testFramework . '" is not a supported testing framework. '
+                . 'Using ' . Defaults::TEST_FRAMEWORK . '.</error>';
+            $output->writeln($warning);
+            $testFramework = Defaults::TEST_FRAMEWORK;
         }
 
         return $testFramework;

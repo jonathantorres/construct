@@ -47,6 +47,13 @@ class InteractiveCommand extends Command
     protected $defaults;
 
     /**
+     * Php version currently used on the system.
+     *
+     * @var string
+     */
+    protected $systemPhpVersion;
+
+    /**
      * Initialize.
      *
      * @param JonathanTorres\Construct\Construct $construct
@@ -59,6 +66,7 @@ class InteractiveCommand extends Command
         $this->construct = $construct;
         $this->str = $str;
         $this->defaults = new Defaults();
+        $this->systemPhpVersion = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
 
         parent::__construct();
     }
@@ -95,24 +103,24 @@ class InteractiveCommand extends Command
         });
 
         $testingFrameworkQuestion = new ChoiceQuestion(
-            'Which testing framework will you use? Default is "' . $this->defaults->testingFrameworks[0] . '"',
+            'Which testing framework will you use? Default is "' . Defaults::TEST_FRAMEWORK . '"',
             $this->defaults->testingFrameworks,
             0
         );
 
         $licenseQuestion = new ChoiceQuestion(
-            'Which open source license will your project use? Default is "' . $this->defaults->licenses[0] . '"',
+            'Which open source license will your project use? Default is "' . Defaults::LICENSE . '"',
             $this->defaults->licenses,
             0
         );
 
         $phpVersionQuestion = new ChoiceQuestion(
-            'What\'s the minimum required php version for this project? Default is "' . $this->defaults->phpVersions[2] . '"',
+            'What\'s the minimum required php version for this project? Default is "' . $this->systemPhpVersion . '"',
             $this->defaults->phpVersions,
             2
         );
 
-        $namespaceQuestion = new Question('What will be the namespace for the project? Default is "Vendor\Project"', 'Vendor\Project');
+        $namespaceQuestion = new Question('What will be the namespace for the project? Default is "Vendor\Project"', Defaults::PROJECT_NAMESPACE);
         $gitQuestion = new ConfirmationQuestion('Do you want to initialize a local git repository?', false);
         $phpCsQuestion = new ConfirmationQuestion('Do you want to generate a PHP Coding Standards Fixer configuration?', false);
         $composerKeywordsQuestion = new Question('Supply a comma separated list of keywords for you composer.json (Optional) ', '');

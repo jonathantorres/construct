@@ -24,4 +24,8 @@ class Defaults
      * @var array
      */
     public $phpVersions = ['5.4', '5.5', '5.6', '7.0'];
+
+    const TEST_FRAMEWORK = 'phpunit';
+    const LICENSE = 'MIT';
+    const PROJECT_NAMESPACE = 'Vendor\Project';
 }
