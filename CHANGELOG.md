@@ -1,10 +1,14 @@
 # Changelog
 
-#### v1.9.0 `2016-04-dd`
+#### v1.9.0 `2016-04-10`
 - `Added`
     - User can optionally generate a Code of Conduct file which is adapted from the [Contributor Covenant](http://contributor-covenant.org), version 1.4. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+    - Composer test scripts for Codeception, behat and phpspec. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#102](https://github.com/jonathantorres/construct/issues/102).
 - `Fixed`
     - User can use the more intent revealing option alias `--test-framework` to select a testing framework. The `--test` option will be removed in a future release. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#96](https://github.com/jonathantorres/construct/issues/96).
+    - Broken link in README when using the --github-templates option. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#105](https://github.com/jonathantorres/construct/issues/105).
+    - Default PHP version is no longer set to the exact patch version. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#85](https://github.com/jonathantorres/construct/issues/85).
+    - Missing PHP version in constructed Travis file. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#91](https://github.com/jonathantorres/construct/issues/91).
 
 #### v1.8.0 `2016-03-12`
 - `Added`
