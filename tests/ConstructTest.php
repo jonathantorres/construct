@@ -521,6 +521,10 @@ class ConstructTest extends PHPUnit
             $this->getStub('with-github-templates/gitattributes'),
             $this->getFile('.gitattributes')
         );
+        $this->assertSame(
+            $this->getStub('with-github-templates/README'),
+            $this->getFile('README.md')
+        );
     }
 
     public function testProjectGenerationWithCodeOfConduct()
@@ -554,6 +558,36 @@ class ConstructTest extends PHPUnit
         $this->assertSame(
             $this->getStub('with-code-of-conduct/gitattributes'),
             $this->getFile('.gitattributes')
+        );
+    }
+
+    public function testProjectGenerationWithCodeOfConductAndGitHubTemplates()
+    {
+        $settings = new Settings(
+            'jonathantorres/logger',
+            'phpunit',
+            'MIT',
+            'Vendor\Project',
+            null,
+            null,
+            null,
+            null,
+            false,
+            '5.6.0',
+            null,
+            false,
+            true,
+            true
+        );
+
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->assertSame(
+            $this->getStub('with-code-of-conduct/CONDUCT'),
+            $this->getFile('CONDUCT.md')
+        );
+        $this->assertSame(
+            $this->getStub('with-code-of-conduct-and-github-templates/README'),
+            $this->getFile('README.md')
         );
     }
 
