@@ -300,7 +300,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithEnvironmentFiles()
     {
-        $this->setMocks(3, 2, 3);
+        $this->setMocks(3, 2, 2, 11, 11);
 
         $app = $this->setApplication();
         $command = $app->find('generate');

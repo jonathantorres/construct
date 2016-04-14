@@ -465,6 +465,7 @@ class ConstructTest extends PHPUnit
         $this->assertSame($this->getStub('with-env/env'), $this->getFile('.env.example'));
         $this->assertSame($this->getStub('with-env/gitattributes'), $this->getFile('.gitattributes'));
         $this->assertSame($this->getStub('with-env/composer'), $this->getFile('composer.json'));
+        $this->assertSame($this->getStub('with-env/gitignore'), $this->getFile('.gitignore'));
     }
 
     public function testProjectGenerationWithLgtmConfiguration()
