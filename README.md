@@ -198,16 +198,16 @@ This mode will ask you all the required (and optional) information to generate y
 construct generate:interactive
 ```
 
-## Changelog
-Please see [CHANGELOG](CHANGELOG.md) for more information.
-
 ## Running tests
 ``` bash
 $ composer test
 ```
 
-## Contributing
-Please see [CONTRIBUTING](CONTRIBUTING.md) for more details.
-
 ## License
 This library is licensed under the MIT license. Please see [LICENSE](LICENSE.md) for more information.
+
+## Changelog
+Please see [CHANGELOG](CHANGELOG.md) for more information.
+
+## Contributing
+Please see [CONTRIBUTING](CONTRIBUTING.md) for more details.
