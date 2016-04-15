@@ -284,7 +284,15 @@ class Construct
      */
     protected function gitignore()
     {
-        $this->file->copy(__DIR__ . '/stubs/gitignore.stub', $this->projectLower . '/' . '.gitignore');
+        if ($this->settings->withEnvironmentFiles()) {
+            $content = $this->file->get(__DIR__ . '/stubs/gitignore.stub');
+            $content .= '.env' . PHP_EOL;
+
+            $this->file->put($this->projectLower . '/' . '.gitignore', $content);
+        } else {
+            $this->file->copy(__DIR__ . '/stubs/gitignore.stub', $this->projectLower . '/' . '.gitignore');
+        }
+
         $this->exportIgnores[] = '.gitignore';
     }
 
