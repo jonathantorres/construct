@@ -1,3 +1,4 @@
+
 # Construct
 [![Build Status](https://travis-ci.org/jonathantorres/construct.svg?branch=master)](https://travis-ci.org/jonathantorres/construct)
 
@@ -130,7 +131,7 @@ construct generate jonathantorres/logger -g
 
 ## Generate a PHP Coding Standards Fixer configuration?
 The `--phpcs` option will generate a [PHP Coding Standards Fixer](http://cs.sensiolabs.org/) configuration
-within the constructed project. The generated `.php_cs` configuration defaults to the `psr-2` coding style guide.
+within the constructed project. The generated `.php_cs` configuration defaults to the `PSR-2` coding style guide.
 
 ```bash
 construct generate jonathantorres/logger --phpcs
