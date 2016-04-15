@@ -92,7 +92,7 @@ class ConstructCommand extends Command
         $codeOfConductDescription = 'Generate Code of Conduct file';
 
         $this->setName('generate');
-        $this->setDescription('Generates a basic PHP project');
+        $this->setDescription('Generates a basic PHP project/micro-package');
         $this->addArgument('name', InputArgument::REQUIRED, $nameDescription);
         $this->addOption('test', 't', InputOption::VALUE_OPTIONAL, $testFrameworkDescription, Defaults::TEST_FRAMEWORK);
         $this->addOption('test-framework', null, InputOption::VALUE_OPTIONAL, $testFrameworkDescription, Defaults::TEST_FRAMEWORK);

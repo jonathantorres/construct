@@ -79,7 +79,7 @@ class InteractiveCommand extends Command
     protected function configure()
     {
         $this->setName('generate:interactive');
-        $this->setDescription('Generate a basic PHP project based on a series of questions.');
+        $this->setDescription('Generate a basic PHP project/micro-package based on a series of questions.');
     }
 
     /**
