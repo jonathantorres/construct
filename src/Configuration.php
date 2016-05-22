@@ -29,6 +29,7 @@ class Configuration
         }
 
         $configuration = Yaml::parse($filesystemHelper->get($configurationFile));
+        $defaults = new Defaults();
 
         if (isset($configuration['construct-with'])) {
             $configuration['construct-with'] = array_flip($configuration['construct-with']);
@@ -36,8 +37,8 @@ class Configuration
 
         return new Settings(
             $projectName,
-            isset($configuration['test-framework']) ? $configuration['test-framework'] : (new Defaults())->testingFrameworks[0],
-            isset($configuration['license']) ? $configuration['license'] : (new Defaults())->licenses[0],
+            isset($configuration['test-framework']) ? $configuration['test-framework'] : $defaults->testingFrameworks[0],
+            isset($configuration['license']) ? $configuration['license'] : $defaults->licenses[0],
             isset($configuration['namespace']) ? $configuration['namespace'] : null,
             isset($configuration['construct-with']['git']) ? true : false,
             isset($configuration['construct-with']['phpcs']) ? true : false,
