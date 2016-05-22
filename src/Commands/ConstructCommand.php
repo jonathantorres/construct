@@ -35,7 +35,7 @@ class ConstructCommand extends Command
     /**
      * Filesystem helper.
      *
-     * @var \JonathanTorres\Construct\Filesystem
+     * @var \JonathanTorres\Construct\Helpers\Filesystem
      */
     protected $filesystem;
 
@@ -65,7 +65,7 @@ class ConstructCommand extends Command
      *
      * @param \JonathanTorres\Construct\Construct  $construct
      * @param \JonathanTorres\Construct\Str        $str
-     * @param \JonathanTorres\Construct\Filesystem $filesystem
+     * @param \JonathanTorres\Construct\Helpers\Filesystem $filesystem
      *
      * @return void
      */
