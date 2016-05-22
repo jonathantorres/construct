@@ -1,6 +1,6 @@
 # Changelog
 
-#### v2.0.0 `2016-04-??`
+#### v1.10.0 `2016-04-??`
 - `Added`
     - User can load common option settings from a configuration file. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#86](https://github.com/jonathantorres/construct/issues/86).
 
