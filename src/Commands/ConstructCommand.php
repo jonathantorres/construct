@@ -63,8 +63,8 @@ class ConstructCommand extends Command
     /**
      * Initialize.
      *
-     * @param \JonathanTorres\Construct\Construct  $construct
-     * @param \JonathanTorres\Construct\Str        $str
+     * @param \JonathanTorres\Construct\Construct          $construct
+     * @param \JonathanTorres\Construct\Str                $str
      * @param \JonathanTorres\Construct\Helpers\Filesystem $filesystem
      *
      * @return void
