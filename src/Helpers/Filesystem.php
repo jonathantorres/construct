@@ -2,6 +2,8 @@
 
 namespace JonathanTorres\Construct\Helpers;
 
+use JonathanTorres\Construct\Defaults;
+
 class Filesystem
 {
     /**
@@ -27,6 +29,65 @@ class Filesystem
     public function isDirectory($path)
     {
         return is_dir($path);
+    }
+
+    /**
+     * Check if the path is a file.
+     *
+     * @param string $path
+     *
+     * @return boolean
+     */
+    public function isFile($path)
+    {
+        return is_file($path);
+    }
+
+    /**
+     * Check if the path is readable.
+     *
+     * @param string $path
+     *
+     * @return boolean
+     */
+    public function isReadable($path)
+    {
+        return is_readable($path);
+    }
+
+    /**
+     * Get the home directory.
+     *
+     * @return string
+     */
+    public function getHomeDirectory($os = PHP_OS)
+    {
+        if (strtoupper(substr($os, 0, 3)) !== 'WIN') {
+            return getenv('HOME');
+        }
+
+        return getenv('userprofile');
+    }
+
+    /**
+     * Get the default construct configuration file.
+     *
+     * @return string
+     */
+    public function getDefaultConfigurationFile()
+    {
+        return $this->getHomeDirectory()
+            . DIRECTORY_SEPARATOR . Defaults::CONFIGURATION_FILE;
+    }
+
+    /**
+     * Determine if system has a default configuration file.
+     *
+     * @return boolean boolean
+     */
+    public function hasDefaultConfigurationFile()
+    {
+        return $this->isFile($this->getDefaultConfigurationFile());
     }
 
     /**

@@ -1,0 +1,10 @@
+namespace: Vendor\Project
+
+construct-with:
+  - git
+  - phpcs
+  - vagrant
+  - editor-config
+  - env
+  - lgtm
+  - github-templates

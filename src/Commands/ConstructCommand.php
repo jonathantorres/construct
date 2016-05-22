@@ -2,8 +2,10 @@
 
 namespace JonathanTorres\Construct\Commands;
 
+use JonathanTorres\Construct\Configuration;
 use JonathanTorres\Construct\Construct;
 use JonathanTorres\Construct\Defaults;
+use JonathanTorres\Construct\Helpers\Filesystem;
 use JonathanTorres\Construct\Helpers\Git;
 use JonathanTorres\Construct\Helpers\Script;
 use JonathanTorres\Construct\Helpers\Str;
@@ -31,6 +33,13 @@ class ConstructCommand extends Command
     protected $str;
 
     /**
+     * Filesystem helper.
+     *
+     * @var \JonathanTorres\Construct\Filesystem
+     */
+    protected $filesystem;
+
+    /**
      * Construct settings.
      *
      * @var \JonathanTorres\Construct\Settings
@@ -54,15 +63,17 @@ class ConstructCommand extends Command
     /**
      * Initialize.
      *
-     * @param \JonathanTorres\Construct\Construct $construct
-     * @param \JonathanTorres\Construct\Str       $str
+     * @param \JonathanTorres\Construct\Construct  $construct
+     * @param \JonathanTorres\Construct\Str        $str
+     * @param \JonathanTorres\Construct\Filesystem $filesystem
      *
      * @return void
      */
-    public function __construct(Construct $construct, Str $str)
+    public function __construct(Construct $construct, Str $str, Filesystem $filesystem)
     {
         $this->construct = $construct;
         $this->str = $str;
+        $this->filesystem = $filesystem;
         $this->defaults = new Defaults();
         $this->systemPhpVersion = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
 
@@ -90,6 +101,9 @@ class ConstructCommand extends Command
         $lgtmDescription = 'Generate LGTM configuration files';
         $githubTemplatesDescription = 'Generate GitHub templates';
         $codeOfConductDescription = 'Generate Code of Conduct file';
+        $configurationDescription = 'Generate from configuration file';
+        $ignoreDefaultConfigurationDescription = 'Ignore present default configuration file';
+        $configurationDefault = $this->filesystem->getDefaultConfigurationFile();
 
         $this->setName('generate');
         $this->setDescription('Generates a basic PHP project/micro-package');
@@ -108,6 +122,8 @@ class ConstructCommand extends Command
         $this->addOption('lgtm', null, InputOption::VALUE_NONE, $lgtmDescription);
         $this->addOption('github-templates', null, InputOption::VALUE_NONE, $githubTemplatesDescription);
         $this->addOption('code-of-conduct', null, InputOption::VALUE_NONE, $codeOfConductDescription);
+        $this->addOption('config', 'c', InputOption::VALUE_OPTIONAL, $configurationDescription, $configurationDefault);
+        $this->addOption('ignore-default-config', 'i', InputOption::VALUE_NONE, $ignoreDefaultConfigurationDescription);
     }
 
     /**
@@ -140,6 +156,8 @@ class ConstructCommand extends Command
         $lgtm = $input->getOption('lgtm');
         $githubTemplates = $input->getOption('github-templates');
         $codeOfConduct = $input->getOption('code-of-conduct');
+        $ignoreDefaultConfiguration = $input->getOption('ignore-default-config');
+        $configuration = $input->getOption('config');
 
         if (!$this->str->isValid($projectName)) {
             $output->writeln('<error>Warning: "' . $projectName . '" is not a valid project name, please use "vendor/project"</error>');
@@ -152,22 +170,32 @@ class ConstructCommand extends Command
         $testFramework = $this->testFrameworkWarning($testFramework, $output);
         $phpVersion = $this->phpVersionWarning($phpVersion, $output);
 
-        $this->settings = new Settings(
-            $projectName,
-            $testFramework,
-            $license,
-            $namespace,
-            $git,
-            $phpcs,
-            $keywords,
-            $vagrant,
-            $editorConfig,
-            $phpVersion,
-            $environment,
-            $lgtm,
-            $githubTemplates,
-            $codeOfConduct
-        );
+        if ($this->isConfigurationApplicable($configuration)
+            && $ignoreDefaultConfiguration === false) {
+            $this->settings = Configuration::getSettings(
+                $configuration,
+                $projectName,
+                $keywords,
+                $this->filesystem
+            );
+        } else {
+            $this->settings = new Settings(
+                $projectName,
+                $testFramework,
+                $license,
+                $namespace,
+                $git,
+                $phpcs,
+                $keywords,
+                $vagrant,
+                $editorConfig,
+                $phpVersion,
+                $environment,
+                $lgtm,
+                $githubTemplates,
+                $codeOfConduct
+            );
+        }
 
         $this->construct->generate($this->settings, new Git, new Script);
 
@@ -176,6 +204,26 @@ class ConstructCommand extends Command
         $this->initializedBehatMessage($testFramework, $output);
 
         $output->writeln('<info>Project "' . $projectName . '" constructed.</info>');
+    }
+
+    /**
+     * Determine if a configuration is applicable.
+     *
+     * @param  string  The default or a command line provided configuration file.
+     * @return boolean
+     */
+    private function isConfigurationApplicable($configuration)
+    {
+        if ($configuration === $this->filesystem->getDefaultConfigurationFile()
+            && $this->filesystem->hasDefaultConfigurationFile()) {
+            return true;
+        }
+
+        if ($configuration !== $this->filesystem->getDefaultConfigurationFile()) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

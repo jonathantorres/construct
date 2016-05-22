@@ -1,5 +1,9 @@
 # Changelog
 
+#### v2.0.0 `2016-04-??`
+- `Added`
+    - User can load common option settings from a configuration file. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#86](https://github.com/jonathantorres/construct/issues/86).
+
 #### v1.9.0 `2016-04-10`
 - `Added`
     - User can optionally generate a Code of Conduct file which is adapted from the [Contributor Covenant](http://contributor-covenant.org), version 1.4. Done by [@raphaelstolt](https://github.com/raphaelstolt).

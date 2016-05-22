@@ -1,0 +1,14 @@
+namespace: Vendor\Project
+test-framework: phpspec
+license: MIT
+php: 5.6
+
+construct-with:
+  - git
+  - phpcs
+  - vagrant
+  - editor-config
+  - env
+  - lgtm
+  - github-templates
+  - code-of-conduct

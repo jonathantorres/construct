@@ -16,8 +16,9 @@ use JonathanTorres\Construct\Helpers\Str;
 use Symfony\Component\Console\Application;
 
 $str = new Str();
-$construct = new Construct(new Filesystem(), $str);
+$filesystem = new Filesystem();
+$construct = new Construct($filesystem, $str);
 $app = new Application('Construct', '1.9.0');
-$app->add(new ConstructCommand($construct, $str));
+$app->add(new ConstructCommand($construct, $str, $filesystem));
 $app->add(new InteractiveCommand($construct, $str));
 $app->run();
