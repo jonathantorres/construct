@@ -3,6 +3,10 @@
 #### v1.10.0 `2016-05-28`
 - `Added`
     - User can load common option settings from a configuration file. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#86](https://github.com/jonathantorres/construct/issues/86).
+- `Fixed`
+    - Generated `.env` file is now added on `.gitignore`. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#117](https://github.com/jonathantorres/construct/issues/117).
+    - Xdebug is now disabled on constructed `.travis.yml` file. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#119](https://github.com/jonathantorres/construct/issues/119).
+    - Wording improvements on constructed `README`. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#112](https://github.com/jonathantorres/construct/issues/112).
 
 #### v1.9.0 `2016-04-10`
 - `Added`
