@@ -39,7 +39,7 @@ class ConfigurationTest extends PHPUnit
             'example-project',
             'phpspec',
             'MIT',
-            'Vendor\Project',
+            'Namespace',
             true,
             true,
             'composer,keywords',
