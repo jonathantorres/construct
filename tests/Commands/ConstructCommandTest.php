@@ -3,6 +3,7 @@
 namespace JonathanTorres\Construct\Tests\Commands;
 
 use Illuminate\Filesystem\Filesystem;
+use JonathanTorres\Construct\Defaults;
 use JonathanTorres\Construct\Commands\ConstructCommand;
 use JonathanTorres\Construct\Construct;
 use JonathanTorres\Construct\Helpers\Str;
@@ -347,6 +348,45 @@ class ConstructCommandTest extends PHPUnit
         ]);
 
         $expectedCommandDisplay = 'Initialized git repo in "project-from-config".' . PHP_EOL
+            . 'Project "vendor/project-from-config" constructed.' . PHP_EOL;
+
+        $this->assertSame(
+            $expectedCommandDisplay,
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @ticket 126 (https://github.com/jonathantorres/construct/issues/126)
+     */
+    public function testProjectGenerationFromConfigurationWithInvalidSettings()
+    {
+        $this->setMocks(4, 3, 10, 11, 11);
+        $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project-from-config',
+            '--config' => dirname(__DIR__) . '/stubs/config/invalid_settings.stub'
+        ]);
+
+        $expectedWarnings = 'Warning: "DOO_WUTCH_YA_LIKE" is not a supported license. '
+            . 'Using {license}.' . PHP_EOL
+            . 'Warning: "rspec" is not a supported testing framework. '
+            . 'Using {testing_framework}.' . PHP_EOL
+            . 'Warning: "2.a" is not a valid php version. '
+            . 'Using version {php_version}' . PHP_EOL;
+
+        $expectedWarnings = str_replace(
+            ['{license}', '{testing_framework}', '{php_version}'],
+            [Defaults::LICENSE, Defaults::TEST_FRAMEWORK, $this->systemPhpVersion],
+            $expectedWarnings
+        );
+
+        $expectedCommandDisplay = $expectedWarnings . 'Initialized git repo in "project-from-config".' . PHP_EOL
             . 'Project "vendor/project-from-config" constructed.' . PHP_EOL;
 
         $this->assertSame(

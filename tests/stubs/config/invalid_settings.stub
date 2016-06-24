@@ -1,0 +1,14 @@
+namespace: Vendor
+test-framework: rspec
+license: DOO_WUTCH_YA_LIKE
+php: 2.a
+
+construct-with:
+  - git
+  - phpcs
+  - vagrant
+  - editor-config
+  - env
+  - lgtm
+  - github-templates
+  - code-of-conduct

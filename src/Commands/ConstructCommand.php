@@ -159,17 +159,6 @@ class ConstructCommand extends Command
         $ignoreDefaultConfiguration = $input->getOption('ignore-default-config');
         $configuration = $input->getOption('config');
 
-        if (!$this->str->isValid($projectName)) {
-            $output->writeln('<error>Warning: "' . $projectName . '" is not a valid project name, please use "vendor/project"</error>');
-
-            return false;
-        }
-
-        $this->containsPhpWarning($projectName, $output);
-        $license = $this->supportedLicenseWarning($license, $output);
-        $testFramework = $this->testFrameworkWarning($testFramework, $output);
-        $phpVersion = $this->phpVersionWarning($phpVersion, $output);
-
         if ($this->isConfigurationApplicable($configuration)
             && $ignoreDefaultConfiguration === false) {
             $this->settings = Configuration::getSettings(
@@ -197,6 +186,16 @@ class ConstructCommand extends Command
             );
         }
 
+        if (!$this->str->isValid($projectName)) {
+            $warningMessage = '<error>Warning: "' . $projectName . '" is not '
+                . 'a valid project name, please use "vendor/project"</error>';
+            $output->writeln($warningMessage);
+
+            return false;
+        }
+
+        $this->warnAndOverwriteInvalidSettingsWithDefaults($output);
+
         $this->construct->generate($this->settings, new Git, new Script);
 
         $this->initializedGitMessage($output);
@@ -205,6 +204,41 @@ class ConstructCommand extends Command
 
         $output->writeln('<info>Project "' . $projectName . '" constructed.</info>');
     }
+
+
+    /**
+     * Shows warnings and sets a new settings which overwrites
+     * invalid settings with default values.
+     *
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @return void
+     */
+    private function warnAndOverwriteInvalidSettingsWithDefaults($output)
+    {
+        $this->projectNameContainsPhpWarning($output);
+
+        $license = $this->supportedLicenseWarning($output);
+        $testFramework = $this->testFrameworkWarning($output);
+        $phpVersion = $this->phpVersionWarning($output);
+
+        $this->settings = new Settings(
+            $this->settings->getProjectName(),
+            $testFramework,
+            $license,
+            $this->settings->getNamespace(),
+            $this->settings->withGitInit(),
+            $this->settings->withPhpcsConfiguration(),
+            $this->settings->getComposerKeywords(),
+            $this->settings->withVagrantfile(),
+            $this->settings->withEditorConfig(),
+            $phpVersion,
+            $this->settings->withEnvironmentFiles(),
+            $this->settings->withLgtmConfiguration(),
+            $this->settings->withGithubTemplates(),
+            $this->settings->withCodeOfConduct()
+        );
+    }
+
 
     /**
      * Determine if a configuration is applicable.
@@ -229,13 +263,13 @@ class ConstructCommand extends Command
     /**
      * Show warning if the project name contains the string "php"
      *
-     * @param string                                            $projectName
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return void
      */
-    private function containsPhpWarning($projectName, $output)
+    private function projectNameContainsPhpWarning($output)
     {
+        $projectName = $this->settings->getProjectName();
         if ($this->str->contains($projectName, 'php')) {
             $containsPhpWarning = 'Warning: If you are about to create a micro-package "'
                 . $projectName . '" should optimally not contain a "php" notation in the project name.';
@@ -246,13 +280,14 @@ class ConstructCommand extends Command
     /**
      * Show warning if a license that is not supported is specified.
      *
-     * @param string                                            $license
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return string
      */
-    private function supportedLicenseWarning($license, $output)
+    private function supportedLicenseWarning($output)
     {
+        $license = $this->settings->getLicense();
+
         if (!in_array($license, $this->defaults->licenses)) {
             $warning = '<error>Warning: "' . $license . '" is not a supported license. '
                 . 'Using ' . Defaults::LICENSE . '.</error>';
@@ -266,13 +301,14 @@ class ConstructCommand extends Command
     /**
      * Show warning if a test framework that is not supported is specified.
      *
-     * @param string                                            $testFramework
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return string
      */
-    private function testFrameworkWarning($testFramework, $output)
+    private function testFrameworkWarning($output)
     {
+        $testFramework = $this->settings->getTestingFramework();
+
         if (!in_array($testFramework, $this->defaults->testingFrameworks)) {
             $warning = '<error>Warning: "' . $testFramework . '" is not a supported testing framework. '
                 . 'Using ' . Defaults::TEST_FRAMEWORK . '.</error>';
@@ -287,13 +323,14 @@ class ConstructCommand extends Command
      * Show warning if an invalid php version or
      * a version greater than the one on the system is specified.
      *
-     * @param string                                            $phpVersion
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return string
      */
-    private function phpVersionWarning($phpVersion, $output)
+    private function phpVersionWarning($output)
     {
+        $phpVersion = $this->settings->getPhpVersion();
+
         if (!$this->str->phpVersionIsValid($phpVersion)) {
             $output->writeln('<error>Warning: "' . $phpVersion . '" is not a valid php version. Using version ' . $this->systemPhpVersion . '</error>');
             $phpVersion = $this->systemPhpVersion;
