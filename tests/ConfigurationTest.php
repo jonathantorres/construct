@@ -45,7 +45,7 @@ class ConfigurationTest extends PHPUnit
             'composer,keywords',
             true,
             true,
-            '5.6',
+            '5.4',
             true,
             true,
             true,
