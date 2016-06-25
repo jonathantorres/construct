@@ -253,7 +253,17 @@ class Construct
      */
     protected function contributing()
     {
-        $content = $this->file->get(__DIR__ . '/stubs/CONTRIBUTING.stub');
+        if ($this->settings->withPhpcsConfiguration()) {
+            $contributing = $this->file->get(__DIR__ . '/stubs/CONTRIBUTING.PHPCS.stub');
+        } else {
+            $contributing = $this->file->get(__DIR__ . '/stubs/CONTRIBUTING.stub');
+        }
+
+        $content = str_replace(
+            '{project_lower}',
+            $this->projectLower,
+            $contributing
+        );
 
         $this->file->put($this->projectLower . '/' . 'CONTRIBUTING.md', $content);
         $this->exportIgnores[] = 'CONTRIBUTING.md';
