@@ -12,9 +12,6 @@
     "require": {
         "php": ">={php_version}"
     },
-    "require-dev": {
-        "{testing}/{testing}": "{testing_version}"
-    },
     "autoload": {
         "psr-4": {
             "{namespace}\\": "src/"
