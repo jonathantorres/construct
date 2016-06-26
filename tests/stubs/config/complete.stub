@@ -1,4 +1,4 @@
-namespace: Vendor\Project
+namespace: Namespace
 test-framework: phpspec
 license: MIT
 php: 5.4
