@@ -288,6 +288,10 @@ class ConstructTest extends PHPUnit
 
         $this->assertSame($this->getStub('with-phpcs/phpcs'), $this->getFile('.php_cs'));
         $this->assertSame($this->getStub('with-phpcs/gitattributes'), $this->getFile('.gitattributes'));
+        $this->assertSame(
+            $this->getStub('with-phpcs/CONTRIBUTING'),
+            $this->getFile('CONTRIBUTING.md')
+        );
     }
 
     public function testProjectGenerationWithComposerKeywords()
