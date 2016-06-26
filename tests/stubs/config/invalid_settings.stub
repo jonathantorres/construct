@@ -1,7 +1,7 @@
-namespace: Vendor\Project
-test-framework: phpspec
-license: MIT
-php: 5.4
+namespace: Vendor
+test-framework: rspec
+license: DOO_WUTCH_YA_LIKE
+php: 2.a
 
 construct-with:
   - git
