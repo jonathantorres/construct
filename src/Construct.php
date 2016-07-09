@@ -722,7 +722,7 @@ class Construct
     }
 
     /**
-     * Add to development requirements.
+     * Add behat to development requirements.
      *
      * @return void
      */
@@ -732,7 +732,7 @@ class Construct
     }
 
     /**
-     * Add to development requirements.
+     * Add codeception to development requirements.
      *
      * @return void
      */
