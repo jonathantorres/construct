@@ -29,7 +29,6 @@ class ConstructTest extends PHPUnit
         $this->str = new Str;
         $this->construct = new Construct(new Filesystem, $this->str);
         $this->scriptHelper = Mockery::mock('JonathanTorres\Construct\Helpers\Script');
-        $this->scriptHelper->shouldReceive('runComposerInstall')->once()->with('logger')->andReturnNull();
         $this->gitHelper = Mockery::mock('JonathanTorres\Construct\Helpers\Git');
         $this->gitHelper->shouldReceive('getUser')->twice()->withNoArgs()->andReturn($this->gitUser);
     }
@@ -56,6 +55,24 @@ class ConstructTest extends PHPUnit
         rmdir($path);
     }
 
+    /**
+     * Sets the Mockery expectation for runComposerInstallAndRequireDevelopmentPackages
+     * of the script helper mock.
+     *
+     * @param  array $packages The require dev packages to inject. Defaults to
+     *                         ['phpunit/phpunit'].
+     * @return void
+     */
+    private function setScriptHelperComposerInstallExpectationWithPackages(
+        array $packages = ['phpunit/phpunit']
+    ) {
+        $this->scriptHelper
+            ->shouldReceive('runComposerInstallAndRequireDevelopmentPackages')
+            ->once()
+            ->with('logger', $packages)
+            ->andReturnNull();
+    }
+
     public function testBasicProjectIsGenerated()
     {
         $settings = new Settings(
@@ -72,6 +89,8 @@ class ConstructTest extends PHPUnit
             null,
             null
         );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('README'), $this->getFile('README.md'));
@@ -104,6 +123,7 @@ class ConstructTest extends PHPUnit
             null
         );
 
+        $this->setScriptHelperComposerInstallExpectationWithPackages(['behat/behat']);
         $this->scriptHelper->shouldReceive('initBehat')->once()->with('logger')->andReturnNull();
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('composer.behat'), $this->getFile('composer.json'));
@@ -126,6 +146,9 @@ class ConstructTest extends PHPUnit
             null
         );
 
+        $this->setScriptHelperComposerInstallExpectationWithPackages(
+            ['codeception/codeception']
+        );
         $this->scriptHelper->shouldReceive('bootstrapCodeception')->once()->with('logger')->andReturnNull();
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('composer.codeception'), $this->getFile('composer.json'));
@@ -146,6 +169,10 @@ class ConstructTest extends PHPUnit
             '5.6.0',
             null,
             null
+        );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages(
+            ['phpspec/phpspec']
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
@@ -170,6 +197,8 @@ class ConstructTest extends PHPUnit
             null
         );
 
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
+
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('LICENSE.Apache'), $this->getFile('LICENSE.md'));
     }
@@ -190,6 +219,8 @@ class ConstructTest extends PHPUnit
             null,
             null
         );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('LICENSE.Gpl2'), $this->getFile('LICENSE.md'));
@@ -212,6 +243,8 @@ class ConstructTest extends PHPUnit
             null
         );
 
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
+
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('LICENSE.Gpl3'), $this->getFile('LICENSE.md'));
     }
@@ -232,6 +265,8 @@ class ConstructTest extends PHPUnit
             null,
             null
         );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('with-namespace/composer'), $this->getFile('composer.json'));
@@ -256,6 +291,7 @@ class ConstructTest extends PHPUnit
             null
         );
 
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
         $this->gitHelper->shouldReceive('init')->once()->with('logger')->andReturnNull();
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
     }
@@ -275,6 +311,10 @@ class ConstructTest extends PHPUnit
             '5.6.0',
             null,
             null
+        );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages(
+            ['phpunit/phpunit', 'friendsofphp/php-cs-fixer']
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
@@ -311,6 +351,8 @@ class ConstructTest extends PHPUnit
             null
         );
 
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
+
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('composer.keywords'), $this->getFile('composer.json'));
     }
@@ -331,6 +373,8 @@ class ConstructTest extends PHPUnit
             null,
             null
         );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('with-vagrant/Vagrantfile'), $this->getFile('Vagrantfile'));
@@ -354,6 +398,8 @@ class ConstructTest extends PHPUnit
             null
         );
 
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
+
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('with-editorconfig/editorconfig'), $this->getFile('.editorconfig'));
         $this->assertSame($this->getStub('with-editorconfig/gitattributes'), $this->getFile('.gitattributes'));
@@ -375,6 +421,8 @@ class ConstructTest extends PHPUnit
             null,
             null
         );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('composer.php54'), $this->getFile('composer.json'));
@@ -398,6 +446,8 @@ class ConstructTest extends PHPUnit
             null
         );
 
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
+
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('composer.php55'), $this->getFile('composer.json'));
         $this->assertSame($this->getStub('travis.php55'), $this->getFile('.travis.yml'));
@@ -419,6 +469,8 @@ class ConstructTest extends PHPUnit
             null,
             null
         );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('composer.php56'), $this->getFile('composer.json'));
@@ -442,6 +494,8 @@ class ConstructTest extends PHPUnit
             null
         );
 
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
+
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('composer.php7'), $this->getFile('composer.json'));
         $this->assertSame($this->getStub('travis.php7'), $this->getFile('.travis.yml'));
@@ -462,6 +516,10 @@ class ConstructTest extends PHPUnit
             '5.6.0',
             true,
             false
+        );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages(
+            ['phpunit/phpunit', 'vlucas/phpdotenv']
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
@@ -489,6 +547,8 @@ class ConstructTest extends PHPUnit
             true
         );
 
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
+
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame($this->getStub('with-lgtm/maintainers'), $this->getFile('MAINTAINERS'));
         $this->assertSame($this->getStub('with-lgtm/lgtm'), $this->getFile('.lgtm'));
@@ -512,6 +572,8 @@ class ConstructTest extends PHPUnit
             false,
             true
         );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame(
@@ -551,6 +613,8 @@ class ConstructTest extends PHPUnit
             true
         );
 
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
+
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame(
             $this->getStub('with-code-of-conduct/CONDUCT'),
@@ -584,6 +648,8 @@ class ConstructTest extends PHPUnit
             true,
             true
         );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame(

@@ -46,13 +46,6 @@ class Construct
     protected $exportIgnores = [];
 
     /**
-     * The selected testing framework version.
-     *
-     * @var string
-     */
-    protected $testingVersion;
-
-    /**
      * Camel case version of vendor name.
      * ex: JonathanTorres
      *
@@ -83,6 +76,13 @@ class Construct
      * @var string
      */
     protected $projectLower;
+
+    /**
+     * The Composer development requirements/packages.
+     *
+     * @var array
+     */
+    protected $developmentRequirements = [];
 
     /**
      * Initialize.
@@ -319,12 +319,15 @@ class Construct
     }
 
     /**
-     * Generate PHP CS Fixer configuration file.
+     * Generate PHP CS Fixer configuration file and add package
+     * to the development requirements.
      *
      * @return void
      */
     protected function phpcs()
     {
+        $this->developmentRequirements[] = 'friendsofphp/php-cs-fixer';
+
         $this->file->copy(
             __DIR__ . '/stubs/phpcs.stub',
             $this->projectLower . '/' . '.php_cs'
@@ -397,7 +400,6 @@ class Construct
             '{vendor_lower}',
             '{vendor_upper}',
             '{testing}',
-            '{testing_version}',
             '{namespace}',
             '{license}',
             '{author_name}',
@@ -412,7 +414,6 @@ class Construct
             $this->vendorLower,
             $this->vendorUpper,
             $this->settings->getTestingFramework(),
-            $this->testingVersion,
             $this->createNamespace(true),
             $this->settings->getLicense(),
             $user['name'],
@@ -422,16 +423,6 @@ class Construct
         ];
 
         $content = str_replace($stubs, $values, $file);
-
-        if ($this->settings->withEnvironmentFiles()) {
-            $composer = json_decode($content, true);
-            $composer['require-dev']['vlucas/phpdotenv'] = '~2.1';
-            $content = json_encode(
-                $composer,
-                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
-            );
-            $content .= PHP_EOL;
-        }
 
         if ($this->settings->withPhpcsConfiguration() && !$this->str->isWindows()) {
             $composer = json_decode($content, true);
@@ -521,7 +512,8 @@ class Construct
     }
 
     /**
-     * Do an initial composer install in constructed project.
+     * Do an initial composer install and require the set development packages
+     * in the constructed project.
      *
      * @param JonathanTorres\Construct\Helpers\Script $script
      *
@@ -530,7 +522,10 @@ class Construct
     protected function composerInstall(Script $script)
     {
         if ($this->file->isDirectory($this->projectLower)) {
-            $script->runComposerInstall($this->projectLower);
+            $script->runComposerInstallAndRequireDevelopmentPackages(
+                $this->projectLower,
+                $this->developmentRequirements
+            );
         }
     }
 
@@ -601,12 +596,15 @@ class Construct
     }
 
     /**
-     * Generate .env environment files.
+     * Generate .env environment files and add package
+     * to the development requirements.
      *
      * @return void
      **/
     protected function environmentFiles()
     {
+        $this->developmentRequirements[] = 'vlucas/phpdotenv';
+
         $this->file->copy(
             __DIR__ . '/stubs/env.stub',
             $this->projectLower . '/' . '.env'
@@ -689,14 +687,15 @@ class Construct
     }
 
     /**
-     * Generate phpunit test/file/settings.
+     * Generate phpunit test/file/settings and add package
+     * to the development requirements.
      *
      * @return void
      */
     protected function phpunit()
     {
         $this->phpunitTest();
-        $this->testingVersion = '4.8.*';
+        $this->developmentRequirements[] = 'phpunit/phpunit';
 
         $file = $this->file->get(__DIR__ . '/stubs/phpunit.stub');
         $content = str_replace('{project_upper}', $this->projectUpper, $file);
@@ -706,13 +705,14 @@ class Construct
     }
 
     /**
-     * Generate phpspec file/settings.
+     * Generate phpspec file/settings and add package
+     * to the development requirements.
      *
      * @return void
      */
     protected function phpspec()
     {
-        $this->testingVersion = '~2.0';
+        $this->developmentRequirements[] = 'phpspec/phpspec';
 
         $file = $this->file->get(__DIR__ . '/stubs/phpspec.stub');
         $content = str_replace('{namespace}', $this->createNamespace(), $file);
@@ -722,23 +722,23 @@ class Construct
     }
 
     /**
-     * Generate behat file/settings.
+     * Add to development requirements.
      *
      * @return void
      */
     protected function behat()
     {
-        $this->testingVersion = '~3.0';
+        $this->developmentRequirements[] = 'behat/behat';
     }
 
     /**
-     * Generate codeception file/settings.
+     * Add to development requirements.
      *
      * @return void
      */
     protected function codeception()
     {
-        $this->testingVersion = '2.1.*';
+        $this->developmentRequirements[] = 'codeception/codeception';
     }
 
     /**
