@@ -1,5 +1,12 @@
 # Changelog
 
+#### v1.10.1 `2016-07-09`
+- `Fixed`
+    - License, testing framework, and PHP version are validated from configuration file. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#126](https://github.com/jonathantorres/construct/issues/126).
+    - Fixes on misleading documentation on configuration file. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#128](https://github.com/jonathantorres/construct/issues/128).
+    - Add phpcs contribution guidelines.
+    - Update `php-cs-fixer` vendor name. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+
 #### v1.10.0 `2016-05-28`
 - `Added`
     - User can load common option settings from a configuration file. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#86](https://github.com/jonathantorres/construct/issues/86).
