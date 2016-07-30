@@ -216,7 +216,7 @@ construct generate:interactive
 
 ## Running tests
 ``` bash
-$ composer test
+composer test
 ```
 
 ## License
