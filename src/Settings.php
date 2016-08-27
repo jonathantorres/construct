@@ -96,6 +96,13 @@ class Settings
     private $githubTemplates;
 
     /**
+     * Generate GitHub documentation files?
+     *
+     * @var boolean
+     */
+    private $githubDocs;
+
+    /**
      * Generate Code of Conduct file?
      *
      * @var boolean
@@ -119,6 +126,7 @@ class Settings
      * @param boolean $lgtmConfiguration  Generate LGTM configuration files?
      * @param boolean $githubTemplates    Generate GitHub templates?
      * @param boolean $codeOfConduct      Generate Code of Conduct file?
+     * @param boolean $githubDocs         Generate GitHub docs?
      *
      * @return void
      */
@@ -136,7 +144,8 @@ class Settings
         $environmentFiles,
         $lgtmConfiguration,
         $githubTemplates = false,
-        $codeOfConduct = false
+        $codeOfConduct = false,
+        $githubDocs = false
     ) {
         $this->projectName = $projectName;
         $this->testingFramework = $testingFramework;
@@ -152,6 +161,7 @@ class Settings
         $this->lgtmConfiguration = $lgtmConfiguration;
         $this->githubTemplates = $githubTemplates;
         $this->codeOfConduct = $codeOfConduct;
+        $this->githubDocs = $githubDocs;
     }
 
     /**
@@ -282,6 +292,16 @@ class Settings
     public function withGithubTemplates()
     {
         return $this->githubTemplates;
+    }
+
+    /**
+     * Whether or not to create GitHub documentation files.
+     *
+     * @return boolean
+     */
+    public function withGithubDocs()
+    {
+        return $this->githubDocs;
     }
 
     /**

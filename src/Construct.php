@@ -142,6 +142,10 @@ class Construct
             $this->githubTemplates();
         }
 
+        if ($this->settings->withGithubDocs()) {
+            $this->githubDocs();
+        }
+
         if ($this->settings->withCodeOfConduct()) {
             $this->codeOfConduct();
         }
@@ -669,6 +673,26 @@ class Construct
         unset($this->exportIgnores[$index]);
 
         $this->exportIgnores[] = '.github/*';
+    }
+
+    /**
+     * Generate GitHub documentation files.
+     *
+     * @return void
+     */
+    protected function githubDocs()
+    {
+        $this->file->makeDirectory(
+            $this->projectLower . '/docs',
+            true
+        );
+
+        $this->file->put(
+            $this->projectLower . '/docs/index.md',
+            ''
+        );
+
+        $this->exportIgnores[] = 'docs';
     }
 
     /**

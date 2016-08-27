@@ -333,9 +333,26 @@ class ConstructCommandTest extends PHPUnit
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
+    public function testProjectGenerationWithGitHubDocs()
+    {
+        $this->setMocks(4, 2, 1);
+        $this->filesystem->shouldReceive('put')->times(1)->andReturnNull();
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--github-docs' => true
+        ]);
+
+        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+    }
+
     public function testProjectGenerationFromConfiguration()
     {
-        $this->setMocks(3, 3, 10);
+        $this->setMocks(4, 3, 10, 10, 11);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
         $app = $this->setApplication();

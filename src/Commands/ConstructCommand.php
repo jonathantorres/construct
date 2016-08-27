@@ -100,6 +100,7 @@ class ConstructCommand extends Command
         $environmentDescription = 'Generate .env environment files';
         $lgtmDescription = 'Generate LGTM configuration files';
         $githubTemplatesDescription = 'Generate GitHub templates';
+        $githubDocsDescription = 'Generate GitHub docs';
         $codeOfConductDescription = 'Generate Code of Conduct file';
         $configurationDescription = 'Generate from configuration file';
         $ignoreDefaultConfigurationDescription = 'Ignore present default configuration file';
@@ -121,6 +122,7 @@ class ConstructCommand extends Command
         $this->addOption('env', null, InputOption::VALUE_NONE, $environmentDescription);
         $this->addOption('lgtm', null, InputOption::VALUE_NONE, $lgtmDescription);
         $this->addOption('github-templates', null, InputOption::VALUE_NONE, $githubTemplatesDescription);
+        $this->addOption('github-docs', null, InputOption::VALUE_NONE, $githubDocsDescription);
         $this->addOption('code-of-conduct', null, InputOption::VALUE_NONE, $codeOfConductDescription);
         $this->addOption('config', 'c', InputOption::VALUE_OPTIONAL, $configurationDescription, $configurationDefault);
         $this->addOption('ignore-default-config', 'i', InputOption::VALUE_NONE, $ignoreDefaultConfigurationDescription);
@@ -155,6 +157,7 @@ class ConstructCommand extends Command
         $environment = $input->getOption('env');
         $lgtm = $input->getOption('lgtm');
         $githubTemplates = $input->getOption('github-templates');
+        $githubDocs = $input->getOption('github-docs');
         $codeOfConduct = $input->getOption('code-of-conduct');
         $ignoreDefaultConfiguration = $input->getOption('ignore-default-config');
         $configuration = $input->getOption('config');
@@ -182,7 +185,8 @@ class ConstructCommand extends Command
                 $environment,
                 $lgtm,
                 $githubTemplates,
-                $codeOfConduct
+                $codeOfConduct,
+                $githubDocs
             );
         }
 
@@ -235,7 +239,8 @@ class ConstructCommand extends Command
             $this->settings->withEnvironmentFiles(),
             $this->settings->withLgtmConfiguration(),
             $this->settings->withGithubTemplates(),
-            $this->settings->withCodeOfConduct()
+            $this->settings->withCodeOfConduct(),
+            $this->settings->withGithubDocs()
         );
     }
 

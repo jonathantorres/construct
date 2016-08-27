@@ -41,5 +41,6 @@ class SettingsTest extends PHPUnit
         $this->assertSame('5.6.0', $this->settings->getPhpVersion());
         $this->assertTrue($this->settings->withEnvironmentFiles());
         $this->assertFalse($this->settings->withLgtmConfiguration());
+        $this->assertFalse($this->settings->withGithubDocs());
     }
 }

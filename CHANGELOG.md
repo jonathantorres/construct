@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.11.0 `2016-**-**`
+- `Added`
+    - User can optionally generate [GitHub documentation](https://github.com/blog/2233-publish-your-project-documentation-with-github-pages) files. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+
 #### v1.10.1 `2016-07-09`
 - `Fixed`
     - License, testing framework, and PHP version are validated from configuration file. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#126](https://github.com/jonathantorres/construct/issues/126).
