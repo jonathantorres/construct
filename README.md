@@ -49,6 +49,8 @@ The generated project structure will look like the following `tree` excerpt. Fil
 │   ├── (.php_cs)
 │   ├── (phpunit.xml.dist)
 │   ├── README.md
+│   ├── (docs)
+│   │   └── index.md
 │   ├── src
 │   │   └── Logger.php
 │   ├── tests
@@ -187,6 +189,13 @@ The `--github-templates` option will generate [GitHub template](https://github.c
 
 ```bash
 construct generate jonathantorres/logger --github-templates
+```
+
+## Generate GitHub documentation files?
+The `--github-docs` option will generate [GitHub documentation](https://github.com/blog/2233-publish-your-project-documentation-with-github-pages) files within the constructed project into a folder conventionally named `docs`. There's no short option available.
+
+```bash
+construct generate jonathantorres/logger --github-docs
 ```
 
 ## Generate a Code of Conduct?

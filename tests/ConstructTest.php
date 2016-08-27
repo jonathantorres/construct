@@ -594,6 +594,41 @@ class ConstructTest extends PHPUnit
         );
     }
 
+    public function testProjectGenerationWithGitHubDocs()
+    {
+        $settings = new Settings(
+            'jonathantorres/logger',
+            'phpunit',
+            'MIT',
+            'Vendor\Project',
+            null,
+            null,
+            null,
+            null,
+            false,
+            '5.6.0',
+            null,
+            false,
+            false,
+            false,
+            true
+        );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
+
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->assertTrue(
+            $this->filesystem->isDirectory(__DIR__ . '/../logger/docs')
+        );
+        $this->assertTrue(
+            $this->filesystem->isFile(__DIR__ . '/../logger/docs/index.md')
+        );
+        $this->assertSame(
+            $this->getStub('with-github-docs/gitattributes'),
+            $this->getFile('.gitattributes')
+        );
+    }
+
     public function testProjectGenerationWithCodeOfConduct()
     {
         $settings = new Settings(

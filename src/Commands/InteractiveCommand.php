@@ -129,6 +129,7 @@ class InteractiveCommand extends Command
         $environmentFileQuestion = new ConfirmationQuestion('Do you want to generate an .env file?', false);
         $lgtmFileQuestion = new ConfirmationQuestion('Do you want to generate an LGTM configuration file?', false);
         $githubTemplatesQuestion = new ConfirmationQuestion('Do you want to generate GitHub templates?', false);
+        $githubDocsQuestion = new ConfirmationQuestion('Do you want to generate GitHub docs?', false);
         $codeOfConductQuestion = new ConfirmationQuestion('Do you want to add a Code of Conduct file?', false);
 
         $projectName = $helper->ask($input, $output, $projectNameQuestion);
@@ -144,6 +145,7 @@ class InteractiveCommand extends Command
         $environmentFile = $helper->ask($input, $output, $environmentFileQuestion);
         $lgtmFile = $helper->ask($input, $output, $lgtmFileQuestion);
         $githubTemplates = $helper->ask($input, $output, $githubTemplatesQuestion);
+        $githubDocs = $helper->ask($input, $output, $githubDocsQuestion);
         $codeOfConduct = $helper->ask($input, $output, $codeOfConductQuestion);
 
         $this->settings = new Settings(
@@ -160,7 +162,8 @@ class InteractiveCommand extends Command
             $environmentFile,
             $lgtmFile,
             $githubTemplates,
-            $codeOfConduct
+            $codeOfConduct,
+            $githubDocs
         );
 
         $output->writeln('Creating your project...');

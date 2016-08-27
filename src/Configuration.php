@@ -49,7 +49,8 @@ class Configuration
             isset($configuration['construct-with']['env']) ? true : false,
             isset($configuration['construct-with']['lgtm']) ? true : false,
             isset($configuration['construct-with']['github-templates']) ? true : false,
-            isset($configuration['construct-with']['code-of-conduct']) ? true : false
+            isset($configuration['construct-with']['code-of-conduct']) ? true : false,
+            isset($configuration['construct-with']['github-docs']) ? true : false
         );
     }
 }

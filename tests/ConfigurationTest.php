@@ -49,6 +49,7 @@ class ConfigurationTest extends PHPUnit
             true,
             true,
             true,
+            true,
             true
         );
 

@@ -11,4 +11,5 @@ construct-with:
   - env
   - lgtm
   - github-templates
+  - github-docs
   - code-of-conduct
