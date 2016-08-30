@@ -373,6 +373,29 @@ class ConstructCommandTest extends PHPUnit
         );
     }
 
+    public function testProjectGenerationWithGitHubAlias()
+    {
+        $this->setMocks(4, 3, 10, 10, 11);
+        $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project-from-config',
+            '--config' => dirname(__DIR__) . '/stubs/config/complete.github.stub'
+        ]);
+
+        $expectedCommandDisplay = 'Initialized git repo in "project-from-config".' . PHP_EOL
+            . 'Project "vendor/project-from-config" constructed.' . PHP_EOL;
+
+        $this->assertSame(
+            $expectedCommandDisplay,
+            $commandTester->getDisplay()
+        );
+    }
+
     /**
      * @ticket 126 (https://github.com/jonathantorres/construct/issues/126)
      */

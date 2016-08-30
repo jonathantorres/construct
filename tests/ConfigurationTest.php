@@ -82,4 +82,38 @@ class ConfigurationTest extends PHPUnit
             $settings->getLicense()
         );
     }
+
+    public function testGithubConfigImplicatesGithubTemplatesAndDocs()
+    {
+        $settings = Configuration::getSettings(
+            __DIR__ . '/stubs/config/complete.github.stub',
+            'example-project',
+            'composer,keywords',
+            new Filesystem
+        );
+
+        $expectedSettings = new Settings(
+            'example-project',
+            'phpspec',
+            'MIT',
+            'Namespace',
+            true,
+            true,
+            'composer,keywords',
+            true,
+            true,
+            '5.4',
+            true,
+            true,
+            true,
+            true,
+            true
+        );
+
+        $this->assertEquals(
+            $expectedSettings,
+            $settings,
+            "Configuration wasn't transformed into expected Settings object."
+        );
+    }
 }

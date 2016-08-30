@@ -101,6 +101,7 @@ class ConstructCommand extends Command
         $lgtmDescription = 'Generate LGTM configuration files';
         $githubTemplatesDescription = 'Generate GitHub templates';
         $githubDocsDescription = 'Generate GitHub docs';
+        $githubDescription = 'Generate GitHub templates and docs';
         $codeOfConductDescription = 'Generate Code of Conduct file';
         $configurationDescription = 'Generate from configuration file';
         $ignoreDefaultConfigurationDescription = 'Ignore present default configuration file';
@@ -121,6 +122,7 @@ class ConstructCommand extends Command
         $this->addOption('php', null, InputOption::VALUE_OPTIONAL, $phpVersionDescription, $this->systemPhpVersion);
         $this->addOption('env', null, InputOption::VALUE_NONE, $environmentDescription);
         $this->addOption('lgtm', null, InputOption::VALUE_NONE, $lgtmDescription);
+        $this->addOption('github', null, InputOption::VALUE_NONE, $githubDescription);
         $this->addOption('github-templates', null, InputOption::VALUE_NONE, $githubTemplatesDescription);
         $this->addOption('github-docs', null, InputOption::VALUE_NONE, $githubDocsDescription);
         $this->addOption('code-of-conduct', null, InputOption::VALUE_NONE, $codeOfConductDescription);
@@ -158,6 +160,7 @@ class ConstructCommand extends Command
         $lgtm = $input->getOption('lgtm');
         $githubTemplates = $input->getOption('github-templates');
         $githubDocs = $input->getOption('github-docs');
+        $github = $input->getOption('github');
         $codeOfConduct = $input->getOption('code-of-conduct');
         $ignoreDefaultConfiguration = $input->getOption('ignore-default-config');
         $configuration = $input->getOption('config');
@@ -171,6 +174,10 @@ class ConstructCommand extends Command
                 $this->filesystem
             );
         } else {
+            if ($github) {
+                $githubTemplates = $githubDocs = true;
+            }
+
             $this->settings = new Settings(
                 $projectName,
                 $testFramework,

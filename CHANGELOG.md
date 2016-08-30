@@ -2,6 +2,7 @@
 
 #### v1.11.0 `2016-**-**`
 - `Added`
+    - User can use the `github` alias implicating all `--github-*` options. Done by [@raphaelstolt](https://github.com/raphaelstolt).
     - User can optionally generate [GitHub documentation](https://github.com/blog/2233-publish-your-project-documentation-with-github-pages) files. Done by [@raphaelstolt](https://github.com/raphaelstolt).
 
 #### v1.10.1 `2016-07-09`

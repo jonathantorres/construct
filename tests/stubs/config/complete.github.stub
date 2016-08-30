@@ -1,7 +1,7 @@
 namespace: Namespace
 test-framework: phpspec
 license: MIT
-php: 5.6
+php: 5.4
 
 construct-with:
   - git
@@ -11,7 +11,4 @@ construct-with:
   - env
   - lgtm
   - github
-# github-* sequences can be omitted when using the github sequence
-  - github-templates
-  - github-docs
   - code-of-conduct

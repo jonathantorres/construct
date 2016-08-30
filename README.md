@@ -184,15 +184,22 @@ The `--lgtm` option will generate [LGTM](https://lgtm.co) configuration files wi
 construct generate jonathantorres/logger --lgtm
 ```
 
+## Generate common GitHub files?
+The `--github` option will generate common GitHub (i.e. `templates` and `docs`) files. There's no short option available.
+
+```bash
+construct generate jonathantorres/logger --github
+```
+
 ## Generate GitHub template files?
-The `--github-templates` option will generate [GitHub template](https://github.com/blog/2111-issue-and-pull-request-templates) files within the constructed project into a folder conventionally named `.github`. It also will move `CONTRIBUTING.md` into it. There's no short option available.
+The `--github-templates` option will generate [GitHub template](https://github.com/blog/2111-issue-and-pull-request-templates) files within the constructed project into a folder conventionally named `.github`. It also will move `CONTRIBUTING.md` into it. There's no short option available, but the option is implicated with the `github` option.
 
 ```bash
 construct generate jonathantorres/logger --github-templates
 ```
 
 ## Generate GitHub documentation files?
-The `--github-docs` option will generate [GitHub documentation](https://github.com/blog/2233-publish-your-project-documentation-with-github-pages) files within the constructed project into a folder conventionally named `docs`. There's no short option available.
+The `--github-docs` option will generate [GitHub documentation](https://github.com/blog/2233-publish-your-project-documentation-with-github-pages) files within the constructed project into a folder conventionally named `docs`. There's no short option available, but the option is implicated with the `github` option.
 
 ```bash
 construct generate jonathantorres/logger --github-docs
