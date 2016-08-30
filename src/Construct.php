@@ -491,7 +491,7 @@ class Construct
 
         $this->file->makeDirectory($this->projectLower . '/tests');
         $this->file->put($this->projectLower . '/tests/' . $this->projectUpper . 'Test.php', $content);
-        $this->exportIgnores[] = 'tests';
+        $this->exportIgnores[] = 'tests/';
     }
 
     /**
@@ -507,7 +507,7 @@ class Construct
         $content = $this->file->get(__DIR__ . '/stubs/gitattributes.stub');
 
         foreach ($this->exportIgnores as $ignore) {
-            $content .= PHP_EOL . '/' . $ignore . ' export-ignore';
+            $content .= PHP_EOL . $ignore . ' export-ignore';
         }
 
         $content .= PHP_EOL;
@@ -672,7 +672,7 @@ class Construct
         $index = array_search('CONTRIBUTING.md', $this->exportIgnores);
         unset($this->exportIgnores[$index]);
 
-        $this->exportIgnores[] = '.github/*';
+        $this->exportIgnores[] = '.github/';
     }
 
     /**
@@ -692,7 +692,7 @@ class Construct
             ''
         );
 
-        $this->exportIgnores[] = 'docs';
+        $this->exportIgnores[] = 'docs/';
     }
 
     /**
