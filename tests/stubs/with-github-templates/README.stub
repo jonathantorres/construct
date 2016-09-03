@@ -1,5 +1,7 @@
 Logger
 ================
+[![Build Status](https://travis-ci.org/jonathantorres/logger.svg?branch=master)](https://travis-ci.org/jonathantorres/logger)
+
 This is where your library description should go. Try to limit it to a paragraph or two.
 
 #### Installation via Composer

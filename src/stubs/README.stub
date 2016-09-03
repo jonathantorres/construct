@@ -1,5 +1,7 @@
 {project_upper}
 ================
+[![Build Status](https://travis-ci.org/{vendor_lower}/{project_lower}.svg?branch=master)](https://travis-ci.org/{vendor_lower}/{project_lower})
+
 This is where your library description should go. Try to limit it to a paragraph or two.
 
 #### Installation via Composer
