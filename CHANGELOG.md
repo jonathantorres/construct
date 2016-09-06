@@ -7,6 +7,7 @@
     - A Travis CI badge is now added in the constructed README.md.
 - `Fixed`
     - Generated `phpspec` configuration file has a `.dist` extension and a `specs` directory is created.
+    - Xdebug is now disabled _correctly_ in constructed `.travis.yml` file.
 
 #### v1.10.1 `2016-07-09`
 - `Fixed`
