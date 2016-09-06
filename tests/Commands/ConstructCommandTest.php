@@ -352,7 +352,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationFromConfiguration()
     {
-        $this->setMocks(4, 3, 10, 10, 11);
+        $this->setMocks(5, 3, 10, 10, 11);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
         $app = $this->setApplication();

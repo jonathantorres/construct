@@ -176,8 +176,10 @@ class ConstructTest extends PHPUnit
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
-        $this->assertSame($this->getStub('phpspec'), $this->getFile('phpspec.yml'));
+        $this->assertSame($this->getStub('phpspec'), $this->getFile('phpspec.yml.dist'));
         $this->assertSame($this->getStub('composer.phpspec'), $this->getFile('composer.json'));
+        $this->assertSame($this->getStub('gitattributes.phpspec'), $this->getFile('.gitattributes'));
+        $this->assertTrue(is_dir(__DIR__ . '/../logger/specs'));
     }
 
     public function testProjectGenerationWithApacheLicense()
