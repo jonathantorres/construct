@@ -180,6 +180,7 @@ class ConstructTest extends PHPUnit
         $this->assertSame($this->getStub('composer.phpspec'), $this->getFile('composer.json'));
         $this->assertSame($this->getStub('gitattributes.phpspec'), $this->getFile('.gitattributes'));
         $this->assertTrue(is_dir(__DIR__ . '/../logger/specs'));
+        $this->assertSame($this->getStub('gitignore.phpspec'), $this->getFile('.gitignore'));
     }
 
     public function testProjectGenerationWithApacheLicense()

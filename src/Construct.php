@@ -46,6 +46,13 @@ class Construct
     protected $exportIgnores = [];
 
     /**
+     * The directories and files to ignore in Git repositories.
+     *
+     * @var array
+     */
+    protected $gitIgnores = ['/vendor', 'composer.lock'];
+
+    /**
      * Camel case version of vendor name.
      * ex: JonathanTorres
      *
@@ -115,7 +122,6 @@ class Construct
         $this->root();
         $this->src();
         $this->docs();
-        $this->gitignore();
         $this->testing();
 
         if ($this->settings->withPhpcsConfiguration()) {
@@ -154,6 +160,7 @@ class Construct
         $this->license($git);
         $this->composer($git);
         $this->projectClass();
+        $this->gitignore();
         $this->gitattributes();
 
         if ($this->settings->withGitInit()) {
@@ -289,25 +296,6 @@ class Construct
 
         $this->file->put($this->projectLower . '/' . 'CHANGELOG.md', $content);
         $this->exportIgnores[] = 'CHANGELOG.md';
-    }
-
-    /**
-     * Generate gitignore file.
-     *
-     * @return void
-     */
-    protected function gitignore()
-    {
-        if ($this->settings->withEnvironmentFiles()) {
-            $content = $this->file->get(__DIR__ . '/stubs/gitignore.stub');
-            $content .= '.env' . PHP_EOL;
-
-            $this->file->put($this->projectLower . '/' . '.gitignore', $content);
-        } else {
-            $this->file->copy(__DIR__ . '/stubs/gitignore.stub', $this->projectLower . '/' . '.gitignore');
-        }
-
-        $this->exportIgnores[] = '.gitignore';
     }
 
     /**
@@ -495,6 +483,26 @@ class Construct
     }
 
     /**
+     * Generate gitignore file.
+     *
+     * @return void
+     */
+    protected function gitignore()
+    {
+        sort($this->gitIgnores, SORT_STRING | SORT_FLAG_CASE);
+
+        $content = '';
+
+        foreach ($this->gitIgnores as $ignore) {
+            $content .= $ignore . "\n";
+        }
+
+        $this->file->put($this->projectLower . '/' . '.gitignore', $content);
+
+        $this->exportIgnores[] = '.gitignore';
+    }
+
+    /**
      * Generate gitattributes file.
      *
      * @return void
@@ -620,6 +628,7 @@ class Construct
         );
 
         $this->exportIgnores[] = '.env';
+        $this->gitIgnores[] = '.env';
     }
 
     /**
@@ -726,6 +735,8 @@ class Construct
 
         $this->file->put($this->projectLower . '/' . 'phpunit.xml.dist', $content);
         $this->exportIgnores[] = 'phpunit.xml.dist';
+
+        $this->gitIgnores[] = 'phpunit.xml';
     }
 
     /**
@@ -746,6 +757,8 @@ class Construct
 
         $this->file->put($this->projectLower . '/' . 'phpspec.yml.dist', $content);
         $this->exportIgnores[] = 'phpspec.yml.dist';
+
+        $this->gitIgnores[] = 'phpspec.yml';
     }
 
     /**
