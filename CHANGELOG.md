@@ -5,6 +5,8 @@
     - User can optionally generate [GitHub documentation](https://github.com/blog/2233-publish-your-project-documentation-with-github-pages) files. Done by [@raphaelstolt](https://github.com/raphaelstolt).
 
     - A Travis CI badge is now added in the constructed README.md.
+- `Fixed`
+    - Generated `phpspec` configuration file has a `.dist` extension and a `specs` directory is created.
 
 #### v1.10.1 `2016-07-09`
 - `Fixed`

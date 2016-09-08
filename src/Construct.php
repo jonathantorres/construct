@@ -729,8 +729,8 @@ class Construct
     }
 
     /**
-     * Generate phpspec file/settings and add package
-     * to the development requirements.
+     * Generate phpspec config file, create a specs directory and
+     * add package to development requirements.
      *
      * @return void
      */
@@ -741,8 +741,11 @@ class Construct
         $file = $this->file->get(__DIR__ . '/stubs/phpspec.stub');
         $content = str_replace('{namespace}', $this->createNamespace(), $file);
 
-        $this->file->put($this->projectLower . '/' . 'phpspec.yml', $content);
-        $this->exportIgnores[] = 'phpspec.yml';
+        $this->file->makeDirectory($this->projectLower . '/specs');
+        $this->exportIgnores[] = 'specs/';
+
+        $this->file->put($this->projectLower . '/' . 'phpspec.yml.dist', $content);
+        $this->exportIgnores[] = 'phpspec.yml.dist';
     }
 
     /**
