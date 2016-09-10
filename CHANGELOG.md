@@ -3,11 +3,11 @@
 #### v1.11.0 `2016-**-**`
 - `Added`
     - User can optionally generate [GitHub documentation](https://github.com/blog/2233-publish-your-project-documentation-with-github-pages) files. Done by [@raphaelstolt](https://github.com/raphaelstolt).
-
     - A Travis CI badge is now added in the constructed README.md.
 - `Fixed`
     - Generated `phpspec` configuration file has a `.dist` extension and a `specs` directory is created.
     - The `.gitignore` entries are set dynamically and the non `dist` tests or specs configuration is ignored.
+    - Xdebug is now disabled _correctly_ in constructed `.travis.yml` file.
 
 #### v1.10.1 `2016-07-09`
 - `Fixed`
