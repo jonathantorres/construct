@@ -35,6 +35,11 @@ class Configuration
             $configuration['construct-with'] = array_flip($configuration['construct-with']);
         }
 
+        if (isset($configuration['construct-with']['github'])) {
+            $configuration['construct-with']['github-templates'] = true;
+            $configuration['construct-with']['github-docs'] = true;
+        }
+
         return new Settings(
             $projectName,
             isset($configuration['test-framework']) ? $configuration['test-framework'] : $defaults->testingFrameworks[0],
