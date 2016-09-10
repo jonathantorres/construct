@@ -12,7 +12,7 @@ matrix:
   fast_finish: true
 
 before_script:
-  - if [ $TRAVIS_PHP_VERSION != "hhvm" && $TRAVIS_PHP_VERSION != "nightly"]; then phpenv config-rm xdebug.ini ; fi
+  - if [[ $TRAVIS_PHP_VERSION != hhvm && $TRAVIS_PHP_VERSION != nightly ]]; then phpenv config-rm xdebug.ini; fi
   - composer self-update
   - composer install -n
 
