@@ -44,6 +44,7 @@ The generated project structure will look like the following `tree` excerpt. Fil
 │   │   ├── ISSUE_TEMPLATE.md
 │   │   └── PULL_REQUEST_TEMPLATE.md
 │   ├── .gitignore
+│   ├── .gitmessage
 │   ├── (.lgtm)
 │   ├── LICENSE.md
 │   ├── (MAINTAINERS)

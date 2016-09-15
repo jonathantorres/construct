@@ -102,6 +102,7 @@ class ConstructTest extends PHPUnit
         $this->assertSame($this->getStub('travis'), $this->getFile('.travis.yml'));
         $this->assertSame($this->getStub('gitignore'), $this->getFile('.gitignore'));
         $this->assertSame($this->getStub('gitattributes'), $this->getFile('.gitattributes'));
+        $this->assertSame($this->getStub('gitmessage'), $this->getFile('.gitmessage'));
         $this->assertSame($this->getStub('Logger'), $this->getFile('src/Logger.php'));
         $this->assertSame($this->getStub('LoggerTest'), $this->getFile('tests/LoggerTest.php'));
     }
@@ -594,6 +595,10 @@ class ConstructTest extends PHPUnit
         $this->assertSame(
             $this->getStub('with-github-templates/README'),
             $this->getFile('README.md')
+        );
+        $this->assertSame(
+            $this->getStub('with-github-templates/CONTRIBUTING'),
+            $this->getFile('.github/CONTRIBUTING.md')
         );
     }
 

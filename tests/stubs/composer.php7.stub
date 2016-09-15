@@ -24,6 +24,7 @@
     },
     "minimum-stability": "stable",
     "scripts": {
-        "test": "phpunit"
+        "test": "phpunit",
+        "configure-commit-template": "git config --add commit.template .gitmessage"
     }
 }

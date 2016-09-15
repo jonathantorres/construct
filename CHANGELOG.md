@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.12.0 `2016-09-??`
+- `Added`
+    - A generated `.gitmessage` template and a Composer script for it's configuration _can_ be used to improve the commit message quality and consistency. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#144](https://github.com/jonathantorres/construct/issues/144).
+
 #### v1.11.0 `2016-09-10`
 - `Added`
     - User can use the `github` alias implicating all `--github-*` options. Done by [@raphaelstolt](https://github.com/raphaelstolt).

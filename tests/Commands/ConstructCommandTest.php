@@ -31,7 +31,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGeneration()
     {
-        $this->setMocks(3, 2);
+        $this->setMocks(3, 2, 0, 11);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -112,7 +112,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithASpecifiedTestingFramework()
     {
-        $this->setMocks(2, 2, 0, 8, 9);
+        $this->setMocks(2, 2, 0, 9, 10);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -129,7 +129,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithASpecifiedTestingFrameworkViaAlias()
     {
-        $this->setMocks(2, 2, 0, 8, 9);
+        $this->setMocks(2, 2, 0, 9, 10);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -302,7 +302,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithEnvironmentFiles()
     {
-        $this->setMocks(3, 2, 2, 10, 11);
+        $this->setMocks(3, 2, 2);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -352,7 +352,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationFromConfiguration()
     {
-        $this->setMocks(5, 3, 10, 9, 11);
+        $this->setMocks(5, 3, 10, 10);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
         $app = $this->setApplication();
@@ -375,7 +375,7 @@ class ConstructCommandTest extends PHPUnit
 
     public function testProjectGenerationWithGitHubAlias()
     {
-        $this->setMocks(5, 3, 10, 9, 11);
+        $this->setMocks(5, 3, 10, 10);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
         $app = $this->setApplication();
@@ -401,7 +401,7 @@ class ConstructCommandTest extends PHPUnit
      */
     public function testProjectGenerationFromConfigurationWithInvalidSettings()
     {
-        $this->setMocks(4, 3, 10, 10, 11);
+        $this->setMocks(4, 3, 10, 11);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
         $app = $this->setApplication();
@@ -468,7 +468,7 @@ class ConstructCommandTest extends PHPUnit
      * @param int $getTimes
      * @param int $putTimes
      */
-    protected function setMocks($makeDirectoryTimes = 3, $isDirectoryTimes = 1, $copyTimes = 0, $getTimes = 10, $putTimes = 11)
+    protected function setMocks($makeDirectoryTimes = 3, $isDirectoryTimes = 1, $copyTimes = 0, $getTimes = 11, $putTimes = 12)
     {
         $this->filesystem->shouldReceive('makeDirectory')->times($makeDirectoryTimes)->andReturnNull();
         $this->filesystem->shouldReceive('isDirectory')->times($isDirectoryTimes)->andReturnNull();

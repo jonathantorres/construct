@@ -19,6 +19,7 @@
     },
     "minimum-stability": "stable",
     "scripts": {
-        "test": "{testing}"
+        "test": "{testing}",
+        "configure-commit-template": "git config --add commit.template .gitmessage"
     }
 }
