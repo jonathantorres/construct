@@ -1,4 +1,4 @@
-* text=auto
+* text=auto eol=lf
 
 example/ export-ignore
 tests/ export-ignore
