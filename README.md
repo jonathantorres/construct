@@ -16,7 +16,7 @@ Make sure that `~/.composer/vendor/bin` is on your `$PATH`. This way the `constr
 
 ## Assumptions
 
-As Construct utilizes the Composer CLI it's assumed that Composer is installed. When using the option to initialize an empty Git repo (i.e. `--git` or `-g`) it's also assumed that Git is installed.
+As Construct utilizes Composer's CLI, it's assumed that Composer is installed. When using the option to initialize an empty Git repo (i.e. `--git` or `-g`) it's also assumed that Git is installed.
 
 ## Usage
 Just run `construct generate` with your `vendor/package` declaration and it will construct a basic PHP project into the `package` directory. For example, if you run `construct generate jonathantorres/logger` it will generate a basic project structure inside the `logger` folder.
