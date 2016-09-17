@@ -19,6 +19,7 @@
     },
     "minimum-stability": "stable",
     "scripts": {
-        "test": "codecept run"
+        "test": "codecept run",
+        "configure-commit-template": "git config --add commit.template .gitmessage"
     }
 }

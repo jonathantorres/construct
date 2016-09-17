@@ -161,6 +161,7 @@ class Construct
         $this->composer($git);
         $this->projectClass();
         $this->gitignore();
+        $this->gitmessage();
         $this->gitattributes();
 
         if ($this->settings->withGitInit()) {
@@ -270,11 +271,14 @@ class Construct
             $contributing = $this->file->get(__DIR__ . '/stubs/CONTRIBUTING.stub');
         }
 
-        $content = str_replace(
-            '{project_lower}',
-            $this->projectLower,
-            $contributing
-        );
+        $placeholder = ['{project_lower}', '{git_message_path}'];
+        $replacements = [$this->projectLower, '.gitmessage'];
+
+        if ($this->settings->withGithubTemplates()) {
+            $replacements = [$this->projectLower, '../.gitmessage'];
+        }
+
+        $content = str_replace($placeholder, $replacements, $contributing);
 
         $this->file->put($this->projectLower . '/' . 'CONTRIBUTING.md', $content);
         $this->exportIgnores[] = 'CONTRIBUTING.md';
@@ -522,6 +526,22 @@ class Construct
 
         $this->file->put($this->projectLower . '/' . '.gitattributes', $content);
     }
+
+    /**
+     * Copy .gitmessage stub file.
+     *
+     * @return void
+     */
+    protected function gitmessage()
+    {
+        $this->file->put(
+            $this->projectLower . '/' . '.gitmessage',
+            $this->file->get(__DIR__ . '/stubs/gitmessage.stub')
+        );
+
+        $this->exportIgnores[] = '.gitmessage';
+    }
+
 
     /**
      * Do an initial composer install and require the set development packages
