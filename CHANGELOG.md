@@ -1,6 +1,6 @@
 # Changelog
 
-#### v1.12.0 `2016-09-??`
+#### v1.12.0 `2016-09-18`
 - `Added`
     - A generated `.gitmessage` template and a Composer script for it's configuration _can_ be used to improve the commit message quality and consistency. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#144](https://github.com/jonathantorres/construct/issues/144).
 
