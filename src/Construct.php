@@ -519,10 +519,10 @@ class Construct
         $content = $this->file->get(__DIR__ . '/stubs/gitattributes.stub');
 
         foreach ($this->exportIgnores as $ignore) {
-            $content .= PHP_EOL . $ignore . ' export-ignore';
+            $content .= "\n" . $ignore . ' export-ignore';
         }
 
-        $content .= PHP_EOL;
+        $content .= "\n";
 
         $this->file->put($this->projectLower . '/' . '.gitattributes', $content);
     }
