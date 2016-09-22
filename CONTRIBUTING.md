@@ -1,7 +1,7 @@
 # How to contribute
 
 Thanks for contributing to construct! Just follow these single guidelines:
-- You must follow the PSR-2 coding standard. More info [here](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md). With these tweaks:
+- You must follow the PSR-2 coding standard. Please see [PSR-2](http://www.php-fig.org/psr/psr-2/) for more details. With these tweaks:
     - Always use spaces!
     - Ensure the coding standard compliance before committing or opening pull requests by running `php-cs-fixer fix .` or `composer cs-fix` in the root directory of this repository.
 
