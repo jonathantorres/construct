@@ -548,7 +548,6 @@ class Construct
         $this->exportIgnores[] = '.gitmessage';
     }
 
-
     /**
      * Do an initial composer install and require the set development packages
      * in the constructed project.
