@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.13.0 `2016-10-??`
+- `Added`
+    - Coding standard checks based on the PHP Coding Standards Fixer are cached and validated via a Travis CI script. Done by [@raphaelstolt](https://github.com/raphaelstolt) and initiated by [@localheinz](https://github.com/localheinz).
+
 #### v1.12.0 `2016-09-18`
 - `Added`
     - A generated `.gitmessage` template and a Composer script for it's configuration _can_ be used to improve the commit message quality and consistency. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#144](https://github.com/jonathantorres/construct/issues/144).

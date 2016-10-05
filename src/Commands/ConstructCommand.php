@@ -216,12 +216,11 @@ class ConstructCommand extends Command
         $output->writeln('<info>Project "' . $projectName . '" constructed.</info>');
     }
 
-
     /**
      * Shows warnings and sets a new settings which overwrites
      * invalid settings with default values.
      *
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @param  \Symfony\Component\Console\Output\OutputInterface $output
      * @return void
      */
     private function warnAndOverwriteInvalidSettingsWithDefaults($output)
@@ -250,7 +249,6 @@ class ConstructCommand extends Command
             $this->settings->withGithubDocs()
         );
     }
-
 
     /**
      * Determine if a configuration is applicable.

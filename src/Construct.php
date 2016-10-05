@@ -329,6 +329,7 @@ class Construct
             $this->projectLower . '/' . '.php_cs'
         );
 
+        $this->gitIgnores[] = '.php_cs.cache';
         $this->exportIgnores[] = '.php_cs';
     }
 
@@ -339,7 +340,12 @@ class Construct
      */
     protected function travis()
     {
-        $file = $this->file->get(__DIR__ . '/stubs/travis.stub');
+        if ($this->settings->withPhpcsConfiguration()) {
+            $file = $this->file->get(__DIR__ . '/stubs/travis.phpcs.stub');
+        } else {
+            $file = $this->file->get(__DIR__ . '/stubs/travis.stub');
+        }
+
         $travisHelper = new Travis();
         $phpVersionsToRunOnTravis = $travisHelper->phpVersionsToRun(
             $travisHelper->phpVersionsToTest($this->settings->getPhpVersion())
@@ -541,7 +547,6 @@ class Construct
 
         $this->exportIgnores[] = '.gitmessage';
     }
-
 
     /**
      * Do an initial composer install and require the set development packages

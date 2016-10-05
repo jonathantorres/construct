@@ -138,8 +138,7 @@ construct generate jonathantorres/logger -g
 ```
 
 ## Generate a PHP Coding Standards Fixer configuration?
-The `--phpcs` option will generate a [PHP Coding Standards Fixer](http://cs.sensiolabs.org/) configuration
-within the constructed project. The generated `.php_cs` configuration defaults to the `PSR-2` coding style guide.
+The `--phpcs` option will generate a [PHP Coding Standards Fixer](http://cs.sensiolabs.org/) configuration within the constructed project and add a Travis CI script for validation during builds. The generated `.php_cs` configuration defaults to the `PSR-2` coding style guide.
 
 ```bash
 construct generate jonathantorres/logger --phpcs
