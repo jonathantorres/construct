@@ -12,5 +12,5 @@ before_script:
   - travis_retry composer install --no-interaction
 
 script:
-  - vendor/bin/php-cs-fixer fix --diff --verbose --dry-run
+  - composer cs-lint
   - composer test

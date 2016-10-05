@@ -17,5 +17,5 @@ before_script:
   - composer install -n
 
 script:
-  - vendor/bin/php-cs-fixer fix --diff --verbose --dry-run
+  - composer cs-lint
   - composer test

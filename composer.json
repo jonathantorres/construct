@@ -38,7 +38,8 @@
     "bin": ["construct"],
     "scripts": {
         "test": "phpunit",
-        "cs-fix": "php-cs-fixer fix . -vv || true"
+        "cs-fix": "php-cs-fixer fix . -vv || true",
+        "cs-lint": "php-cs-fixer fix --diff --verbose --dry-run"
     },
     "minimum-stability": "stable"
 }
