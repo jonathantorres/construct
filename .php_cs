@@ -1,43 +1,34 @@
 <?php
 
-$finder = Symfony\CS\Finder\DefaultFinder::create()
-    ->exclude('stubs')
-    ->in(__DIR__);
+$finder = PhpCsFixer\Finder::create()
+    ->in(__DIR__)
+    ->exclude('stubs');
 
-return Symfony\CS\Config\Config::create()
-    ->level(Symfony\CS\FixerInterface::PSR2_LEVEL)
+$rules = [
+    'psr0' => false,
+    '@PSR2' => true,
+    'short_array_syntax' => true,
+    'concat_with_spaces' => true,
+    'phpdoc_order' => true,
+    'ordered_imports' => true,
+    'include' => true,
+    'object_operator_without_whitespace' => true,
+    'binary_operator_spaces' => true,
+    'phpdoc_align' => true,
+    'blank_line_before_return' => true,
+    'no_trailing_comma_in_singleline_array' => true,
+    'cast_spaces' => true,
+    'standardize_not_equals' => true,
+    'ternary_operator_spaces' => true,
+    'no_unused_imports' => true,
+    'no_whitespace_in_blank_lines' => true,
+    'ordered_imports' => false,
+];
+
+$cacheDir = getenv('TRAVIS') ? getenv('HOME') . '/.php-cs-fixer' : __DIR__;
+
+return PhpCsFixer\Config::create()
+    ->setRules($rules)
+    ->finder($finder)
     ->setUsingCache(true)
-    ->fixers(array(
-        '-psr0',
-        'short_array_syntax',
-        'concat_with_spaces',
-        'encoding',
-        'short_tag',
-        'braces',
-        'elseif',
-        'eof_ending',
-        'function_declaration',
-        'indentation',
-        'line_after_namespace',
-        'linefeed',
-        'lowercase_constants',
-        'lowercase_keywords',
-        'multiple_use',
-        'php_closing_tag',
-        'trailing_spaces',
-        'visibility',
-        'duplicate_semicolon',
-        'extra_empty_lines',
-        'include',
-        'namespace_no_leading_whitespace',
-        'object_operator',
-        'operators_spaces',
-        'phpdoc_params',
-        'return',
-        'single_array_no_trailing_comma',
-        'spaces_cast',
-        'standardize_not_equal',
-        'ternary_spaces',
-        'unused_use',
-        'whitespacy_lines'
-    ))->finder($finder);
+    ->setCacheFile($cacheDir . '/.php_cs.cache');

@@ -15,7 +15,7 @@
         "symfony/yaml": "^2.6 || ^3.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^1.11",
+        "friendsofphp/php-cs-fixer": "2.0.0-alpha",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "^4.8 || ^5.0"
     },
@@ -38,7 +38,8 @@
     "bin": ["construct"],
     "scripts": {
         "test": "phpunit",
-        "cs-fix": "php-cs-fixer fix . -vv || true"
+        "cs-fix": "php-cs-fixer fix . -vv || true",
+        "cs-lint": "php-cs-fixer fix --diff --verbose --dry-run"
     },
     "minimum-stability": "stable"
 }

@@ -3,7 +3,7 @@
 Thanks for contributing to {project_lower}! Just follow these single guidelines:
 - You __MUST__ follow the PSR-2 coding standard. Please see [PSR-2](http://www.php-fig.org/psr/psr-2/) for more details.
 
-- Ensure the coding standard compliance before committing or opening pull requests by running `composer cs-fix` in the root directory of this repository.
+- Ensure the coding standard compliance before committing or opening pull requests by running `composer cs-fix` or `composer cs-lint` in the root directory of this repository.
 
 - You __MUST__ use [feature / topic branches](https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows) to ease the merge of contributions.
 
