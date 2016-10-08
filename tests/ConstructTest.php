@@ -506,6 +506,30 @@ class ConstructTest extends PHPUnit
         $this->assertSame($this->getStub('travis.php7'), $this->getFile('.travis.yml'));
     }
 
+    public function testProjectGenerationWithPhp71()
+    {
+        $settings = new Settings(
+            'jonathantorres/logger',
+            'phpunit',
+            'MIT',
+            'Vendor\Project',
+            null,
+            null,
+            null,
+            null,
+            null,
+            '7.1.2',
+            null,
+            null
+        );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
+
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->assertSame($this->getStub('composer.php71'), $this->getFile('composer.json'));
+        $this->assertSame($this->getStub('travis.php71'), $this->getFile('.travis.yml'));
+    }
+
     public function testProjectGenerationWithEnvironmentFiles()
     {
         $settings = new Settings(

@@ -1,14 +1,22 @@
 language: php
 
-php:
+env:
+  global:
+    - disable-xdebug=true
+
+matrix:
+  include:
 {phpVersions}
+  fast_finish: true
 
 cache:
   directories:
     - $HOME/.composer/cache
 
 before_script:
-  - if [[ $TRAVIS_PHP_VERSION != hhvm && $TRAVIS_PHP_VERSION != nightly ]]; then phpenv config-rm xdebug.ini; fi
+  - if [[ $disable-xdebug = true ]]; then
+      phpenv config-rm xdebug.ini;
+    fi
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction
 
