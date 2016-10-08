@@ -18,6 +18,9 @@
         }
     },
     "minimum-stability": "stable",
+    "config": {
+        "sort-packages": true
+    },
     "scripts": {
         "test": "behat",
         "configure-commit-template": "git config --add commit.template .gitmessage"
