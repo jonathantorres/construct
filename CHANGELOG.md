@@ -3,6 +3,7 @@
 #### v1.13.0 `2016-10-??`
 - `Added`
     - Coding standard checks based on the PHP Coding Standards Fixer are cached and validated via a Travis CI script. Done by [@raphaelstolt](https://github.com/raphaelstolt) and initiated by [@localheinz](https://github.com/localheinz).
+    - Composer dependencies are sorted. Done by [@raphaelstolt](https://github.com/raphaelstolt).
 
 #### v1.12.0 `2016-09-18`
 - `Added`
