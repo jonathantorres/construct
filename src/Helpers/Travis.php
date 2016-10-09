@@ -51,10 +51,17 @@ class Travis
      */
     public function phpVersionsToRun($phpVersions)
     {
+        $versionsWithoutXdebugExtension = ['hhvm', 'nightly', '7.1'];
         $runOn = '';
 
         for ($i = 0; $i < count($phpVersions); $i++) {
-            $runOn .= '  - ' . $phpVersions[$i];
+            if (count($i) !== 0) {
+                $runOn .= '    ';
+            }
+            $runOn .= '- php: ' . $phpVersions[$i];
+            if (in_array($phpVersions[$i], $versionsWithoutXdebugExtension)) {
+                $runOn .= "\n      env: disable-xdebug=false";
+            }
 
             if ($i !== (count($phpVersions) - 1)) {
                 $runOn .= PHP_EOL;
