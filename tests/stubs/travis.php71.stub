@@ -1,17 +1,10 @@
 language: php
 
-env:
-  global:
-    - disable-xdebug=true
-
 matrix:
   include:
     - php: hhvm
-      env: disable-xdebug=false
     - php: nightly
-      env: disable-xdebug=false
     - php: 7.1
-      env: disable-xdebug=false
   fast_finish: true
 
 cache:
@@ -19,7 +12,7 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - if [[ $disable-xdebug = true ]]; then
+  - if [[ $DISABLE_XDEBUG = true ]]; then
       phpenv config-rm xdebug.ini;
     fi
   - travis_retry composer self-update
