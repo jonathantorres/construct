@@ -49,16 +49,23 @@ class TravisTest extends PHPUnit
 
         $stringExpected = <<<CONTENT
     - php: hhvm
-      env: disable-xdebug=false
     - php: nightly
-      env: disable-xdebug=false
     - php: 5.4
+      env:
+      - DISABLE_XDEBUG=true
     - php: 5.5
+      env:
+      - DISABLE_XDEBUG=true
     - php: 5.5.9
+      env:
+      - DISABLE_XDEBUG=true
     - php: 5.6
+      env:
+      - DISABLE_XDEBUG=true
     - php: 7.0
+      env:
+      - DISABLE_XDEBUG=true
     - php: 7.1
-      env: disable-xdebug=false
 CONTENT;
 
         $this->assertEquals($versionsToRun, $stringExpected);
@@ -98,13 +105,19 @@ CONTENT;
 
         $stringExpected = <<<CONTENT
     - php: hhvm
-      env: disable-xdebug=false
     - php: 5.5
+      env:
+      - DISABLE_XDEBUG=true
     - php: 5.5.9
+      env:
+      - DISABLE_XDEBUG=true
     - php: 5.6
+      env:
+      - DISABLE_XDEBUG=true
     - php: 7.0
+      env:
+      - DISABLE_XDEBUG=true
     - php: 7.1
-      env: disable-xdebug=false
 CONTENT;
 
         $this->assertEquals($versionsToRun, $stringExpected);
@@ -143,12 +156,16 @@ CONTENT;
 
         $stringExpected = <<<CONTENT
     - php: hhvm
-      env: disable-xdebug=false
     - php: 5.5.9
+      env:
+      - DISABLE_XDEBUG=true
     - php: 5.6
+      env:
+      - DISABLE_XDEBUG=true
     - php: 7.0
+      env:
+      - DISABLE_XDEBUG=true
     - php: 7.1
-      env: disable-xdebug=false
 CONTENT;
 
         $this->assertEquals($versionsToRun, $stringExpected);
@@ -185,11 +202,13 @@ CONTENT;
 
         $stringExpected = <<<CONTENT
     - php: hhvm
-      env: disable-xdebug=false
     - php: 5.6
+      env:
+      - DISABLE_XDEBUG=true
     - php: 7.0
+      env:
+      - DISABLE_XDEBUG=true
     - php: 7.1
-      env: disable-xdebug=false
 CONTENT;
 
         $this->assertEquals($versionsToRun, $stringExpected);
@@ -242,10 +261,10 @@ CONTENT;
 
         $stringExpected = <<<CONTENT
     - php: hhvm
-      env: disable-xdebug=false
     - php: 7.0
+      env:
+      - DISABLE_XDEBUG=true
     - php: 7.1
-      env: disable-xdebug=false
 CONTENT;
 
         $this->assertEquals($versionsToRun, $stringExpected);
@@ -278,9 +297,7 @@ CONTENT;
 
         $stringExpected = <<<CONTENT
     - php: hhvm
-      env: disable-xdebug=false
     - php: 7.1
-      env: disable-xdebug=false
 CONTENT;
 
         $this->assertEquals($versionsToRun, $stringExpected);

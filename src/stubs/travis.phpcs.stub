@@ -1,9 +1,5 @@
 language: php
 
-env:
-  global:
-    - disable-xdebug=true
-
 matrix:
   include:
 {phpVersions}
@@ -14,7 +10,7 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - if [[ $disable-xdebug = true ]]; then
+  - if [[ $DISABLE_XDEBUG = true ]]; then
       phpenv config-rm xdebug.ini;
     fi
   - travis_retry composer self-update

@@ -1,21 +1,22 @@
 language: php
 
-env:
-  global:
-    - disable-xdebug=true
-
 matrix:
   include:
     - php: hhvm
-      env: disable-xdebug=false
     - php: nightly
-      env: disable-xdebug=false
     - php: 7.1
-      env: disable-xdebug=false
     - php: 7.0
+      env:
+      - DISABLE_XDEBUG=true
     - php: 5.6
+      env:
+      - DISABLE_XDEBUG=true
     - php: 5.5
+      env:
+      - DISABLE_XDEBUG=true
     - php: 5.4
+      env:
+      - DISABLE_XDEBUG=true
   fast_finish: true
 
 cache:
@@ -24,7 +25,7 @@ cache:
     - $HOME/.php-cs-fixer
 
 before_script:
-  - if [[ $disable-xdebug = true ]]; then
+  - if [[ $DISABLE_XDEBUG = true ]]; then
       phpenv config-rm xdebug.ini;
     fi
   - composer self-update
