@@ -340,16 +340,20 @@ class Construct
      */
     protected function travis()
     {
+        $travisHelper = new Travis();
+
         if ($this->settings->withPhpcsConfiguration()) {
             $file = $this->file->get(__DIR__ . '/stubs/travis.phpcs.stub');
+            $phpVersionsToRunOnTravis = $travisHelper->phpVersionsToRun(
+                $travisHelper->phpVersionsToTest($this->settings->getPhpVersion()),
+                true
+            );
         } else {
             $file = $this->file->get(__DIR__ . '/stubs/travis.stub');
+            $phpVersionsToRunOnTravis = $travisHelper->phpVersionsToRun(
+                $travisHelper->phpVersionsToTest($this->settings->getPhpVersion())
+            );
         }
-
-        $travisHelper = new Travis();
-        $phpVersionsToRunOnTravis = $travisHelper->phpVersionsToRun(
-            $travisHelper->phpVersionsToTest($this->settings->getPhpVersion())
-        );
 
         $content = str_replace('{phpVersions}', $phpVersionsToRunOnTravis, $file);
 

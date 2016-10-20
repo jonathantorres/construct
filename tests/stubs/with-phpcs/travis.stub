@@ -14,6 +14,8 @@ matrix:
       env:
       - DISABLE_XDEBUG=true
     - php: 7.1
+      env:
+      - LINT=true
   fast_finish: true
 
 cache:
@@ -28,5 +30,7 @@ before_script:
   - travis_retry composer install --no-interaction
 
 script:
-  - composer cs-lint
+  - if [[ $LINT = true ]]; then
+      composer cs-lint;
+    fi
   - composer test

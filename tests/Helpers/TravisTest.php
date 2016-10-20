@@ -1,6 +1,7 @@
 <?php
 
 use JonathanTorres\Construct\Helpers\Travis;
+use JonathanTorres\Construct\Defaults;
 use PHPUnit_Framework_TestCase as PHPUnit;
 
 class TravisTest extends PHPUnit
@@ -217,6 +218,34 @@ CONTENT;
     /**
      * @test
      */
+    public function it_should_generate_string_of_all_versions_to_run_on_a_php56_project_with_lint_env()
+    {
+        $versionsToRun = $this->travis->phpVersionsToRun([
+            'hhvm',
+            '5.6',
+            '7.0',
+            '7.1',
+        ], true);
+
+        $stringExpected = <<<CONTENT
+    - php: hhvm
+    - php: 5.6
+      env:
+      - DISABLE_XDEBUG=true
+    - php: 7.0
+      env:
+      - DISABLE_XDEBUG=true
+    - php: 7.1
+      env:
+      - LINT=true
+CONTENT;
+
+        $this->assertEquals($versionsToRun, $stringExpected);
+    }
+
+    /**
+     * @test
+     */
     public function it_should_return_all_versions_to_test_on_a_php5616_project()
     {
         $versionsToTest = $this->travis->phpVersionsToTest('5.6.16');
@@ -298,6 +327,66 @@ CONTENT;
         $stringExpected = <<<CONTENT
     - php: hhvm
     - php: 7.1
+CONTENT;
+
+        $this->assertEquals($versionsToRun, $stringExpected);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_generate_string_of_all_versions_to_run_on_a_php7_1_project_with_lint_env()
+    {
+        $versionsToRun = $this->travis->phpVersionsToRun([
+            'hhvm',
+            '7.1',
+        ], true);
+
+        $stringExpected = <<<CONTENT
+    - php: hhvm
+    - php: 7.1
+      env:
+      - LINT=true
+CONTENT;
+
+        $this->assertEquals($versionsToRun, $stringExpected);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_generate_versions_with_adding_lint_env_on_non_semver_versions()
+    {
+        $versionsToRun = $this->travis->phpVersionsToRun((new Defaults)->nonSemverPhpVersions, true);
+
+        $stringExpected = <<<CONTENT
+    - php: hhvm
+    - php: nightly
+      env:
+      - LINT=true
+CONTENT;
+
+        $this->assertEquals($versionsToRun, $stringExpected);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_generate_versions_with_adding_lint_env_to_existing_env_var()
+    {
+        $versionsToRun = $this->travis->phpVersionsToRun([
+            '5.5',
+            '5.6',
+        ], true);
+
+        $stringExpected = <<<CONTENT
+    - php: 5.5
+      env:
+      - DISABLE_XDEBUG=true
+    - php: 5.6
+      env:
+      - DISABLE_XDEBUG=true
+      - LINT=true
 CONTENT;
 
         $this->assertEquals($versionsToRun, $stringExpected);

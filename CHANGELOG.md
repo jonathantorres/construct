@@ -2,6 +2,7 @@
 
 #### v1.13.0 `2016-10-??`
 - `Added`
+    - Coding standard checks are only run against a single PHP version. Done by [@raphaelstolt](https://github.com/raphaelstolt).
     - PHP version `7.1` is added to Travis CI builds. Done by [@raphaelstolt](https://github.com/raphaelstolt).
     - Coding standard checks based on the PHP Coding Standards Fixer are cached and validated via Travis CI. Done by [@raphaelstolt](https://github.com/raphaelstolt) and initiated by [@localheinz](https://github.com/localheinz).
     - Composer dependencies are sorted. Done by [@raphaelstolt](https://github.com/raphaelstolt).
