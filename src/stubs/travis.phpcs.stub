@@ -17,5 +17,7 @@ before_script:
   - travis_retry composer install --no-interaction
 
 script:
-  - composer cs-lint
+  - if [[ $LINT = true ]]; then
+      composer cs-lint;
+    fi
   - composer test

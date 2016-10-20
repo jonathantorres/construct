@@ -8,6 +8,7 @@ matrix:
     - php: 7.0
       env:
       - DISABLE_XDEBUG=true
+      - LINT=true
     - php: 5.6
       env:
       - DISABLE_XDEBUG=true
@@ -32,5 +33,7 @@ before_script:
   - composer install -n
 
 script:
-  - composer cs-lint
+  - if [[ $LINT = true ]]; then
+      composer cs-lint;
+    fi
   - composer test
