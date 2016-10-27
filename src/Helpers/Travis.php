@@ -52,7 +52,6 @@ class Travis
      */
     public function phpVersionsToRun($phpVersions, $setLintEnvironmentVariable = false)
     {
-        $versionsWithXdebugExtension = (new Defaults)->phpVersionsWithXdebugExtension;
         $runOn = '';
         $nonSemverVersions = (new Defaults)->nonSemverPhpVersions;
         $alreadySetLintEnvironmentVariable = false;
@@ -67,17 +66,6 @@ class Travis
                 $runOn .= '    ';
             }
             $runOn .= '- php: ' . $phpVersions[$i];
-            if (in_array($phpVersion, $versionsWithXdebugExtension)) {
-                $runOn .= "\n      env:"
-                    . "\n      - DISABLE_XDEBUG=true";
-                if ($setLintEnvironmentVariable
-                    && count($phpVersions) == $i + 1
-                    && $alreadySetLintEnvironmentVariable == false
-                ) {
-                    $alreadySetLintEnvironmentVariable = true;
-                    $runOn .= "\n      - LINT=true";
-                }
-            }
 
             if ($setLintEnvironmentVariable
                 && count($phpVersions) == $i + 1

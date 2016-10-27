@@ -52,20 +52,10 @@ class TravisTest extends PHPUnit
     - php: hhvm
     - php: nightly
     - php: 5.4
-      env:
-      - DISABLE_XDEBUG=true
     - php: 5.5
-      env:
-      - DISABLE_XDEBUG=true
     - php: 5.5.9
-      env:
-      - DISABLE_XDEBUG=true
     - php: 5.6
-      env:
-      - DISABLE_XDEBUG=true
     - php: 7.0
-      env:
-      - DISABLE_XDEBUG=true
     - php: 7.1
 CONTENT;
 
@@ -107,17 +97,9 @@ CONTENT;
         $stringExpected = <<<CONTENT
     - php: hhvm
     - php: 5.5
-      env:
-      - DISABLE_XDEBUG=true
     - php: 5.5.9
-      env:
-      - DISABLE_XDEBUG=true
     - php: 5.6
-      env:
-      - DISABLE_XDEBUG=true
     - php: 7.0
-      env:
-      - DISABLE_XDEBUG=true
     - php: 7.1
 CONTENT;
 
@@ -158,14 +140,8 @@ CONTENT;
         $stringExpected = <<<CONTENT
     - php: hhvm
     - php: 5.5.9
-      env:
-      - DISABLE_XDEBUG=true
     - php: 5.6
-      env:
-      - DISABLE_XDEBUG=true
     - php: 7.0
-      env:
-      - DISABLE_XDEBUG=true
     - php: 7.1
 CONTENT;
 
@@ -204,11 +180,7 @@ CONTENT;
         $stringExpected = <<<CONTENT
     - php: hhvm
     - php: 5.6
-      env:
-      - DISABLE_XDEBUG=true
     - php: 7.0
-      env:
-      - DISABLE_XDEBUG=true
     - php: 7.1
 CONTENT;
 
@@ -230,11 +202,7 @@ CONTENT;
         $stringExpected = <<<CONTENT
     - php: hhvm
     - php: 5.6
-      env:
-      - DISABLE_XDEBUG=true
     - php: 7.0
-      env:
-      - DISABLE_XDEBUG=true
     - php: 7.1
       env:
       - LINT=true
@@ -291,8 +259,6 @@ CONTENT;
         $stringExpected = <<<CONTENT
     - php: hhvm
     - php: 7.0
-      env:
-      - DISABLE_XDEBUG=true
     - php: 7.1
 CONTENT;
 
@@ -381,11 +347,8 @@ CONTENT;
 
         $stringExpected = <<<CONTENT
     - php: 5.5
-      env:
-      - DISABLE_XDEBUG=true
     - php: 5.6
       env:
-      - DISABLE_XDEBUG=true
       - LINT=true
 CONTENT;
 
