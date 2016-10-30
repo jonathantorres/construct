@@ -26,13 +26,6 @@ class Defaults
     public $phpVersions = ['5.4', '5.5', '5.6', '7.0', '7.1'];
 
     /**
-     * Available php versions with a Xdebug extension.
-     *
-     * @var array
-     */
-    public $phpVersionsWithXdebugExtension = ['5.4', '5.5', '5.6', '7.0'];
-
-    /**
      * Php versions without a semver scheme.
      *
      * @var array
