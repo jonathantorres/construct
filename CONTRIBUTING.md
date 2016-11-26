@@ -5,7 +5,7 @@ Thanks for contributing to construct! Just follow these single guidelines:
     - Always use spaces!
     - Ensure the coding standard compliance before committing or opening pull requests by running `composer cs-fix` or `composer cs-lint` in the root directory of this repository.
 
-- All features or bugfixes must have an associated issue for discussion. If you want to work on a issue that is already created, please leave a comment on it indicating that you are working on it.
+- All features or bugfixes must have an associated issue for discussion. If you want to work on an issue that is already created, please leave a comment on it indicating that you are working on it.
 
 - You must use [feature / topic branches](https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows) to ease the merge of contributions.
 
