@@ -62,10 +62,7 @@ class Travis
                 $phpVersion = $this->toMinorVersion($phpVersions[$i]);
             }
 
-            if (count($i) !== 0) {
-                $runOn .= '    ';
-            }
-            $runOn .= '- php: ' . $phpVersions[$i];
+            $runOn .= '    - php: ' . $phpVersions[$i];
 
             if ($setLintEnvironmentVariable
                 && count($phpVersions) == $i + 1
