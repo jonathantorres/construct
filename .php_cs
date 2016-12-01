@@ -7,8 +7,8 @@ $finder = PhpCsFixer\Finder::create()
 $rules = [
     'psr0' => false,
     '@PSR2' => true,
-    'short_array_syntax' => true,
-    'concat_with_spaces' => true,
+    'array_syntax' => ['syntax' => 'short'],
+    'concat_space' => ['spacing' => 'one'],
     'phpdoc_order' => true,
     'ordered_imports' => true,
     'include' => true,
@@ -21,7 +21,7 @@ $rules = [
     'standardize_not_equals' => true,
     'ternary_operator_spaces' => true,
     'no_unused_imports' => true,
-    'no_whitespace_in_blank_lines' => true,
+    'no_whitespace_in_blank_line' => true,
     'ordered_imports' => false,
 ];
 
@@ -29,6 +29,5 @@ $cacheDir = getenv('TRAVIS') ? getenv('HOME') . '/.php-cs-fixer' : __DIR__;
 
 return PhpCsFixer\Config::create()
     ->setRules($rules)
-    ->finder($finder)
-    ->setUsingCache(true)
+    ->setFinder($finder)
     ->setCacheFile($cacheDir . '/.php_cs.cache');
