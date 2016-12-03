@@ -8,6 +8,9 @@
     - Composer dependencies are sorted. Done by [@raphaelstolt](https://github.com/raphaelstolt).
     - Composer dependencies are cached for Travis CI builds. Done by [@raphaelstolt](https://github.com/raphaelstolt).
 
+- `Fixed`
+    - Aligned generated `.php_cs` configuration with `php-cs-fixer` ^2.0 release. Done by [@raphaelstolt](https://github.com/raphaelstolt).
+
 #### v1.12.0 `2016-09-18`
 - `Added`
     - A generated `.gitmessage` template and a Composer script for it's configuration _can_ be used to improve the commit message quality and consistency. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#144](https://github.com/jonathantorres/construct/issues/144).
