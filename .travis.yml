@@ -9,7 +9,6 @@ matrix:
       sudo: required
       dist: trusty
       group: edge
-    - php: nightly
     - php: 7.1
     - php: 7.0
       env:
@@ -18,6 +17,8 @@ matrix:
     - php: 5.5
     - php: 5.4
   fast_finish: true
+  allow_failures:
+    - php: nightly
 
 cache:
   directories:
