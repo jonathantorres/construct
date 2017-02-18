@@ -104,8 +104,8 @@ You can also use the short option `-s`.
 construct generate jonathantorres/logger -s JonathanTorres\\Projects\\Logger
 ```
 
-## Specify php version
-The `--php` option will allow you to specify the minimum required php version that your project will support. Construct will use the currently installed version if not specified.
+## Specify PHP version
+The `--php` option will allow you to specify the minimum required PHP version that your project will support. Construct will use the currently installed version if not specified.
 
 ```bash
 construct generate jonathantorres/logger --php=5.5.9
