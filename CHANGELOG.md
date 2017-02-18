@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.13.1 `2017-0?-??`
+- `Fixed`
+    - Fix generated PHP Coding Standards Fixer configuration. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#172](https://github.com/jonathantorres/construct/issues/172).
+
 #### v1.13.0 `2016-12-11`
 - `Added`
     - Coding standard checks are only run against a single PHP version. Done by [@raphaelstolt](https://github.com/raphaelstolt).

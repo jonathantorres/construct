@@ -12,5 +12,5 @@ $rules = [
 
 return PhpCsFixer\Config::create()
     ->setRules($rules)
-    ->finder($finder)
+    ->setFinder($finder)
     ->setCacheFile($cacheDir . '/.php_cs.cache');
