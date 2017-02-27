@@ -1,0 +1,16 @@
+<?php
+
+namespace {namespace}\Tests;
+
+use {namespace}\{project_upper};
+use PHPUnit\Framework\TestCase;
+
+class {project_upper}Test extends TestCase
+{
+    public function testExample()
+    {
+        ${project_camel_case} = new {project_upper}();
+
+        $this->assertTrue(true);
+    }
+}

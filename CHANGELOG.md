@@ -3,6 +3,7 @@
 #### v1.13.1 `2017-0?-??`
 - `Fixed`
     - Fix generated PHP Coding Standards Fixer configuration. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#172](https://github.com/jonathantorres/construct/issues/172).
+    - Executable test skeleton for PHPUnit 6. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#170](https://github.com/jonathantorres/construct/issues/170).
 
 #### v1.13.0 `2016-12-11`
 - `Added`
