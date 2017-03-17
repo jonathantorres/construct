@@ -350,6 +350,42 @@ class ConstructCommandTest extends PHPUnit
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
+    public function testProjectGenerationWithCli()
+    {
+        $this->setMocks(3, 2);
+        $this->filesystem->shouldReceive('put')->times(0);
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--cli-framework' => null
+        ]);
+
+        $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
+    }
+
+    public function testProjectGenerationWithInvalidCliPackageName()
+    {
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'name' => 'vendor/project',
+            '--cli-framework' => 'abc'
+        ]);
+
+        $expectedWarning = <<<CONTENT
+Warning: "abc" is not a valid Composer package name, please use "vendor/project"
+
+CONTENT;
+
+        $this->assertSame($expectedWarning, $commandTester->getDisplay());
+    }
+
     public function testProjectGenerationFromConfiguration()
     {
         $this->setMocks(5, 3, 10, 10);

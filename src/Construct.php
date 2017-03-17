@@ -85,6 +85,13 @@ class Construct
     protected $projectLower;
 
     /**
+     * The Composer requirements/packages.
+     *
+     * @var array
+     */
+    protected $requirements = [];
+
+    /**
      * The Composer development requirements/packages.
      *
      * @var array
@@ -123,6 +130,10 @@ class Construct
         $this->src();
         $this->docs();
         $this->testing();
+
+        if ($this->settings->withCliFramework()) {
+            $this->cli();
+        }
 
         if ($this->settings->withPhpcsConfiguration()) {
             $this->phpcs();
@@ -205,6 +216,22 @@ class Construct
     protected function src()
     {
         $this->file->makeDirectory($this->projectLower . '/' . $this->srcPath);
+    }
+
+    /**
+     * Add the CLI framework as a Composer requirement and create CLI entry script.
+     *
+     * @return void
+     */
+    protected function cli()
+    {
+        $this->file->makeDirectory($this->projectLower . '/bin');
+        $this->file->copy(
+            __DIR__ . '/stubs/cli-script.stub',
+            $this->projectLower . '/bin/cli-script'
+        );
+
+        $this->requirements[] = $this->settings->getCliFramework();
     }
 
     /**
@@ -438,6 +465,13 @@ class Construct
             $content .= PHP_EOL;
         }
 
+        if ($this->settings->withCliFramework()) {
+            $composer = json_decode($content, true);
+            $composer['bin'] = ["bin/cli-script"];
+            $content = json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            $content .= PHP_EOL;
+        }
+
         $this->file->put($this->projectLower . '/' . 'composer.json', $content);
     }
 
@@ -568,9 +602,10 @@ class Construct
     protected function composerInstall(Script $script)
     {
         if ($this->file->isDirectory($this->projectLower)) {
-            $script->runComposerInstallAndRequireDevelopmentPackages(
+            $script->runComposerInstallAndRequirePackages(
                 $this->projectLower,
-                $this->developmentRequirements
+                $this->developmentRequirements,
+                $this->requirements
             );
         }
     }
