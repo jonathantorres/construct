@@ -592,7 +592,7 @@ class Construct
     }
 
     /**
-     * Do an initial composer install and require the set development packages
+     * Do an initial composer install and require the set packages
      * in the constructed project.
      *
      * @param JonathanTorres\Construct\Helpers\Script $script
@@ -684,7 +684,7 @@ class Construct
      **/
     protected function environmentFiles()
     {
-        $this->developmentRequirements[] = 'vlucas/phpdotenv';
+        $this->requirements[] = 'vlucas/phpdotenv';
 
         $this->file->copy(
             __DIR__ . '/stubs/env.stub',

@@ -578,7 +578,8 @@ class ConstructTest extends PHPUnit
         );
 
         $this->setScriptHelperComposerInstallExpectationWithPackages(
-            ['phpunit/phpunit', 'vlucas/phpdotenv']
+            ['phpunit/phpunit'],
+            ['vlucas/phpdotenv']
         );
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
