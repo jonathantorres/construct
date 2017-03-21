@@ -13,7 +13,8 @@ class Str
     protected $regEx = '{^[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$}u';
 
     /**
-     * Check if the entered project name is valid.
+     * Check if the entered project name or
+     * Composer package name is valid.
      *
      * @param string $name
      *

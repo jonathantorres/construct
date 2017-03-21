@@ -89,6 +89,7 @@ class ConstructCommand extends Command
     {
         $nameDescription = 'The vendor/project name';
         $testFrameworkDescription = 'Testing framework (one of: ' . join(', ', $this->defaults->testingFrameworks) . ')';
+        $cliFrameworkDescription = 'CLI framework';
         $licenseDescription = 'License (one of: ' . join(', ', $this->defaults->licenses) . ')';
         $namespaceDescription = 'Namespace for project';
         $gitDescription = 'Initialize an empty Git repo';
@@ -128,6 +129,13 @@ class ConstructCommand extends Command
         $this->addOption('code-of-conduct', null, InputOption::VALUE_NONE, $codeOfConductDescription);
         $this->addOption('config', 'c', InputOption::VALUE_OPTIONAL, $configurationDescription, $configurationDefault);
         $this->addOption('ignore-default-config', 'i', InputOption::VALUE_NONE, $ignoreDefaultConfigurationDescription);
+        $this->addOption(
+            'cli-framework',
+            null,
+            InputOption::VALUE_OPTIONAL,
+            $cliFrameworkDescription,
+            Defaults::CLI_FRAMEWORK
+        );
     }
 
     /**
@@ -146,6 +154,17 @@ class ConstructCommand extends Command
         $testingFramework = $input->getOption('test-framework');
         if ($testingFramework !== Defaults::TEST_FRAMEWORK) {
             $testFramework = $testingFramework;
+        }
+        $cliFramework = null;
+        if ($input->hasParameterOption('--cli-framework')) {
+            $cliFramework = $input->getOption('cli-framework');
+            if (!$this->str->isValid($cliFramework)) {
+                $warningMessage = '<error>Warning: "' . $cliFramework . '" is not '
+                    . 'a valid Composer package name, please use "vendor/project"</error>';
+                $output->writeln($warningMessage);
+
+                return false;
+            }
         }
 
         $license = $input->getOption('license');
@@ -173,6 +192,10 @@ class ConstructCommand extends Command
                 $keywords,
                 $this->filesystem
             );
+
+            if ($cliFramework) {
+                $this->settings->setCliFramework($cliFramework);
+            }
         } else {
             if ($github) {
                 $githubTemplates = $githubDocs = true;
@@ -193,7 +216,8 @@ class ConstructCommand extends Command
                 $lgtm,
                 $githubTemplates,
                 $codeOfConduct,
-                $githubDocs
+                $githubDocs,
+                $cliFramework
             );
         }
 

@@ -110,6 +110,13 @@ class Settings
     private $codeOfConduct;
 
     /**
+     * The entered CLI framework.
+     *
+     * @var string
+     */
+    private $cliFramework;
+
+    /**
      * Initialize.
      *
      * @param string  $projectName        The entered project name.
@@ -127,6 +134,7 @@ class Settings
      * @param boolean $githubTemplates    Generate GitHub templates?
      * @param boolean $codeOfConduct      Generate Code of Conduct file?
      * @param boolean $githubDocs         Generate GitHub docs?
+     * @param string  $cliFramework       The entered CLI framework.
      *
      * @return void
      */
@@ -145,7 +153,8 @@ class Settings
         $lgtmConfiguration,
         $githubTemplates = false,
         $codeOfConduct = false,
-        $githubDocs = false
+        $githubDocs = false,
+        $cliFramework = null
     ) {
         $this->projectName = $projectName;
         $this->testingFramework = $testingFramework;
@@ -162,6 +171,7 @@ class Settings
         $this->githubTemplates = $githubTemplates;
         $this->codeOfConduct = $codeOfConduct;
         $this->githubDocs = $githubDocs;
+        $this->cliFramework = $cliFramework;
     }
 
     /**
@@ -182,6 +192,36 @@ class Settings
     public function getTestingFramework()
     {
         return $this->testingFramework;
+    }
+
+    /**
+     * Whether or not to add a CLI framework.
+     *
+     * @return boolean
+     */
+    public function withCliFramework()
+    {
+        return $this->cliFramework !== null;
+    }
+
+    /**
+     * Get the entered CLI framework.
+     *
+     * @return string
+     */
+    public function getCliFramework()
+    {
+        return $this->cliFramework;
+    }
+
+    /**
+     * Set the CLI framework.
+     *
+     * @param string $composerPackage
+     */
+    public function setCliFramework($composerPackage)
+    {
+        $this->cliFramework = $composerPackage;
     }
 
     /**
