@@ -23,7 +23,8 @@ class SettingsTest extends PHPUnit
             false,
             '5.6.0',
             true,
-            false
+            false,
+            null
         );
     }
 
@@ -42,5 +43,16 @@ class SettingsTest extends PHPUnit
         $this->assertTrue($this->settings->withEnvironmentFiles());
         $this->assertFalse($this->settings->withLgtmConfiguration());
         $this->assertFalse($this->settings->withGithubDocs());
+        $this->assertNull($this->settings->getCliFramework());
+    }
+
+    public function testCanSetCliFrameworkAfterInstantiation()
+    {
+        $this->assertFalse($this->settings->withCliFramework());
+
+        $this->settings->setCliFramework('zendframework/zend-console');
+
+        $this->assertTrue($this->settings->withCliFramework());
+        $this->assertEquals('zendframework/zend-console', $this->settings->getCliFramework());
     }
 }

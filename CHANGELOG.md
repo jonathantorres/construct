@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.14.0 `2017-03-??`
+- `Added`
+    - With the `--cli-framework` option a CLI project can be generated. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#175](https://github.com/jonathantorres/construct/issues/175).
+
 #### v1.13.1 `2017-03-01`
 - `Fixed`
     - Fix generated PHP Coding Standards Fixer configuration. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#172](https://github.com/jonathantorres/construct/issues/172).

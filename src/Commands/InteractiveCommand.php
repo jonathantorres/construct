@@ -108,6 +108,26 @@ class InteractiveCommand extends Command
             0
         );
 
+        $cliProjectQuestion = new ConfirmationQuestion(
+            'Do you want to create a CLI project?',
+            false
+        );
+
+        $cliFrameworkQuestion = new Question(
+            'Which CLI Framework will you use? Default is "' . Defaults::CLI_FRAMEWORK . '"',
+            Defaults::CLI_FRAMEWORK
+        );
+
+        $cliFrameworkQuestion->setValidator(function ($answer) {
+            if (!$this->str->isValid($answer)) {
+                $exceptionMessage = 'Error: "' . $answer . '" is not a '
+                    . 'valid Composer package name, please use "vendor/project"';
+                throw new RuntimeException($exceptionMessage);
+            }
+
+            return $answer;
+        });
+
         $licenseQuestion = new ChoiceQuestion(
             'Which open source license will your project use? Default is "' . Defaults::LICENSE . '"',
             $this->defaults->licenses,
@@ -122,6 +142,7 @@ class InteractiveCommand extends Command
 
         $namespaceQuestion = new Question('What will be the namespace for the project? Default is "Vendor\Project"', Defaults::PROJECT_NAMESPACE);
         $gitQuestion = new ConfirmationQuestion('Do you want to initialize a local git repository?', false);
+
         $phpCsQuestion = new ConfirmationQuestion('Do you want to generate a PHP Coding Standards Fixer configuration?', false);
         $composerKeywordsQuestion = new Question('Supply a comma separated list of keywords for you composer.json (Optional) ', '');
         $vagrantFileQuestion = new ConfirmationQuestion('Do you want to generate a Vagrantfile?', false);
@@ -134,6 +155,12 @@ class InteractiveCommand extends Command
 
         $projectName = $helper->ask($input, $output, $projectNameQuestion);
         $testingFramework = $helper->ask($input, $output, $testingFrameworkQuestion);
+        $cliProject = $helper->ask($input, $output, $cliProjectQuestion);
+        $cliFramework = null;
+        if ($cliProject) {
+            $cliFramework = $helper->ask($input, $output, $cliFrameworkQuestion);
+        }
+
         $license = $helper->ask($input, $output, $licenseQuestion);
         $phpVersion = $helper->ask($input, $output, $phpVersionQuestion);
         $namespace = $helper->ask($input, $output, $namespaceQuestion);
@@ -163,7 +190,8 @@ class InteractiveCommand extends Command
             $lgtmFile,
             $githubTemplates,
             $codeOfConduct,
-            $githubDocs
+            $githubDocs,
+            $cliFramework
         );
 
         $output->writeln('Creating your project...');

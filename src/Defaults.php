@@ -32,6 +32,7 @@ class Defaults
      */
     public $nonSemverPhpVersions = ['hhvm', 'nightly'];
 
+    const CLI_FRAMEWORK = 'symfony/console';
     const TEST_FRAMEWORK = 'phpunit';
     const LICENSE = 'MIT';
     const PROJECT_NAMESPACE = 'Vendor\Project';

@@ -56,20 +56,21 @@ class ConstructTest extends PHPUnit
     }
 
     /**
-     * Sets the Mockery expectation for runComposerInstallAndRequireDevelopmentPackages
+     * Sets the Mockery expectation for runComposerInstallAndRequirePackages
      * of the script helper mock.
      *
-     * @param  array $packages The require dev packages to inject. Defaults to
-     *                         ['phpunit/phpunit'].
+     * @param  array $developmentPackages The development packages to inject. Defaults to ['phpunit/phpunit'].
+     * @param  array $packages            The non development packages to inject.
      * @return void
      */
     private function setScriptHelperComposerInstallExpectationWithPackages(
-        array $packages = ['phpunit/phpunit']
+        array $developmentPackages = ['phpunit/phpunit'],
+        array $packages = []
     ) {
         $this->scriptHelper
-            ->shouldReceive('runComposerInstallAndRequireDevelopmentPackages')
+            ->shouldReceive('runComposerInstallAndRequirePackages')
             ->once()
-            ->with('logger', $packages)
+            ->with('logger', $developmentPackages, $packages)
             ->andReturnNull();
     }
 
@@ -757,6 +758,38 @@ class ConstructTest extends PHPUnit
             $this->getStub('with-code-of-conduct-and-github-templates/README'),
             $this->getFile('README.md')
         );
+    }
+
+    public function testProjectGenerationWithDefaultCliFramework()
+    {
+        $settings = new Settings(
+            'jonathantorres/logger',
+            'phpunit',
+            'MIT',
+            'Vendor\Project',
+            null,
+            null,
+            null,
+            null,
+            false,
+            '5.6.0',
+            null,
+            null,
+            false,
+            false,
+            false,
+            'symfony/console'
+        );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages(
+            ['phpunit/phpunit'],
+            [$settings->getCliFramework()]
+        );
+
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+
+        $this->assertSame($this->getStub('with-cli/composer'), $this->getFile('composer.json'));
+        $this->assertSame($this->getStub('with-cli/cli-script'), $this->getFile('bin/cli-script'));
     }
 
     /**
