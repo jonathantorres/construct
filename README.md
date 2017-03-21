@@ -25,7 +25,7 @@ Just run `construct generate` with your `vendor/package` declaration and it will
 construct generate jonathantorres/logger
 ```
 
-The generated project structure will look like the following `tree` excerpt. Files and directories in brackets are optional.
+The generated project structure will look like the following `tree` excerpt. Files and directories in parentheses are optional.
 ```
 ├── logger
 │   ├── CHANGELOG.md
