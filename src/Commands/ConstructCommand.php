@@ -129,13 +129,7 @@ class ConstructCommand extends Command
         $this->addOption('code-of-conduct', null, InputOption::VALUE_NONE, $codeOfConductDescription);
         $this->addOption('config', 'c', InputOption::VALUE_OPTIONAL, $configurationDescription, $configurationDefault);
         $this->addOption('ignore-default-config', 'i', InputOption::VALUE_NONE, $ignoreDefaultConfigurationDescription);
-        $this->addOption(
-            'cli-framework',
-            null,
-            InputOption::VALUE_OPTIONAL,
-            $cliFrameworkDescription,
-            Defaults::CLI_FRAMEWORK
-        );
+        $this->addOption('cli-framework', null, InputOption::VALUE_OPTIONAL, $cliFrameworkDescription, Defaults::CLI_FRAMEWORK);
     }
 
     /**
@@ -150,14 +144,16 @@ class ConstructCommand extends Command
     {
         $projectName = $input->getArgument('name');
         $testFramework = $input->getOption('test');
-
         $testingFramework = $input->getOption('test-framework');
+        $cliFramework = null;
+
         if ($testingFramework !== Defaults::TEST_FRAMEWORK) {
             $testFramework = $testingFramework;
         }
-        $cliFramework = null;
+
         if ($input->hasParameterOption('--cli-framework')) {
             $cliFramework = $input->getOption('cli-framework');
+
             if (!$this->str->isValid($cliFramework)) {
                 $warningMessage = '<error>Warning: "' . $cliFramework . '" is not '
                     . 'a valid Composer package name, please use "vendor/project"</error>';
@@ -304,6 +300,7 @@ class ConstructCommand extends Command
     private function projectNameContainsPhpWarning($output)
     {
         $projectName = $this->settings->getProjectName();
+
         if ($this->str->contains($projectName, 'php')) {
             $containsPhpWarning = 'Warning: If you are about to create a micro-package "'
                 . $projectName . '" should optimally not contain a "php" notation in the project name.';

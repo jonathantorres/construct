@@ -157,6 +157,7 @@ class InteractiveCommand extends Command
         $testingFramework = $helper->ask($input, $output, $testingFrameworkQuestion);
         $cliProject = $helper->ask($input, $output, $cliProjectQuestion);
         $cliFramework = null;
+
         if ($cliProject) {
             $cliFramework = $helper->ask($input, $output, $cliFrameworkQuestion);
         }
