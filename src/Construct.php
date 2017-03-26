@@ -462,14 +462,14 @@ class Construct
             $composer['scripts']['cs-fix'] = 'php-cs-fixer fix . -vv || true';
             $composer['scripts']['cs-lint'] = 'php-cs-fixer fix --diff --verbose --dry-run';
             $content = json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-            $content .= PHP_EOL;
+            $content .= "\n";
         }
 
         if ($this->settings->withCliFramework()) {
             $composer = json_decode($content, true);
             $composer['bin'] = ["bin/cli-script"];
             $content = json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-            $content .= PHP_EOL;
+            $content .= "\n";
         }
 
         $this->file->put($this->projectLower . '/' . 'composer.json', $content);
