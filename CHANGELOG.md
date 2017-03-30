@@ -5,6 +5,7 @@
     - With the `--cli-framework` option a CLI project can be generated. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#175](https://github.com/jonathantorres/construct/issues/175).
 - `Fixed`
     - The package `vlucas/phpdotenv` is added as a non development requirement. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#176](https://github.com/jonathantorres/construct/issues/176).
+    - Fix PHP Coding Standards Fixer Composer scripts are set on Windows. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#183](https://github.com/jonathantorres/construct/issues/183).
     - Command integration tests use no output decoration and are green again. Also enabled CI of the command integration tests on Windows via [AppVeyor](https://www.appveyor.com). Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#181](https://github.com/jonathantorres/construct/issues/181).
 
 #### v1.13.1 `2017-03-01`

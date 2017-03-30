@@ -457,7 +457,7 @@ class Construct
 
         $content = str_replace($stubs, $values, $file);
 
-        if ($this->settings->withPhpcsConfiguration() && !$this->str->isWindows()) {
+        if ($this->settings->withPhpcsConfiguration()) {
             $composer = json_decode($content, true);
             $composer['scripts']['cs-fix'] = 'php-cs-fixer fix . -vv || true';
             $composer['scripts']['cs-lint'] = 'php-cs-fixer fix --diff --verbose --dry-run';
