@@ -469,7 +469,7 @@ class Construct
             $composer = json_decode($content, true);
             $composer['bin'] = ["bin/cli-script"];
             $content = json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-            $content .= PHP_EOL;
+            $content .= "\n";
         }
 
         $this->file->put($this->projectLower . '/' . 'composer.json', $content);

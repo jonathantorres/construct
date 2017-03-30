@@ -77,7 +77,7 @@ class Travis
             }
 
             if ($i !== (count($phpVersions) - 1)) {
-                $runOn .= PHP_EOL;
+                $runOn .= "\n";
             }
         }
 
