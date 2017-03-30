@@ -11,7 +11,7 @@ use JonathanTorres\Construct\Helpers\Filesystem as FilesystemHelper;
 use Mockery;
 use PHPUnit_Framework_TestCase as PHPUnit;
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Tester\CommandTester;
+use JonathanTorres\Construct\Tests\CommandTester;
 
 class ConstructCommandTest extends PHPUnit
 {
@@ -383,7 +383,7 @@ Warning: "abc" is not a valid Composer package name, please use "vendor/project"
 
 CONTENT;
 
-        $this->assertSame($expectedWarning, $commandTester->getDisplay());
+        $this->assertSame($expectedWarning, $commandTester->getDisplay(true));
     }
 
     public function testProjectGenerationFromConfiguration()
@@ -476,7 +476,7 @@ CONTENT;
      */
     public function testExecutable()
     {
-        $constructCommand = 'php construct';
+        $constructCommand = 'php construct --no-ansi';
         exec($constructCommand, $output, $returnValue);
 
         $this->assertStringStartsWith(

@@ -7,7 +7,7 @@ use JonathanTorres\Construct\Helpers\Str;
 use Mockery;
 use PHPUnit_Framework_TestCase as PHPUnit;
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Tester\CommandTester;
+use JonathanTorres\Construct\Tests\CommandTester;
 
 class InteractiveCommandTest extends PHPUnit
 {
@@ -39,9 +39,13 @@ class InteractiveCommandTest extends PHPUnit
 
         $commandTester = new CommandTester($command);
         $commandTester->execute(['command' => $command->getName()]);
-        $expectedMessage = 'Creating your project...' . PHP_EOL . 'Project "jonathantorres/logger" constructed.' . PHP_EOL;
+        $expectedMessage = <<<CONTENT
+Creating your project...
+Project "jonathantorres/logger" constructed.
 
-        $this->assertEquals($expectedMessage, $commandTester->getDisplay());
+CONTENT;
+
+        $this->assertEquals($expectedMessage, $commandTester->getDisplay(true));
     }
 
     protected function createApplication()
