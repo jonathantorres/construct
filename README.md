@@ -1,7 +1,7 @@
 
 # Construct
-[![Build Status](https://travis-ci.org/jonathantorres/construct.svg?branch=master)](https://travis-ci.org/jonathantorres/construct) 
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/jonathantorres/construct?svg=true)](https://ci.appveyor.com/api/projects/status/github/jonathantorres/construct)
+[![Build Status](https://travis-ci.org/jonathantorres/construct.svg?branch=master)](https://travis-ci.org/jonathantorres/construct)
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/jonathantorres/construct?svg=true)](https://ci.appveyor.com/project/jonathantorres/construct)
 [![Version](http://img.shields.io/packagist/v/jonathantorres/construct.svg?style=flat)](https://packagist.org/packages/jonathantorres/construct)
 
 PHP project/micro-package generator.
