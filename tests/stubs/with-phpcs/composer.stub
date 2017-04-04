@@ -30,6 +30,6 @@
         "test": "phpunit",
         "configure-commit-template": "git config --add commit.template .gitmessage",
         "cs-fix": "php-cs-fixer fix . -vv || true",
-        "cs-lint": "php-cs-fixer fix --diff --verbose --dry-run"
+        "cs-lint": "php-cs-fixer fix --diff --stop-on-violation --verbose --dry-run"
     }
 }

@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.14.1 `2017-04-??`
+- `Added`
+    - Make the PHP Coding Standards Fixer linting fail early to speedup builds. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#187](https://github.com/jonathantorres/construct/issues/187).
+
 #### v1.14.0 `2017-03-29`
 - `Added`
     - With the `--cli-framework` option a CLI project can be generated. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#175](https://github.com/jonathantorres/construct/issues/175).
