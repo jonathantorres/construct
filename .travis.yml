@@ -5,10 +5,7 @@ git:
 
 matrix:
   include:
-    - php: hhvm-3.9
-      sudo: required
-      dist: trusty
-      group: edge
+    - php: hhvm
     - php: nightly
     - php: 7.1
     - php: 7.0
@@ -20,6 +17,7 @@ matrix:
   fast_finish: true
   allow_failures:
     - php: nightly
+    - php: hhvm
 
 cache:
   directories:
