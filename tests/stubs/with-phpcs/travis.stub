@@ -17,6 +17,7 @@ matrix:
 cache:
   directories:
     - $HOME/.composer/cache
+    - $HOME/.php-cs-fixer
 
 before_script:
   - phpenv config-rm xdebug.ini || true
