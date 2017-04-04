@@ -2,7 +2,6 @@
 
 namespace JonathanTorres\Construct\Tests\Commands;
 
-use Illuminate\Filesystem\Filesystem;
 use JonathanTorres\Construct\Defaults;
 use JonathanTorres\Construct\Commands\ConstructCommand;
 use JonathanTorres\Construct\Construct;
