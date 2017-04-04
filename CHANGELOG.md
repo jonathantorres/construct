@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.14.1 `2017-04-??`
+- `Fixed`
+    - The PHP Coding Standards Fixer cache directory is present in the generated Travis CI configuration. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#186](https://github.com/jonathantorres/construct/issues/186).
+
 #### v1.14.0 `2017-03-29`
 - `Added`
     - With the `--cli-framework` option a CLI project can be generated. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#175](https://github.com/jonathantorres/construct/issues/175).
