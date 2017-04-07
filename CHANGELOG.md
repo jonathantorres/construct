@@ -5,6 +5,7 @@
     - Make the PHP Coding Standards Fixer linting fail early to speedup builds. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#187](https://github.com/jonathantorres/construct/issues/187).
 - `Fixed`
     - The PHP Coding Standards Fixer cache directory is present in the generated Travis CI configuration. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#186](https://github.com/jonathantorres/construct/issues/186).
+    - The CLI artifacts are constructed as expected. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#190](https://github.com/jonathantorres/construct/issues/190).
 
 #### v1.14.0 `2017-03-29`
 - `Added`
