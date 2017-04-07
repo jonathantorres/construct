@@ -266,7 +266,8 @@ class ConstructCommand extends Command
             $this->settings->withLgtmConfiguration(),
             $this->settings->withGithubTemplates(),
             $this->settings->withCodeOfConduct(),
-            $this->settings->withGithubDocs()
+            $this->settings->withGithubDocs(),
+            $this->settings->getCliFramework()
         );
     }
 

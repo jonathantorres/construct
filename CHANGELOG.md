@@ -6,6 +6,7 @@
 - `Fixed`
     - The PHP Coding Standards Fixer cache directory is present in the generated Travis CI configuration. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#186](https://github.com/jonathantorres/construct/issues/186).
     - The PHPUnit 6 test skeleton is created on PHP 7.0.* after a fix of the version guard. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#192](https://github.com/jonathantorres/construct/issues/192).
+    - The CLI artifacts are constructed as expected. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#190](https://github.com/jonathantorres/construct/issues/190).
 
 #### v1.14.0 `2017-03-29`
 - `Added`
