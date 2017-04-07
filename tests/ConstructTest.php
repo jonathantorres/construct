@@ -560,6 +560,35 @@ class ConstructTest extends PHPUnit
         );
     }
 
+    /**
+     * @ticket 192 (https://github.com/jonathantorres/construct/issues/192)
+     */
+    public function testProjectGenerationWithPhpUnit6StubOnPhp70()
+    {
+        $settings = new Settings(
+            'jonathantorres/logger',
+            'phpunit',
+            'MIT',
+            'Vendor\Project',
+            null,
+            null,
+            null,
+            null,
+            null,
+            '7.0',
+            null,
+            null
+        );
+
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
+
+        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->assertSame(
+            $this->getStub('LoggerTestPhpUnit6'),
+            $this->getFile('tests/LoggerTest.php')
+        );
+    }
+
     public function testProjectGenerationWithEnvironmentFiles()
     {
         $settings = new Settings(
