@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.14.2 `2017-04-??`
+- `Fixed`
+    - The Xdebug extension disabling has been removed from the Travis CI configuration as Composer takes care of this since 1.3. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#194](https://github.com/jonathantorres/construct/issues/194).
+
 #### v1.14.1 `2017-04-07`
 - `Added`
     - Make the PHP Coding Standards Fixer linting fail early to speedup builds. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#187](https://github.com/jonathantorres/construct/issues/187).
