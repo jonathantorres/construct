@@ -231,6 +231,18 @@ class Construct
             $this->projectLower . '/bin/cli-script'
         );
 
+        $appveyorConfiguration = $this->file->get(
+            __DIR__ . '/stubs/appveyor.stub'
+        );
+
+        $minorPhpVersion = $this->str->toMinorVersion($this->settings->getPhpVersion());
+
+        $phpDownloadFile = (new Defaults())->phpAppVeyorVersions[$minorPhpVersion];
+
+        $content = str_replace('{php_download_file}', $phpDownloadFile, $appveyorConfiguration);
+        $this->file->put($this->projectLower . '/' . '.appveyor.yml', $content);
+        $this->exportIgnores[] = '.appveyor.yml';
+
         $this->requirements[] = $this->settings->getCliFramework();
     }
 

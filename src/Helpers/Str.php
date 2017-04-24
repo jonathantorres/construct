@@ -171,6 +171,19 @@ class Str
     }
 
     /**
+     * Returns the minor version of the given version.
+     *
+     * @param  string $version
+     * @return string
+     */
+    public function toMinorVersion($version)
+    {
+        list($major, $minor) = explode('.', $version);
+
+        return $major . '.' . $minor;
+    }
+
+    /**
      * Validate php version string
      *
      * @param string $version

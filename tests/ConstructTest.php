@@ -818,8 +818,22 @@ class ConstructTest extends PHPUnit
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
 
-        $this->assertSame($this->getStub('with-cli/composer'), $this->getFile('composer.json'));
-        $this->assertSame($this->getStub('with-cli/cli-script'), $this->getFile('bin/cli-script'));
+        $this->assertSame(
+            $this->getStub('with-cli/composer'),
+            $this->getFile('composer.json')
+        );
+        $this->assertSame(
+            $this->getStub('with-cli/cli-script'),
+            $this->getFile('bin/cli-script')
+        );
+        $this->assertSame(
+            $this->getStub('with-cli/appveyor'),
+            $this->getFile('.appveyor.yml')
+        );
+        $this->assertSame(
+            $this->getStub('with-cli/gitattributes'),
+            $this->getFile('.gitattributes')
+        );
     }
 
     /**

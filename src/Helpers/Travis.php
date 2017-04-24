@@ -7,16 +7,15 @@ use JonathanTorres\Construct\Defaults;
 class Travis
 {
     /**
-     * Returns the minor version of the given version.
+     * String helper.
      *
-     * @param  string $version
-     * @return string
+     * @var \JonathanTorres\Construct\Helpers\Str
      */
-    private function toMinorVersion($version)
-    {
-        list($major, $minor) = explode('.', $version);
+    private $stringHelper;
 
-        return $major . '.' . $minor;
+    public function __construct()
+    {
+        $this->stringHelper = new Str();
     }
 
     /**
@@ -33,8 +32,8 @@ class Travis
 
         $phpVersionsToTest = array_filter($supportedPhpVersions, function ($supportedPhpVersion) use ($projectPhpVersion) {
             return version_compare(
-                $this->toMinorversion($projectPhpVersion),
-                $this->toMinorversion($supportedPhpVersion),
+                $this->stringHelper->toMinorversion($projectPhpVersion),
+                $this->stringHelper->toMinorversion($supportedPhpVersion),
                 '<='
             ) === true;
         });
@@ -59,7 +58,7 @@ class Travis
         for ($i = 0; $i < count($phpVersions); $i++) {
             $phpVersion = $phpVersions[$i];
             if (!in_array($phpVersions[$i], $nonSemverVersions)) {
-                $phpVersion = $this->toMinorVersion($phpVersions[$i]);
+                $phpVersion = $this->stringHelper->toMinorVersion($phpVersions[$i]);
             }
 
             if (count($i) !== 0) {
