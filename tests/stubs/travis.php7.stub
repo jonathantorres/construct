@@ -16,7 +16,6 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - phpenv config-rm xdebug.ini || true
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction
 

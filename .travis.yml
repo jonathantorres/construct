@@ -25,7 +25,6 @@ cache:
     - $HOME/.php-cs-fixer
 
 before_script:
-  - phpenv config-rm xdebug.ini || true
   - composer self-update
   - composer install -n
 

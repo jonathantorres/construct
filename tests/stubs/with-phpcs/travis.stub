@@ -20,7 +20,6 @@ cache:
     - $HOME/.php-cs-fixer
 
 before_script:
-  - phpenv config-rm xdebug.ini || true
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction
 
