@@ -2,10 +2,16 @@
 
 <?php
 
-if (file_exists(__DIR__ . '/../../autoload.php')) {
-    require __DIR__ . '/../../autoload.php';
-} else {
-    require __DIR__ . '/vendor/autoload.php';
+$autoloads = [
+    __DIR__ . '/../../../autoload.php',
+    __DIR__ . '/../vendor/autoload.php',
+];
+
+foreach ($autoloads as $autoload) {
+    if (file_exists($autoload)) {
+        require $autoload;
+        break;
+    }
 }
 
 use JonathanTorres\Construct\Commands\ConstructCommand;

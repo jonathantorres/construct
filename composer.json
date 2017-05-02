@@ -35,7 +35,7 @@
         },
         "sort-packages": true
     },
-    "bin": ["construct"],
+    "bin": ["bin/construct"],
     "scripts": {
         "test": "phpunit",
         "cs-fix": "php-cs-fixer fix . -vv || true",

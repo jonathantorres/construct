@@ -8,6 +8,7 @@
     - Utilise PHPUnit's forward compatibility layer for PHPUnit 6. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#179](https://github.com/jonathantorres/construct/issues/179).
     - The email notification for successful Travis CI builds has been disabled. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#198](https://github.com/jonathantorres/construct/issues/198).
     - The generated change log has been aligned with the [Keep a Changelog](http://keepachangelog.com/) format. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#202](https://github.com/jonathantorres/construct/issues/202).
+    - The CLI binary has been moved to `bin` to achieve [PDS](http://php-pds.com) compliance. Done by [@raphaelstolt](https://github.com/raphaelstolt).
 
 #### v1.14.1 `2017-04-07`
 - `Added`
