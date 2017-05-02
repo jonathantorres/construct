@@ -3,9 +3,9 @@
 namespace {namespace}\Tests;
 
 use {namespace}\{project_upper};
-use PHPUnit_Framework_TestCase as PHPUnit;
+use PHPUnit\Framework\TestCase;
 
-class {project_upper}Test extends PHPUnit
+class {project_upper}Test extends TestCase
 {
     public function testExample()
     {

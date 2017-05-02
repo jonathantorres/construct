@@ -5,7 +5,7 @@ namespace JonathanTorres\Construct\Tests\Commands;
 use JonathanTorres\Construct\Commands\InteractiveCommand;
 use JonathanTorres\Construct\Helpers\Str;
 use Mockery;
-use PHPUnit_Framework_TestCase as PHPUnit;
+use PHPUnit\Framework\TestCase as PHPUnit;
 use Symfony\Component\Console\Application;
 use JonathanTorres\Construct\Tests\CommandTester;
 

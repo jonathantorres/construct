@@ -6,9 +6,9 @@ use JonathanTorres\Construct\Configuration;
 use JonathanTorres\Construct\Defaults;
 use JonathanTorres\Construct\Settings;
 use JonathanTorres\Construct\Helpers\Filesystem;
-use PHPUnit_Framework_TestCase as PHPUnit;
+use PHPUnit\Framework\TestCase;
 
-class ConfigurationTest extends PHPUnit
+class ConfigurationTest extends TestCase
 {
     public function testExceptionIsRaisedOnNonExistentFile()
     {

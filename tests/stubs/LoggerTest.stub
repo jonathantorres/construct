@@ -3,9 +3,9 @@
 namespace Jonathantorres\Logger\Tests;
 
 use Jonathantorres\Logger\Logger;
-use PHPUnit_Framework_TestCase as PHPUnit;
+use PHPUnit\Framework\TestCase;
 
-class LoggerTest extends PHPUnit
+class LoggerTest extends TestCase
 {
     public function testExample()
     {

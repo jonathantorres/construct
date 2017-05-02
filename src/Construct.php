@@ -508,11 +508,7 @@ class Construct
      */
     protected function phpunitTest()
     {
-        if (version_compare($this->settings->getPhpVersion(), '7.0') >= 0) {
-            $file = $this->file->get(__DIR__ . '/stubs/ProjectPhpUnit6Test.stub');
-        } else {
-            $file = $this->file->get(__DIR__ . '/stubs/ProjectTest.stub');
-        }
+        $file = $this->file->get(__DIR__ . '/stubs/ProjectTest.stub');
 
         $stubs = [
             '{project_upper}',

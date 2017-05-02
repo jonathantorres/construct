@@ -3,9 +3,9 @@
 namespace JonathanTorres\Construct\Tests;
 
 use JonathanTorres\Construct\Settings;
-use PHPUnit_Framework_TestCase as PHPUnit;
+use PHPUnit\Framework\TestCase;
 
-class SettingsTest extends PHPUnit
+class SettingsTest extends TestCase
 {
     protected $settings;
 
