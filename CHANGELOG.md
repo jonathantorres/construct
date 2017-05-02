@@ -6,6 +6,7 @@
 - `Fixed`
     - The Xdebug extension disabling has been removed from the Travis CI configuration as Composer takes care of this since 1.3. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#194](https://github.com/jonathantorres/construct/issues/194).
     - Utilise PHPUnit's forward compatibility layer for PHPUnit 6. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#179](https://github.com/jonathantorres/construct/issues/179).
+    - The email notification for successful Travis CI builds has been disabled. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#198](https://github.com/jonathantorres/construct/issues/198).
 
 #### v1.14.1 `2017-04-07`
 - `Added`

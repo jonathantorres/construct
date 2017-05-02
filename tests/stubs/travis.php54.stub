@@ -1,5 +1,9 @@
 language: php
 
+notifications:
+  email:
+    on_success: never
+
 git:
   depth: 2
 
