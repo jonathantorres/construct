@@ -2,6 +2,7 @@
 
 <?php
 
+$autoloaded = false;
 $autoloads = [
     __DIR__ . '/../../../autoload.php',
     __DIR__ . '/../vendor/autoload.php',
@@ -10,8 +11,15 @@ $autoloads = [
 foreach ($autoloads as $autoload) {
     if (file_exists($autoload)) {
         require $autoload;
+        $autoloaded = true;
         break;
     }
+}
+
+if (false === $autoloaded) {
+   echo('You need to set up the project dependencies by running the following command:' . PHP_EOL .
+       '> composer install' . PHP_EOL);
+   exit(1);
 }
 
 use JonathanTorres\Construct\Commands\ConstructCommand;
