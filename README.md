@@ -34,6 +34,7 @@ The generated project structure will look like the following `tree` excerpt. Fil
 │   ├── composer.json
 │   ├── composer.lock
 │   ├── CONTRIBUTING.md
+│   ├── (.appveyor.yml)
 │   ├── (.editorconfig)
 │   ├── (.env)
 │   ├── (.env.example)
@@ -108,7 +109,7 @@ construct generate jonathantorres/logger -s JonathanTorres\\Projects\\Logger
 ```
 
 ## Specify a CLI framework
-The optional `--cli-framework` option will allow you to specify a CLI framework for the project to construct, while also creating a bin directory with an initial CLI script in it and adding a bin key in the project's composer.json. When the option has been set without a CLI composer package the `symfony/console` package will be used per default. There's no short option available.
+The optional `--cli-framework` option will allow you to specify a CLI framework for the project to construct, while also creating a bin directory with an initial CLI script in it, adding a bin key in the project's composer.json, and an initial [AppVeyor](https://www.appveyor.com) configuration. When the option has been set without a CLI composer package the `symfony/console` package will be used per default. There's no short option available.
 
 ```bash
 construct generate jonathantorres/logger --cli-framework=zendframework/zend-console

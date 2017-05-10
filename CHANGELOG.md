@@ -1,6 +1,8 @@
 # Changelog
 
-#### v1.14.2 `2017-04-??`
+#### v1.15.0 `2017-04-??`
+- `Added`
+    - Generate initial AppVeyor configuration for CLI projects. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#196](https://github.com/jonathantorres/construct/issues/196).
 - `Fixed`
     - The Xdebug extension disabling has been removed from the Travis CI configuration as Composer takes care of this since 1.3. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#194](https://github.com/jonathantorres/construct/issues/194).
 

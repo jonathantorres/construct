@@ -151,4 +151,23 @@ class StrTest extends PHPUnit
             'keyword_null' => [null, ""],
         ];
     }
+
+    /**
+     * @dataProvider versionProvider
+     */
+    public function testReturnsExpectedMinorVersion($expected, $version)
+    {
+        $this->assertEquals($expected, $this->str->toMinorVersion($version));
+    }
+
+    /**
+     * @return array
+     */
+    public function versionProvider()
+    {
+        return [
+            '5.6.1' => ['5.6', '5.6.1'],
+            '7.1.17' => ['7.1', '7.1.17'],
+        ];
+    }
 }
