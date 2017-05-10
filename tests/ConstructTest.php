@@ -7,11 +7,11 @@ use JonathanTorres\Construct\Helpers\Filesystem;
 use JonathanTorres\Construct\Helpers\Str;
 use JonathanTorres\Construct\Settings;
 use Mockery;
-use PHPUnit_Framework_TestCase as PHPUnit;
+use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-class ConstructTest extends PHPUnit
+class ConstructTest extends TestCase
 {
     protected $construct;
     protected $filesystem;
@@ -555,7 +555,7 @@ class ConstructTest extends PHPUnit
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame(
-            $this->getStub('LoggerTestPhpUnit6'),
+            $this->getStub('LoggerTest'),
             $this->getFile('tests/LoggerTest.php')
         );
     }
@@ -584,7 +584,7 @@ class ConstructTest extends PHPUnit
 
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
         $this->assertSame(
-            $this->getStub('LoggerTestPhpUnit6'),
+            $this->getStub('LoggerTest'),
             $this->getFile('tests/LoggerTest.php')
         );
     }

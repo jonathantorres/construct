@@ -5,9 +5,9 @@ namespace JonathanTorres\Construct\Tests\Helpers;
 use JonathanTorres\Construct\Defaults;
 use JonathanTorres\Construct\Helpers\Filesystem;
 use JonathanTorres\Construct\Helpers\Str;
-use PHPUnit_Framework_TestCase as PHPUnit;
+use PHPUnit\Framework\TestCase;
 
-class FilesystemTest extends PHPUnit
+class FilesystemTest extends TestCase
 {
     protected $filesystem;
     protected $str;

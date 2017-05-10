@@ -2,9 +2,9 @@
 
 use JonathanTorres\Construct\Helpers\Travis;
 use JonathanTorres\Construct\Defaults;
-use PHPUnit_Framework_TestCase as PHPUnit;
+use PHPUnit\Framework\TestCase;
 
-class TravisTest extends PHPUnit
+class TravisTest extends TestCase
 {
     protected $travis;
 

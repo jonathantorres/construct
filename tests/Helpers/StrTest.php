@@ -3,9 +3,9 @@
 namespace JonathanTorres\Construct\Tests\Helpers;
 
 use JonathanTorres\Construct\Helpers\Str;
-use PHPUnit_Framework_TestCase as PHPUnit;
+use PHPUnit\Framework\TestCase;
 
-class StrTest extends PHPUnit
+class StrTest extends TestCase
 {
     protected $str;
 

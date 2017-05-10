@@ -8,11 +8,11 @@ use JonathanTorres\Construct\Construct;
 use JonathanTorres\Construct\Helpers\Str;
 use JonathanTorres\Construct\Helpers\Filesystem as FilesystemHelper;
 use Mockery;
-use PHPUnit_Framework_TestCase as PHPUnit;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 use JonathanTorres\Construct\Tests\CommandTester;
 
-class ConstructCommandTest extends PHPUnit
+class ConstructCommandTest extends TestCase
 {
     protected $filesystem;
     protected $systemPhpVersion;

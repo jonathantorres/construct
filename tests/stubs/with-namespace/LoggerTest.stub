@@ -3,9 +3,9 @@
 namespace Terminus\Maximus\Logger\Tests;
 
 use Terminus\Maximus\Logger\Logger;
-use PHPUnit_Framework_TestCase as PHPUnit;
+use PHPUnit\Framework\TestCase;
 
-class LoggerTest extends PHPUnit
+class LoggerTest extends TestCase
 {
     public function testExample()
     {
