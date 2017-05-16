@@ -475,7 +475,7 @@ CONTENT;
      */
     public function testExecutable()
     {
-        $constructCommand = 'php construct --no-ansi';
+        $constructCommand = 'php bin/construct --no-ansi';
         exec($constructCommand, $output, $returnValue);
 
         $this->assertStringStartsWith(
