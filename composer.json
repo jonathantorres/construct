@@ -21,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "JonathanTorres\\Construct\\": "src/"
+            "Construct\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "JonathanTorres\\Construct\\Tests\\": "tests/"
+            "Construct\\Tests\\": "tests/"
         }
     },
     "config": {
