@@ -1,15 +1,15 @@
 <?php
 
-namespace JonathanTorres\Construct\Commands;
+namespace Construct\Commands;
 
-use JonathanTorres\Construct\Configuration;
-use JonathanTorres\Construct\Construct;
-use JonathanTorres\Construct\Defaults;
-use JonathanTorres\Construct\Helpers\Filesystem;
-use JonathanTorres\Construct\Helpers\Git;
-use JonathanTorres\Construct\Helpers\Script;
-use JonathanTorres\Construct\Helpers\Str;
-use JonathanTorres\Construct\Settings;
+use Construct\Configuration;
+use Construct\Construct;
+use Construct\Defaults;
+use Construct\Helpers\Filesystem;
+use Construct\Helpers\Git;
+use Construct\Helpers\Script;
+use Construct\Helpers\Str;
+use Construct\Settings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,28 +28,28 @@ class ConstructCommand extends Command
     /**
      * String helper.
      *
-     * @var \JonathanTorres\Construct\Str
+     * @var \Construct\Str
      */
     protected $str;
 
     /**
      * Filesystem helper.
      *
-     * @var \JonathanTorres\Construct\Helpers\Filesystem
+     * @var \Construct\Helpers\Filesystem
      */
     protected $filesystem;
 
     /**
      * Construct settings.
      *
-     * @var \JonathanTorres\Construct\Settings
+     * @var \Construct\Settings
      */
     protected $settings;
 
     /**
      * Construct defaults.
      *
-     * @var \JonathanTorres\Construct\Defaults
+     * @var \Construct\Defaults
      */
     protected $defaults;
 
@@ -63,9 +63,9 @@ class ConstructCommand extends Command
     /**
      * Initialize.
      *
-     * @param \JonathanTorres\Construct\Construct          $construct
-     * @param \JonathanTorres\Construct\Str                $str
-     * @param \JonathanTorres\Construct\Helpers\Filesystem $filesystem
+     * @param \Construct\Construct          $construct
+     * @param \Construct\Str                $str
+     * @param \Construct\Helpers\Filesystem $filesystem
      *
      * @return void
      */

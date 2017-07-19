@@ -1,13 +1,13 @@
 <?php
 
-namespace JonathanTorres\Construct\Commands;
+namespace Construct\Commands;
 
-use JonathanTorres\Construct\Construct;
-use JonathanTorres\Construct\Defaults;
-use JonathanTorres\Construct\Helpers\Git;
-use JonathanTorres\Construct\Helpers\Script;
-use JonathanTorres\Construct\Helpers\Str;
-use JonathanTorres\Construct\Settings;
+use Construct\Construct;
+use Construct\Defaults;
+use Construct\Helpers\Git;
+use Construct\Helpers\Script;
+use Construct\Helpers\Str;
+use Construct\Settings;
 use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,21 +28,21 @@ class InteractiveCommand extends Command
     /**
      * String helper.
      *
-     * @var JonathanTorres\Construct\Str
+     * @var Construct\Str
      */
     protected $str;
 
     /**
      * Construct settings.
      *
-     * @var JonathanTorres\Construct\Settings
+     * @var Construct\Settings
      */
     protected $settings;
 
     /**
      * Construct defaults.
      *
-     * @var JonathanTorres\Construct\Defaults
+     * @var Construct\Defaults
      */
     protected $defaults;
 
@@ -56,8 +56,8 @@ class InteractiveCommand extends Command
     /**
      * Initialize.
      *
-     * @param JonathanTorres\Construct\Construct $construct
-     * @param JonathanTorres\Construct\Str       $str
+     * @param Construct\Construct $construct
+     * @param Construct\Str       $str
      *
      * @return void
      */

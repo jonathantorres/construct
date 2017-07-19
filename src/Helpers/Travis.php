@@ -1,15 +1,15 @@
 <?php
 
-namespace JonathanTorres\Construct\Helpers;
+namespace Construct\Helpers;
 
-use JonathanTorres\Construct\Defaults;
+use Construct\Defaults;
 
 class Travis
 {
     /**
      * String helper.
      *
-     * @var \JonathanTorres\Construct\Helpers\Str
+     * @var \Construct\Helpers\Str
      */
     private $stringHelper;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace JonathanTorres\Construct;
+namespace Construct;
 
 use Symfony\Component\Yaml\Yaml;
 
@@ -12,9 +12,9 @@ class Configuration
      * @param string                                       $configurationFile Path to the configuration file.
      * @param string                                       $projectName       Name of the project.
      * @param string                                       $keywords          Composer keywords.
-     * @param \JonathanTorres\Construct\Helpers\Filesystem $filesystemHelper
+     * @param \Construct\Helpers\Filesystem $filesystemHelper
      *
-     * @return \JonathanTorres\Construct\Settings
+     * @return \Construct\Settings
      */
     public static function getSettings($configurationFile, $projectName, $keywords, $filesystemHelper)
     {

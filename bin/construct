@@ -22,11 +22,11 @@ if (false === $autoloaded) {
    exit(1);
 }
 
-use JonathanTorres\Construct\Commands\ConstructCommand;
-use JonathanTorres\Construct\Commands\InteractiveCommand;
-use JonathanTorres\Construct\Construct;
-use JonathanTorres\Construct\Helpers\Filesystem;
-use JonathanTorres\Construct\Helpers\Str;
+use Construct\Commands\ConstructCommand;
+use Construct\Commands\InteractiveCommand;
+use Construct\Construct;
+use Construct\Helpers\Filesystem;
+use Construct\Helpers\Str;
 use Symfony\Component\Console\Application;
 
 $str = new Str();

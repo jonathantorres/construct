@@ -1,6 +1,6 @@
 <?php
 
-namespace JonathanTorres\Construct;
+namespace Construct;
 
 class Defaults
 {

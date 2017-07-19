@@ -1,33 +1,33 @@
 <?php
 
-namespace JonathanTorres\Construct;
+namespace Construct;
 
-use JonathanTorres\Construct\Helpers\Filesystem;
-use JonathanTorres\Construct\Helpers\Git;
-use JonathanTorres\Construct\Helpers\Script;
-use JonathanTorres\Construct\Helpers\Str;
-use JonathanTorres\Construct\Helpers\Travis;
+use Construct\Helpers\Filesystem;
+use Construct\Helpers\Git;
+use Construct\Helpers\Script;
+use Construct\Helpers\Str;
+use Construct\Helpers\Travis;
 
 class Construct
 {
     /**
      * The filesystem helper.
      *
-     * @var \JonathanTorres\Construct\Helpers\Filesystem
+     * @var \Construct\Helpers\Filesystem
      */
     protected $file;
 
     /**
      * String helper.
      *
-     * @var \JonathanTorres\Construct\Helpers\Str
+     * @var \Construct\Helpers\Str
      */
     protected $str;
 
     /**
      * The construct command selections instance.
      *
-     * @var \JonathanTorres\Construct\Settings
+     * @var \Construct\Settings
      */
     protected $settings;
 
@@ -101,8 +101,8 @@ class Construct
     /**
      * Initialize.
      *
-     * @param \JonathanTorres\Construct\Helpers\Filesystem $file
-     * @param \JonathanTorres\Construct\Helpers\Str        $str
+     * @param \Construct\Helpers\Filesystem $file
+     * @param \Construct\Helpers\Str        $str
      *
      * @return void
      */
@@ -115,9 +115,9 @@ class Construct
     /**
      * Generate project.
      *
-     * @param \JonathanTorres\Construct\Settings       $settings The command settings made by the user.
-     * @param \JonathanTorres\Construct\Helpers\Git    $git      The git helper.
-     * @param \JonathanTorres\Construct\Helpers\Script $script   The script helper.
+     * @param \Construct\Settings       $settings The command settings made by the user.
+     * @param \Construct\Helpers\Git    $git      The git helper.
+     * @param \Construct\Helpers\Script $script   The script helper.
      *
      * @return void
      */
@@ -403,7 +403,7 @@ class Construct
     /**
      * Generate LICENSE.md file.
      *
-     * @param \JonathanTorres\Construct\Helpers\Git $git The git helper.
+     * @param \Construct\Helpers\Git $git The git helper.
      *
      * @return void
      */
@@ -428,7 +428,7 @@ class Construct
     /**
      * Generate composer file.
      *
-     * @param \JonathanTorres\Construct\Helpers\Git $git The git helper.
+     * @param \Construct\Helpers\Git $git The git helper.
      *
      * @return void
      */
@@ -603,7 +603,7 @@ class Construct
      * Do an initial composer install and require the set packages
      * in the constructed project.
      *
-     * @param JonathanTorres\Construct\Helpers\Script $script
+     * @param Construct\Helpers\Script $script
      *
      * @return void
      */
@@ -621,7 +621,7 @@ class Construct
     /**
      * Run any extra scripts.
      *
-     * @param JonathanTorres\Construct\Helpers\Script $script
+     * @param Construct\Helpers\Script $script
      *
      * @return void
      */
@@ -643,7 +643,7 @@ class Construct
     /**
      * Initialize an empty git repo.
      *
-     * @param JonathanTorres\Construct\Helpers\Git $git
+     * @param Construct\Helpers\Git $git
      *
      * @return void
      */

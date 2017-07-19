@@ -1,6 +1,6 @@
 <?php
 
-namespace JonathanTorres\Construct\Helpers;
+namespace Construct\Helpers;
 
 class Str
 {

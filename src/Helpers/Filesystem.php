@@ -1,8 +1,8 @@
 <?php
 
-namespace JonathanTorres\Construct\Helpers;
+namespace Construct\Helpers;
 
-use JonathanTorres\Construct\Defaults;
+use Construct\Defaults;
 
 class Filesystem
 {
