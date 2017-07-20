@@ -1,6 +1,6 @@
 <?php
 
-namespace JonathanTorres\Construct\Tests;
+namespace Construct\Tests;
 
 use Symfony\Component\Console\Tester\CommandTester as ConsoleCommandTester;
 

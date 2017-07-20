@@ -1,11 +1,11 @@
 <?php
 
-namespace JonathanTorres\Construct\Tests;
+namespace Construct\Tests;
 
-use JonathanTorres\Construct\Construct;
-use JonathanTorres\Construct\Helpers\Filesystem;
-use JonathanTorres\Construct\Helpers\Str;
-use JonathanTorres\Construct\Settings;
+use Construct\Construct;
+use Construct\Helpers\Filesystem;
+use Construct\Helpers\Str;
+use Construct\Settings;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
@@ -28,8 +28,8 @@ class ConstructTest extends TestCase
         $this->filesystem = new Filesystem;
         $this->str = new Str;
         $this->construct = new Construct(new Filesystem, $this->str);
-        $this->scriptHelper = Mockery::mock('JonathanTorres\Construct\Helpers\Script');
-        $this->gitHelper = Mockery::mock('JonathanTorres\Construct\Helpers\Git');
+        $this->scriptHelper = Mockery::mock('Construct\Helpers\Script');
+        $this->gitHelper = Mockery::mock('Construct\Helpers\Git');
         $this->gitHelper->shouldReceive('getUser')->twice()->withNoArgs()->andReturn($this->gitUser);
     }
 

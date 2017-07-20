@@ -1,8 +1,8 @@
 <?php
 
-namespace JonathanTorres\Construct\Tests;
+namespace Construct\Tests;
 
-use JonathanTorres\Construct\Settings;
+use Construct\Settings;
 use PHPUnit\Framework\TestCase;
 
 class SettingsTest extends TestCase

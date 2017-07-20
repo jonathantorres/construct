@@ -1,7 +1,7 @@
 <?php
 
-use JonathanTorres\Construct\Helpers\Travis;
-use JonathanTorres\Construct\Defaults;
+use Construct\Helpers\Travis;
+use Construct\Defaults;
 use PHPUnit\Framework\TestCase;
 
 class TravisTest extends TestCase

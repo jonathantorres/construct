@@ -1,13 +1,13 @@
 <?php
 
-namespace JonathanTorres\Construct\Tests\Commands;
+namespace Construct\Tests\Commands;
 
-use JonathanTorres\Construct\Commands\InteractiveCommand;
-use JonathanTorres\Construct\Helpers\Str;
+use Construct\Commands\InteractiveCommand;
+use Construct\Helpers\Str;
 use Mockery;
 use PHPUnit\Framework\TestCase as PHPUnit;
 use Symfony\Component\Console\Application;
-use JonathanTorres\Construct\Tests\CommandTester;
+use Construct\Tests\CommandTester;
 
 class InteractiveCommandTest extends PHPUnit
 {
@@ -16,8 +16,8 @@ class InteractiveCommandTest extends PHPUnit
 
     protected function setUp()
     {
-        $this->construct = Mockery::mock('JonathanTorres\Construct\Construct');
-        $this->filesystem = Mockery::mock('JonathanTorres\Construct\Helpers\Filesystem');
+        $this->construct = Mockery::mock('Construct\Construct');
+        $this->filesystem = Mockery::mock('Construct\Helpers\Filesystem');
     }
 
     protected function tearDown()

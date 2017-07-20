@@ -1,8 +1,8 @@
 <?php
 
-namespace JonathanTorres\Construct\Tests\Helpers;
+namespace Construct\Tests\Helpers;
 
-use JonathanTorres\Construct\Helpers\Str;
+use Construct\Helpers\Str;
 use PHPUnit\Framework\TestCase;
 
 class StrTest extends TestCase

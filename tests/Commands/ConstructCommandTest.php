@@ -1,16 +1,16 @@
 <?php
 
-namespace JonathanTorres\Construct\Tests\Commands;
+namespace Construct\Tests\Commands;
 
-use JonathanTorres\Construct\Defaults;
-use JonathanTorres\Construct\Commands\ConstructCommand;
-use JonathanTorres\Construct\Construct;
-use JonathanTorres\Construct\Helpers\Str;
-use JonathanTorres\Construct\Helpers\Filesystem as FilesystemHelper;
+use Construct\Defaults;
+use Construct\Commands\ConstructCommand;
+use Construct\Construct;
+use Construct\Helpers\Str;
+use Construct\Helpers\Filesystem as FilesystemHelper;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
-use JonathanTorres\Construct\Tests\CommandTester;
+use Construct\Tests\CommandTester;
 
 class ConstructCommandTest extends TestCase
 {
@@ -19,7 +19,7 @@ class ConstructCommandTest extends TestCase
 
     protected function setUp()
     {
-        $this->filesystem = Mockery::mock('JonathanTorres\Construct\Helpers\Filesystem');
+        $this->filesystem = Mockery::mock('Construct\Helpers\Filesystem');
         $this->systemPhpVersion = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
     }
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace JonathanTorres\Construct\Tests\Helpers;
+namespace Construct\Tests\Helpers;
 
-use JonathanTorres\Construct\Defaults;
-use JonathanTorres\Construct\Helpers\Filesystem;
-use JonathanTorres\Construct\Helpers\Str;
+use Construct\Defaults;
+use Construct\Helpers\Filesystem;
+use Construct\Helpers\Str;
 use PHPUnit\Framework\TestCase;
 
 class FilesystemTest extends TestCase

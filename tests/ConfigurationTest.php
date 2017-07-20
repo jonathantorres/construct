@@ -1,11 +1,11 @@
 <?php
 
-namespace JonathanTorres\Construct\Tests;
+namespace Construct\Tests;
 
-use JonathanTorres\Construct\Configuration;
-use JonathanTorres\Construct\Defaults;
-use JonathanTorres\Construct\Settings;
-use JonathanTorres\Construct\Helpers\Filesystem;
+use Construct\Configuration;
+use Construct\Defaults;
+use Construct\Settings;
+use Construct\Helpers\Filesystem;
 use PHPUnit\Framework\TestCase;
 
 class ConfigurationTest extends TestCase
@@ -31,7 +31,7 @@ class ConfigurationTest extends TestCase
         );
 
         $this->assertInstanceOf(
-            'JonathanTorres\Construct\Settings',
+            'Construct\Settings',
             $settings
         );
 
