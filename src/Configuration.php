@@ -9,9 +9,9 @@ class Configuration
     /**
      * Get settings derived from the configuration file.
      *
-     * @param string                                       $configurationFile Path to the configuration file.
-     * @param string                                       $projectName       Name of the project.
-     * @param string                                       $keywords          Composer keywords.
+     * @param string                        $configurationFile Path to the configuration file.
+     * @param string                        $projectName       Name of the project.
+     * @param string                        $keywords          Composer keywords.
      * @param \Construct\Helpers\Filesystem $filesystemHelper
      *
      * @return \Construct\Settings
