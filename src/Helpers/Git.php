@@ -31,6 +31,7 @@ class Git
         ];
 
         $command = 'git config --get-regexp "^user.*"';
+
         exec($command, $keyValueLines, $returnValue);
 
         if ($returnValue === 0) {

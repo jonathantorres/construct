@@ -114,6 +114,7 @@ class Filesystem
     public function move($path, $target)
     {
         $this->copy($path, $target);
+
         unlink($path);
     }
 

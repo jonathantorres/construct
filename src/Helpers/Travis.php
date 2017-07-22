@@ -57,6 +57,7 @@ class Travis
 
         for ($i = 0; $i < count($phpVersions); $i++) {
             $phpVersion = $phpVersions[$i];
+
             if (!in_array($phpVersions[$i], $nonSemverVersions)) {
                 $phpVersion = $this->stringHelper->toMinorVersion($phpVersions[$i]);
             }
@@ -64,6 +65,7 @@ class Travis
             if (count($i) !== 0) {
                 $runOn .= '    ';
             }
+
             $runOn .= '- php: ' . $phpVersions[$i];
 
             if ($setLintEnvironmentVariable
