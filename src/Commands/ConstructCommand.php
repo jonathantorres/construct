@@ -147,10 +147,6 @@ class ConstructCommand extends Command
         $testingFramework = $input->getOption('test-framework');
         $cliFramework = null;
 
-        if ($testingFramework !== Defaults::TEST_FRAMEWORK) {
-            $testFramework = $testingFramework;
-        }
-
         if ($input->hasParameterOption('--cli-framework')) {
             $cliFramework = $input->getOption('cli-framework');
 
@@ -179,6 +175,11 @@ class ConstructCommand extends Command
         $codeOfConduct = $input->getOption('code-of-conduct');
         $ignoreDefaultConfiguration = $input->getOption('ignore-default-config');
         $configuration = $input->getOption('config');
+
+        // alias for --test-framework
+        if ($testingFramework !== Defaults::TEST_FRAMEWORK) {
+            $testFramework = $testingFramework;
+        }
 
         if ($this->isConfigurationApplicable($configuration)
             && $ignoreDefaultConfiguration === false) {
