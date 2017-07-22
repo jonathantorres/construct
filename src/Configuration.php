@@ -3,6 +3,7 @@
 namespace Construct;
 
 use Symfony\Component\Yaml\Yaml;
+use RuntimeException;
 
 class Configuration
 {
@@ -20,12 +21,12 @@ class Configuration
     {
         if (!$filesystemHelper->isFile($configurationFile)) {
             $exceptionMessage = "Configuration file '$configurationFile' is not existent.";
-            throw new \RuntimeException($exceptionMessage);
+            throw new RuntimeException($exceptionMessage);
         }
 
         if (!$filesystemHelper->isReadable($configurationFile)) {
             $exceptionMessage = "Configuration file '$configurationFile' is not readable.";
-            throw new \RuntimeException($exceptionMessage);
+            throw new RuntimeException($exceptionMessage);
         }
 
         $configuration = Yaml::parse($filesystemHelper->get($configurationFile));
