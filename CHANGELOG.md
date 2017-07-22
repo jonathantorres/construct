@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.15.1 `2017-xx-xx`
+- `Fixed`
+    - Use the default CLI framework `symfony/console` if the one specified has an invalid name. Done by [@jonathantorres](https://github.com/jonathantorres). See [1b297ca](https://github.com/jonathantorres/construct/commit/1b297ca8a9bd791111cb0aa8a5aeb87b4c9dbc4d).
+
 #### v1.15.0 `2017-07-17`
 - `Added`
     - Generate initial AppVeyor configuration for CLI projects. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#196](https://github.com/jonathantorres/construct/issues/196).
