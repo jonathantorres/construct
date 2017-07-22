@@ -368,6 +368,9 @@ class ConstructCommandTest extends TestCase
 
     public function testProjectGenerationWithInvalidCliPackageName()
     {
+        $this->setMocks(4, 2, 1, 12, 13);
+        $this->filesystem->shouldReceive('put')->times(0);
+
         $app = $this->setApplication();
         $command = $app->find('generate');
         $commandTester = new CommandTester($command);
@@ -377,12 +380,10 @@ class ConstructCommandTest extends TestCase
             '--cli-framework' => 'abc'
         ]);
 
-        $expectedWarning = <<<CONTENT
-Warning: "abc" is not a valid Composer package name, please use "vendor/project"
+        $output = 'Warning: "abc" is not a valid Composer package name. Using "symfony/console" instead.'
+                  . PHP_EOL . 'Project "vendor/project" constructed.' . PHP_EOL;
 
-CONTENT;
-
-        $this->assertSame($expectedWarning, $commandTester->getDisplay(true));
+        $this->assertSame($output, $commandTester->getDisplay());
     }
 
     public function testProjectGenerationFromConfiguration()

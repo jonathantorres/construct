@@ -145,20 +145,6 @@ class ConstructCommand extends Command
         $projectName = $input->getArgument('name');
         $testFramework = $input->getOption('test');
         $testingFramework = $input->getOption('test-framework');
-        $cliFramework = null;
-
-        if ($input->hasParameterOption('--cli-framework')) {
-            $cliFramework = $input->getOption('cli-framework');
-
-            if (!$this->str->isValid($cliFramework)) {
-                $warningMessage = '<error>Warning: "' . $cliFramework . '" is not '
-                    . 'a valid Composer package name, please use "vendor/project"</error>';
-                $output->writeln($warningMessage);
-
-                return false;
-            }
-        }
-
         $license = $input->getOption('license');
         $namespace = $input->getOption('namespace');
         $git = $input->getOption('git');
@@ -175,6 +161,18 @@ class ConstructCommand extends Command
         $codeOfConduct = $input->getOption('code-of-conduct');
         $ignoreDefaultConfiguration = $input->getOption('ignore-default-config');
         $configuration = $input->getOption('config');
+        $cliFramework = null;
+
+        // special case for cli-framework
+        if ($input->hasParameterOption('--cli-framework')) {
+            $cliFramework = $input->getOption('cli-framework');
+
+            if (!$this->str->isValid($cliFramework)) {
+                $warning = '<error>Warning: "' . $cliFramework . '" is not a valid Composer package name. Using "' . Defaults::CLI_FRAMEWORK . '" instead.</error>';
+                $output->writeln($warning);
+                $cliFramework = Defaults::CLI_FRAMEWORK;
+            }
+        }
 
         // alias for --test-framework
         if ($testingFramework !== Defaults::TEST_FRAMEWORK) {
