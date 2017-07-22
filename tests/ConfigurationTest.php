@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class ConfigurationTest extends TestCase
 {
-    public function testExceptionIsRaisedOnNonExistentFile()
+    public function test_exception_is_raised_on_non_existent_file()
     {
         $this->setExpectedException('RuntimeException');
         Configuration::getSettings(
@@ -21,7 +21,7 @@ class ConfigurationTest extends TestCase
         );
     }
 
-    public function testCompleteConfigIsTransformedIntoSettings()
+    public function test_complete_config_is_transformed_into_settings()
     {
         $settings = Configuration::getSettings(
             __DIR__ . '/stubs/config/complete.stub',
@@ -60,7 +60,7 @@ class ConfigurationTest extends TestCase
         );
     }
 
-    public function testDefaultsAreUsedWhenNotConfigured()
+    public function test_defaults_are_used_when_not_configured()
     {
         $settings = Configuration::getSettings(
             __DIR__ . '/stubs/config/php+testframework+licenceless.stub',
@@ -83,7 +83,7 @@ class ConfigurationTest extends TestCase
         );
     }
 
-    public function testGithubConfigImplicatesGithubTemplatesAndDocs()
+    public function test_github_config_implicates_github_templates_and_docs()
     {
         $settings = Configuration::getSettings(
             __DIR__ . '/stubs/config/complete.github.stub',

@@ -28,7 +28,7 @@ class SettingsTest extends TestCase
         );
     }
 
-    public function testSettingsAreRetrieved()
+    public function test_settings_are_retrieved()
     {
         $this->assertEquals('jonathantorres/logger', $this->settings->getProjectName());
         $this->assertEquals('phpunit', $this->settings->getTestingFramework());
@@ -46,7 +46,7 @@ class SettingsTest extends TestCase
         $this->assertNull($this->settings->getCliFramework());
     }
 
-    public function testCanSetCliFrameworkAfterInstantiation()
+    public function test_can_set_cli_framework_after_instantiation()
     {
         $this->assertFalse($this->settings->withCliFramework());
 

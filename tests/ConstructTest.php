@@ -74,7 +74,7 @@ class ConstructTest extends TestCase
             ->andReturnNull();
     }
 
-    public function testBasicProjectIsGenerated()
+    public function test_basic_project_is_generated()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -108,7 +108,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('LoggerTest'), $this->getFile('tests/LoggerTest.php'));
     }
 
-    public function testProjectGenerationWithBehat()
+    public function test_project_generation_with_behat()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -131,7 +131,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('composer.behat'), $this->getFile('composer.json'));
     }
 
-    public function testProjectGenerationWithCodeception()
+    public function test_project_generation_with_codeception()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -156,7 +156,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('composer.codeception'), $this->getFile('composer.json'));
     }
 
-    public function testProjectGenerationWithPhpSpec()
+    public function test_project_generation_with_phpspec()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -185,7 +185,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('gitignore.phpspec'), $this->getFile('.gitignore'));
     }
 
-    public function testProjectGenerationWithApacheLicense()
+    public function test_project_generation_with_apache_license()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -208,7 +208,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('LICENSE.Apache'), $this->getFile('LICENSE.md'));
     }
 
-    public function testProjectGenerationWithGpl2License()
+    public function test_project_generation_with_gpl2_license()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -231,7 +231,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('LICENSE.Gpl2'), $this->getFile('LICENSE.md'));
     }
 
-    public function testProjectGenerationWithGpl3License()
+    public function test_project_generation_with_gpl3_license()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -254,7 +254,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('LICENSE.Gpl3'), $this->getFile('LICENSE.md'));
     }
 
-    public function testProjectGenerationWithSpecifiedNamespace()
+    public function test_project_generation_with_specified_namespace()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -279,7 +279,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('with-namespace/LoggerTest'), $this->getFile('tests/LoggerTest.php'));
     }
 
-    public function testProjectGenerationWithGitRepository()
+    public function test_project_generation_with_git_repository()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -301,7 +301,7 @@ class ConstructTest extends TestCase
         $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
     }
 
-    public function testProjectGenerationWithCodingStandardsFixer()
+    public function test_project_generation_with_coding_standards_fixer()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -340,7 +340,7 @@ class ConstructTest extends TestCase
         );
     }
 
-    public function testProjectGenerationWithComposerKeywords()
+    public function test_project_generation_with_composer_keywords()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -363,7 +363,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('composer.keywords'), $this->getFile('composer.json'));
     }
 
-    public function testProjectGenerationWithVagrant()
+    public function test_project_generation_with_vagrant()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -387,7 +387,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('with-vagrant/gitattributes'), $this->getFile('.gitattributes'));
     }
 
-    public function testProjectGenerationWithEditorConfig()
+    public function test_project_generation_with_editor_config()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -411,7 +411,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('with-editorconfig/gitattributes'), $this->getFile('.gitattributes'));
     }
 
-    public function testProjectGenerationWithPhp54()
+    public function test_project_generation_with_php54()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -435,7 +435,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('travis.php54'), $this->getFile('.travis.yml'));
     }
 
-    public function testProjectGenerationWithPhp55()
+    public function test_project_generation_with_php55()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -459,7 +459,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('travis.php55'), $this->getFile('.travis.yml'));
     }
 
-    public function testProjectGenerationWithPhp56()
+    public function test_project_generation_with_php56()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -483,7 +483,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('travis.php56'), $this->getFile('.travis.yml'));
     }
 
-    public function testProjectGenerationWithPhp7()
+    public function test_project_generation_with_php7()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -507,7 +507,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('travis.php7'), $this->getFile('.travis.yml'));
     }
 
-    public function testProjectGenerationWithPhp71()
+    public function test_project_generation_with_php71()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -534,7 +534,7 @@ class ConstructTest extends TestCase
     /**
      * @ticket 170 (https://github.com/jonathantorres/construct/issues/170)
      */
-    public function testProjectGenerationWithPhpUnit6Stub()
+    public function test_project_generation_with_phpunit6_stub()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -563,7 +563,7 @@ class ConstructTest extends TestCase
     /**
      * @ticket 192 (https://github.com/jonathantorres/construct/issues/192)
      */
-    public function testProjectGenerationWithPhpUnit6StubOnPhp70()
+    public function test_project_generation_with_phpunit6_stub_on_php70()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -589,7 +589,7 @@ class ConstructTest extends TestCase
         );
     }
 
-    public function testProjectGenerationWithEnvironmentFiles()
+    public function test_project_generation_with_environment_files()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -619,7 +619,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('with-env/gitignore'), $this->getFile('.gitignore'));
     }
 
-    public function testProjectGenerationWithLgtmConfiguration()
+    public function test_project_generation_with_lgtm_configuration()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -644,7 +644,7 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('with-lgtm/gitattributes'), $this->getFile('.gitattributes'));
     }
 
-    public function testProjectGenerationWithGitHubTemplates()
+    public function test_project_generation_with_github_templates()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -687,7 +687,7 @@ class ConstructTest extends TestCase
         );
     }
 
-    public function testProjectGenerationWithGitHubDocs()
+    public function test_project_generation_with_github_docs()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -722,7 +722,7 @@ class ConstructTest extends TestCase
         );
     }
 
-    public function testProjectGenerationWithCodeOfConduct()
+    public function test_project_generation_with_code_of_conduct()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -758,7 +758,7 @@ class ConstructTest extends TestCase
         );
     }
 
-    public function testProjectGenerationWithCodeOfConductAndGitHubTemplates()
+    public function test_project_generation_with_code_of_conduct_and_github_templates()
     {
         $settings = new Settings(
             'jonathantorres/logger',
@@ -790,7 +790,7 @@ class ConstructTest extends TestCase
         );
     }
 
-    public function testProjectGenerationWithDefaultCliFramework()
+    public function test_project_generation_with_default_cli_framework()
     {
         $settings = new Settings(
             'jonathantorres/logger',

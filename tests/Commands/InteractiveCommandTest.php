@@ -25,7 +25,7 @@ class InteractiveCommandTest extends PHPUnit
         Mockery::close();
     }
 
-    public function testGenerateProjectInteractive()
+    public function test_generate_project_interactive()
     {
         $helper = Mockery::mock('Symfony\Component\Console\Helper\QuestionHelper');
         $helper->shouldReceive('getName');

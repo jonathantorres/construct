@@ -28,7 +28,7 @@ class ConstructCommandTest extends TestCase
         Mockery::close();
     }
 
-    public function testProjectGeneration()
+    public function test_project_generation()
     {
         $this->setMocks(3, 2, 0, 11);
 
@@ -40,7 +40,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithInvalidProjectName()
+    public function test_project_generation_with_invalid_project_name()
     {
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -55,7 +55,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithPhpInProjectName()
+    public function test_project_generation_with_php_in_project_name()
     {
         $this->setMocks(3, 2);
 
@@ -71,7 +71,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithUnknownLicense()
+    public function test_project_generation_with_unknown_license()
     {
         $this->setMocks(3, 2);
 
@@ -90,7 +90,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithUnknownTestingFramework()
+    public function test_project_generation_with_unknown_testing_framework()
     {
         $this->setMocks(3, 2);
 
@@ -109,7 +109,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithASpecifiedTestingFramework()
+    public function test_project_generation_with_a_specified_testing_framework()
     {
         $this->setMocks(2, 2, 0, 9, 10);
 
@@ -126,7 +126,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithASpecifiedTestingFrameworkViaAlias()
+    public function test_project_generation_with_a_specified_testing_framework_via_alias()
     {
         $this->setMocks(2, 2, 0, 9, 10);
 
@@ -143,7 +143,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithSpecifiedPhpVersion()
+    public function test_project_generation_with_specified_php_version()
     {
         $this->setMocks(3, 2);
 
@@ -168,7 +168,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithAnInvalidPhpVersion()
+    public function test_project_generation_with_an_invalid_php_version()
     {
         $this->setMocks(3, 2);
 
@@ -186,7 +186,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithASpecifiedLicense()
+    public function test_project_generation_with_a_specified_license()
     {
         $this->setMocks(3, 2);
 
@@ -202,7 +202,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithASpecifiedNamespace()
+    public function test_project_generation_with_a_specified_namespace()
     {
         $this->setMocks(3, 2);
 
@@ -218,7 +218,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithAnInitializedGithubRepo()
+    public function test_project_generation_with_an_initialized_github_repo()
     {
         $this->setMocks(3, 3);
 
@@ -235,7 +235,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithPhpCs()
+    public function test_project_generation_with_phpcs()
     {
         $this->setMocks(3, 2, 1);
 
@@ -251,7 +251,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithSpecifiedComposerKeywords()
+    public function test_project_generation_with_specified_composer_keywords()
     {
         $this->setMocks(3, 2);
 
@@ -267,7 +267,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithVagrant()
+    public function test_project_generation_with_vagrant()
     {
         $this->setMocks(3, 2, 1);
 
@@ -283,7 +283,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithEditorConfig()
+    public function test_project_generation_with_editor_config()
     {
         $this->setMocks(3, 2, 1);
 
@@ -299,7 +299,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithEnvironmentFiles()
+    public function test_project_generation_with_environment_files()
     {
         $this->setMocks(3, 2, 2);
 
@@ -315,7 +315,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithGitHubTemplates()
+    public function test_project_generation_with_github_templates()
     {
         $this->setMocks(4, 2, 2);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
@@ -332,7 +332,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithGitHubDocs()
+    public function test_project_generation_with_github_docs()
     {
         $this->setMocks(4, 2);
         $this->filesystem->shouldReceive('put')->times(1)->andReturnNull();
@@ -349,7 +349,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithCli()
+    public function test_project_generation_with_cli()
     {
         $this->setMocks(4, 2, 1, 12, 13);
         $this->filesystem->shouldReceive('put')->times(0);
@@ -366,7 +366,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationWithInvalidCliPackageName()
+    public function test_project_generation_with_invalid_cli_package_name()
     {
         $this->setMocks(4, 2, 1, 12, 13);
         $this->filesystem->shouldReceive('put')->times(0);
@@ -386,7 +386,7 @@ class ConstructCommandTest extends TestCase
         $this->assertSame($output, $commandTester->getDisplay());
     }
 
-    public function testProjectGenerationFromConfiguration()
+    public function test_project_generation_from_configuration()
     {
         $this->setMocks(5, 3, 10, 10);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
@@ -409,7 +409,7 @@ class ConstructCommandTest extends TestCase
         );
     }
 
-    public function testProjectGenerationWithGitHubAlias()
+    public function test_project_generation_with_github_alias()
     {
         $this->setMocks(5, 3, 10, 10);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
@@ -435,7 +435,7 @@ class ConstructCommandTest extends TestCase
     /**
      * @ticket 126 (https://github.com/jonathantorres/construct/issues/126)
      */
-    public function testProjectGenerationFromConfigurationWithInvalidSettings()
+    public function test_project_generation_from_configuration_with_invalid_settings()
     {
         $this->setMocks(4, 3, 10, 11);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
@@ -474,7 +474,7 @@ class ConstructCommandTest extends TestCase
     /**
      * @group integration
      */
-    public function testExecutable()
+    public function test_executable()
     {
         $constructCommand = 'php bin/construct --no-ansi';
         exec($constructCommand, $output, $returnValue);

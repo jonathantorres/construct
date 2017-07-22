@@ -18,7 +18,7 @@ class FilesystemTest extends TestCase
         $this->filesystem = new Filesystem();
     }
 
-    public function testGetHomeDirectory()
+    public function test_get_home_directory()
     {
         if ($this->str->isWindows()) {
             $this->assertEquals(
@@ -38,7 +38,7 @@ class FilesystemTest extends TestCase
         }
     }
 
-    public function testGetDefaultConfigurationFile()
+    public function test_get_default_configuration_file()
     {
         if ($this->str->isWindows()) {
             $this->assertEquals(
@@ -53,7 +53,7 @@ class FilesystemTest extends TestCase
         }
     }
 
-    public function testHasDefaultConfigurationFile()
+    public function test_has_default_configuration_file()
     {
         $this->assertFalse($this->filesystem->hasDefaultConfigurationFile());
     }

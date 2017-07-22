@@ -14,7 +14,7 @@ class StrTest extends TestCase
         $this->str = new Str();
     }
 
-    public function testValidProjectName()
+    public function test_valid_project_name()
     {
         $this->assertTrue($this->str->isValid('vendor/project'));
         $this->assertTrue($this->str->isValid('vendor/project-name'));
@@ -26,7 +26,7 @@ class StrTest extends TestCase
         $this->assertFalse($this->str->isValid('some\project'));
     }
 
-    public function testContains()
+    public function test_contains()
     {
         $this->assertTrue($this->str->contains('vendor/php-project', 'php'));
         $this->assertTrue($this->str->contains('vendor/project-php', 'php'));
@@ -35,18 +35,18 @@ class StrTest extends TestCase
         $this->assertTrue($this->str->contains('vendor/project-test', 'test'));
     }
 
-    public function testToLower()
+    public function test_to_lower()
     {
         $this->assertSame('jonathantorres', $this->str->toLower('JonathanTorres'));
         $this->assertSame('jonathantorres', $this->str->toLower('JONATHANTORRES'));
     }
 
-    public function testToStudly()
+    public function test_to_studly()
     {
         $this->assertSame('Jonathan', $this->str->toStudly('jonathan'));
     }
 
-    public function testToCamelCase()
+    public function test_to_camel_case()
     {
         $this->assertSame('fooBar', $this->str->toCamelCase('foo_bar'));
         $this->assertSame('foozBall', $this->str->toCamelCase('fooz-ball'));
@@ -56,7 +56,7 @@ class StrTest extends TestCase
         $this->assertSame('VolleyBall', $this->str->toCamelCase('volley ball', true));
     }
 
-    public function testSplit()
+    public function test_split()
     {
         $result = [
             'vendor' => 'vendor',
@@ -67,7 +67,7 @@ class StrTest extends TestCase
         $this->assertSame($result, $this->str->split('vendor/project'));
     }
 
-    public function testNamespaceWithProjectNameAndSingleSlashes()
+    public function test_namespace_with_project_name_and_single_slashes()
     {
         $this->assertSame('Vendor\\Project', $this->str->createNamespace('vendor/project', true));
         $this->assertSame('Vendor\\ProjectName', $this->str->createNamespace('vendor/project-name', true));
@@ -75,7 +75,7 @@ class StrTest extends TestCase
         $this->assertSame('Vendor\\Project', $this->str->createNamespace('Vendor/Project', true));
     }
 
-    public function testNamespaceWithProjectNameAndDoubleSlashes()
+    public function test_namespace_with_project_name_and_double_slashes()
     {
         $this->assertSame('Vendor\\\\Project', $this->str->createNamespace('vendor/project', true, true));
         $this->assertSame('Vendor\\\\ProjectName', $this->str->createNamespace('vendor/project-name', true, true));
@@ -83,24 +83,24 @@ class StrTest extends TestCase
         $this->assertSame('Vendor\\\\Project', $this->str->createNamespace('Vendor/Project', true, true));
     }
 
-    public function testNamespaceWithProvidedInputAndSingleSlashes()
+    public function test_namespace_with_provided_input_and_single_slashes()
     {
         $this->assertSame('Project\\Namespace', $this->str->createNamespace('project\namespace', false));
         $this->assertSame('Project\\Namespace', $this->str->createNamespace('Project\Namespace', false));
     }
 
-    public function testNamespaceWithProvidedInputAndDoubleSlashes()
+    public function test_namespace_with_provided_input_and_double_slashes()
     {
         $this->assertSame('Project\\\\Namespace', $this->str->createNamespace('project\namespace', false, true));
         $this->assertSame('Project\\\\Namespace', $this->str->createNamespace('Project\Namespace', false, true));
     }
 
-    public function testNamespaceWithProvidedInputWithSingleName()
+    public function test_namespace_with_provided_input_with_single_name()
     {
         $this->assertSame('Namespace', $this->str->createNamespace('namespace'));
     }
 
-    public function testIsWindows()
+    public function test_is_windows()
     {
         if ($this->str->isWindows()) {
             $this->assertTrue($this->str->isWindows());
@@ -115,7 +115,7 @@ class StrTest extends TestCase
     /**
      * @dataProvider keywordsProvider
      */
-    public function testToQuotedKeywords($keywordsList, $expectedQuotedKeywords)
+    public function test_to_quoted_keywords($keywordsList, $expectedQuotedKeywords)
     {
         $this->assertEquals(
             $expectedQuotedKeywords,
@@ -123,7 +123,7 @@ class StrTest extends TestCase
         );
     }
 
-    public function testPhpVersionIsValid()
+    public function test_php_version_is_valid()
     {
         $this->assertTrue($this->str->phpVersionIsValid('5.4.0'));
         $this->assertTrue($this->str->phpVersionIsValid('5.5.0'));
@@ -155,7 +155,7 @@ class StrTest extends TestCase
     /**
      * @dataProvider versionProvider
      */
-    public function testReturnsExpectedMinorVersion($expected, $version)
+    public function test_returns_expected_minor_version($expected, $version)
     {
         $this->assertEquals($expected, $this->str->toMinorVersion($version));
     }
