@@ -117,64 +117,6 @@ class Settings
     private $cliFramework;
 
     /**
-     * Initialize.
-     *
-     * @param string  $projectName        The entered project name.
-     * @param string  $testingFramework   The entered testing framework.
-     * @param string  $license            The entered project license.
-     * @param string  $namespace          The entered namespace.
-     * @param boolean $gitInit            Initialize a git repo?
-     * @param boolean $phpcsConfiguration Generate a PHP Coding Standards Fixer configuration?
-     * @param string  $composerKeywords   The entered list of Composer keywords.
-     * @param boolean $vagrantfile        Generate a Vagrantfile?
-     * @param boolean $editorConfig       Generate an EditorConfig file?
-     * @param boolean $phpVersion         The entered php version
-     * @param boolean $environmentFiles   Generate .env environment files?
-     * @param boolean $lgtmConfiguration  Generate LGTM configuration files?
-     * @param boolean $githubTemplates    Generate GitHub templates?
-     * @param boolean $codeOfConduct      Generate Code of Conduct file?
-     * @param boolean $githubDocs         Generate GitHub docs?
-     * @param string  $cliFramework       The entered CLI framework.
-     *
-     * @return void
-     */
-    public function __construct(
-        $projectName,
-        $testingFramework,
-        $license,
-        $namespace,
-        $gitInit,
-        $phpcsConfiguration,
-        $composerKeywords,
-        $vagrantfile,
-        $editorConfig,
-        $phpVersion,
-        $environmentFiles,
-        $lgtmConfiguration,
-        $githubTemplates = false,
-        $codeOfConduct = false,
-        $githubDocs = false,
-        $cliFramework = null
-    ) {
-        $this->projectName = $projectName;
-        $this->testingFramework = $testingFramework;
-        $this->license = $license;
-        $this->namespace = $namespace;
-        $this->gitInit = $gitInit;
-        $this->phpcsConfiguration = $phpcsConfiguration;
-        $this->composerKeywords = $composerKeywords;
-        $this->vagrantfile = $vagrantfile;
-        $this->editorConfig = $editorConfig;
-        $this->phpVersion = $phpVersion;
-        $this->environmentFiles = $environmentFiles;
-        $this->lgtmConfiguration = $lgtmConfiguration;
-        $this->githubTemplates = $githubTemplates;
-        $this->codeOfConduct = $codeOfConduct;
-        $this->githubDocs = $githubDocs;
-        $this->cliFramework = $cliFramework;
-    }
-
-    /**
      * Get the entered project name.
      *
      * @return string
@@ -182,6 +124,11 @@ class Settings
     public function getProjectName()
     {
         return $this->projectName;
+    }
+
+    public function setProjectName($name)
+    {
+        $this->projectName = $name;
     }
 
     /**
@@ -192,6 +139,206 @@ class Settings
     public function getTestingFramework()
     {
         return $this->testingFramework;
+    }
+
+    public function setTestingFramework($testingFramework)
+    {
+        $this->testingFramework = $testingFramework;
+    }
+
+    /**
+     * Get the entered license.
+     *
+     * @return string
+     */
+    public function getLicense()
+    {
+        return $this->license;
+    }
+
+    public function setLicense($license)
+    {
+        $this->license = $license;
+    }
+
+    /**
+     * Get the entered namespace.
+     *
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
+    }
+
+    public function setNamespace($namespace)
+    {
+        $this->namespace = $namespace;
+    }
+
+    /**
+     * Whether or not to initialize a git repo on the project.
+     *
+     * @return boolean
+     */
+    public function withGitInit()
+    {
+        return $this->gitInit;
+    }
+
+    public function setGitInit($gitInit)
+    {
+        $this->gitInit = $gitInit;
+    }
+
+    /**
+     * Whether or not to use phpcs on the project.
+     *
+     * @return boolean
+     */
+    public function withPhpcsConfiguration()
+    {
+        return $this->phpcsConfiguration;
+    }
+
+    public function setPhpcsConfiguration($configuration)
+    {
+        $this->phpcsConfiguration = $configuration;
+    }
+
+    /**
+     * Get the entered Composer keywords.
+     *
+     * @return string
+     */
+    public function getComposerKeywords()
+    {
+        return $this->composerKeywords;
+    }
+
+    public function setComposerKeywords($keywords)
+    {
+        $this->composerKeywords = $keywords;
+    }
+
+    /**
+     * Whether or not to create a Vagrantfile.
+     *
+     * @return boolean
+     */
+    public function withVagrantfile()
+    {
+        return $this->vagrantfile;
+    }
+
+    public function setVagrantFile($vagrantFile)
+    {
+        $this->vagrantFile = $vagrantfile;
+    }
+
+    /**
+     * Whether or not to create an EditorConfig file.
+     *
+     * @return boolean
+     */
+    public function withEditorConfig()
+    {
+        return $this->editorConfig;
+    }
+
+    public function setEditorConfig($config)
+    {
+        $this->editorConfig = $config;
+    }
+
+    /**
+     * Get the entered project php version.
+     *
+     * @return string
+     */
+    public function getPhpVersion()
+    {
+        return $this->phpVersion;
+    }
+
+    public function setPhpVersion($version)
+    {
+        $this->phpVersion = $version;
+    }
+
+    /**
+     * Whether or not to create .env environment files.
+     *
+     * @return boolean
+     */
+    public function withEnvironmentFiles()
+    {
+        return $this->environmentFiles;
+    }
+
+    public function setEnvironmentFiles($envFiles)
+    {
+        $this->environmentFiles = $envFiles;
+    }
+
+    /**
+     * Whether or not to create LGTM configuration files.
+     *
+     * @return boolean
+     */
+    public function withLgtmConfiguration()
+    {
+        return $this->lgtmConfiguration;
+    }
+
+    public function setLgtmConfiguration($configuration)
+    {
+        $this->lgtmConfiguration = $configuration;
+    }
+
+    /**
+     * Whether or not to create GitHub template files.
+     *
+     * @return boolean
+     */
+    public function withGithubTemplates()
+    {
+        return $this->githubTemplates;
+    }
+
+    public function setGithubTemplates($templates)
+    {
+        $this->githubTemplates = $templates;
+    }
+
+    /**
+     * Whether or not to create GitHub documentation files.
+     *
+     * @return boolean
+     */
+    public function withGithubDocs()
+    {
+        return $this->githubDocs;
+    }
+
+    public function setGithubDocs($docs)
+    {
+        $this->githubDocs = $docs;
+    }
+
+    /**
+     * Whether or not to create a Code of Conduct file.
+     *
+     * @return boolean
+     */
+    public function withCodeOfConduct()
+    {
+        return $this->codeOfConduct;
+    }
+
+    public function setCodeOfConduct($codeOfConduct)
+    {
+        $this->codeOfConduct = $codeOfConduct;
     }
 
     /**
@@ -217,140 +364,10 @@ class Settings
     /**
      * Set the CLI framework.
      *
-     * @param string $composerPackage
+     * @param string $cliFramework
      */
-    public function setCliFramework($composerPackage)
+    public function setCliFramework($cliFramework)
     {
-        $this->cliFramework = $composerPackage;
-    }
-
-    /**
-     * Get the entered license.
-     *
-     * @return string
-     */
-    public function getLicense()
-    {
-        return $this->license;
-    }
-
-    /**
-     * Get the entered namespace.
-     *
-     * @return string
-     */
-    public function getNamespace()
-    {
-        return $this->namespace;
-    }
-
-    /**
-     * Whether or not to initialize a git repo on the project.
-     *
-     * @return boolean
-     */
-    public function withGitInit()
-    {
-        return $this->gitInit;
-    }
-
-    /**
-     * Whether or not to use phpcs on the project.
-     *
-     * @return boolean
-     */
-    public function withPhpcsConfiguration()
-    {
-        return $this->phpcsConfiguration;
-    }
-
-    /**
-     * Get the entered Composer keywords.
-     *
-     * @return string
-     */
-    public function getComposerKeywords()
-    {
-        return $this->composerKeywords;
-    }
-
-    /**
-     * Whether or not to create a Vagrantfile.
-     *
-     * @return boolean
-     */
-    public function withVagrantfile()
-    {
-        return $this->vagrantfile;
-    }
-
-    /**
-     * Whether or not to create an EditorConfig file.
-     *
-     * @return boolean
-     */
-    public function withEditorConfig()
-    {
-        return $this->editorConfig;
-    }
-
-    /**
-     * Get the entered project php version.
-     *
-     * @return string
-     */
-    public function getPhpVersion()
-    {
-        return $this->phpVersion;
-    }
-
-    /**
-     * Whether or not to create .env environment files.
-     *
-     * @return boolean
-     */
-    public function withEnvironmentFiles()
-    {
-        return $this->environmentFiles;
-    }
-
-    /**
-     * Whether or not to create LGTM configuration files.
-     *
-     * @return boolean
-     */
-    public function withLgtmConfiguration()
-    {
-        return $this->lgtmConfiguration;
-    }
-
-    /**
-     * Whether or not to create GitHub template files.
-     *
-     * @return boolean
-     */
-    public function withGithubTemplates()
-    {
-        return $this->githubTemplates;
-    }
-
-    /**
-     * Whether or not to create GitHub documentation files.
-     *
-     * @return boolean
-     */
-    public function withGithubDocs()
-    {
-        return $this->githubDocs;
-    }
-
-    /**
-     * Whether or not to create a Code of Conduct file.
-     *
-     * @return boolean
-     */
-    public function withCodeOfConduct()
-    {
-        return $this->codeOfConduct;
+        $this->cliFramework = $cliFramework;
     }
 }
