@@ -11,11 +11,16 @@ class Travis
      *
      * @var \Construct\Helpers\Str
      */
-    private $stringHelper;
+    private $str;
 
-    public function __construct()
+    /**
+     * Initialize Travis helper.
+     *
+     * @param \Construct\Helpers\Str $str
+     */
+    public function __construct(Str $str)
     {
-        $this->stringHelper = new Str();
+        $this->str = $str;
     }
 
     /**
@@ -32,8 +37,8 @@ class Travis
 
         $phpVersionsToTest = array_filter($supportedPhpVersions, function ($supportedPhpVersion) use ($projectPhpVersion) {
             return version_compare(
-                $this->stringHelper->toMinorversion($projectPhpVersion),
-                $this->stringHelper->toMinorversion($supportedPhpVersion),
+                $this->str->toMinorversion($projectPhpVersion),
+                $this->str->toMinorversion($supportedPhpVersion),
                 '<='
             ) === true;
         });
@@ -59,7 +64,7 @@ class Travis
             $phpVersion = $phpVersions[$i];
 
             if (!in_array($phpVersions[$i], $nonSemverVersions)) {
-                $phpVersion = $this->stringHelper->toMinorVersion($phpVersions[$i]);
+                $phpVersion = $this->str->toMinorVersion($phpVersions[$i]);
             }
 
             if (count($i) !== 0) {

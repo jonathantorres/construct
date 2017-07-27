@@ -7,6 +7,22 @@ use Construct\Defaults;
 class Filesystem
 {
     /**
+     * The project's default settings.
+     * @var \Construct\Defaults
+     */
+    private $defaults;
+
+    /**
+     * Initialize filesystem helper.
+     *
+     * @param \Construct\Defaults $defaults
+     */
+    public function __construct(Defaults $defaults)
+    {
+        $this->defaults = $defaults;
+    }
+
+    /**
      * Create a directory
      *
      * @param string  $path
@@ -77,7 +93,8 @@ class Filesystem
     public function getDefaultConfigurationFile()
     {
         return $this->getHomeDirectory()
-            . DIRECTORY_SEPARATOR . Defaults::CONFIGURATION_FILE;
+            . DIRECTORY_SEPARATOR
+            . $this->defaults->getConfigurationFile();
     }
 
     /**
