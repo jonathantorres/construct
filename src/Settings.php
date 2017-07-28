@@ -231,7 +231,7 @@ class Settings
         return $this->vagrantfile;
     }
 
-    public function setVagrantFile($vagrantFile)
+    public function setVagrantfile($vagrantFile)
     {
         $this->vagrantFile = $vagrantfile;
     }
