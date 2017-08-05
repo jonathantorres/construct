@@ -8,6 +8,7 @@ class Filesystem
 {
     /**
      * The project's default settings.
+     *
      * @var \Construct\Defaults
      */
     private $defaults;

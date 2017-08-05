@@ -10,12 +10,14 @@ use PHPUnit\Framework\TestCase;
 class FilesystemTest extends TestCase
 {
     protected $filesystem;
+    protected $defaults;
     protected $str;
 
     protected function setUp()
     {
         $this->str = new Str();
-        $this->filesystem = new Filesystem();
+        $this->defaults = new Defaults();
+        $this->filesystem = new Filesystem($this->defaults);
     }
 
     public function test_get_home_directory()
@@ -42,12 +44,12 @@ class FilesystemTest extends TestCase
     {
         if ($this->str->isWindows()) {
             $this->assertEquals(
-                getenv('userprofile') . DIRECTORY_SEPARATOR . Defaults::CONFIGURATION_FILE,
+                getenv('userprofile') . DIRECTORY_SEPARATOR . $this->defaults->getConfigurationFile(),
                 $this->filesystem->getDefaultConfigurationFile()
             );
         } else {
             $this->assertEquals(
-                getenv('HOME') . DIRECTORY_SEPARATOR . Defaults::CONFIGURATION_FILE,
+                getenv('HOME') . DIRECTORY_SEPARATOR . $this->defaults->getConfigurationFile(),
                 $this->filesystem->getDefaultConfigurationFile()
             );
         }
