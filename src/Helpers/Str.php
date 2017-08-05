@@ -174,6 +174,7 @@ class Str
      * Returns the minor version of the given version.
      *
      * @param  string $version
+     *
      * @return string
      */
     public function toMinorVersion($version)
