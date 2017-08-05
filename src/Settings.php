@@ -126,6 +126,13 @@ class Settings
         return $this->projectName;
     }
 
+    /**
+     * Set the entered project name.
+     *
+     * @param string $name
+     *
+     * @return void
+     */
     public function setProjectName($name)
     {
         $this->projectName = $name;
@@ -141,6 +148,13 @@ class Settings
         return $this->testingFramework;
     }
 
+    /**
+     * Set the entered testing framework.
+     *
+     * @param string $testingFramework
+     *
+     * @return void
+     */
     public function setTestingFramework($testingFramework)
     {
         $this->testingFramework = $testingFramework;
@@ -156,6 +170,13 @@ class Settings
         return $this->license;
     }
 
+    /**
+     * Set the entered license.
+     *
+     * @param string $license
+     *
+     * @return void
+     */
     public function setLicense($license)
     {
         $this->license = $license;
@@ -171,6 +192,13 @@ class Settings
         return $this->namespace;
     }
 
+    /**
+     * Set the entered namespace.
+     *
+     * @param string $namespace
+     *
+     * @return void
+     */
     public function setNamespace($namespace)
     {
         $this->namespace = $namespace;
@@ -186,6 +214,13 @@ class Settings
         return $this->gitInit;
     }
 
+    /**
+     * Set whether or not to initialize a git repo on the project.
+     *
+     * @param boolean $gitInit
+     *
+     * @return void
+     */
     public function setGitInit($gitInit)
     {
         $this->gitInit = $gitInit;
@@ -201,6 +236,13 @@ class Settings
         return $this->phpcsConfiguration;
     }
 
+    /**
+     * Set whether or not to use phpcs on the project.
+     *
+     * @param boolean $configuration
+     *
+     * @return void
+     */
     public function setPhpcsConfiguration($configuration)
     {
         $this->phpcsConfiguration = $configuration;
@@ -216,6 +258,13 @@ class Settings
         return $this->composerKeywords;
     }
 
+    /**
+     * Set the entered Composer keywords.
+     *
+     * @param string $keywords
+     *
+     * @return void
+     */
     public function setComposerKeywords($keywords)
     {
         $this->composerKeywords = $keywords;
@@ -231,6 +280,13 @@ class Settings
         return $this->vagrantfile;
     }
 
+    /**
+     * Set whether or not to create a Vagrantfile.
+     *
+     * @param boolean $vagrantfile
+     *
+     * @return void
+     */
     public function setVagrantfile($vagrantfile)
     {
         $this->vagrantfile = $vagrantfile;
@@ -246,6 +302,13 @@ class Settings
         return $this->editorConfig;
     }
 
+    /**
+     * Set whether or not to create an EditorConfig file.
+     *
+     * @param boolean $config
+     *
+     * @return  void
+     */
     public function setEditorConfig($config)
     {
         $this->editorConfig = $config;
@@ -261,6 +324,13 @@ class Settings
         return $this->phpVersion;
     }
 
+    /**
+     * Set the entered project php version.
+     *
+     * @param string $version
+     *
+     * @return void
+     */
     public function setPhpVersion($version)
     {
         $this->phpVersion = $version;
@@ -276,6 +346,13 @@ class Settings
         return $this->environmentFiles;
     }
 
+    /**
+     * Set whether or not to create .env environment files.
+     *
+     * @param boolean $envFiles
+     *
+     * @return void
+     */
     public function setEnvironmentFiles($envFiles)
     {
         $this->environmentFiles = $envFiles;
@@ -291,6 +368,13 @@ class Settings
         return $this->lgtmConfiguration;
     }
 
+    /**
+     * Set whether or not to create an LGTM configuration file.
+     *
+     * @param boolean $configuration
+     *
+     * @return void
+     */
     public function setLgtmConfiguration($configuration)
     {
         $this->lgtmConfiguration = $configuration;
@@ -306,6 +390,13 @@ class Settings
         return $this->githubTemplates;
     }
 
+    /**
+     * Set whether or not to create GitHub template files.
+     *
+     * @param boolean $templates
+     *
+     * @return void
+     */
     public function setGithubTemplates($templates)
     {
         $this->githubTemplates = $templates;
@@ -321,6 +412,13 @@ class Settings
         return $this->githubDocs;
     }
 
+    /**
+     * Set whether or not to create GitHub documentation files.
+     *
+     * @param boolean $docs
+     *
+     * @return void
+     */
     public function setGithubDocs($docs)
     {
         $this->githubDocs = $docs;
@@ -336,6 +434,13 @@ class Settings
         return $this->codeOfConduct;
     }
 
+    /**
+     * Set whether or not to create a Code of Conduct file.
+     *
+     * @param boolean $codeOfConduct
+     *
+     * @return void
+     */
     public function setCodeOfConduct($codeOfConduct)
     {
         $this->codeOfConduct = $codeOfConduct;
@@ -365,6 +470,8 @@ class Settings
      * Set the CLI framework.
      *
      * @param string $cliFramework
+     *
+     * @return void
      */
     public function setCliFramework($cliFramework)
     {
