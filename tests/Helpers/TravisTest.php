@@ -1,7 +1,8 @@
 <?php
 
-use Construct\Helpers\Travis;
 use Construct\Defaults;
+use Construct\Helpers\Str;
+use Construct\Helpers\Travis;
 use PHPUnit\Framework\TestCase;
 
 class TravisTest extends TestCase
@@ -10,7 +11,7 @@ class TravisTest extends TestCase
 
     protected function setUp()
     {
-        $this->travis = new Travis();
+        $this->travis = new Travis(new Str());
     }
 
     /**
@@ -323,7 +324,7 @@ CONTENT;
      */
     public function it_should_generate_versions_with_adding_lint_env_on_non_semver_versions()
     {
-        $versionsToRun = $this->travis->phpVersionsToRun((new Defaults)->nonSemverPhpVersions, true);
+        $versionsToRun = $this->travis->phpVersionsToRun((new Defaults)->getNonSemverPhpVersions(), true);
 
         $stringExpected = <<<CONTENT
     - php: hhvm

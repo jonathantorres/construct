@@ -32,8 +32,8 @@ class Travis
      */
     public function phpVersionsToTest($projectPhpVersion)
     {
-        $supportedPhpVersions = (new Defaults)->phpVersions;
-        $versionsToTest = (new Defaults)->nonSemverPhpVersions;
+        $supportedPhpVersions = (new Defaults)->getPhpVersions();
+        $versionsToTest = (new Defaults)->getNonSemverPhpVersions();
 
         $phpVersionsToTest = array_filter($supportedPhpVersions, function ($supportedPhpVersion) use ($projectPhpVersion) {
             return version_compare(
@@ -57,7 +57,7 @@ class Travis
     public function phpVersionsToRun($phpVersions, $setLintEnvironmentVariable = false)
     {
         $runOn = '';
-        $nonSemverVersions = (new Defaults)->nonSemverPhpVersions;
+        $nonSemverVersions = (new Defaults)->getNonSemverPhpVersions();
         $alreadySetLintEnvironmentVariable = false;
 
         for ($i = 0; $i < count($phpVersions); $i++) {
