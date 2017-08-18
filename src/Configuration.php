@@ -29,8 +29,8 @@ class Configuration
     /**
      * Overwrite the passed in settings with the settings set on the configuration file.
      *
-     * @param  \Construct\Settings $settings
-     * @param  string   $configurationFile
+     * @param \Construct\Settings $settings
+     * @param string              $configurationFile
      *
      * @return \Construct\Settings
      */

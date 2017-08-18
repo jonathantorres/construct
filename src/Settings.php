@@ -307,7 +307,7 @@ class Settings
      *
      * @param boolean $config
      *
-     * @return  void
+     * @return void
      */
     public function setEditorConfig($config)
     {
