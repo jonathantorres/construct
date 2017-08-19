@@ -12,6 +12,38 @@ class Settings
     private $projectName;
 
     /**
+     * Camel case version of vendor name.
+     * ex: JonathanTorres
+     *
+     * @var string
+     */
+    protected $vendorUpper;
+
+    /**
+     * Lower case version of vendor name.
+     * ex: jonathantorres
+     *
+     * @var string
+     */
+    protected $vendorLower;
+
+    /**
+     * Camel case version of project name.
+     * ex: Construct
+     *
+     * @var string
+     */
+    protected $projectUpper;
+
+    /**
+     * Lower case version of project name.
+     * ex: construct
+     *
+     * @var string
+     */
+    protected $projectLower;
+
+    /**
      * The entered testing framework.
      *
      * @var string
@@ -136,6 +168,46 @@ class Settings
     public function setProjectName($name)
     {
         $this->projectName = $name;
+    }
+
+    public function setVendorUpper($vendorUpper)
+    {
+        $this->vendorUpper = $vendorUpper;
+    }
+
+    public function getVendorUpper()
+    {
+        return $this->vendorUpper;
+    }
+
+    public function setVendorLower($vendorLower)
+    {
+        $this->vendorLower = $vendorLower;
+    }
+
+    public function getVendorLower()
+    {
+        return $this->vendorLower;
+    }
+
+    public function setProjectUpper($projectUpper)
+    {
+        $this->projectUpper = $projectUpper;
+    }
+
+    public function getProjectUpper()
+    {
+        return $this->projectUpper;
+    }
+
+    public function setProjectLower($projectLower)
+    {
+        $this->projectLower = $projectLower;
+    }
+
+    public function getProjectLower()
+    {
+        return $this->projectLower;
     }
 
     /**
