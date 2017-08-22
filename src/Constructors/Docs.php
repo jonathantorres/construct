@@ -52,7 +52,7 @@ class Docs extends Constructor implements ConstructorContract
         $content = str_replace($stubs, $values, $readme);
 
         $this->filesystem->put($this->settings->getProjectLower() . '/' . 'README.md', $content);
-        $this->gitAttributes->addIgnore('README.md');
+        $this->gitAttributes->addExportIgnore('README.md');
     }
 
     /**
@@ -78,7 +78,7 @@ class Docs extends Constructor implements ConstructorContract
         $content = str_replace($placeholder, $replacements, $contributing);
 
         $this->filesystem->put($this->settings->getProjectLower() . '/' . 'CONTRIBUTING.md', $content);
-        $this->gitAttributes->addIgnore('CONTRIBUTING.md');
+        $this->gitAttributes->addExportIgnore('CONTRIBUTING.md');
     }
 
     /**
@@ -96,6 +96,6 @@ class Docs extends Constructor implements ConstructorContract
         );
 
         $this->filesystem->put($this->settings->getProjectLower() . '/' . 'CHANGELOG.md', $content);
-        $this->gitAttributes->addIgnore('CHANGELOG.md');
+        $this->gitAttributes->addExportIgnore('CHANGELOG.md');
     }
 }

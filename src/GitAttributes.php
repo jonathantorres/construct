@@ -35,7 +35,7 @@ class GitAttributes
      *
      * @return  void
      */
-    public function addIgnore($ignore)
+    public function addExportIgnore($ignore)
     {
         $this->exportIgnores[] = $ignore;
     }
