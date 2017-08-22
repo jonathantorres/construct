@@ -170,41 +170,89 @@ class Settings
         $this->projectName = $name;
     }
 
+    /**
+     * Set the studly case version of the vendor name.
+     *
+     * @param string $vendorUpper
+     *
+     * @return void
+     */
     public function setVendorUpper($vendorUpper)
     {
         $this->vendorUpper = $vendorUpper;
     }
 
+    /**
+     * Get the studly case version of the vendor name.
+     *
+     * @return string
+     */
     public function getVendorUpper()
     {
         return $this->vendorUpper;
     }
 
+    /**
+     * Set the lower case version of the vendor name.
+     *
+     * @param string $vendorLower
+     *
+     * @return void
+     */
     public function setVendorLower($vendorLower)
     {
         $this->vendorLower = $vendorLower;
     }
 
+    /**
+     * Get the lower case version of the vendor name.
+     *
+     * @return string
+     */
     public function getVendorLower()
     {
         return $this->vendorLower;
     }
 
+    /**
+     * Set the studly case version of the project name
+     *
+     * @param string $projectUpper
+     *
+     * @return  void
+     */
     public function setProjectUpper($projectUpper)
     {
         $this->projectUpper = $projectUpper;
     }
 
+    /**
+     * Get the studly case version of the project name.
+     *
+     * @return string
+     */
     public function getProjectUpper()
     {
         return $this->projectUpper;
     }
 
+    /**
+     * Set the lower case version of the project name.
+     *
+     * @param string $projectLower
+     *
+     * @return  void
+     */
     public function setProjectLower($projectLower)
     {
         $this->projectLower = $projectLower;
     }
 
+    /**
+     * Get the lower case version of the project name
+     *
+     * @return string
+     */
     public function getProjectLower()
     {
         return $this->projectLower;
