@@ -49,4 +49,16 @@ class GitAttributes
     {
         return $this->gitIgnores;
     }
+
+    /**
+     * Add a file to the .gitignore
+     *
+     * @param string $ignore
+     *
+     * @return  void
+     */
+    public function addGitIgnore($ignore)
+    {
+        $this->gitIgnores[] = $ignore;
+    }
 }
