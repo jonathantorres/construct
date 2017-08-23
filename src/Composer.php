@@ -35,7 +35,7 @@ class Composer
      *
      * @return  void
      */
-    public function addComposerRequirement($requirement)
+    public function addRequirement($requirement)
     {
         $this->requirements[] = $requirement;
     }
