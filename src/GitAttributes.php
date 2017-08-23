@@ -41,6 +41,18 @@ class GitAttributes
     }
 
     /**
+     * Remove a file from the export ignores
+     *
+     * @param string $ignore
+     *
+     * @return  void
+     */
+    public function removeExportIgnore($ignore)
+    {
+        unset($this->exportIgnores[$ignore]);
+    }
+
+    /**
      * Get the directories and files to ignore on git repositories.
      *
      * @return array
