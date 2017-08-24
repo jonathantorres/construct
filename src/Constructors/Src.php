@@ -11,7 +11,7 @@ class Src extends Constructor implements ConstructorContract
      *
      * @var string
      */
-    protected $srcPath = 'src';
+    private $srcPath = 'src';
 
     /**
      * This constructor creates the project's root folder
