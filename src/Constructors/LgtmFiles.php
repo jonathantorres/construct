@@ -19,7 +19,7 @@ class LgtmFiles extends Constructor implements ConstructorContract
 
             $this->filesystem->copy(
                 __DIR__ . '/../stubs/lgtm.stub',
-                $this->getProjectLower() . '/' . '.lgtm'
+                $this->settings->getProjectLower() . '/' . '.lgtm'
             );
 
             $this->gitAttributes->addExportIgnore('MAINTAINERS');
