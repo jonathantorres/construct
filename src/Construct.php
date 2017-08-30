@@ -166,14 +166,4 @@ class Construct
             }
         }
     }
-
-    /**
-     * Get project root folder.
-     *
-     * @return string
-     */
-    public function getprojectLower()
-    {
-        return $this->projectLower;
-    }
 }
