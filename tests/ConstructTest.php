@@ -3,9 +3,27 @@
 namespace Construct\Tests;
 
 use Construct\Construct;
-use Construct\Helpers\Filesystem;
-use Construct\Helpers\Str;
+use Construct\Constructors\Cli;
+use Construct\Constructors\CodeOfConduct;
+use Construct\Constructors\Composer;
+use Construct\Constructors\Docs;
+use Construct\Constructors\EditorConfig;
+use Construct\Constructors\EnvironmentFiles;
+use Construct\Constructors\GitAttributes;
+use Construct\Constructors\GitHubDocs;
+use Construct\Constructors\GitHubTemplates;
+use Construct\Constructors\GitIgnore;
+use Construct\Constructors\GitMessage;
+use Construct\Constructors\LgtmFiles;
+use Construct\Constructors\License;
+use Construct\Constructors\PhpCs;
+use Construct\Constructors\ProjectClass;
+use Construct\Constructors\Src;
+use Construct\Constructors\Tests;
+use Construct\Constructors\Travis;
+use Construct\Constructors\Vagrant;
 use Construct\Settings;
+use League\Container\Container;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
@@ -13,24 +31,37 @@ use RecursiveIteratorIterator;
 
 class ConstructTest extends TestCase
 {
+    protected $container;
     protected $construct;
     protected $filesystem;
     protected $str;
     protected $gitHelper;
     protected $scriptHelper;
-    protected $gitUser = [
-        'name' => 'Jonathan Torres',
-        'email' => 'jonathantorres41@gmail.com',
-    ];
 
     protected function setUp()
     {
-        $this->filesystem = new Filesystem;
-        $this->str = new Str;
-        $this->construct = new Construct(new Filesystem, $this->str);
-        $this->scriptHelper = Mockery::mock('Construct\Helpers\Script');
-        $this->gitHelper = Mockery::mock('Construct\Helpers\Git');
-        $this->gitHelper->shouldReceive('getUser')->twice()->withNoArgs()->andReturn($this->gitUser);
+        $gitUser = [
+            'name' => 'Jonathan Torres',
+            'email' => 'jonathantorres41@gmail.com',
+        ];
+
+        $this->container = new Container();
+        $this->container->add('Construct\Helpers\Filesystem')->withArgument('Construct\Defaults');
+        $this->container->add('Construct\Helpers\Git', Mockery::mock('Construct\Helpers\Git'));
+        $this->container->add('Construct\Helpers\Script', Mockery::mock('Construct\Helpers\Script'));
+        $this->container->add('Construct\Helpers\Str');
+        $this->container->add('Construct\Helpers\Travis')->withArgument('Construct\Helpers\Str');
+        $this->container->add('Construct\Configuration')->withArgument('Construct\Helpers\Filesystem');
+        $this->container->add('Construct\Defaults');
+        $this->container->share('Construct\Settings');
+        $this->container->share('Construct\GitAttributes');
+        $this->container->share('Construct\Composer');
+
+        $this->filesystem = $this->container->get('Construct\Helpers\Filesystem');
+        $this->str = $this->container->get('Construct\Helpers\Str');
+        $this->scriptHelper = $this->container->get('Construct\Helpers\Script');
+        $this->gitHelper = $this->container->get('Construct\Helpers\Git');
+        $this->gitHelper->shouldReceive('getUser')->twice()->withNoArgs()->andReturn($gitUser);
     }
 
     /**
@@ -55,45 +86,31 @@ class ConstructTest extends TestCase
         rmdir($path);
     }
 
-    /**
-     * Sets the Mockery expectation for runComposerInstallAndRequirePackages
-     * of the script helper mock.
-     *
-     * @param  array $developmentPackages The development packages to inject. Defaults to ['phpunit/phpunit'].
-     * @param  array $packages            The non development packages to inject.
-     * @return void
-     */
-    private function setScriptHelperComposerInstallExpectationWithPackages(
-        array $developmentPackages = ['phpunit/phpunit'],
-        array $packages = []
-    ) {
-        $this->scriptHelper
-            ->shouldReceive('runComposerInstallAndRequirePackages')
-            ->once()
-            ->with('logger', $developmentPackages, $packages)
-            ->andReturnNull();
-    }
-
     public function test_basic_project_is_generated()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        // $settings->setGitInit(null);
+        // $settings->setPhpcsConfiguration(null);
+        // $settings->setComposerKeywords(null);
+        // $settings->setVagrantfile(null);
+        // $settings->setEditorConfig(null);
+        $settings->setPhpVersion('5.6.0');
+        // $settings->setEnvironmentFiles(null);
+        // $settings->setLgtmConfiguration(null);
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('README'), $this->getFile('README.md'));
         $this->assertSame($this->getStub('phpunit'), $this->getFile('phpunit.xml.dist'));
         $this->assertSame($this->getStub('LICENSE'), $this->getFile('LICENSE.md'));
@@ -110,74 +127,68 @@ class ConstructTest extends TestCase
 
     public function test_project_generation_with_behat()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'behat',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('behat');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages(['behat/behat']);
         $this->scriptHelper->shouldReceive('initBehat')->once()->with('logger')->andReturnNull();
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('composer.behat'), $this->getFile('composer.json'));
     }
 
     public function test_project_generation_with_codeception()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'codeception',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('codeception');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages(
             ['codeception/codeception']
         );
         $this->scriptHelper->shouldReceive('bootstrapCodeception')->once()->with('logger')->andReturnNull();
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('composer.codeception'), $this->getFile('composer.json'));
     }
 
     public function test_project_generation_with_phpspec()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpspec',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpspec');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages(
             ['phpspec/phpspec']
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('phpspec'), $this->getFile('phpspec.yml.dist'));
         $this->assertSame($this->getStub('composer.phpspec'), $this->getFile('composer.json'));
         $this->assertSame($this->getStub('gitattributes.phpspec'), $this->getFile('.gitattributes'));
@@ -187,93 +198,85 @@ class ConstructTest extends TestCase
 
     public function test_project_generation_with_apache_license()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'Apache-2.0',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('Apache-2.0');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('LICENSE.Apache'), $this->getFile('LICENSE.md'));
     }
 
     public function test_project_generation_with_gpl2_license()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'GPL-2.0',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('GPL-2.0');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('LICENSE.Gpl2'), $this->getFile('LICENSE.md'));
     }
 
     public function test_project_generation_with_gpl3_license()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'GPL-3.0',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('GPL-3.0');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('LICENSE.Gpl3'), $this->getFile('LICENSE.md'));
     }
 
     public function test_project_generation_with_specified_namespace()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Terminus\Maximus\Logger',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Terminus\Maximus\Logger');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('with-namespace/composer'), $this->getFile('composer.json'));
         $this->assertSame($this->getStub('with-namespace/Logger'), $this->getFile('src/Logger.php'));
         $this->assertSame($this->getStub('with-namespace/LoggerTest'), $this->getFile('tests/LoggerTest.php'));
@@ -281,48 +284,46 @@ class ConstructTest extends TestCase
 
     public function test_project_generation_with_git_repository()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            true,
-            null,
-            null,
-            null,
-            null,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setGitInit(true);
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
         $this->gitHelper->shouldReceive('init')->once()->with('logger')->andReturnNull();
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
     }
 
     public function test_project_generation_with_coding_standards_fixer()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            true,
-            null,
-            null,
-            null,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpcsConfiguration(true);
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages(
             ['phpunit/phpunit', 'friendsofphp/php-cs-fixer']
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
 
         if (!$this->str->isWindows()) {
             $this->assertSame(
@@ -342,191 +343,178 @@ class ConstructTest extends TestCase
 
     public function test_project_generation_with_composer_keywords()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            'some,another,keyword',
-            null,
-            null,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setComposerKeywords('some,another,keyword');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('composer.keywords'), $this->getFile('composer.json'));
     }
 
     public function test_project_generation_with_vagrant()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            true,
-            null,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setVagrantfile(true);
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('with-vagrant/Vagrantfile'), $this->getFile('Vagrantfile'));
         $this->assertSame($this->getStub('with-vagrant/gitattributes'), $this->getFile('.gitattributes'));
     }
 
     public function test_project_generation_with_editor_config()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            true,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setEditorConfig(true);
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('with-editorconfig/editorconfig'), $this->getFile('.editorconfig'));
         $this->assertSame($this->getStub('with-editorconfig/gitattributes'), $this->getFile('.gitattributes'));
     }
 
     public function test_project_generation_with_php54()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '5.4.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.4.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('composer.php54'), $this->getFile('composer.json'));
         $this->assertSame($this->getStub('travis.php54'), $this->getFile('.travis.yml'));
     }
 
     public function test_project_generation_with_php55()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '5.5.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.5.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('composer.php55'), $this->getFile('composer.json'));
         $this->assertSame($this->getStub('travis.php55'), $this->getFile('.travis.yml'));
     }
 
     public function test_project_generation_with_php56()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '5.6.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('composer.php56'), $this->getFile('composer.json'));
         $this->assertSame($this->getStub('travis.php56'), $this->getFile('.travis.yml'));
     }
 
     public function test_project_generation_with_php7()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '7.0.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('7.0.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('composer.php7'), $this->getFile('composer.json'));
         $this->assertSame($this->getStub('travis.php7'), $this->getFile('.travis.yml'));
     }
 
     public function test_project_generation_with_php71()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '7.1.2',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('7.1.2');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('composer.php71'), $this->getFile('composer.json'));
         $this->assertSame($this->getStub('travis.php71'), $this->getFile('.travis.yml'));
     }
@@ -536,24 +524,22 @@ class ConstructTest extends TestCase
      */
     public function test_project_generation_with_phpunit6_stub()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '7.1.2',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('7.1.2');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame(
             $this->getStub('LoggerTest'),
             $this->getFile('tests/LoggerTest.php')
@@ -565,24 +551,22 @@ class ConstructTest extends TestCase
      */
     public function test_project_generation_with_phpunit6_stub_on_php70()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            null,
-            '7.0',
-            null,
-            null
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('7.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame(
             $this->getStub('LoggerTest'),
             $this->getFile('tests/LoggerTest.php')
@@ -591,27 +575,26 @@ class ConstructTest extends TestCase
 
     public function test_project_generation_with_environment_files()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            false,
-            '5.6.0',
-            true,
-            false
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setEnvironmentFiles(true);
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages(
             ['phpunit/phpunit'],
             ['vlucas/phpdotenv']
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('with-env/env'), $this->getFile('.env'));
         $this->assertSame($this->getStub('with-env/env'), $this->getFile('.env.example'));
         $this->assertSame($this->getStub('with-env/gitattributes'), $this->getFile('.gitattributes'));
@@ -621,24 +604,23 @@ class ConstructTest extends TestCase
 
     public function test_project_generation_with_lgtm_configuration()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            false,
-            '5.6.0',
-            null,
-            true
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setLgtmConfiguration(true);
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame($this->getStub('with-lgtm/maintainers'), $this->getFile('MAINTAINERS'));
         $this->assertSame($this->getStub('with-lgtm/lgtm'), $this->getFile('.lgtm'));
         $this->assertSame($this->getStub('with-lgtm/gitattributes'), $this->getFile('.gitattributes'));
@@ -646,25 +628,22 @@ class ConstructTest extends TestCase
 
     public function test_project_generation_with_github_templates()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            false,
-            '5.6.0',
-            null,
-            false,
-            true
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(true);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame(
             $this->getStub('with-github-templates/issue_template'),
             $this->getFile('.github/ISSUE_TEMPLATE.md')
@@ -689,27 +668,22 @@ class ConstructTest extends TestCase
 
     public function test_project_generation_with_github_docs()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            false,
-            '5.6.0',
-            null,
-            false,
-            false,
-            false,
-            true
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(true);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertTrue(
             $this->filesystem->isDirectory(__DIR__ . '/../logger/docs')
         );
@@ -724,26 +698,22 @@ class ConstructTest extends TestCase
 
     public function test_project_generation_with_code_of_conduct()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            false,
-            '5.6.0',
-            null,
-            false,
-            false,
-            true
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(true);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame(
             $this->getStub('with-code-of-conduct/CONDUCT'),
             $this->getFile('CONDUCT.md')
@@ -760,26 +730,22 @@ class ConstructTest extends TestCase
 
     public function test_project_generation_with_code_of_conduct_and_github_templates()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            false,
-            '5.6.0',
-            null,
-            false,
-            true,
-            true
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(true);
+        $settings->setCodeOfConduct(true);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
         $this->assertSame(
             $this->getStub('with-code-of-conduct/CONDUCT'),
             $this->getFile('CONDUCT.md')
@@ -792,31 +758,25 @@ class ConstructTest extends TestCase
 
     public function test_project_generation_with_default_cli_framework()
     {
-        $settings = new Settings(
-            'jonathantorres/logger',
-            'phpunit',
-            'MIT',
-            'Vendor\Project',
-            null,
-            null,
-            null,
-            null,
-            false,
-            '5.6.0',
-            null,
-            null,
-            false,
-            false,
-            false,
-            'symfony/console'
-        );
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework('symfony/console');
 
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
         $this->setScriptHelperComposerInstallExpectationWithPackages(
             ['phpunit/phpunit'],
             [$settings->getCliFramework()]
         );
 
-        $this->construct->generate($settings, $this->gitHelper, $this->scriptHelper);
+        $this->construct->generate();
 
         $this->assertSame(
             $this->getStub('with-cli/composer'),
@@ -834,6 +794,53 @@ class ConstructTest extends TestCase
             $this->getStub('with-cli/gitattributes'),
             $this->getFile('.gitattributes')
         );
+    }
+
+    /**
+     * Set the constructors.
+     *
+     * @return void
+     */
+    private function setConstructors()
+    {
+        $this->construct->addConstructor(new Src($this->construct->getContainer()));
+        $this->construct->addConstructor(new Docs($this->construct->getContainer()));
+        $this->construct->addConstructor(new Tests($this->construct->getContainer()));
+        $this->construct->addConstructor(new Cli($this->construct->getContainer()));
+        $this->construct->addConstructor(new PhpCs($this->construct->getContainer()));
+        $this->construct->addConstructor(new Vagrant($this->construct->getContainer()));
+        $this->construct->addConstructor(new EditorConfig($this->construct->getContainer()));
+        $this->construct->addConstructor(new EnvironmentFiles($this->construct->getContainer()));
+        $this->construct->addConstructor(new LgtmFiles($this->construct->getContainer()));
+        $this->construct->addConstructor(new GitHubTemplates($this->construct->getContainer()));
+        $this->construct->addConstructor(new GitHubDocs($this->construct->getContainer()));
+        $this->construct->addConstructor(new CodeOfConduct($this->construct->getContainer()));
+        $this->construct->addConstructor(new Travis($this->construct->getContainer()));
+        $this->construct->addConstructor(new License($this->construct->getContainer()));
+        $this->construct->addConstructor(new Composer($this->construct->getContainer()));
+        $this->construct->addConstructor(new ProjectClass($this->construct->getContainer()));
+        $this->construct->addConstructor(new GitIgnore($this->construct->getContainer()));
+        $this->construct->addConstructor(new GitMessage($this->construct->getContainer()));
+        $this->construct->addConstructor(new GitAttributes($this->construct->getContainer()));
+    }
+
+    /**
+     * Sets the Mockery expectation for runComposerInstallAndRequirePackages
+     * of the script helper mock.
+     *
+     * @param  array $developmentPackages The development packages to inject. Defaults to ['phpunit/phpunit'].
+     * @param  array $packages            The non development packages to inject.
+     * @return void
+     */
+    private function setScriptHelperComposerInstallExpectationWithPackages(
+        array $developmentPackages = ['phpunit/phpunit'],
+        array $packages = []
+    ) {
+        $this->scriptHelper
+            ->shouldReceive('runComposerInstallAndRequirePackages')
+            ->once()
+            ->with('logger', $developmentPackages, $packages)
+            ->andReturnNull();
     }
 
     /**
