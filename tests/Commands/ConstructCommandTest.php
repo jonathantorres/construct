@@ -4,6 +4,7 @@ namespace Construct\Tests\Commands;
 
 use Construct\Commands\ConstructCommand;
 use Construct\Construct;
+use Construct\Defaults;
 use Construct\Tests\CommandTester;
 use League\Container\Container;
 use Mockery;
@@ -13,11 +14,13 @@ use Symfony\Component\Console\Application;
 class ConstructCommandTest extends TestCase
 {
     protected $filesystem;
+    protected $defaults;
     protected $systemPhpVersion;
 
     protected function setUp()
     {
         $this->filesystem = Mockery::mock('Construct\Helpers\Filesystem');
+        $this->defaults = new Defaults();
         $this->systemPhpVersion = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
     }
 
@@ -429,13 +432,13 @@ class ConstructCommandTest extends TestCase
 
     public function test_project_generation_from_configuration()
     {
-        // @todo
-        $this->markTestSkipped('The configuration file is not being read correctly, is returning null');
+        $configuration = dirname(__DIR__) . '/stubs/config/complete.stub';
 
-        $this->filesystem->shouldReceive('getDefaultConfigurationFile');
-        $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
+        $this->filesystem->shouldReceive('getDefaultConfigurationFile')->andReturn($configuration);
+        $this->filesystem->shouldReceive('hasDefaultConfigurationFile')->andReturn(true);
         $this->filesystem->shouldReceive('isFile')->andReturn(true);
         $this->filesystem->shouldReceive('isReadable')->andReturn(true);
+        $this->filesystem->shouldReceive('get')->with($configuration)->andReturn(file_get_contents($configuration));
         $this->setMocks(5, 3, 10, 10);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
@@ -459,13 +462,13 @@ class ConstructCommandTest extends TestCase
 
     public function test_project_generation_with_github_alias()
     {
-        // @todo
-        $this->markTestSkipped('The configuration file is not being read correctly, is returning null');
+        $configuration = dirname(__DIR__) . '/stubs/config/complete.github.stub';
 
-        $this->filesystem->shouldReceive('getDefaultConfigurationFile');
-        $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
+        $this->filesystem->shouldReceive('getDefaultConfigurationFile')->andReturn($configuration);
+        $this->filesystem->shouldReceive('hasDefaultConfigurationFile')->andReturn(true);
         $this->filesystem->shouldReceive('isFile')->andReturn(true);
         $this->filesystem->shouldReceive('isReadable')->andReturn(true);
+        $this->filesystem->shouldReceive('get')->with($configuration)->andReturn(file_get_contents($configuration));
         $this->setMocks(5, 3, 10, 10);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
@@ -492,13 +495,13 @@ class ConstructCommandTest extends TestCase
      */
     public function test_project_generation_from_configuration_with_invalid_settings()
     {
-        // @todo
-        $this->markTestSkipped('The configuration file is not being read correctly, is returning null');
+        $configuration = dirname(__DIR__) . '/stubs/config/invalid_settings.stub';
 
-        $this->filesystem->shouldReceive('getDefaultConfigurationFile');
-        $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
+        $this->filesystem->shouldReceive('getDefaultConfigurationFile')->andReturn($configuration);
+        $this->filesystem->shouldReceive('hasDefaultConfigurationFile')->andReturn(true);
         $this->filesystem->shouldReceive('isFile')->andReturn(true);
         $this->filesystem->shouldReceive('isReadable')->andReturn(true);
+        $this->filesystem->shouldReceive('get')->with($configuration)->andReturn(file_get_contents($configuration));
         $this->setMocks(4, 3, 10, 11);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
@@ -520,7 +523,7 @@ class ConstructCommandTest extends TestCase
 
         $expectedWarnings = str_replace(
             ['{license}', '{testing_framework}', '{php_version}'],
-            [Defaults::LICENSE, Defaults::TEST_FRAMEWORK, $this->systemPhpVersion],
+            [$this->defaults->getLicense(), $this->defaults->getTestingFramework(), $this->systemPhpVersion],
             $expectedWarnings
         );
 
