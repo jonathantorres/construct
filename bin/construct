@@ -27,13 +27,23 @@ use Construct\Commands\InteractiveCommand;
 use Construct\Construct;
 use Construct\Helpers\Filesystem;
 use Construct\Helpers\Str;
+use League\Container\Container;
 use Symfony\Component\Console\Application;
 
-$str = new Str();
-$filesystem = new Filesystem();
-$construct = new Construct($filesystem, $str);
+$container = new Container();
+$container->add('Construct\Helpers\Filesystem')->withArgument('Construct\Defaults');
+$container->add('Construct\Helpers\Git');
+$container->add('Construct\Helpers\Script');
+$container->add('Construct\Helpers\Str');
+$container->add('Construct\Helpers\Travis')->withArgument('Construct\Helpers\Str');
+$container->add('Construct\Configuration')->withArgument('Construct\Helpers\Filesystem');
+$container->add('Construct\Defaults');
+$container->share('Construct\Settings');
+$container->share('Construct\GitAttributes');
+$container->share('Construct\Composer');
 
+$construct = new Construct($container);
 $app = new Application('Construct', '1.15.0');
-$app->add(new ConstructCommand($construct, $str, $filesystem));
-$app->add(new InteractiveCommand($construct, $str));
+$app->add(new ConstructCommand($construct));
+$app->add(new InteractiveCommand($construct));
 $app->run();

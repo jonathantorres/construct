@@ -3,11 +3,6 @@
 namespace Construct\Commands;
 
 use Construct\Construct;
-use Construct\Defaults;
-use Construct\Helpers\Git;
-use Construct\Helpers\Script;
-use Construct\Helpers\Str;
-use Construct\Settings;
 use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -47,26 +42,18 @@ class InteractiveCommand extends Command
     protected $defaults;
 
     /**
-     * Php version currently used on the system.
-     *
-     * @var string
-     */
-    protected $systemPhpVersion;
-
-    /**
      * Initialize.
      *
      * @param Construct\Construct $construct
-     * @param Construct\Str       $str
      *
      * @return void
      */
-    public function __construct(Construct $construct, Str $str)
+    public function __construct(Construct $construct)
     {
         $this->construct = $construct;
-        $this->str = $str;
-        $this->defaults = new Defaults();
-        $this->systemPhpVersion = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
+        $this->str = $construct->getContainer()->get('Construct\Helpers\Str');
+        $this->defaults = $construct->getContainer()->get('Construct\Defaults');
+        $this->settings = $construct->getContainer()->get('Construct\Settings');
 
         parent::__construct();
     }
@@ -103,8 +90,8 @@ class InteractiveCommand extends Command
         });
 
         $testingFrameworkQuestion = new ChoiceQuestion(
-            'Which testing framework will you use? Default is "' . Defaults::TEST_FRAMEWORK . '"',
-            $this->defaults->testingFrameworks,
+            'Which testing framework will you use? Default is "' . $this->defaults->getTestingFramework() . '"',
+            $this->defaults->getTestingFrameworks(),
             0
         );
 
@@ -114,8 +101,8 @@ class InteractiveCommand extends Command
         );
 
         $cliFrameworkQuestion = new Question(
-            'Which CLI Framework will you use? Default is "' . Defaults::CLI_FRAMEWORK . '"',
-            Defaults::CLI_FRAMEWORK
+            'Which CLI Framework will you use? Default is "' . $this->defaults->getCliFramework() . '"',
+            $this->defaults->getCliFramework()
         );
 
         $cliFrameworkQuestion->setValidator(function ($answer) {
@@ -129,20 +116,19 @@ class InteractiveCommand extends Command
         });
 
         $licenseQuestion = new ChoiceQuestion(
-            'Which open source license will your project use? Default is "' . Defaults::LICENSE . '"',
-            $this->defaults->licenses,
+            'Which open source license will your project use? Default is "' . $this->defaults->getLicense() . '"',
+            $this->defaults->getLicenses(),
             0
         );
 
         $phpVersionQuestion = new ChoiceQuestion(
-            'What\'s the minimum required php version for this project? Default is "' . $this->systemPhpVersion . '"',
-            $this->defaults->phpVersions,
+            'What\'s the minimum required php version for this project? Default is "' . $this->defaults->getSystemPhpVersion() . '"',
+            $this->defaults->getPhpVersions(),
             2
         );
 
-        $namespaceQuestion = new Question('What will be the namespace for the project? Default is "Vendor\Project"', Defaults::PROJECT_NAMESPACE);
+        $namespaceQuestion = new Question('What will be the namespace for the project? Default is "Vendor\Project"', $this->defaults->getProjectNamespace());
         $gitQuestion = new ConfirmationQuestion('Do you want to initialize a local git repository?', false);
-
         $phpCsQuestion = new ConfirmationQuestion('Do you want to generate a PHP Coding Standards Fixer configuration?', false);
         $composerKeywordsQuestion = new Question('Supply a comma separated list of keywords for you composer.json (Optional) ', '');
         $vagrantFileQuestion = new ConfirmationQuestion('Do you want to generate a Vagrantfile?', false);
@@ -176,27 +162,25 @@ class InteractiveCommand extends Command
         $githubDocs = $helper->ask($input, $output, $githubDocsQuestion);
         $codeOfConduct = $helper->ask($input, $output, $codeOfConductQuestion);
 
-        $this->settings = new Settings(
-            $projectName,
-            $testingFramework,
-            $license,
-            $namespace,
-            $git,
-            $phpCs,
-            $composerKeywords,
-            $vagrantFile,
-            $editorConfig,
-            $phpVersion,
-            $environmentFile,
-            $lgtmFile,
-            $githubTemplates,
-            $codeOfConduct,
-            $githubDocs,
-            $cliFramework
-        );
+        $this->settings->setProjectName($projectName);
+        $this->settings->setTestingFramework($testingFramework);
+        $this->settings->setLicense($license);
+        $this->settings->setNamespace($namespace);
+        $this->settings->setGitInit($git);
+        $this->settings->setPhpcsConfiguration($phpCs);
+        $this->settings->setComposerKeywords($composerKeywords);
+        $this->settings->setVagrantfile($vagrantFile);
+        $this->settings->setEditorConfig($editorConfig);
+        $this->settings->setPhpVersion($phpVersion);
+        $this->settings->setEnvironmentFiles($environmentFile);
+        $this->settings->setLgtmConfiguration($lgtmFile);
+        $this->settings->setGithubTemplates($githubTemplates);
+        $this->settings->setGithubDocs($githubDocs);
+        $this->settings->setCodeOfConduct($codeOfConduct);
+        $this->settings->setCliFramework($cliFramework);
 
         $output->writeln('Creating your project...');
-        $this->construct->generate($this->settings, new Git, new Script);
+        $this->construct->generate();
         $output->writeln('<info>Project "' . $projectName . '" constructed.</info>');
     }
 }
