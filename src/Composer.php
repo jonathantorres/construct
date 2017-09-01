@@ -33,7 +33,7 @@ class Composer
      *
      * @param string $requirement
      *
-     * @return  void
+     * @return void
      */
     public function addRequirement($requirement)
     {
@@ -55,7 +55,7 @@ class Composer
      *
      * @param string $requirement
      *
-     * @return  void
+     * @return void
      */
     public function addDevelopmentRequirement($requirement)
     {

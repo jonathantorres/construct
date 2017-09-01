@@ -219,7 +219,7 @@ class Settings
      *
      * @param string $projectUpper
      *
-     * @return  void
+     * @return void
      */
     public function setProjectUpper($projectUpper)
     {
@@ -241,7 +241,7 @@ class Settings
      *
      * @param string $projectLower
      *
-     * @return  void
+     * @return void
      */
     public function setProjectLower($projectLower)
     {

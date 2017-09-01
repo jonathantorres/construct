@@ -233,7 +233,7 @@ class ConstructCommand extends Command
 
         $this->warnAndOverwriteInvalidSettingsWithDefaults($output);
 
-         // add constructors here using the current settings (whether from input or from the configuration file)
+        // add constructors here using the current settings (whether from input or from the configuration file)
         $this->construct->addConstructor(new Src($this->construct->getContainer()));
         $this->construct->addConstructor(new Docs($this->construct->getContainer()));
         $this->construct->addConstructor(new Tests($this->construct->getContainer()));
@@ -267,7 +267,7 @@ class ConstructCommand extends Command
      * Shows warnings and sets new settings which overwrites
      * invalid settings with default values.
      *
-     * @param  \Symfony\Component\Console\Output\OutputInterface $output
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return void
      */

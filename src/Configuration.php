@@ -3,7 +3,6 @@
 namespace Construct;
 
 use Construct\Helpers\Filesystem;
-use Construct\Settings;
 use RuntimeException;
 use Symfony\Component\Yaml\Yaml;
 

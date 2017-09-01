@@ -10,7 +10,7 @@ class Construct
     /**
      * The container instance
      *
-     * @var  League\Container\Container
+     * @var League\Container\Container
      */
     private $container;
 
@@ -38,7 +38,7 @@ class Construct
     /**
      * Initialize.
      *
-     * @param  League\Container\Container $container
+     * @param League\Container\Container $container
      *
      * @return void
      */

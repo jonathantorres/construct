@@ -22,7 +22,6 @@ use Construct\Constructors\Src;
 use Construct\Constructors\Tests;
 use Construct\Constructors\Travis;
 use Construct\Constructors\Vagrant;
-use Construct\Settings;
 use League\Container\Container;
 use Mockery;
 use PHPUnit\Framework\TestCase;

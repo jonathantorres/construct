@@ -33,7 +33,7 @@ class GitAttributes
      *
      * @param string $ignore
      *
-     * @return  void
+     * @return void
      */
     public function addExportIgnore($ignore)
     {
@@ -45,7 +45,7 @@ class GitAttributes
      *
      * @param string $ignore
      *
-     * @return  void
+     * @return void
      */
     public function removeExportIgnore($ignore)
     {
@@ -67,7 +67,7 @@ class GitAttributes
      *
      * @param string $ignore
      *
-     * @return  void
+     * @return void
      */
     public function addGitIgnore($ignore)
     {

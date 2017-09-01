@@ -2,8 +2,6 @@
 
 namespace Construct\Constructors;
 
-use League\Container\Container;
-
 class Src extends Constructor implements ConstructorContract
 {
     /**
