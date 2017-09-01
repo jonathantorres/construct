@@ -3,20 +3,15 @@
 namespace Construct\Tests\Commands;
 
 use Construct\Commands\InteractiveCommand;
+use Construct\Construct;
+use Construct\Tests\CommandTester;
+use League\Container\Container;
 use Mockery;
 use PHPUnit\Framework\TestCase as PHPUnit;
 use Symfony\Component\Console\Application;
-use Construct\Tests\CommandTester;
 
 class InteractiveCommandTest extends PHPUnit
 {
-    protected $construct;
-
-    protected function setUp()
-    {
-        $this->construct = Mockery::mock('Construct\Construct');
-    }
-
     protected function tearDown()
     {
         Mockery::close();
@@ -24,19 +19,10 @@ class InteractiveCommandTest extends PHPUnit
 
     public function test_generate_project_interactive()
     {
-        // @todo
-        $this->markTestSkipped('Fixes on mocking objects.');
-
         $helper = Mockery::mock('Symfony\Component\Console\Helper\QuestionHelper');
         $helper->shouldReceive('getName');
         $helper->shouldReceive('setHelperSet');
         $helper->shouldReceive('ask')->andReturn('jonathantorres/logger');
-
-        $container = Mockery::mock('League\Container\Container');
-        $container->shouldReceive('get');
-
-        $this->construct->shouldReceive('getContainer')->andReturn($container);
-        $this->construct->shouldReceive('generate')->once()->andReturnNull();
 
         $app = $this->createApplication();
         $command = $app->find('generate:interactive');
@@ -55,8 +41,21 @@ CONTENT;
 
     protected function createApplication()
     {
+        $container = new Container();
+        $container->add('Construct\Helpers\Filesystem')->withArgument('Construct\Defaults');
+        $container->add('Construct\Helpers\Git');
+        $container->add('Construct\Helpers\Script');
+        $container->add('Construct\Helpers\Str');
+        $container->add('Construct\Helpers\Travis')->withArgument('Construct\Helpers\Str');
+        $container->add('Construct\Configuration')->withArgument('Construct\Helpers\Filesystem');
+        $container->add('Construct\Defaults');
+        $container->share('Construct\Settings');
+        $container->share('Construct\GitAttributes');
+        $container->share('Construct\Composer');
+
+        $construct = new Construct($container);
         $app = new Application();
-        $app->add(new InteractiveCommand($this->construct));
+        $app->add(new InteractiveCommand($construct));
 
         return $app;
     }
