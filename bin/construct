@@ -41,7 +41,7 @@ $container->share('Construct\GitAttributes');
 $container->share('Construct\Composer');
 
 $construct = new Construct($container);
-$app = new Application('Construct', '1.15.1');
+$app = new Application('Construct', '1.15.2');
 $app->add(new ConstructCommand($construct));
 $app->add(new InteractiveCommand($construct));
 $app->run();
