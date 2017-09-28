@@ -19,10 +19,21 @@ class GitHubTemplates extends Constructor implements ConstructorContract
 
             $templates = ['ISSUE_TEMPLATE', 'PULL_REQUEST_TEMPLATE'];
 
+            $stubs = [
+                '{license}',
+            ];
+
+            $values = [
+                $this->settings->getLicense(),
+            ];
+
             foreach ($templates as $template) {
-                $this->filesystem->copy(
-                    __DIR__ . '/../stubs/github/' . $template . '.stub',
-                    $this->settings->getProjectLower() . '/.github/' . $template . '.md'
+                $templateContent = $this->filesystem->get(__DIR__ . '/../stubs/github/' . $template . '.stub');
+                $content = str_replace($stubs, $values, $templateContent);
+
+                $this->filesystem->put(
+                    $this->settings->getProjectLower() . '/.github/' . $template . '.md',
+                    $content
                 );
             }
 
