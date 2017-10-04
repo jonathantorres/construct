@@ -355,7 +355,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(4, 2, 2);
+        $this->setMocks(4, 2, 0, 13, 14);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
         $app = $this->setApplication();
@@ -439,7 +439,7 @@ class ConstructCommandTest extends TestCase
         $this->filesystem->shouldReceive('isFile')->andReturn(true);
         $this->filesystem->shouldReceive('isReadable')->andReturn(true);
         $this->filesystem->shouldReceive('get')->with($configuration)->andReturn(file_get_contents($configuration));
-        $this->setMocks(5, 3, 10, 10);
+        $this->setMocks(5, 3, 8, 12, 14);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
         $app = $this->setApplication();
@@ -469,7 +469,7 @@ class ConstructCommandTest extends TestCase
         $this->filesystem->shouldReceive('isFile')->andReturn(true);
         $this->filesystem->shouldReceive('isReadable')->andReturn(true);
         $this->filesystem->shouldReceive('get')->with($configuration)->andReturn(file_get_contents($configuration));
-        $this->setMocks(5, 3, 10, 10);
+        $this->setMocks(5, 3, 8, 12, 14);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
         $app = $this->setApplication();
@@ -502,7 +502,7 @@ class ConstructCommandTest extends TestCase
         $this->filesystem->shouldReceive('isFile')->andReturn(true);
         $this->filesystem->shouldReceive('isReadable')->andReturn(true);
         $this->filesystem->shouldReceive('get')->with($configuration)->andReturn(file_get_contents($configuration));
-        $this->setMocks(4, 3, 10, 11);
+        $this->setMocks(4, 3, 8, 13, 14);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
         $app = $this->setApplication();
