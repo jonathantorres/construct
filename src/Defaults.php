@@ -23,7 +23,7 @@ class Defaults
      *
      * @var array
      */
-    private $phpVersions = ['5.6', '7.0', '7.1'];
+    private $phpVersions = ['5.6', '7.0', '7.1', '7.2'];
 
     /**
      * Available php files to test on appveyor.
@@ -34,6 +34,7 @@ class Defaults
         '5.6' => 'php-5.6.29-nts-Win32-VC11-x86.zip',
         '7.0' => 'php-7.0.17-nts-Win32-VC14-x86.zip',
         '7.1' => 'php-7.1.3-nts-Win32-VC14-x64.zip',
+        '7.2' => 'php-7.2.0-nts-Win32-VC14-x64.zip',
     ];
 
     /**

@@ -1,6 +1,8 @@
 # Changelog
 
 #### v1.16.0 `2017-??-??`
+- `Added`
+    - Added PHP version 7.2 to the available versions. Done by [@raphaelstolt](https://github.com/raphaelstolt).
 - `Fixed`
     - Removed EOL PHP versions (i.e. `5.4` and `5.5`). Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#211](https://github.com/jonathantorres/construct/issues/211).
     - Added a guard to check if the project directory to be already exists. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#212](https://github.com/jonathantorres/construct/issues/212).

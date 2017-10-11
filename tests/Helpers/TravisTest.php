@@ -26,6 +26,7 @@ class TravisTest extends TestCase
             '5.6',
             '7.0',
             '7.1',
+            '7.2',
         ];
 
         $this->assertEquals($versionsToTest, $versionsExpected);
@@ -41,6 +42,7 @@ class TravisTest extends TestCase
             '5.6',
             '7.0',
             '7.1',
+            '7.2',
         ]);
 
         $stringExpected = <<<CONTENT
@@ -48,6 +50,7 @@ class TravisTest extends TestCase
     - php: 5.6
     - php: 7.0
     - php: 7.1
+    - php: 7.2
 CONTENT;
 
         $this->assertEquals($versionsToRun, $stringExpected);
@@ -63,6 +66,7 @@ CONTENT;
             '5.6',
             '7.0',
             '7.1',
+            '7.2',
         ], true);
 
         $stringExpected = <<<CONTENT
@@ -70,6 +74,7 @@ CONTENT;
     - php: 5.6
     - php: 7.0
     - php: 7.1
+    - php: 7.2
       env:
       - LINT=true
 CONTENT;
@@ -90,6 +95,7 @@ CONTENT;
             '5.6',
             '7.0',
             '7.1',
+            '7.2',
         ];
 
         $this->assertEquals($versionsToTest, $versionsExpected);
@@ -106,6 +112,7 @@ CONTENT;
             'nightly',
             '7.0',
             '7.1',
+            '7.2',
         ];
 
         $this->assertEquals($versionsToTest, $versionsExpected);
@@ -120,12 +127,14 @@ CONTENT;
             'hhvm',
             '7.0',
             '7.1',
+            '7.2',
         ]);
 
         $stringExpected = <<<CONTENT
     - php: hhvm
     - php: 7.0
     - php: 7.1
+    - php: 7.2
 CONTENT;
 
         $this->assertEquals($versionsToRun, $stringExpected);
@@ -141,6 +150,7 @@ CONTENT;
             'hhvm',
             'nightly',
             '7.1',
+            '7.2',
         ];
 
         $this->assertEquals($versionsToTest, $versionsExpected);
@@ -154,11 +164,31 @@ CONTENT;
         $versionsToRun = $this->travis->phpVersionsToRun([
             'hhvm',
             '7.1',
+            '7.2',
         ]);
 
         $stringExpected = <<<CONTENT
     - php: hhvm
     - php: 7.1
+    - php: 7.2
+CONTENT;
+
+        $this->assertEquals($versionsToRun, $stringExpected);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_generate_string_of_all_versions_to_run_on_a_php7_2_project()
+    {
+        $versionsToRun = $this->travis->phpVersionsToRun([
+            'hhvm',
+            '7.2',
+        ]);
+
+        $stringExpected = <<<CONTENT
+    - php: hhvm
+    - php: 7.2
 CONTENT;
 
         $this->assertEquals($versionsToRun, $stringExpected);
@@ -172,11 +202,33 @@ CONTENT;
         $versionsToRun = $this->travis->phpVersionsToRun([
             'hhvm',
             '7.1',
+            '7.2',
         ], true);
 
         $stringExpected = <<<CONTENT
     - php: hhvm
     - php: 7.1
+    - php: 7.2
+      env:
+      - LINT=true
+CONTENT;
+
+        $this->assertEquals($versionsToRun, $stringExpected);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_generate_string_of_all_versions_to_run_on_a_php7_2_project_with_lint_env()
+    {
+        $versionsToRun = $this->travis->phpVersionsToRun([
+            'hhvm',
+            '7.2',
+        ], true);
+
+        $stringExpected = <<<CONTENT
+    - php: hhvm
+    - php: 7.2
       env:
       - LINT=true
 CONTENT;
