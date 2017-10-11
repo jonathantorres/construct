@@ -6,6 +6,7 @@
 - `Fixed`
     - Removed EOL PHP versions (i.e. `5.4` and `5.5`). Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#211](https://github.com/jonathantorres/construct/issues/211).
     - Added a guard to check if the project directory to be already exists. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#212](https://github.com/jonathantorres/construct/issues/212).
+    - Generated AppVeyor configuration uses minor versions instead of ZIP archives. Done by [@raphaelstolt](https://github.com/raphaelstolt).
 
 #### v1.15.2 `2017-09-18`
 - `Fixed`
