@@ -1,7 +1,7 @@
 namespace: Namespace
 test-framework: phpspec
 license: MIT
-php: 5.4
+php: 5.6
 
 construct-with:
   - git
