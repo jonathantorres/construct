@@ -125,14 +125,10 @@ class StrTest extends TestCase
 
     public function test_php_version_is_valid()
     {
-        $this->assertTrue($this->str->phpVersionIsValid('5.4.0'));
-        $this->assertTrue($this->str->phpVersionIsValid('5.5.0'));
-        $this->assertTrue($this->str->phpVersionIsValid('5.5.9'));
         $this->assertTrue($this->str->phpVersionIsValid('5.6.0'));
+        $this->assertTrue($this->str->phpVersionIsValid('5.6.10'));
         $this->assertTrue($this->str->phpVersionIsValid('7.0.0'));
         $this->assertTrue($this->str->phpVersionIsValid('7.1.0'));
-        $this->assertTrue($this->str->phpVersionIsValid('5.4'));
-        $this->assertTrue($this->str->phpVersionIsValid('5.5'));
         $this->assertTrue($this->str->phpVersionIsValid('5.6'));
         $this->assertTrue($this->str->phpVersionIsValid('7.0'));
         $this->assertTrue($this->str->phpVersionIsValid('7.1'));

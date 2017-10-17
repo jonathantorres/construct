@@ -40,7 +40,7 @@ class ConfigurationTest extends TestCase
         $expectedSettings->setComposerKeywords('composer,keywords');
         $expectedSettings->setVagrantfile(true);
         $expectedSettings->setEditorConfig(true);
-        $expectedSettings->setPhpVersion('5.4');
+        $expectedSettings->setPhpVersion('5.6');
         $expectedSettings->setEnvironmentFiles(true);
         $expectedSettings->setLgtmConfiguration(true);
         $expectedSettings->setGithubTemplates(true);
@@ -72,7 +72,7 @@ class ConfigurationTest extends TestCase
         $expectedSettings->setComposerKeywords('composer,keywords');
         $expectedSettings->setVagrantfile(true);
         $expectedSettings->setEditorConfig(true);
-        $expectedSettings->setPhpVersion('5.4');
+        $expectedSettings->setPhpVersion('5.6');
         $expectedSettings->setEnvironmentFiles(true);
         $expectedSettings->setLgtmConfiguration(true);
         $expectedSettings->setGithubTemplates(true);

@@ -1,5 +1,9 @@
 # Changelog
 
+#### v1.16.0 `2017-??-??`
+- `Fixed`
+    - Removed EOL PHP versions (i.e. `5.4` and `5.5`). Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#211](https://github.com/jonathantorres/construct/issues/211).
+
 #### v1.15.2 `2017-09-18`
 - `Fixed`
     - Major codebase refactor.

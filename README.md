@@ -119,7 +119,7 @@ construct generate jonathantorres/logger --cli-framework=zendframework/zend-cons
 The `--php` option will allow you to specify the minimum required PHP version that your project will support. Construct will use the currently installed version if not specified.
 
 ```bash
-construct generate jonathantorres/logger --php=5.5.9
+construct generate jonathantorres/logger --php=5.6.31
 ```
 
 ## Specify Composer keywords

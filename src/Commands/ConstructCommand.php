@@ -178,6 +178,10 @@ class ConstructCommand extends Command
         if ($input->hasParameterOption('--cli-framework')) {
             $cliFramework = $input->getOption('cli-framework');
 
+            if ($cliFramework === null) {
+                $cliFramework = $this->defaults->getCliFramework();
+            }
+
             if (!$this->str->isValid($cliFramework)) {
                 $warning = '<error>Warning: "' . $cliFramework . '" is not a valid Composer package name. Using "' . $this->defaults->getCliFramework() . '" instead.</error>';
                 $output->writeln($warning);

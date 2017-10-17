@@ -408,50 +408,6 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('with-editorconfig/gitattributes'), $this->getFile('.gitattributes'));
     }
 
-    public function test_project_generation_with_php54()
-    {
-        $settings = $this->container->get('Construct\Settings');
-        $settings->setProjectName('jonathantorres/logger');
-        $settings->setTestingFramework('phpunit');
-        $settings->setLicense('MIT');
-        $settings->setNamespace('Vendor\Project');
-        $settings->setPhpVersion('5.4.0');
-        $settings->setGithubTemplates(false);
-        $settings->setCodeOfConduct(false);
-        $settings->setGithubDocs(false);
-        $settings->setCliFramework(null);
-
-        $this->construct = new Construct($this->container);
-        $this->setConstructors();
-        $this->setScriptHelperComposerInstallExpectationWithPackages();
-
-        $this->construct->generate();
-        $this->assertSame($this->getStub('composer.php54'), $this->getFile('composer.json'));
-        $this->assertSame($this->getStub('travis.php54'), $this->getFile('.travis.yml'));
-    }
-
-    public function test_project_generation_with_php55()
-    {
-        $settings = $this->container->get('Construct\Settings');
-        $settings->setProjectName('jonathantorres/logger');
-        $settings->setTestingFramework('phpunit');
-        $settings->setLicense('MIT');
-        $settings->setNamespace('Vendor\Project');
-        $settings->setPhpVersion('5.5.0');
-        $settings->setGithubTemplates(false);
-        $settings->setCodeOfConduct(false);
-        $settings->setGithubDocs(false);
-        $settings->setCliFramework(null);
-
-        $this->construct = new Construct($this->container);
-        $this->setConstructors();
-        $this->setScriptHelperComposerInstallExpectationWithPackages();
-
-        $this->construct->generate();
-        $this->assertSame($this->getStub('composer.php55'), $this->getFile('composer.json'));
-        $this->assertSame($this->getStub('travis.php55'), $this->getFile('.travis.yml'));
-    }
-
     public function test_project_generation_with_php56()
     {
         $settings = $this->container->get('Construct\Settings');
