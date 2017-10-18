@@ -33,7 +33,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 2, 0, 11);
+        $this->setMocks(3, 3, 0, 11);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -65,7 +65,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 2);
+        $this->setMocks(3, 3);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -83,7 +83,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 2);
+        $this->setMocks(3, 3);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -104,7 +104,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 2);
+        $this->setMocks(3, 3);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -125,7 +125,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(2, 2, 0, 9, 10);
+        $this->setMocks(2, 3, 0, 9, 10);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -144,7 +144,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(2, 2, 0, 9, 10);
+        $this->setMocks(2, 3, 0, 9, 10);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -163,7 +163,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 2);
+        $this->setMocks(3, 3);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -190,7 +190,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 2);
+        $this->setMocks(3, 3);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -210,7 +210,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 2);
+        $this->setMocks(3, 3);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -228,7 +228,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 2);
+        $this->setMocks(3, 3);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -246,7 +246,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 3);
+        $this->setMocks(3, 4);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -265,7 +265,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 2, 1);
+        $this->setMocks(3, 3, 1);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -283,7 +283,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 2);
+        $this->setMocks(3, 3);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -301,7 +301,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 2, 1);
+        $this->setMocks(3, 3, 1);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -319,7 +319,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 2, 1);
+        $this->setMocks(3, 3, 1);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -333,11 +333,31 @@ class ConstructCommandTest extends TestCase
         $this->assertSame('Project "vendor/project" constructed.' . PHP_EOL, $commandTester->getDisplay());
     }
 
+    /**
+     * @ticket 212 (https://github.com/jonathantorres/construct/issues/212)
+     */
+    public function test_project_generation_with_existing_directory()
+    {
+        $this->filesystem->shouldReceive('getDefaultConfigurationFile');
+        $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
+        $this->filesystem->shouldReceive('isDirectory')->times(1)->andReturn(true);
+
+        $app = $this->setApplication();
+        $command = $app->find('generate');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(['command' => $command->getName(), 'name' => 'vendor/project']);
+
+        $output = 'Warning: "vendor/project" would be constructed into existing directory "project". '
+            . 'Aborting further construction.' . PHP_EOL;
+
+        $this->assertSame($output, $commandTester->getDisplay());
+    }
+
     public function test_project_generation_with_environment_files()
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(3, 2, 2);
+        $this->setMocks(3, 3, 2);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -355,7 +375,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(4, 2, 0, 13, 14);
+        $this->setMocks(4, 3, 0, 13, 14);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
         $app = $this->setApplication();
@@ -374,7 +394,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(4, 2);
+        $this->setMocks(4, 3);
         $this->filesystem->shouldReceive('put')->times(1)->andReturnNull();
 
         $app = $this->setApplication();
@@ -393,7 +413,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(4, 2, 1, 12, 13);
+        $this->setMocks(4, 3, 1, 12, 13);
         $this->filesystem->shouldReceive('put')->times(0);
 
         $app = $this->setApplication();
@@ -412,7 +432,7 @@ class ConstructCommandTest extends TestCase
     {
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
-        $this->setMocks(4, 2, 1, 12, 13);
+        $this->setMocks(4, 3, 1, 12, 13);
         $this->filesystem->shouldReceive('put')->times(0);
 
         $app = $this->setApplication();
@@ -439,7 +459,7 @@ class ConstructCommandTest extends TestCase
         $this->filesystem->shouldReceive('isFile')->andReturn(true);
         $this->filesystem->shouldReceive('isReadable')->andReturn(true);
         $this->filesystem->shouldReceive('get')->with($configuration)->andReturn(file_get_contents($configuration));
-        $this->setMocks(5, 3, 8, 12, 14);
+        $this->setMocks(5, 4, 8, 12, 14);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
         $app = $this->setApplication();
@@ -469,7 +489,7 @@ class ConstructCommandTest extends TestCase
         $this->filesystem->shouldReceive('isFile')->andReturn(true);
         $this->filesystem->shouldReceive('isReadable')->andReturn(true);
         $this->filesystem->shouldReceive('get')->with($configuration)->andReturn(file_get_contents($configuration));
-        $this->setMocks(5, 3, 8, 12, 14);
+        $this->setMocks(5, 4, 8, 12, 14);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
         $app = $this->setApplication();
@@ -502,7 +522,7 @@ class ConstructCommandTest extends TestCase
         $this->filesystem->shouldReceive('isFile')->andReturn(true);
         $this->filesystem->shouldReceive('isReadable')->andReturn(true);
         $this->filesystem->shouldReceive('get')->with($configuration)->andReturn(file_get_contents($configuration));
-        $this->setMocks(4, 3, 8, 13, 14);
+        $this->setMocks(4, 4, 8, 13, 14);
         $this->filesystem->shouldReceive('move')->times(1)->andReturnNull();
 
         $app = $this->setApplication();

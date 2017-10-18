@@ -4,6 +4,7 @@ namespace Construct\Commands;
 
 use Construct\Construct;
 use RuntimeException;
+use Construct\Exceptions\ProjectDirectoryToBeAlreadyExists;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -180,7 +181,18 @@ class InteractiveCommand extends Command
         $this->settings->setCliFramework($cliFramework);
 
         $output->writeln('Creating your project...');
-        $this->construct->generate();
+
+        try {
+            $this->construct->generate();
+        } catch (ProjectDirectoryToBeAlreadyExists $e) {
+            $warningMessage = '<error>Warning: "' . $projectName . '" would be '
+                . 'constructed into existing directory "' . $this->settings->getProjectLower() . '". '
+                . 'Aborting further construction.</error>';
+            $output->writeln($warningMessage);
+
+            return false;
+        }
+
         $output->writeln('<info>Project "' . $projectName . '" constructed.</info>');
     }
 }
