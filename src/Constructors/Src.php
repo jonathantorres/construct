@@ -25,6 +25,7 @@ class Src extends Constructor implements ConstructorContract
         if ($this->projectDirectoryExists()) {
             throw new ProjectDirectoryToBeAlreadyExists();
         }
+
         $this->filesystem->makeDirectory($this->settings->getProjectLower());
         $this->filesystem->makeDirectory($this->settings->getProjectLower() . '/' . $this->srcPath);
     }
