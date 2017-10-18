@@ -3,6 +3,7 @@
 namespace Construct\Commands;
 
 use Construct\Construct;
+use Construct\Exceptions\ProjectDirectoryToBeAlreadyExists;
 use Construct\Constructors\Cli;
 use Construct\Constructors\CodeOfConduct;
 use Construct\Constructors\Composer;
@@ -258,7 +259,16 @@ class ConstructCommand extends Command
         $this->construct->addConstructor(new GitMessage($this->construct->getContainer()));
         $this->construct->addConstructor(new GitAttributes($this->construct->getContainer()));
 
-        $this->construct->generate();
+        try {
+            $this->construct->generate();
+        } catch (ProjectDirectoryToBeAlreadyExists $e) {
+            $warningMessage = '<error>Warning: "' . $projectName . '" would be '
+                . 'constructed into existing directory "' . $this->settings->getProjectLower() . '". '
+                . 'Aborting further construction.</error>';
+            $output->writeln($warningMessage);
+
+            return false;
+        }
 
         $this->initializedGitMessage($output);
         $this->bootstrappedCodeceptionMessage($output);

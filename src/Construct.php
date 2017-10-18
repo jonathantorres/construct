@@ -52,6 +52,7 @@ class Construct
     /**
      * Generates the project using the specified constructors.
      *
+     * @throws ProjectDirectoryToBeAlreadyExists
      * @return void
      */
     public function generate()
