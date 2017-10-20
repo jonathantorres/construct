@@ -31,9 +31,6 @@
         }
     },
     "config": {
-        "platform": {
-            "php": "5.6"
-        },
         "sort-packages": true
     },
     "bin": ["bin/construct"],
