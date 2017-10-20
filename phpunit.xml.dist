@@ -8,7 +8,8 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="true"
-         syntaxCheck="false">
+         syntaxCheck="false"
+         beStrictAboutTestsThatDoNotTestAnything="false">
     <testsuites>
         <testsuite name="Construct">
             <directory>tests/</directory>
