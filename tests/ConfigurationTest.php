@@ -19,7 +19,7 @@ class ConfigurationTest extends TestCase
 
     public function test_exception_is_raised_on_non_existent_file()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->expectException('RuntimeException');
         $this->configuration->overwriteSettings(new Settings(), 'non-existent-file.txt');
     }
 
