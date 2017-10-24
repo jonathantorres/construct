@@ -2,8 +2,6 @@
 
 namespace Construct\Constructors;
 
-use Construct\Defaults;
-
 class Cli extends Constructor implements ConstructorContract
 {
     /**
@@ -25,10 +23,8 @@ class Cli extends Constructor implements ConstructorContract
             );
 
             $minorPhpVersion = $this->str->toMinorVersion($this->settings->getPhpVersion());
-            $appveyorVersions = (new Defaults())->getPhpAppVeyorVersions();
-            $phpDownloadFile = $appveyorVersions[$minorPhpVersion];
 
-            $content = str_replace('{php_download_file}', $phpDownloadFile, $appveyorConfiguration);
+            $content = str_replace('{php_version}', $minorPhpVersion, $appveyorConfiguration);
             $this->filesystem->put($this->settings->getProjectLower() . '/' . '.appveyor.yml', $content);
             $this->gitAttributes->addExportIgnore('.appveyor.yml');
             $this->composer->addRequirement($this->settings->getCliFramework());
