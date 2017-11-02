@@ -1,5 +1,11 @@
 # Changelog
 
+#### [unreleased] `xxxx-xx-xx`
+- `Breaking Changes`
+    - Support for PHP7 only.
+    - Bump Symfony dependencies to `3.0`.
+    - Bump PHPUnit to `6.0` and Mockery to `1.0`.
+
 #### v1.16.0 `2017-10-26`
 - `Added`
     - Added PHP version 7.2 to the available versions. Done by [@raphaelstolt](https://github.com/raphaelstolt).
