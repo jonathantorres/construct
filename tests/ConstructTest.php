@@ -474,6 +474,28 @@ class ConstructTest extends TestCase
         $this->assertSame($this->getStub('travis.php71'), $this->getFile('.travis.yml'));
     }
 
+    public function test_project_generation_with_php72()
+    {
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('7.2.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
+
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
+
+        $this->construct->generate();
+        $this->assertSame($this->getStub('composer.php72'), $this->getFile('composer.json'));
+        $this->assertSame($this->getStub('travis.php72'), $this->getFile('.travis.yml'));
+    }
+
     /**
      * @ticket 170 (https://github.com/jonathantorres/construct/issues/170)
      */

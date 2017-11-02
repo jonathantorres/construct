@@ -67,7 +67,7 @@ class Travis
                 $phpVersion = $this->str->toMinorVersion($phpVersions[$i]);
             }
 
-            if (count($i) !== 0) {
+            if ($i >= 0) {
                 $runOn .= '    ';
             }
 
