@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct;
 
 use Construct\Helpers\Filesystem;
@@ -33,7 +35,7 @@ class Configuration
      *
      * @return \Construct\Settings
      */
-    public function overwriteSettings(Settings $settings, $configurationFile)
+    public function overwriteSettings(Settings $settings, string $configurationFile): Settings
     {
         if (!$this->filesystem->isFile($configurationFile)) {
             $exceptionMessage = "Configuration file '$configurationFile' is not existent.";
@@ -133,7 +135,7 @@ class Configuration
      *
      * @return boolean
      */
-    public function isApplicable($configuration)
+    public function isApplicable($configuration): bool
     {
         if ($configuration === $this->filesystem->getDefaultConfigurationFile()
             && $this->filesystem->hasDefaultConfigurationFile()) {

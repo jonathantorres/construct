@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct;
 
 class Defaults
@@ -87,9 +89,9 @@ class Defaults
     /**
      * Get the available open source licenses.
      *
-     * @return string
+     * @return array
      */
-    public function getLicenses()
+    public function getLicenses(): array
     {
         return $this->licenses;
     }
@@ -99,7 +101,7 @@ class Defaults
      *
      * @return array
      */
-    public function getTestingFrameworks()
+    public function getTestingFrameworks(): array
     {
         return $this->testingFrameworks;
     }
@@ -109,7 +111,7 @@ class Defaults
      *
      * @return array
      */
-    public function getPhpVersions()
+    public function getPhpVersions(): array
     {
         return $this->phpVersions;
     }
@@ -119,7 +121,7 @@ class Defaults
      *
      * @return array
      */
-    public function getNonSemverPhpVersions()
+    public function getNonSemverPhpVersions(): array
     {
         return $this->nonSemverPhpVersions;
     }
@@ -129,7 +131,7 @@ class Defaults
      *
      * @return string
      */
-    public function getCliFramework()
+    public function getCliFramework(): string
     {
         return $this->cliFramework;
     }
@@ -139,7 +141,7 @@ class Defaults
      *
      * @return string
      */
-    public function getTestingFramework()
+    public function getTestingFramework(): string
     {
         return $this->testingFramework;
     }
@@ -149,7 +151,7 @@ class Defaults
      *
      * @return string
      */
-    public function getLicense()
+    public function getLicense(): string
     {
         return $this->license;
     }
@@ -159,7 +161,7 @@ class Defaults
      *
      * @return string
      */
-    public function getProjectNamespace()
+    public function getProjectNamespace(): string
     {
         return $this->projectNamespace;
     }
@@ -169,7 +171,7 @@ class Defaults
      *
      * @return string
      */
-    public function getConfigurationFile()
+    public function getConfigurationFile(): string
     {
         return $this->configurationFile;
     }
@@ -179,7 +181,7 @@ class Defaults
      *
      * @return string
      */
-    public function getSystemPhpVersion()
+    public function getSystemPhpVersion(): string
     {
         return $this->systemPhpVersion;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct;
 
 class Composer
@@ -23,7 +25,7 @@ class Composer
      *
      * @return array
      */
-    public function getRequirements()
+    public function getRequirements(): array
     {
         return $this->requirements;
     }
@@ -35,7 +37,7 @@ class Composer
      *
      * @return void
      */
-    public function addRequirement($requirement)
+    public function addRequirement(string $requirement)
     {
         $this->requirements[] = $requirement;
     }
@@ -45,7 +47,7 @@ class Composer
      *
      * @return array
      */
-    public function getDevelopmentRequirements()
+    public function getDevelopmentRequirements(): array
     {
         return $this->developmentRequirements;
     }
@@ -57,7 +59,7 @@ class Composer
      *
      * @return void
      */
-    public function addDevelopmentRequirement($requirement)
+    public function addDevelopmentRequirement(string $requirement)
     {
         $this->developmentRequirements[] = $requirement;
     }

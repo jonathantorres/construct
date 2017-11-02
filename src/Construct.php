@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct;
 
 use Construct\Constructors\ConstructorContract;
@@ -89,7 +91,7 @@ class Construct
      *
      * @return League\Container\Container
      */
-    public function getContainer()
+    public function getContainer(): Container
     {
         return $this->container;
     }

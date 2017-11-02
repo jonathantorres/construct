@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct;
 
 class GitAttributes
@@ -23,7 +25,7 @@ class GitAttributes
      *
      * @return array
      */
-    public function getExportIgnores()
+    public function getExportIgnores(): array
     {
         return $this->exportIgnores;
     }
@@ -35,7 +37,7 @@ class GitAttributes
      *
      * @return void
      */
-    public function addExportIgnore($ignore)
+    public function addExportIgnore(string $ignore)
     {
         $this->exportIgnores[] = $ignore;
     }
@@ -47,7 +49,7 @@ class GitAttributes
      *
      * @return void
      */
-    public function removeExportIgnore($ignore)
+    public function removeExportIgnore(string $ignore)
     {
         unset($this->exportIgnores[$ignore]);
     }
@@ -57,7 +59,7 @@ class GitAttributes
      *
      * @return array
      */
-    public function getGitIgnores()
+    public function getGitIgnores(): array
     {
         return $this->gitIgnores;
     }
@@ -69,7 +71,7 @@ class GitAttributes
      *
      * @return void
      */
-    public function addGitIgnore($ignore)
+    public function addGitIgnore(string $ignore)
     {
         $this->gitIgnores[] = $ignore;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct;
 
 class Settings
@@ -153,7 +155,7 @@ class Settings
      *
      * @return string
      */
-    public function getProjectName()
+    public function getProjectName(): string
     {
         return $this->projectName;
     }
@@ -165,7 +167,7 @@ class Settings
      *
      * @return void
      */
-    public function setProjectName($name)
+    public function setProjectName(string $name)
     {
         $this->projectName = $name;
     }
@@ -177,7 +179,7 @@ class Settings
      *
      * @return void
      */
-    public function setVendorUpper($vendorUpper)
+    public function setVendorUpper(string $vendorUpper)
     {
         $this->vendorUpper = $vendorUpper;
     }
@@ -187,7 +189,7 @@ class Settings
      *
      * @return string
      */
-    public function getVendorUpper()
+    public function getVendorUpper(): string
     {
         return $this->vendorUpper;
     }
@@ -199,7 +201,7 @@ class Settings
      *
      * @return void
      */
-    public function setVendorLower($vendorLower)
+    public function setVendorLower(string $vendorLower)
     {
         $this->vendorLower = $vendorLower;
     }
@@ -209,7 +211,7 @@ class Settings
      *
      * @return string
      */
-    public function getVendorLower()
+    public function getVendorLower(): string
     {
         return $this->vendorLower;
     }
@@ -221,7 +223,7 @@ class Settings
      *
      * @return void
      */
-    public function setProjectUpper($projectUpper)
+    public function setProjectUpper(string $projectUpper)
     {
         $this->projectUpper = $projectUpper;
     }
@@ -231,7 +233,7 @@ class Settings
      *
      * @return string
      */
-    public function getProjectUpper()
+    public function getProjectUpper(): string
     {
         return $this->projectUpper;
     }
@@ -243,7 +245,7 @@ class Settings
      *
      * @return void
      */
-    public function setProjectLower($projectLower)
+    public function setProjectLower(string $projectLower)
     {
         $this->projectLower = $projectLower;
     }
@@ -253,7 +255,7 @@ class Settings
      *
      * @return string
      */
-    public function getProjectLower()
+    public function getProjectLower(): string
     {
         return $this->projectLower;
     }
@@ -263,7 +265,7 @@ class Settings
      *
      * @return string
      */
-    public function getTestingFramework()
+    public function getTestingFramework(): string
     {
         return $this->testingFramework;
     }
@@ -275,7 +277,7 @@ class Settings
      *
      * @return void
      */
-    public function setTestingFramework($testingFramework)
+    public function setTestingFramework(string $testingFramework)
     {
         $this->testingFramework = $testingFramework;
     }
@@ -285,7 +287,7 @@ class Settings
      *
      * @return string
      */
-    public function getLicense()
+    public function getLicense(): string
     {
         return $this->license;
     }
@@ -297,7 +299,7 @@ class Settings
      *
      * @return void
      */
-    public function setLicense($license)
+    public function setLicense(string $license)
     {
         $this->license = $license;
     }
@@ -307,7 +309,7 @@ class Settings
      *
      * @return string
      */
-    public function getNamespace()
+    public function getNamespace(): string
     {
         return $this->namespace;
     }
@@ -319,7 +321,7 @@ class Settings
      *
      * @return void
      */
-    public function setNamespace($namespace)
+    public function setNamespace(string $namespace)
     {
         $this->namespace = $namespace;
     }
@@ -341,7 +343,7 @@ class Settings
      *
      * @return void
      */
-    public function setGitInit($gitInit)
+    public function setGitInit(bool $gitInit)
     {
         $this->gitInit = $gitInit;
     }
@@ -363,7 +365,7 @@ class Settings
      *
      * @return void
      */
-    public function setPhpcsConfiguration($configuration)
+    public function setPhpcsConfiguration(bool $configuration)
     {
         $this->phpcsConfiguration = $configuration;
     }
@@ -407,7 +409,7 @@ class Settings
      *
      * @return void
      */
-    public function setVagrantfile($vagrantfile)
+    public function setVagrantfile(bool $vagrantfile)
     {
         $this->vagrantfile = $vagrantfile;
     }
@@ -429,7 +431,7 @@ class Settings
      *
      * @return void
      */
-    public function setEditorConfig($config)
+    public function setEditorConfig(bool $config)
     {
         $this->editorConfig = $config;
     }
@@ -439,7 +441,7 @@ class Settings
      *
      * @return string
      */
-    public function getPhpVersion()
+    public function getPhpVersion(): string
     {
         return $this->phpVersion;
     }
@@ -451,7 +453,7 @@ class Settings
      *
      * @return void
      */
-    public function setPhpVersion($version)
+    public function setPhpVersion(string $version)
     {
         $this->phpVersion = $version;
     }
@@ -473,7 +475,7 @@ class Settings
      *
      * @return void
      */
-    public function setEnvironmentFiles($envFiles)
+    public function setEnvironmentFiles(bool $envFiles)
     {
         $this->environmentFiles = $envFiles;
     }
@@ -495,7 +497,7 @@ class Settings
      *
      * @return void
      */
-    public function setLgtmConfiguration($configuration)
+    public function setLgtmConfiguration(bool $configuration)
     {
         $this->lgtmConfiguration = $configuration;
     }
@@ -505,7 +507,7 @@ class Settings
      *
      * @return boolean
      */
-    public function withGithubTemplates()
+    public function withGithubTemplates(): bool
     {
         return $this->githubTemplates;
     }
@@ -517,7 +519,7 @@ class Settings
      *
      * @return void
      */
-    public function setGithubTemplates($templates)
+    public function setGithubTemplates(bool $templates)
     {
         $this->githubTemplates = $templates;
     }
@@ -527,7 +529,7 @@ class Settings
      *
      * @return boolean
      */
-    public function withGithubDocs()
+    public function withGithubDocs(): bool
     {
         return $this->githubDocs;
     }
@@ -539,7 +541,7 @@ class Settings
      *
      * @return void
      */
-    public function setGithubDocs($docs)
+    public function setGithubDocs(bool $docs)
     {
         $this->githubDocs = $docs;
     }
@@ -549,7 +551,7 @@ class Settings
      *
      * @return boolean
      */
-    public function withCodeOfConduct()
+    public function withCodeOfConduct(): bool
     {
         return $this->codeOfConduct;
     }
@@ -561,7 +563,7 @@ class Settings
      *
      * @return void
      */
-    public function setCodeOfConduct($codeOfConduct)
+    public function setCodeOfConduct(bool $codeOfConduct)
     {
         $this->codeOfConduct = $codeOfConduct;
     }
@@ -571,7 +573,7 @@ class Settings
      *
      * @return boolean
      */
-    public function withCliFramework()
+    public function withCliFramework(): bool
     {
         return $this->cliFramework !== null;
     }
