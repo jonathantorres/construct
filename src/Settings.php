@@ -343,7 +343,7 @@ class Settings
      *
      * @return void
      */
-    public function setGitInit(bool $gitInit)
+    public function setGitInit($gitInit)
     {
         $this->gitInit = $gitInit;
     }
@@ -365,7 +365,7 @@ class Settings
      *
      * @return void
      */
-    public function setPhpcsConfiguration(bool $configuration)
+    public function setPhpcsConfiguration($configuration)
     {
         $this->phpcsConfiguration = $configuration;
     }
@@ -409,7 +409,7 @@ class Settings
      *
      * @return void
      */
-    public function setVagrantfile(bool $vagrantfile)
+    public function setVagrantfile($vagrantfile)
     {
         $this->vagrantfile = $vagrantfile;
     }
@@ -431,7 +431,7 @@ class Settings
      *
      * @return void
      */
-    public function setEditorConfig(bool $config)
+    public function setEditorConfig($config)
     {
         $this->editorConfig = $config;
     }
@@ -475,7 +475,7 @@ class Settings
      *
      * @return void
      */
-    public function setEnvironmentFiles(bool $envFiles)
+    public function setEnvironmentFiles($envFiles)
     {
         $this->environmentFiles = $envFiles;
     }
@@ -497,7 +497,7 @@ class Settings
      *
      * @return void
      */
-    public function setLgtmConfiguration(bool $configuration)
+    public function setLgtmConfiguration($configuration)
     {
         $this->lgtmConfiguration = $configuration;
     }
@@ -519,7 +519,7 @@ class Settings
      *
      * @return void
      */
-    public function setGithubTemplates(bool $templates)
+    public function setGithubTemplates($templates)
     {
         $this->githubTemplates = $templates;
     }
@@ -541,7 +541,7 @@ class Settings
      *
      * @return void
      */
-    public function setGithubDocs(bool $docs)
+    public function setGithubDocs($docs)
     {
         $this->githubDocs = $docs;
     }
@@ -563,7 +563,7 @@ class Settings
      *
      * @return void
      */
-    public function setCodeOfConduct(bool $codeOfConduct)
+    public function setCodeOfConduct($codeOfConduct)
     {
         $this->codeOfConduct = $codeOfConduct;
     }
