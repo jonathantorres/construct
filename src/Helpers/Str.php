@@ -159,7 +159,7 @@ class Str
      */
     public function toQuotedKeywords($keywords)
     {
-        if (trim($keywords) === '' || $keywords === null) {
+        if ($keywords === null || trim($keywords) === '') {
             return '';
         }
 
