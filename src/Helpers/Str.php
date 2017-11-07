@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct\Helpers;
 
 class Str
@@ -20,7 +22,7 @@ class Str
      *
      * @return boolean
      */
-    public function isValid($name)
+    public function isValid(string $name): bool
     {
         if (preg_match($this->regEx, $name) === 0) {
             return false;
@@ -37,7 +39,7 @@ class Str
      *
      * @return boolean
      */
-    public function contains($name, $needle)
+    public function contains(string $name, string $needle): bool
     {
         return strstr($name, $needle) !== false;
     }
@@ -49,7 +51,7 @@ class Str
      *
      * @return string
      */
-    public function toLower($string)
+    public function toLower(string $string): string
     {
         return strtolower($string);
     }
@@ -61,7 +63,7 @@ class Str
      *
      * @return string
      */
-    public function toStudly($string)
+    public function toStudly(string $string): string
     {
         $value = ucwords(str_replace(['-', '_'], ' ', $string));
 
@@ -76,7 +78,7 @@ class Str
      *
      * @return string
      */
-    public function toCamelCase($string, $capitalizeFirstCharacter = false)
+    public function toCamelCase(string $string, bool $capitalizeFirstCharacter = false): string
     {
         $string = str_replace(
             ' ',
@@ -98,7 +100,7 @@ class Str
      *
      * @return array
      */
-    public function split($string)
+    public function split(string $string): array
     {
         $project = explode('/', $string);
 
@@ -117,7 +119,7 @@ class Str
      *
      * @return string
      */
-    public function createNamespace($namespace, $usesProjectName = false, $useDoubleSlashes = false)
+    public function createNamespace(string $namespace, bool $usesProjectName = false, bool $useDoubleSlashes = false): string
     {
         $delimiter = $usesProjectName ? '/' : '\\';
         $slash = $useDoubleSlashes ? '\\\\' : '\\';
@@ -140,7 +142,7 @@ class Str
      *
      * @return boolean
      */
-    public function isWindows($os = PHP_OS)
+    public function isWindows(string $os = PHP_OS): bool
     {
         if (strtoupper(substr($os, 0, 3)) !== 'WIN') {
             return false;
@@ -177,7 +179,7 @@ class Str
      *
      * @return string
      */
-    public function toMinorVersion($version)
+    public function toMinorVersion(string $version): string
     {
         list($major, $minor) = explode('.', $version);
 
@@ -191,7 +193,7 @@ class Str
      *
      * @return boolean
      */
-    public function phpVersionIsValid($version)
+    public function phpVersionIsValid(string $version): bool
     {
         return preg_match('/\d\.\d(\.\d)?/', $version) === 1;
     }

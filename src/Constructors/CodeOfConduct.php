@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct\Constructors;
 
 class CodeOfConduct extends Constructor implements ConstructorContract

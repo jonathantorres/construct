@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct\Constructors;
 
 class Docs extends Constructor implements ConstructorContract

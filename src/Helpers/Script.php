@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct\Helpers;
 
 class Script
@@ -15,7 +17,7 @@ class Script
      * @return void
      */
     public function runComposerInstallAndRequirePackages(
-        $folder,
+        string $folder,
         array $developmentPackages,
         array $packages = []
     ) {
@@ -39,7 +41,7 @@ class Script
      *
      * @return void
      */
-    public function initBehat($folder)
+    public function initBehat(string $folder)
     {
         $command = 'cd ' . $folder . ' && vendor/bin/behat --init';
 
@@ -53,7 +55,7 @@ class Script
      *
      * @return void
      */
-    public function bootstrapCodeception($folder)
+    public function bootstrapCodeception(string $folder)
     {
         $command = 'cd ' . $folder . ' && vendor/bin/codecept bootstrap';
 

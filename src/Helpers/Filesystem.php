@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct\Helpers;
 
 use Construct\Defaults;
@@ -31,7 +33,7 @@ class Filesystem
      *
      * @return boolean
      */
-    public function makeDirectory($path, $recursive = false)
+    public function makeDirectory(string $path, bool $recursive = false)
     {
         return mkdir($path, 0777, $recursive);
     }
@@ -43,7 +45,7 @@ class Filesystem
      *
      * @return boolean
      */
-    public function isDirectory($path)
+    public function isDirectory(string $path)
     {
         return is_dir($path);
     }
@@ -55,7 +57,7 @@ class Filesystem
      *
      * @return boolean
      */
-    public function isFile($path)
+    public function isFile(string $path): bool
     {
         return is_file($path);
     }
@@ -67,7 +69,7 @@ class Filesystem
      *
      * @return boolean
      */
-    public function isReadable($path)
+    public function isReadable(string $path): bool
     {
         return is_readable($path);
     }
@@ -75,9 +77,11 @@ class Filesystem
     /**
      * Get the home directory.
      *
+     * @param string $os
+     *
      * @return string
      */
-    public function getHomeDirectory($os = PHP_OS)
+    public function getHomeDirectory(string $os = PHP_OS): string
     {
         if (strtoupper(substr($os, 0, 3)) !== 'WIN') {
             return getenv('HOME');
@@ -91,7 +95,7 @@ class Filesystem
      *
      * @return string
      */
-    public function getDefaultConfigurationFile()
+    public function getDefaultConfigurationFile(): string
     {
         return $this->getHomeDirectory()
             . DIRECTORY_SEPARATOR
@@ -101,9 +105,9 @@ class Filesystem
     /**
      * Determine if system has a default configuration file.
      *
-     * @return boolean boolean
+     * @return boolean
      */
-    public function hasDefaultConfigurationFile()
+    public function hasDefaultConfigurationFile(): bool
     {
         return $this->isFile($this->getDefaultConfigurationFile());
     }
@@ -116,7 +120,7 @@ class Filesystem
      *
      * @return boolean
      */
-    public function copy($path, $target)
+    public function copy(string $path, string $target)
     {
         return copy($path, $target);
     }
@@ -129,7 +133,7 @@ class Filesystem
      *
      * @return boolean
      */
-    public function move($path, $target)
+    public function move(string $path, string $target)
     {
         $this->copy($path, $target);
 
@@ -143,7 +147,7 @@ class Filesystem
      *
      * @return string
      */
-    public function get($path)
+    public function get(string $path)
     {
         return file_get_contents($path);
     }
@@ -156,7 +160,7 @@ class Filesystem
      *
      * @return int
      */
-    public function put($path, $contents)
+    public function put(string $path, $contents)
     {
         return file_put_contents($path, $contents);
     }

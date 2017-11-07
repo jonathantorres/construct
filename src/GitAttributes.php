@@ -49,7 +49,7 @@ class GitAttributes
      *
      * @return void
      */
-    public function removeExportIgnore(string $ignore)
+    public function removeExportIgnore($ignore)
     {
         unset($this->exportIgnores[$ignore]);
     }

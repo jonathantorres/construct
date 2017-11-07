@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct\Constructors;
 
 class PhpCs extends Constructor implements ConstructorContract

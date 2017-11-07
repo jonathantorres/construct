@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct\Commands;
 
 use Construct\Construct;
@@ -285,7 +287,7 @@ class ConstructCommand extends Command
      *
      * @return void
      */
-    private function warnAndOverwriteInvalidSettingsWithDefaults($output)
+    private function warnAndOverwriteInvalidSettingsWithDefaults(OutputInterface $output)
     {
         $this->projectNameContainsPhpWarning($output);
 
@@ -305,7 +307,7 @@ class ConstructCommand extends Command
      *
      * @return void
      */
-    private function projectNameContainsPhpWarning($output)
+    private function projectNameContainsPhpWarning(OutputInterface $output)
     {
         $projectName = $this->settings->getProjectName();
 
@@ -323,7 +325,7 @@ class ConstructCommand extends Command
      *
      * @return string
      */
-    private function supportedLicenseWarning($output)
+    private function supportedLicenseWarning(OutputInterface $output)
     {
         $license = $this->settings->getLicense();
 
@@ -344,7 +346,7 @@ class ConstructCommand extends Command
      *
      * @return string
      */
-    private function testFrameworkWarning($output)
+    private function testFrameworkWarning(OutputInterface $output)
     {
         $testFramework = $this->settings->getTestingFramework();
 
@@ -366,7 +368,7 @@ class ConstructCommand extends Command
      *
      * @return string
      */
-    private function phpVersionWarning($output)
+    private function phpVersionWarning(OutputInterface $output)
     {
         $phpVersion = $this->settings->getPhpVersion();
 
@@ -390,7 +392,7 @@ class ConstructCommand extends Command
      *
      * @return void
      */
-    private function initializedGitMessage($output)
+    private function initializedGitMessage(OutputInterface $output)
     {
         if ($this->settings->withGitInit()) {
             $folder = $this->settings->getProjectLower();
@@ -405,7 +407,7 @@ class ConstructCommand extends Command
      *
      * @return void
      */
-    private function bootstrappedCodeceptionMessage($output)
+    private function bootstrappedCodeceptionMessage(OutputInterface $output)
     {
         if ($this->settings->getTestingFramework() === 'codeception') {
             $output->writeln('<info>Bootstrapped codeception.</info>');
@@ -419,7 +421,7 @@ class ConstructCommand extends Command
      *
      * @return void
      */
-    private function initializedBehatMessage($output)
+    private function initializedBehatMessage(OutputInterface $output)
     {
         if ($this->settings->getTestingFramework() === 'behat') {
             $output->writeln('<info>Initialized behat.</info>');

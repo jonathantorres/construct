@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct\Constructors;
 
 use League\Container\Container;
@@ -70,7 +72,7 @@ abstract class Constructor
      *
      * @return string
      */
-    protected function createNamespace($useDoubleSlashes = false)
+    protected function createNamespace(bool $useDoubleSlashes = false): string
     {
         $namespace = $this->settings->getNamespace();
         $projectName = $this->settings->getProjectName();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Construct\Helpers;
 
 class Git
@@ -11,7 +13,7 @@ class Git
      *
      * @return void
      */
-    public function init($folder)
+    public function init(string $folder)
     {
         $command = 'cd ' . $folder . ' && git init';
 
@@ -23,7 +25,7 @@ class Git
      *
      * @return array
      */
-    public function getUser()
+    public function getUser(): array
     {
         $user = [
             'name' => 'Some name',
