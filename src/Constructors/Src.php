@@ -18,6 +18,7 @@ class Src extends Constructor implements ConstructorContract
      * and the src folder inside of it.
      *
      * @throws ProjectDirectoryToBeAlreadyExists
+     *
      * @return void
      */
     public function run()
