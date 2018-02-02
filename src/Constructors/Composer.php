@@ -11,8 +11,13 @@ class Composer extends Constructor implements ConstructorContract
      */
     public function run()
     {
-        $composerFile = 'composer.' . $this->settings->getTestingFramework();
-        $file = $this->filesystem->get(__DIR__ . '/../stubs/composer/' . $composerFile . '.stub');
+        $defaults = $this->defaults;
+        $composerFile = 'composer';
+
+        if ($this->settings->getTestingFramework() === $defaults->getTestingFrameworks()[0]) {
+            $composerFile .= '.' . $this->settings->getTestingFramework();
+        }
+        $file = $this->filesystem->get(realpath(__DIR__ . '/../stubs/composer/' . $composerFile . '.stub'));
         $git = $this->container->get('Construct\Helpers\Git');
         $user = $git->getUser();
 
@@ -46,13 +51,10 @@ class Composer extends Constructor implements ConstructorContract
 
         $content = str_replace($stubs, $values, $file);
 
-        if ($this->settings->withPhpcsConfiguration()) {
-            $composer = json_decode($content, true);
-            $composer['scripts']['cs-fix'] = 'php-cs-fixer fix . -vv || true';
-            $composer['scripts']['cs-lint'] = 'php-cs-fixer fix --diff --stop-on-violation --verbose --dry-run';
-            $content = json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-            $content .= "\n";
-        }
+        $composer = json_decode($content, true);
+        $composer = array_merge($composer, $this->getScriptsAndTheirDescriptions());
+        $content = json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        $content .= "\n";
 
         if ($this->settings->withCliFramework()) {
             $composer = json_decode($content, true);
@@ -62,5 +64,64 @@ class Composer extends Constructor implements ConstructorContract
         }
 
         $this->filesystem->put($this->settings->getProjectLower() . '/' . 'composer.json', $content);
+    }
+
+    /**
+     * Returns the default and settings dependent Composer scripts
+     * and their descriptions.
+     *
+     * @return array
+     */
+    private function getScriptsAndTheirDescriptions()
+    {
+        $defaults = $this->defaults;
+
+        $scripts = [
+            'configure-commit-template' => 'git config --add commit.template .gitmessage',
+        ];
+        $descriptions = [
+            'configure-commit-template' => 'Configures a local Git commit message template.',
+        ];
+
+        if ($this->settings->withPhpcsConfiguration()) {
+            $scripts['cs-fix'] = 'php-cs-fixer fix . -vv || true';
+            $descriptions['cs-fix'] = 'Fixes existing coding standard violations.';
+
+            $scripts['cs-lint'] = 'php-cs-fixer fix --diff --stop-on-violation --verbose --dry-run';
+            $descriptions['cs-lint'] = 'Checks for coding standard violations.';
+        }
+
+        if ($this->settings->getTestingFramework() === $defaults->getTestingFrameworks()[0]) {
+            $scripts['test'] = $this->settings->getTestingFramework();
+            $descriptions['test'] = 'Runs all tests.';
+        }
+
+        if ($this->settings->getTestingFramework() === $defaults->getTestingFrameworks()[1]) {
+            $scripts['test'] = $this->settings->getTestingFramework();
+            $descriptions['test'] = 'Runs all features.';
+        }
+
+        if ($this->settings->getTestingFramework() === $defaults->getTestingFrameworks()[2]) {
+            $scripts['test'] = $this->settings->getTestingFramework() . " run --format=pretty";
+            $descriptions['test'] = 'Runs all specs.';
+        }
+
+        if ($this->settings->getTestingFramework() === $defaults->getTestingFrameworks()[3]) {
+            $scripts['test'] = "codecept run";
+            $descriptions['test'] = 'Runs all tests.';
+        }
+
+        $this->scriptHelper = $this->container->get('Construct\Helpers\Script');
+
+        if ($this->scriptHelper->isComposerVersionAvailable()) {
+            return [
+                'scripts' => $scripts,
+                'scripts-descriptions' => $descriptions,
+            ];
+        }
+
+        return [
+            'scripts' => $scripts,
+        ];
     }
 }

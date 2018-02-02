@@ -583,7 +583,7 @@ class ConstructCommandTest extends TestCase
         $container = new Container();
         $container->add('Construct\Helpers\Filesystem', $this->filesystem);
         $container->add('Construct\Helpers\Git');
-        $container->add('Construct\Helpers\Script');
+        $container->add('Construct\Helpers\Script')->withArgument('Construct\Helpers\Str');
         $container->add('Construct\Helpers\Str');
         $container->add('Construct\Helpers\Travis')->withArgument('Construct\Helpers\Str');
         $container->add('Construct\Configuration')->withArgument('Construct\Helpers\Filesystem');
@@ -615,7 +615,7 @@ class ConstructCommandTest extends TestCase
         $this->filesystem->shouldReceive('makeDirectory')->times($makeDirectoryTimes)->andReturnNull();
         $this->filesystem->shouldReceive('isDirectory')->times($isDirectoryTimes)->andReturnNull();
         $this->filesystem->shouldReceive('copy')->times($copyTimes)->andReturnNull();
-        $this->filesystem->shouldReceive('get')->times($getTimes)->andReturnNull();
+        $this->filesystem->shouldReceive('get')->times($getTimes)->andReturn('{"foo": "bar"}');
         $this->filesystem->shouldReceive('put')->times($putTimes)->andReturnNull();
     }
 }

@@ -20,9 +20,5 @@
     "minimum-stability": "stable",
     "config": {
         "sort-packages": true
-    },
-    "scripts": {
-        "test": "codecept run",
-        "configure-commit-template": "git config --add commit.template .gitmessage"
     }
 }
