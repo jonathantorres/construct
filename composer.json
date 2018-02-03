@@ -39,14 +39,14 @@
     },
     "bin": ["bin/construct"],
     "scripts": {
-        "test": "phpunit",
-        "cs-fix": "php-cs-fixer fix . -vv || true",
-        "cs-lint": "php-cs-fixer fix --diff --stop-on-violation --verbose --dry-run"
+        "construct:test": "phpunit",
+        "construct:cs-fix": "php-cs-fixer fix . -vv || true",
+        "construct:cs-lint": "php-cs-fixer fix --diff --stop-on-violation --verbose --dry-run"
     },
     "scripts-descriptions": {
-        "test": "Runs all tests.",
-        "cs-fix": "Fixes existing coding standard violations.",
-        "cs-lint": "Checks for coding standard violations."
+        "construct:test": "Runs all tests.",
+        "construct:cs-fix": "Fixes existing coding standard violations.",
+        "construct:cs-lint": "Checks for coding standard violations."
     },
     "minimum-stability": "stable"
 }

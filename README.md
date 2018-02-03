@@ -248,7 +248,7 @@ construct generate:interactive
 
 ## Running tests
 ``` bash
-composer test
+composer construct:test
 ```
 
 ## License

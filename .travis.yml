@@ -30,6 +30,6 @@ before_script:
 
 script:
   - if [[ $LINT = true ]]; then
-      composer cs-lint;
+      composer construct:cs-lint;
     fi
-  - composer test
+  - composer construct:test

@@ -40,4 +40,4 @@ install:
 
 test_script:
     - cd %APPVEYOR_BUILD_FOLDER%
-    - composer test
+    - composer construct:test
