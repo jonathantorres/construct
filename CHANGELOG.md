@@ -3,6 +3,7 @@
 #### v1.17.0 `2018-01-??`
 - `Added`
     - Added Composer script descriptions to improve Composer script documentation when runtime Composer is >= `1.6.0`. Done by [@raphaelstolt](https://github.com/raphaelstolt). See [#215](https://github.com/jonathantorres/construct/issues/215).
+    - Added Composer script descriptions for internal Composer scripts, bumps the by Construct required Composer version to `^1.6.0`. Done by [@raphaelstolt](https://github.com/raphaelstolt).
 
 #### v1.16.0 `2017-10-26`
 - `Added`
