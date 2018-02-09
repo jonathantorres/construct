@@ -131,7 +131,7 @@ class Filesystem
      * @param string $path
      * @param string $target
      *
-     * @return boolean
+     * @return void
      */
     public function move(string $path, string $target)
     {
