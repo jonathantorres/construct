@@ -159,7 +159,7 @@ class Str
      *
      * @return string
      */
-    public function toQuotedKeywords($keywords)
+    public function toQuotedKeywords($keywords): string
     {
         if ($keywords === null || trim($keywords) === '') {
             return '';

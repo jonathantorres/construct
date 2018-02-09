@@ -325,7 +325,7 @@ class ConstructCommand extends Command
      *
      * @return string
      */
-    private function supportedLicenseWarning(OutputInterface $output)
+    private function supportedLicenseWarning(OutputInterface $output): string
     {
         $license = $this->settings->getLicense();
 
@@ -346,7 +346,7 @@ class ConstructCommand extends Command
      *
      * @return string
      */
-    private function testFrameworkWarning(OutputInterface $output)
+    private function testFrameworkWarning(OutputInterface $output): string
     {
         $testFramework = $this->settings->getTestingFramework();
 
@@ -368,7 +368,7 @@ class ConstructCommand extends Command
      *
      * @return string
      */
-    private function phpVersionWarning(OutputInterface $output)
+    private function phpVersionWarning(OutputInterface $output): string
     {
         $phpVersion = $this->settings->getPhpVersion();
 

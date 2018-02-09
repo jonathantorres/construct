@@ -33,7 +33,7 @@ class Filesystem
      *
      * @return boolean
      */
-    public function makeDirectory(string $path, bool $recursive = false)
+    public function makeDirectory(string $path, bool $recursive = false): bool
     {
         return mkdir($path, 0777, $recursive);
     }
@@ -45,7 +45,7 @@ class Filesystem
      *
      * @return boolean
      */
-    public function isDirectory(string $path)
+    public function isDirectory(string $path): bool
     {
         return is_dir($path);
     }
@@ -120,7 +120,7 @@ class Filesystem
      *
      * @return boolean
      */
-    public function copy(string $path, string $target)
+    public function copy(string $path, string $target): bool
     {
         return copy($path, $target);
     }
@@ -147,7 +147,7 @@ class Filesystem
      *
      * @return string
      */
-    public function get(string $path)
+    public function get(string $path): string
     {
         return file_get_contents($path);
     }
@@ -160,7 +160,7 @@ class Filesystem
      *
      * @return int
      */
-    public function put(string $path, $contents)
+    public function put(string $path, $contents): int
     {
         return file_put_contents($path, $contents);
     }

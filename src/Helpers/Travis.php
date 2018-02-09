@@ -30,7 +30,7 @@ class Travis
      *
      * @return array
      */
-    public function phpVersionsToTest($projectPhpVersion)
+    public function phpVersionsToTest($projectPhpVersion): array
     {
         $supportedPhpVersions = (new Defaults)->getPhpVersions();
         $versionsToTest = (new Defaults)->getNonSemverPhpVersions();
@@ -54,7 +54,7 @@ class Travis
      *
      * @return string
      */
-    public function phpVersionsToRun($phpVersions, $setLintEnvironmentVariable = false)
+    public function phpVersionsToRun($phpVersions, $setLintEnvironmentVariable = false): string
     {
         $runOn = '';
         $nonSemverVersions = (new Defaults)->getNonSemverPhpVersions();
