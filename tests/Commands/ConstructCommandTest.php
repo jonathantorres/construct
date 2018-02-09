@@ -395,7 +395,7 @@ class ConstructCommandTest extends TestCase
         $this->filesystem->shouldReceive('getDefaultConfigurationFile');
         $this->filesystem->shouldReceive('hasDefaultConfigurationFile');
         $this->setMocks(4, 3);
-        $this->filesystem->shouldReceive('put')->times(1)->andReturnNull();
+        $this->filesystem->shouldReceive('put')->times(1)->andReturn(1);
 
         $app = $this->setApplication();
         $command = $app->find('generate');
@@ -612,10 +612,10 @@ class ConstructCommandTest extends TestCase
      */
     private function setMocks($makeDirectoryTimes = 3, $isDirectoryTimes = 1, $copyTimes = 0, $getTimes = 11, $putTimes = 12)
     {
-        $this->filesystem->shouldReceive('makeDirectory')->times($makeDirectoryTimes)->andReturnNull();
-        $this->filesystem->shouldReceive('isDirectory')->times($isDirectoryTimes)->andReturnNull();
-        $this->filesystem->shouldReceive('copy')->times($copyTimes)->andReturnNull();
-        $this->filesystem->shouldReceive('get')->times($getTimes)->andReturnNull();
-        $this->filesystem->shouldReceive('put')->times($putTimes)->andReturnNull();
+        $this->filesystem->shouldReceive('makeDirectory')->times($makeDirectoryTimes)->andReturn(true);
+        $this->filesystem->shouldReceive('isDirectory')->times($isDirectoryTimes)->andReturn(false);
+        $this->filesystem->shouldReceive('copy')->times($copyTimes)->andReturn(true);
+        $this->filesystem->shouldReceive('get')->times($getTimes)->andReturn('');
+        $this->filesystem->shouldReceive('put')->times($putTimes)->andReturn(1);
     }
 }
