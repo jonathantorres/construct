@@ -27,7 +27,11 @@
         "sort-packages": true
     },
     "scripts": {
-        "test": "phpunit",
-        "configure-commit-template": "git config --add commit.template .gitmessage"
+        "configure-commit-template": "git config --add commit.template .gitmessage",
+        "test": "phpunit"
+    },
+    "scripts-descriptions": {
+        "configure-commit-template": "Configures a local Git commit message template.",
+        "test": "Runs all tests."
     }
 }

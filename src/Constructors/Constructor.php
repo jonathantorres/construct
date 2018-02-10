@@ -51,6 +51,13 @@ abstract class Constructor
     protected $composer;
 
     /**
+     * The construct defaults.
+     *
+     * @var \Construct\Defalts
+     */
+    protected $defaults;
+
+    /**
      * Initialize.
      *
      * @return void
@@ -63,6 +70,7 @@ abstract class Constructor
         $this->filesystem = $container->get('Construct\Helpers\Filesystem');
         $this->gitAttributes = $container->get('Construct\GitAttributes');
         $this->composer = $container->get('Construct\Composer');
+        $this->defaults = $container->get('Construct\Defaults');
     }
 
     /**

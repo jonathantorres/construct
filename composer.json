@@ -13,7 +13,8 @@
         "php": "^7.0",
         "league/container": "^2.4",
         "symfony/console": "^3.0",
-        "symfony/yaml": "^3.0"
+        "symfony/yaml": "^3.0",
+        "composer/composer": "^1.6.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0",
@@ -35,9 +36,14 @@
     },
     "bin": ["bin/construct"],
     "scripts": {
-        "test": "phpunit",
-        "cs-fix": "php-cs-fixer fix . -vv || true",
-        "cs-lint": "php-cs-fixer fix --diff --stop-on-violation --verbose --dry-run"
+        "construct:test": "phpunit",
+        "construct:cs-fix": "php-cs-fixer fix . -vv || true",
+        "construct:cs-lint": "php-cs-fixer fix --diff --stop-on-violation --verbose --dry-run"
+    },
+    "scripts-descriptions": {
+        "construct:test": "Runs all tests.",
+        "construct:cs-fix": "Fixes existing coding standard violations.",
+        "construct:cs-lint": "Checks for coding standard violations."
     },
     "minimum-stability": "stable"
 }

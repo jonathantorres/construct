@@ -22,7 +22,11 @@
         "sort-packages": true
     },
     "scripts": {
-        "test": "behat",
-        "configure-commit-template": "git config --add commit.template .gitmessage"
+        "configure-commit-template": "git config --add commit.template .gitmessage",
+        "test": "behat"
+    },
+    "scripts-descriptions": {
+        "configure-commit-template": "Configures a local Git commit message template.",
+        "test": "Runs all features."
     }
 }

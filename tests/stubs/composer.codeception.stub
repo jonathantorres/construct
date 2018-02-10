@@ -22,7 +22,11 @@
         "sort-packages": true
     },
     "scripts": {
-        "test": "codecept run",
-        "configure-commit-template": "git config --add commit.template .gitmessage"
+        "configure-commit-template": "git config --add commit.template .gitmessage",
+        "test": "codecept run"
+    },
+    "scripts-descriptions": {
+        "configure-commit-template": "Configures a local Git commit message template.",
+        "test": "Runs all tests."
     }
 }
