@@ -27,9 +27,15 @@
         "sort-packages": true
     },
     "scripts": {
-        "test": "phpunit",
         "configure-commit-template": "git config --add commit.template .gitmessage",
         "cs-fix": "php-cs-fixer fix . -vv || true",
-        "cs-lint": "php-cs-fixer fix --diff --stop-on-violation --verbose --dry-run"
+        "cs-lint": "php-cs-fixer fix --diff --stop-on-violation --verbose --dry-run",
+        "test": "phpunit"
+    },
+    "scripts-descriptions": {
+        "configure-commit-template": "Configures a local Git commit message template.",
+        "cs-fix": "Fixes existing coding standard violations.",
+        "cs-lint": "Checks for coding standard violations.",
+        "test": "Runs all tests."
     }
 }

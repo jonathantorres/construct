@@ -107,6 +107,8 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -139,6 +141,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages(['behat/behat']);
         $this->scriptHelper->shouldReceive('initBehat')->once()->with('logger')->andReturnNull();
         $this->construct->generate();
@@ -160,6 +163,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages(
             ['codeception/codeception']
         );
@@ -183,6 +187,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages(
             ['phpspec/phpspec']
         );
@@ -210,6 +215,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -231,6 +237,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -252,6 +259,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -273,6 +281,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -297,6 +306,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
         $this->gitHelper->shouldReceive('init')->once()->with('logger')->andReturnNull();
         $this->construct->generate();
@@ -318,6 +328,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages(
             ['phpunit/phpunit', 'friendsofphp/php-cs-fixer']
         );
@@ -356,6 +367,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -378,6 +390,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -401,6 +414,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -423,6 +437,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -445,6 +460,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -467,6 +483,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -489,11 +506,35 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
         $this->assertSame($this->getStub('composer.php72'), $this->getFile('composer.json'));
         $this->assertSame($this->getStub('travis.php72'), $this->getFile('.travis.yml'));
+    }
+
+    public function test_project_generation_with_composer_version_below_1_6()
+    {
+        $settings = $this->container->get('Construct\Settings');
+        $settings->setProjectName('jonathantorres/logger');
+        $settings->setTestingFramework('phpunit');
+        $settings->setLicense('MIT');
+        $settings->setNamespace('Vendor\Project');
+        $settings->setPhpVersion('5.6.0');
+        $settings->setGithubTemplates(false);
+        $settings->setCodeOfConduct(false);
+        $settings->setGithubDocs(false);
+        $settings->setCliFramework(null);
+
+        $this->construct = new Construct($this->container);
+        $this->setConstructors();
+
+        $this->setScriptHelperComposerVersion16IsInstalled(false);
+        $this->setScriptHelperComposerInstallExpectationWithPackages();
+
+        $this->construct->generate();
+        $this->assertSame($this->getStub('composer.below16'), $this->getFile('composer.json'));
     }
 
     /**
@@ -514,6 +555,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -541,6 +583,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -566,6 +609,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages(
             ['phpunit/phpunit'],
             ['vlucas/phpdotenv']
@@ -595,6 +639,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -618,6 +663,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -658,6 +704,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -688,6 +735,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -720,6 +768,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages();
 
         $this->construct->generate();
@@ -748,6 +797,7 @@ class ConstructTest extends TestCase
 
         $this->construct = new Construct($this->container);
         $this->setConstructors();
+        $this->setScriptHelperComposerVersion16IsInstalled();
         $this->setScriptHelperComposerInstallExpectationWithPackages(
             ['phpunit/phpunit'],
             [$settings->getCliFramework()]
@@ -818,6 +868,20 @@ class ConstructTest extends TestCase
             ->once()
             ->with('logger', $developmentPackages, $packages)
             ->andReturnNull();
+    }
+
+    /**
+     * Sets the Mockery expectation for isComposerVersionAvailable
+     * of the script helper mock.
+     *
+     * @param boolean $isInstalled Whether the expected Composer version should be available or not.
+     */
+    private function setScriptHelperComposerVersion16IsInstalled($isInstalled = true)
+    {
+        $this->scriptHelper
+            ->shouldReceive('isComposerVersionAvailable')
+            ->once()
+            ->andReturn($isInstalled);
     }
 
     /**

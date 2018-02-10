@@ -7,6 +7,23 @@ namespace Construct\Helpers;
 class Script
 {
     /**
+     * String helper.
+     *
+     * @var \Construct\Helpers\Str
+     */
+    private $str;
+
+    /**
+     * Initialize Script helper.
+     *
+     * @param \Construct\Helpers\Str $str
+     */
+    public function __construct(Str $str)
+    {
+        $this->str = $str;
+    }
+
+    /**
      * Do an initial composer install in constructed project and require
      * the development and non development packages.
      *
@@ -32,6 +49,35 @@ class Script
         }
 
         exec($command);
+    }
+
+    /**
+     * Checks if a given Composer version or greater is
+     * available on the runtime system.
+     *
+     * @param  string  $version Defaults to version 1.6.0.
+     * @return boolean
+     */
+    public function isComposerVersionAvailable($version = '1.6.0')
+    {
+        $requiredMinorVersion = $this->str->toMinorVersion($version);
+        $command = 'composer --version';
+
+        exec($command, $version, $returnValue);
+
+        if ($returnValue === 0) {
+            $availableMinorVersion = $this->str->toMinorVersion(
+                explode(' ', $version[0])[2]
+            );
+
+            return version_compare(
+                $requiredMinorVersion,
+                $availableMinorVersion,
+                '<='
+            ) === true;
+        }
+
+        return true;
     }
 
     /**

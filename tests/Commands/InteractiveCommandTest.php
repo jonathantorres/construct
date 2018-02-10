@@ -46,7 +46,7 @@ CONTENT;
         $container = new Container();
         $container->add('Construct\Helpers\Filesystem')->withArgument('Construct\Defaults');
         $container->add('Construct\Helpers\Git');
-        $container->add('Construct\Helpers\Script');
+        $container->add('Construct\Helpers\Script')->withArgument('Construct\Helpers\Str');
         $container->add('Construct\Helpers\Str');
         $container->add('Construct\Helpers\Travis')->withArgument('Construct\Helpers\Str');
         $container->add('Construct\Configuration')->withArgument('Construct\Helpers\Filesystem');
