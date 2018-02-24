@@ -7,6 +7,7 @@
 
 # composer
 /vendor/
+composer.lock
 
 # PHP Coding Standards Fixer
 .php_cs.cache
