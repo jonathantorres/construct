@@ -67,7 +67,7 @@ class Script
 
         if ($returnValue === 0) {
             $availableMinorVersion = $this->str->toMinorVersion(
-                explode(' ', $version[0])[2]
+                explode(' ', $version[0])[1]
             );
 
             return version_compare(
