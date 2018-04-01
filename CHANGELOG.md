@@ -1,6 +1,6 @@
 # Changelog
 
-#### [unreleased] `xxxx-xx-xx`
+#### v2.0.0 `2018-04-01`
 - `Breaking Changes`
     - Support for PHP7 only.
     - Bump Symfony dependencies to `3.0`.
