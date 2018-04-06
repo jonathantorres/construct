@@ -113,9 +113,9 @@ class Composer extends Constructor implements ConstructorContract
             $descriptions['test'] = 'Runs all tests.';
         }
 
-        $this->scriptHelper = $this->container->get('Construct\Helpers\Script');
+        $scriptHelper = $this->container->get('Construct\Helpers\Script');
 
-        if ($this->scriptHelper->isComposerVersionAvailable()) {
+        if ($scriptHelper->isComposerVersionAvailable()) {
             return [
                 'scripts' => $scripts,
                 'scripts-descriptions' => $descriptions,

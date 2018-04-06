@@ -36,14 +36,14 @@ class ConstructCommand extends Command
     /**
      * The construct implementation.
      *
-     * @var string
+     * @var \Construct\Construct
      */
     private $construct;
 
     /**
      * String helper.
      *
-     * @var \Construct\Str
+     * @var \Construct\Helpers\Str
      */
     private $str;
 

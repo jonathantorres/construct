@@ -19,35 +19,35 @@ class InteractiveCommand extends Command
     /**
      * The construct implementation.
      *
-     * @var string
+     * @var \Construct\Construct
      */
     protected $construct;
 
     /**
      * String helper.
      *
-     * @var Construct\Str
+     * @var \Construct\Helpers\Str
      */
     protected $str;
 
     /**
      * Construct settings.
      *
-     * @var Construct\Settings
+     * @var \Construct\Settings
      */
     protected $settings;
 
     /**
      * Construct defaults.
      *
-     * @var Construct\Defaults
+     * @var \Construct\Defaults
      */
     protected $defaults;
 
     /**
      * Initialize.
      *
-     * @param Construct\Construct $construct
+     * @param \Construct\Construct $construct
      *
      * @return void
      */
@@ -75,8 +75,8 @@ class InteractiveCommand extends Command
     /**
      * Execute command.
      *
-     * @param Symfony\Component\Console\Input\InputInterface  $input
-     * @param Symfony\Component\Console\Input\OutputInterface $output
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return void
      */

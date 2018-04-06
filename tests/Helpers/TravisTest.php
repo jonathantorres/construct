@@ -1,5 +1,7 @@
 <?php
 
+namespace Construct\Tests\Helpers;
+
 use Construct\Defaults;
 use Construct\Helpers\Str;
 use Construct\Helpers\Travis;

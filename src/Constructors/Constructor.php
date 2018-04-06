@@ -53,7 +53,7 @@ abstract class Constructor
     /**
      * The construct defaults.
      *
-     * @var \Construct\Defalts
+     * @var \Construct\Defaults
      */
     protected $defaults;
 

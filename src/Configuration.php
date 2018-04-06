@@ -131,7 +131,7 @@ class Configuration
     /**
      * Determine if a configuration is applicable.
      *
-     * @param  string  The default or a command line provided configuration file.
+     * @param string $configuration The default or a command line provided configuration file.
      *
      * @return boolean
      */

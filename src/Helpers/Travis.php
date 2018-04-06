@@ -37,8 +37,8 @@ class Travis
 
         $phpVersionsToTest = array_filter($supportedPhpVersions, function ($supportedPhpVersion) use ($projectPhpVersion) {
             return version_compare(
-                $this->str->toMinorversion($projectPhpVersion),
-                $this->str->toMinorversion($supportedPhpVersion),
+                $this->str->toMinorVersion($projectPhpVersion),
+                $this->str->toMinorVersion($supportedPhpVersion),
                 '<='
             ) === true;
         });
