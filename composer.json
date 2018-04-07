@@ -19,6 +19,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0",
         "mockery/mockery": "^1.0",
+        "phpstan/phpstan": "^0.9.2",
         "phpunit/phpunit": "^6.0"
     },
     "autoload": {
@@ -38,12 +39,14 @@
     "scripts": {
         "construct:test": "phpunit",
         "construct:cs-fix": "php-cs-fixer fix . -vv || true",
-        "construct:cs-lint": "php-cs-fixer fix --diff --stop-on-violation --verbose --dry-run"
+        "construct:cs-lint": "php-cs-fixer fix --diff --stop-on-violation --verbose --dry-run",
+        "construct:static-analysis": "vendor/bin/phpstan analyse -l max -c phpstan.neon src tests"
     },
     "scripts-descriptions": {
         "construct:test": "Runs all tests.",
         "construct:cs-fix": "Fixes existing coding standard violations.",
-        "construct:cs-lint": "Checks for coding standard violations."
+        "construct:cs-lint": "Checks for coding standard violations.",
+        "construct:static-analysis": "Runs a static code analysis."
     },
     "minimum-stability": "stable"
 }

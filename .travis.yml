@@ -29,5 +29,6 @@ before_script:
 script:
   - if [[ $LINT = true ]]; then
       composer construct:cs-lint;
+      composer construct:static-analysis;
     fi
   - composer construct:test
