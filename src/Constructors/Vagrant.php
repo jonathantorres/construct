@@ -13,7 +13,7 @@ class Vagrant extends Constructor implements ConstructorContract
      */
     public function run()
     {
-        if ($this->settings->withVagrantFile()) {
+        if ($this->settings->withVagrantfile()) {
             $this->filesystem->copy(
                 __DIR__ . '/../stubs/Vagrantfile.stub',
                 $this->settings->getProjectLower() . '/' . 'Vagrantfile'

@@ -12,7 +12,7 @@ class Construct
     /**
      * The container instance
      *
-     * @var League\Container\Container
+     * @var \League\Container\Container
      */
     private $container;
 
@@ -40,7 +40,7 @@ class Construct
     /**
      * Initialize.
      *
-     * @param League\Container\Container $container
+     * @param \League\Container\Container $container
      *
      * @return void
      */
@@ -77,7 +77,7 @@ class Construct
     /**
      * Adds a constructor.
      *
-     * @param Construct\Constructors\ConstructorContract $constructor
+     * @param \Construct\Constructors\ConstructorContract $constructor
      *
      * @return void
      */
@@ -89,7 +89,7 @@ class Construct
     /**
      * Returns the container instance.
      *
-     * @return League\Container\Container
+     * @return \League\Container\Container
      */
     public function getContainer(): Container
     {

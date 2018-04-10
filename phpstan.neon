@@ -1,0 +1,4 @@
+parameters:
+    ignoreErrors:
+        - '#Method [a-zA-Z0-9\\_]+Command::execute\(\) with return type void returns false but should not return anything.#'
+        - '#Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage::andReturn\(\).#'

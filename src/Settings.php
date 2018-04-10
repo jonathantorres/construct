@@ -575,7 +575,8 @@ class Settings
      */
     public function withCliFramework(): bool
     {
-        return $this->cliFramework !== null;
+        return $this->cliFramework !== null
+            && $this->cliFramework !== '';
     }
 
     /**

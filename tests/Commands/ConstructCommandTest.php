@@ -576,7 +576,7 @@ class ConstructCommandTest extends TestCase
     /**
      * Set the main command application.
      *
-     * @return void
+     * @return \Symfony\Component\Console\Application
      */
     private function setApplication()
     {

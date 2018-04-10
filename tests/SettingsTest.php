@@ -27,7 +27,7 @@ class SettingsTest extends TestCase
         $this->settings->setGithubTemplates(false);
         $this->settings->setGithubDocs(false);
         $this->settings->setCodeOfConduct(false);
-        $this->settings->setCliFramework(null);
+        $this->settings->setCliFramework('');
     }
 
     public function test_settings_are_retrieved()
@@ -47,7 +47,7 @@ class SettingsTest extends TestCase
         $this->assertFalse($this->settings->withGithubDocs());
         $this->assertFalse($this->settings->withGithubTemplates());
         $this->assertFalse($this->settings->withCodeOfConduct());
-        $this->assertNull($this->settings->getCliFramework());
+        $this->assertEmpty($this->settings->getCliFramework());
     }
 
     public function test_can_set_cli_framework_after_instantiation()

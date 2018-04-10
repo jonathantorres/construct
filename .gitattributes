@@ -11,5 +11,6 @@ tests/ export-ignore
 CHANGELOG.md export-ignore
 CONTRIBUTING.md export-ignore
 LICENSE.md export-ignore
+phpstan.neon export-ignore
 phpunit.xml.dist export-ignore
 README.md export-ignore
