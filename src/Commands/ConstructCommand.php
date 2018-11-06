@@ -185,7 +185,7 @@ class ConstructCommand extends Command
                 $cliFramework = $this->defaults->getCliFramework();
             }
 
-            if (!$this->str->isValid($cliFramework)) {
+            if (!$this->str->isValid((string) $cliFramework)) {
                 $warning = '<error>Warning: "' . $cliFramework . '" is not a valid Composer package name. Using "' . $this->defaults->getCliFramework() . '" instead.</error>';
                 $output->writeln($warning);
                 $cliFramework = $this->defaults->getCliFramework();
@@ -204,33 +204,36 @@ class ConstructCommand extends Command
         }
 
         // set the initial project settings
-        $this->settings->setProjectName($projectName);
-        $this->settings->setTestingFramework($testFramework);
-        $this->settings->setLicense($license);
-        $this->settings->setNamespace($namespace);
-        $this->settings->setGitInit($git);
-        $this->settings->setPhpcsConfiguration($phpcs);
-        $this->settings->setComposerKeywords($keywords);
-        $this->settings->setVagrantfile($vagrant);
-        $this->settings->setEditorConfig($editorConfig);
-        $this->settings->setPhpVersion($phpVersion);
-        $this->settings->setEnvironmentFiles($environment);
-        $this->settings->setLgtmConfiguration($lgtm);
-        $this->settings->setGithubTemplates($githubTemplates);
-        $this->settings->setGithubDocs($githubDocs);
-        $this->settings->setCodeOfConduct($codeOfConduct);
-        $this->settings->setCliFramework($cliFramework);
+        $this->settings->setProjectName((string) $projectName);
+        $this->settings->setTestingFramework((string) $testFramework);
+        $this->settings->setLicense((string) $license);
+        $this->settings->setNamespace((string) $namespace);
+        $this->settings->setGitInit((boolean) $git);
+        $this->settings->setPhpcsConfiguration((boolean) $phpcs);
+        $this->settings->setComposerKeywords((string) $keywords);
+        $this->settings->setVagrantfile((boolean) $vagrant);
+        $this->settings->setEditorConfig((boolean) $editorConfig);
+        $this->settings->setPhpVersion((string) $phpVersion);
+        $this->settings->setEnvironmentFiles((boolean) $environment);
+        $this->settings->setLgtmConfiguration((boolean) $lgtm);
+        $this->settings->setGithubTemplates((boolean) $githubTemplates);
+        $this->settings->setGithubDocs((boolean) $githubDocs);
+        $this->settings->setCodeOfConduct((boolean) $codeOfConduct);
+        $this->settings->setCliFramework((string) $cliFramework);
 
         // using a .construct configuration file
-        if ($this->config->isApplicable($configuration)
+        if ($this->config->isApplicable((string) $configuration)
             && $ignoreDefaultConfiguration === false) {
-            $newSettings = $this->config->overwriteSettings($this->settings, $configuration);
+            $newSettings = $this->config->overwriteSettings(
+                $this->settings,
+                (string) $configuration
+            );
 
             $this->settings = $newSettings;
         }
 
         // warning message if the project name is invalid
-        if (!$this->str->isValid($projectName)) {
+        if (!$this->str->isValid((string) $projectName)) {
             $warningMessage = '<error>Warning: "' . $projectName . '" is not '
                 . 'a valid project name, please use "vendor/project"</error>';
             $output->writeln($warningMessage);

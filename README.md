@@ -3,8 +3,9 @@
 [![Build Status](https://travis-ci.org/jonathantorres/construct.svg?branch=master)](https://travis-ci.org/jonathantorres/construct)
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/jonathantorres/construct?svg=true)](https://ci.appveyor.com/project/jonathantorres/construct)
 [![Version](http://img.shields.io/packagist/v/jonathantorres/construct.svg?style=flat)](https://packagist.org/packages/jonathantorres/construct)
+[![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg?style=flat)](https://github.com/php-pds/skeleton)
 
-PHP project/micro-package generator.
+A PHP project/micro-package generator for [PDS](http://php-pds.com/) compliant projects or micro-packages.
 
 ## Installation
 Construct should be installed globally through composer.
