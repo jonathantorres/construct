@@ -17,14 +17,14 @@ class ConstructCommandTest extends TestCase
     protected $defaults;
     protected $systemPhpVersion;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->filesystem = Mockery::mock('Construct\Helpers\Filesystem');
         $this->defaults = new Defaults();
         $this->systemPhpVersion = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Mockery::close();
     }
