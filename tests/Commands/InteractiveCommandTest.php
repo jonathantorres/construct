@@ -12,7 +12,7 @@ use Symfony\Component\Console\Application;
 
 class InteractiveCommandTest extends PHPUnit
 {
-    protected function tearDown(): void
+    protected function tearDown()
     {
         Mockery::close();
     }

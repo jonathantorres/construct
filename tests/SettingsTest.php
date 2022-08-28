@@ -9,7 +9,7 @@ class SettingsTest extends TestCase
 {
     protected $settings;
 
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->settings = new Settings();
         $this->settings->setProjectName('jonathantorres/logger');

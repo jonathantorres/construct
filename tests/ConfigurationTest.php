@@ -12,7 +12,7 @@ class ConfigurationTest extends TestCase
 {
     protected $configuration;
 
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->configuration = new Configuration(new Filesystem(new Defaults()));
     }

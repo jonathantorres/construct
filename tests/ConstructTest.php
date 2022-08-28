@@ -37,7 +37,7 @@ class ConstructTest extends TestCase
     protected $gitHelper;
     protected $scriptHelper;
 
-    protected function setUp(): void
+    protected function setUp()
     {
         $gitUser = [
             'name' => 'Jonathan Torres',
@@ -68,7 +68,7 @@ class ConstructTest extends TestCase
      *
      * @return void
      */
-    protected function tearDown(): void
+    protected function tearDown()
     {
         $path = __DIR__ . '/../logger';
         $iterator = new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::SKIP_DOTS);
