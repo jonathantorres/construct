@@ -12,8 +12,6 @@ matrix:
     - php: 7.2
     - php: 7.1
     - php: 7.0
-      env:
-      - LINT=true
   fast_finish: true
   allow_failures:
     - php: nightly
