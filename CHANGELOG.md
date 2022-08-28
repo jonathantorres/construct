@@ -1,5 +1,7 @@
 # Changelog
 
+#### [unreleased] `xxxx-xx-xx`
+
 #### v2.1.0 `2022-08-28`
 - `Added`
     - Support for PHP 7.3 and 7.4.
