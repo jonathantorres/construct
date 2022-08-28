@@ -1,5 +1,9 @@
 # Changelog
 
+#### v2.1.0 `2022-08-28`
+- `Added`
+    - Support for PHP 7.3 and 7.4.
+
 #### v2.0.0 `2018-04-01`
 - `Breaking Changes`
     - Support for PHP7 only.
