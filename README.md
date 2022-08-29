@@ -1,6 +1,6 @@
 
 # Construct
-[![Build Status](https://travis-ci.com/jonathantorres/construct.svg?branch=master)](https://travis-ci.com/jonathantorres/construct)
+[![Build Status](https://github.com/jonathantorres/construct/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/jonathantorres/construct/actions/workflows/tests.yml)
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/jonathantorres/construct?svg=true)](https://ci.appveyor.com/project/jonathantorres/construct)
 [![Version](http://img.shields.io/packagist/v/jonathantorres/construct.svg?style=flat)](https://packagist.org/packages/jonathantorres/construct)
 [![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg?style=flat)](https://github.com/php-pds/skeleton)
