@@ -1,4 +1,4 @@
-name: Construct
+name: Tests
 
 on:
   push:
@@ -10,12 +10,24 @@ permissions:
   contents: read
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
+  tests:
+    name: "PHPUnit Tests (PHP ${{ matrix.php }})"
+    runs-on: [ubuntu-latest, macos-latest]
+    strategy:
+      matrix:
+        php:
+          - "8.0"
+          - "8.1"
+          - "8.2"
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
+    
+    - name: Install PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: "${{ matrix.php }}"
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
