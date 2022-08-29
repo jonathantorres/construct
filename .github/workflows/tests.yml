@@ -12,14 +12,13 @@ permissions:
 jobs:
   tests:
     name: "PHPUnit Tests (PHP ${{ matrix.php }})"
-    runs-on: [ubuntu-latest, macos-latest]
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         php:
           - "8.0"
           - "8.1"
           - "8.2"
-
     steps:
     - name: Checkout
       uses: actions/checkout@v3
