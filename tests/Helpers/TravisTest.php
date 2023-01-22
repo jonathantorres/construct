@@ -11,7 +11,7 @@ class TravisTest extends TestCase
 {
     protected $travis;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->travis = new Travis(new Str());
     }

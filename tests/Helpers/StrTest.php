@@ -9,7 +9,7 @@ class StrTest extends TestCase
 {
     protected $str;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->str = new Str();
     }

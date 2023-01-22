@@ -13,7 +13,7 @@ class FilesystemTest extends TestCase
     protected $defaults;
     protected $str;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->str = new Str();
         $this->defaults = new Defaults();
