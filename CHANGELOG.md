@@ -1,6 +1,9 @@
 # Changelog
 
-#### [unreleased] `xxxx-xx-xx`
+#### v3.0.0 `2023-01-21`
+- `Added`
+    - Support for PHP 8.0, 8.1 and 8.2 only.
+    - Bump PHPUnit to `8.0`.
 
 #### v2.1.0 `2022-08-28`
 - `Added`
